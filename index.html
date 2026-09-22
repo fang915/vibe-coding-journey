@@ -3,10 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vibe coding journey</title>
+  <title>寻味 / Xunwei —— 中华美食文化检索</title>
+  <meta name="description" content="把权威的中国饮食文化资料，翻译成在华外国人看得懂的中英双语文化卡片。">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>vibe coding 学习项目</h1>
-  <p>这是一个占位首页。真正的页面功能会在后面的 Day 里逐步加上。</p>
+
+  <header class="site-header">
+    <h1 class="brand">寻味 <span class="en">Xunwei</span></h1>
+    <p class="tagline">
+      读懂一道中国菜的文化来头
+      <span class="en">· Understand the story behind a Chinese dish</span>
+    </p>
+  </header>
+
+  <main>
+
+    <!-- ===================== 视图一：检索 ===================== -->
+    <section id="search-view" class="view">
+
+      <form id="search-form" class="search" role="search">
+        <input
+          id="search-input"
+          type="search"
+          name="q"
+          autocomplete="off"
+          aria-label="搜索美食 / Search dishes"
+          placeholder="输入菜名，如：螺蛳粉 / Luosifen">
+        <button type="submit">搜索 Search</button>
+      </form>
+
+      <!-- 提示条：命中别名/错别字、或"暂未收录"时显示 -->
+      <p id="search-hint" class="hint" hidden></p>
+
+      <h2 class="section-title">已收录 · Included</h2>
+
+      <!-- 列表由 js/app.js 依据 data/dishes.json 重建；
+           下面这 5 个静态入口是"脚本没跑起来"时的兜底，保证页面不至于空白 -->
+      <ul id="dish-list" class="dish-list">
+        <li>
+          <button class="dish-entry" type="button" data-id="luosifen">
+            <span class="zh">螺蛳粉</span>
+            <span class="en">Liuzhou Luosifen</span>
+            <span class="region">广西 · Guangxi</span>
+          </button>
+        </li>
+        <li>
+          <button class="dish-entry" type="button" data-id="lanzhou-beef-noodles">
+            <span class="zh">兰州牛肉面</span>
+            <span class="en">Lanzhou Beef Noodles</span>
+            <span class="region">甘肃 · Gansu</span>
+          </button>
+        </li>
+        <li>
+          <button class="dish-entry" type="button" data-id="shaxian-snacks">
+            <span class="zh">沙县小吃</span>
+            <span class="en">Shaxian Snacks</span>
+            <span class="region">福建 · Fujian</span>
+          </button>
+        </li>
+        <li>
+          <button class="dish-entry" type="button" data-id="mengzi-rice-noodles">
+            <span class="zh">蒙自过桥米线</span>
+            <span class="en">Mengzi Crossing-the-Bridge Rice Noodles</span>
+            <span class="region">云南 · Yunnan</span>
+          </button>
+        </li>
+        <li>
+          <button class="dish-entry" type="button" data-id="goubuli-baozi">
+            <span class="zh">狗不理包子</span>
+            <span class="en">Goubuli Baozi</span>
+            <span class="region">天津 · Tianjin</span>
+          </button>
+        </li>
+      </ul>
+
+    </section>
+
+    <!-- ===================== 视图二：文化卡片 ===================== -->
+    <section id="card-view" class="view" hidden>
+
+      <button id="back-btn" class="back" type="button">← 返回 / Back</button>
+
+      <article class="card">
+
+        <header class="card-head">
+          <h2 id="card-name-zh">菜名</h2>
+          <p id="card-name-en" class="name-en"></p>
+          <p id="card-meta" class="meta"></p>
+        </header>
+
+        <!-- 未收录完整内容时（status = pending）显示这段说明 -->
+        <div id="card-note" class="pending-note" hidden></div>
+
+        <section id="section-origin" class="block" hidden>
+          <h3>渊源 <span class="en">Origins</span></h3>
+          <div id="block-origin"></div>
+        </section>
+
+        <section id="section-story" class="block" hidden>
+          <h3>文化典故 <span class="en">Story</span></h3>
+          <div id="block-story"></div>
+        </section>
+
+        <section id="section-technique" class="block" hidden>
+          <h3>做法特点 <span class="en">Technique</span></h3>
+          <div id="block-technique"></div>
+        </section>
+
+        <section id="section-facts" class="block facts" hidden>
+          <h3>关键事实 <span class="en">Key facts</span></h3>
+          <ul id="fact-list"></ul>
+        </section>
+
+        <section id="section-sources" class="block sources" hidden>
+          <h3>出处 <span class="en">Sources</span></h3>
+          <ol id="source-list"></ol>
+        </section>
+
+      </article>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    寻味 / Xunwei · MVP v0.1 —— 内容均来自公开可溯源资料
+    <span class="en">Content sourced from public, traceable references.</span>
+  </footer>
+
+  <script src="js/app.js"></script>
+
 </body>
 </html>

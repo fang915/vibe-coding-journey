@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "product": "寻味 / Xunwei",
+    "version": "MVP v0.1",
+    "generatedOn": "2026-09-22",
+    "dishesCount": 5,
+    "contentReadyCount": 1,
+    "rule": "本文件中的文化内容全部来自可溯源的公开资料，不由模型生成（见 PRD.md 非目标第 8 条）。文本中的 [[sourceId]] 标记指向该道菜 sources 里的具体出处。",
+    "authorNote": "螺蛳粉为已核实内容；其余 4 道为占位（status = pending），待逐条查证后填入。"
+  },
+  "dishes": [
+    {
+      "id": "luosifen",
+      "status": "published",
+      "name": {
+        "zh": "螺蛳粉",
+        "en": "Liuzhou Luosifen (Snail Rice Noodles)"
+      },
+      "aliases": [
+        "柳州螺蛳粉",
+        "螺狮粉",
+        "螺絲粉",
+        "螺蛳粉制作技艺",
+        "luosifen",
+        "luo si fen",
+        "liusifen",
+        "liuzhou luosifen",
+        "snail rice noodles",
+        "snail noodles"
+      ],
+      "region": {
+        "zh": "广西柳州",
+        "en": "Liuzhou, Guangxi"
+      },
+      "tagline": {
+        "zh": "一碗闻着「臭」、吃着香的米粉，来自柳江边的夜市。",
+        "en": "A rice-noodle bowl that smells strong and tastes unforgettable — born in the night markets by the Liujiang River."
+      },
+      "blocks": {
+        "origin": {
+          "zh": "螺蛳粉出自广西柳州。柳州位于广西中北部，史称「龙城」——当地多山多梯田，红土肥沃、雨量充沛，既盛产稻谷，也盛产生活在石缝与山泉间的石螺（本地俗称「螺蛳」）[[ihchina]]。明清以来，当地人就把螺蛳和米粉这两样东西放在一起做[[ihchina]]；到清末民初，这门手艺基本成形，并在柳州民间的私营餐饮店铺里流传开来[[ihchina]]。\n\n真正让螺蛳粉「出圈」的是夜市：20 世纪七八十年代，柳州夜市逐渐繁荣，食客吃米粉时会要求加一勺鲜辣的螺蛳汤，摊主们久而久之开始直接用螺蛳汤煮米粉，今天的螺蛳粉由此定型[[xinhua]]。\n\n2021 年，柳州螺蛳粉制作技艺被列入第五批国家级非物质文化遗产代表性项目名录（编号 Ⅷ-277）[[ihchina]]。",
+          "en": "Luosifen comes from Liuzhou, in north-central Guangxi — a city historically known as \"Dragon City\". Its hills, terraced fields and wet climate suit both rice growing and the stone snails (locally called luosi) that live in rock crevices and mountain springs [[ihchina]]. Since the Ming and Qing dynasties local cooks have combined snails with rice noodles; the craft took shape around the end of the Qing dynasty and the early Republic and spread among private eateries in Liuzhou [[ihchina]].\n\nWhat made it famous was the night market: through the 1970s and 1980s Liuzhou's night markets grew busy, diners began asking for a spoonful of spicy snail broth on their noodles, and vendors eventually cooked the noodles directly in snail broth — the dish as we know it today [[xinhua]].\n\nIn 2021 the craft was added to China's fifth national list of intangible cultural heritage (item no. Ⅷ-277) [[ihchina]]."
+        },
+        "story": {
+          "zh": "关于锅里那一勺汤，流传最广的一种说法是这样的：20 世纪七八十年代的柳州夜市，有人吃米粉时随口要求摊主加一勺煮螺蛳的鲜辣汤；这个吃法很快传开，摊主们索性改用螺蛳汤来煮米粉，螺蛳粉就此诞生[[xinhua]]。\n\n柳州人与螺的渊源则要久远得多。柳州所在的柳江流域，先民很早就有「嗦螺」的饮食习惯——碗里那一颗颗螺，其来路可以追到两万多年前的柳江先人[[lzzx]]。\n\n在柳州，几乎每家粉店都有自己的配方。食材怎么处理、汤怎么配比，常年「秘不外传」，靠家族和师徒关系一代一代传下来[[ihchina]]。",
+          "en": "The most widely told story about that spoonful of broth goes like this: in the night markets of Liuzhou in the 1970s and 1980s, a diner casually asked the vendor to add a spoonful of spicy snail broth to his rice noodles. The idea spread fast, vendors began cooking the noodles in snail broth altogether, and luosifen was born [[xinhua]].\n\nLiuzhou's relationship with snails goes back much further. In the Liujiang river basin where the city sits, people were eating snails long before that — the snails in the bowl trace back to the ancestors who lived along the Liujiang more than 20,000 years ago [[lzzx]].\n\nIn Liuzhou almost every noodle shop keeps its own recipe. How ingredients are handled and how the broth is balanced is traditionally kept \"in the family\", passed down through families and from master to apprentice [[ihchina]]."
+        },
+        "technique": {
+          "zh": "螺蛳粉的风味常被概括为五个字：酸、辣、鲜、爽、烫[[ihchina]]。\n\n汤是精髓，而做汤的关键是「炒螺」：石螺先「飞水」，再下铁锅干炒出味，与十几种香料猛火爆炒，让螺吸足香气；然后加水没过螺，文火收汁，再同猪筒骨、茴香、紫苏一起熬煮到出味，最后冲入辣椒油，调成螺蛳汤[[ihchina]]。\n\n米粉用隔年糙米与新出油的黏米混合，以山泉水研磨成米浆制成，既保留营养，又韧性爽滑[[ihchina]]。\n\n酸笋是另一个灵魂：选用鲜嫩春笋，经山泉水浸泡 72 天自然发酵（发酵：让食材在微生物作用下自然变化的过程，酸味和气味由此而来），软嫩酸爽[[ihchina]]。很多人闻到的那股「臭」味，就来自酸笋的发酵[[xinhua]]。常见配料还有酸豆角、木耳、花生、腐竹等[[xinhua]]。",
+          "en": "The flavour of luosifen is usually summed up in five words: sour, spicy, fresh, crisp and hot [[ihchina]].\n\nThe broth is the heart of it, and the key step is dry-frying the snails: the stone snails are first blanched, then dry-fried in an iron wok to draw out their flavour, and stir-fried hard with a dozen or so spices so the meat absorbs the aroma. Water is added to cover the snails and the liquid is reduced over a low flame; the snails are then simmered with pork marrow bones, fennel and perilla until the essence comes out, and finally chili oil is stirred in to finish the snail broth [[ihchina]].\n\nThe noodles are made from a mix of aged brown rice and fresh sticky rice, ground with mountain spring water into a batter — nutritious, chewy and smooth [[ihchina]].\n\nPickled bamboo shoots are the other soul of the dish: tender spring shoots are soaked in mountain spring water and left to ferment naturally for 72 days (fermentation: letting microbes change the food naturally — this is where the sourness and the smell come from), giving a soft, tangy crunch [[ihchina]]. The strong smell many people notice comes from that fermented bamboo shoot [[xinhua]]. Common toppings also include pickled green beans, wood ear mushrooms, peanuts and fried tofu skin [[xinhua]]."
+        }
+      },
+      "facts": [
+        {
+          "zh": "柳州螺蛳粉制作技艺于 2021 年（第五批）列入国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-277，类别为传统技艺，申报地区为广西壮族自治区柳州市。",
+          "en": "The craft of making Liuzhou luosifen was added to China's national list of intangible cultural heritage in 2021 (fifth batch), item no. Ⅷ-277, under the category of traditional craftsmanship; the declaring region is Liuzhou City, Guangxi.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "该项目的保护单位是柳州市群众艺术馆。",
+          "en": "The official safeguarding body for the item is the Liuzhou Mass Art Centre.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "早在 2008 年，柳州螺蛳粉手工制作技艺就已入选第二批广西壮族自治区级非物质文化遗产名录。",
+          "en": "As early as 2008, the hand-making technique of Liuzhou luosifen had already been listed in the second batch of Guangxi regional intangible cultural heritage.",
+          "sources": ["chinanews"]
+        },
+        {
+          "zh": "螺蛳粉制作技艺在清末民初基本成形，此后在柳州民间的私营餐饮店铺中广为流传。",
+          "en": "The technique took shape around the end of the Qing dynasty and the early Republic, then spread widely among private eateries in Liuzhou.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "20 世纪七八十年代，柳州夜市摊主开始用螺蛳汤煮米粉，现代意义上的螺蛳粉由此定型。",
+          "en": "In the 1970s and 1980s, night-market vendors in Liuzhou began cooking rice noodles in snail broth — this is when luosifen took its modern form.",
+          "sources": ["xinhua", "lzzx"]
+        },
+        {
+          "zh": "酸笋选用鲜嫩春笋，经山泉水浸泡 72 天自然发酵制成。",
+          "en": "The pickled bamboo shoots are made from tender spring shoots, soaked in mountain spring water and fermented naturally for 72 days.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "螺蛳汤以石螺为主料，关键工序是「炒螺」，并与猪筒骨、茴香、紫苏等一同熬煮。",
+          "en": "The broth is built on stone snails; the critical step is dry-frying them, after which they are simmered with pork marrow bones, fennel and perilla.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "常见配料包括酸笋、酸豆角、木耳、花生、腐竹等；闻起来的「臭」味来自酸笋的发酵。",
+          "en": "Common toppings include pickled bamboo shoots, pickled green beans, wood ear mushrooms, peanuts and fried tofu skin; the strong smell comes from the fermented bamboo shoots.",
+          "sources": ["xinhua"]
+        },
+        {
+          "zh": "2014 年底，第一家袋装螺蛳粉企业在柳州诞生，此后螺蛳粉从街边小吃发展为预包装产业。",
+          "en": "At the end of 2014 the first packaged luosifen company appeared in Liuzhou; from there the street snack grew into a packaged-food industry.",
+          "sources": ["xinhua", "chinanews"]
+        },
+        {
+          "zh": "2018 年，「柳州螺蛳粉」获得中国国家地理标志商标。",
+          "en": "In 2018 \"Liuzhou Luosifen\" was granted China's national geographical indication trademark.",
+          "sources": ["lzzx"]
+        },
+        {
+          "zh": "据柳州市政协网站专访，2024 年柳州市螺蛳粉全产业链销售收入为 759.6 亿元人民币（初步预测），同比增长 13.4%。",
+          "en": "According to an interview published on the Liuzhou CPPCC website, the city's whole luosifen industry chain recorded an estimated 75.96 billion yuan in revenue in 2024, up 13.4% year on year.",
+          "sources": ["lzzx"]
+        }
+      ],
+      "sources": [
+        {
+          "id": "ihchina",
+          "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《米粉制作技艺（柳州螺蛳粉制作技艺）》项目页",
+          "url": "https://www.ihchina.cn/project_details/23595",
+          "accessed": "2026-09-22"
+        },
+        {
+          "id": "xinhua",
+          "title": "新华社《镜头微观察｜一碗螺蛳粉「嗦」出百亿大产业》（经柳州市人民政府门户网站转载，2024-12-20）",
+          "url": "http://www.liuzhou.gov.cn/sjzt/zxzt/zwzt/dlfzsfjj/lsfcyfz/202412/t20241220_3567476.shtml",
+          "accessed": "2026-09-22"
+        },
+        {
+          "id": "chinanews",
+          "title": "中国新闻网《只有几十年历史的螺蛳粉，是如何成为国家级非遗的？》（2021-06-12）",
+          "url": "https://www.chinanews.com/cul/2021/06-12/9498742.shtml",
+          "accessed": "2026-09-22"
+        },
+        {
+          "id": "lzzx",
+          "title": "中国人民政治协商会议柳州市委员会网站《柳州螺蛳粉如何出海又「出圈」？——专访广西柳州螺蛳粉技术创新中心岗位专家程昊》（2025-02-23）",
+          "url": "http://lzzx.liuzhou.gov.cn/xw/202502/t20250223_3593127.html",
+          "accessed": "2026-09-22"
+        }
+      ]
+    },
+    {
+      "id": "lanzhou-beef-noodles",
+      "status": "pending",
+      "name": {
+        "zh": "兰州牛肉面",
+        "en": "Lanzhou Beef Noodles"
+      },
+      "aliases": [
+        "兰州拉面",
+        "兰州牛肉拉面",
+        "牛肉面",
+        "lanzhou beef noodles",
+        "lanzhou noodles"
+      ],
+      "region": {
+        "zh": "甘肃兰州",
+        "en": "Lanzhou, Gansu"
+      },
+      "note": {
+        "zh": "内容整理中。按 PRD 要求，每一条文化内容都必须先查到可溯源的公开资料再填入，因此本页暂不展示内容。",
+        "en": "Content in progress. Every cultural statement must first be traced to a public, citable source, so this page is not filled in yet."
+      },
+      "blocks": null,
+      "facts": [],
+      "sources": []
+    },
+    {
+      "id": "shaxian-snacks",
+      "status": "pending",
+      "name": {
+        "zh": "沙县小吃",
+        "en": "Shaxian Snacks"
+      },
+      "aliases": [
+        "沙县小吃制作技艺",
+        "shaxian snacks",
+        "shaxian delicacies"
+      ],
+      "region": {
+        "zh": "福建三明沙县",
+        "en": "Shaxian, Sanming, Fujian"
+      },
+      "note": {
+        "zh": "内容整理中。按 PRD 要求，每一条文化内容都必须先查到可溯源的公开资料再填入，因此本页暂不展示内容。",
+        "en": "Content in progress. Every cultural statement must first be traced to a public, citable source, so this page is not filled in yet."
+      },
+      "blocks": null,
+      "facts": [],
+      "sources": []
+    },
+    {
+      "id": "mengzi-rice-noodles",
+      "status": "pending",
+      "name": {
+        "zh": "蒙自过桥米线",
+        "en": "Mengzi Crossing-the-Bridge Rice Noodles"
+      },
+      "aliases": [
+        "过桥米线",
+        "云南过桥米线",
+        "crossing the bridge rice noodles",
+        "guoqiao mixian"
+      ],
+      "region": {
+        "zh": "云南蒙自",
+        "en": "Mengzi, Yunnan"
+      },
+      "note": {
+        "zh": "内容整理中。按 PRD 要求，每一条文化内容都必须先查到可溯源的公开资料再填入，因此本页暂不展示内容。",
+        "en": "Content in progress. Every cultural statement must first be traced to a public, citable source, so this page is not filled in yet."
+      },
+      "blocks": null,
+      "facts": [],
+      "sources": []
+    },
+    {
+      "id": "goubuli-baozi",
+      "status": "pending",
+      "name": {
+        "zh": "狗不理包子",
+        "en": "Goubuli Baozi"
+      },
+      "aliases": [
+        "狗不理",
+        "天津狗不理包子",
+        "goubuli",
+        "goubuli baozi"
+      ],
+      "region": {
+        "zh": "天津",
+        "en": "Tianjin"
+      },
+      "note": {
+        "zh": "内容整理中。按 PRD 要求，每一条文化内容都必须先查到可溯源的公开资料再填入，因此本页暂不展示内容。",
+        "en": "Content in progress. Every cultural statement must first be traced to a public, citable source, so this page is not filled in yet."
+      },
+      "blocks": null,
+      "facts": [],
+      "sources": []
+    }
+  ]
+}

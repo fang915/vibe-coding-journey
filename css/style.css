@@ -1,0 +1,370 @@
+/* =========================================================
+   寻味 / Xunwei —— 中华美食文化检索  ·  MVP v0.1 样式
+   技术约束（见 TECH_DESIGN.md §2）：纯 CSS，无框架、无外部资源
+   ========================================================= */
+
+:root{
+  --bg:        #fdfaf6;
+  --surface:   #ffffff;
+  --ink:       #2b2320;
+  --ink-soft:  #6b5f59;
+  --ink-faint: #9b908a;
+  --line:      #e8ded5;
+  --brand:     #a63a2a;
+  --brand-ink: #7d2a1e;
+  --brand-bg:  #f6eae5;
+  --radius:    12px;
+  --shadow:    0 1px 2px rgba(43,35,32,.05), 0 6px 20px rgba(43,35,32,.06);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html, body{ margin: 0; padding: 0; }
+
+body{
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB",
+               "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* [hidden] 必须真正隐藏 —— 单页靠它切换"检索视图 / 卡片视图" */
+[hidden]{ display: none !important; }
+
+/* 英文一律并置在中文旁边，视觉上退后一层（不切换语言即可同时看到两种语言） */
+.en{ color: var(--ink-soft); font-size: .88em; font-weight: 400; }
+
+/* ---------- 页头 ---------- */
+
+.site-header{
+  padding: 26px 40px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.brand{
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: .04em;
+  color: var(--brand-ink);
+}
+
+.brand .en{
+  font-size: 15px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-left: 6px;
+}
+
+.tagline{
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* ---------- 主区域 ---------- */
+
+main{ padding: 28px 40px 48px; }
+
+.view{ max-width: 1180px; margin: 0 auto; }
+
+/* ---------- 搜索区 ---------- */
+
+.search{
+  display: flex;
+  gap: 10px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.search input{
+  flex: 1;
+  padding: 13px 18px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.search input::placeholder{ color: var(--ink-faint); }
+
+.search input:focus{
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-bg);
+}
+
+.search button{
+  padding: 13px 24px;
+  font: inherit;
+  font-size: 15px;
+  color: #fff;
+  background: var(--brand);
+  border: 1px solid var(--brand);
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s;
+}
+
+.search button:hover{ background: var(--brand-ink); }
+
+/* 搜索提示（命中别名 / 未收录 等） */
+.hint{
+  max-width: 640px;
+  margin: 12px auto 0;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--brand-ink);
+  background: var(--brand-bg);
+  border-radius: 8px;
+}
+
+/* ---------- 收录列表 ---------- */
+
+.section-title{
+  margin: 34px 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+}
+
+.dish-list{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dish-entry{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding: 20px 18px;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .15s, border-color .15s;
+}
+
+.dish-entry:hover{
+  transform: translateY(-2px);
+  border-color: var(--brand);
+}
+
+.dish-entry .zh{
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.dish-entry .en{
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.dish-entry .region{
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ---------- 文化卡片 ---------- */
+
+.back{
+  margin-bottom: 18px;
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.back:hover{ border-color: var(--brand); color: var(--brand-ink); }
+
+.card{
+  padding: 32px 36px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card-head{
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.card-head h2{
+  margin: 0;
+  font-size: 28px;
+  color: var(--brand-ink);
+}
+
+.card-head .name-en{
+  margin: 2px 0 0;
+  font-size: 15px;
+  letter-spacing: .04em;
+  color: var(--ink-faint);
+}
+
+.card-head .meta{
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* 三个内容板块 */
+.block{ margin-top: 26px; }
+
+.block h3{
+  margin: 0 0 8px;
+  font-size: 17px;
+  color: var(--brand-ink);
+}
+
+.block h3 .en{
+  font-size: 12.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-left: 8px;
+}
+
+.block .zh-text{ margin: 0 0 6px; }
+
+.block .en-text{
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+
+/* 出处标记：贴在事实性陈述末尾的小角标 */
+.cite{
+  display: inline-block;
+  margin-left: 4px;
+  padding: 0 6px;
+  font-size: 11.5px;
+  line-height: 18px;
+  color: var(--brand-ink);
+  background: var(--brand-bg);
+  border: 1px solid #e3cfc8;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: 1px;
+}
+
+.cite:hover{ background: #eedcd5; }
+
+/* 出处列表 */
+.sources{ padding-top: 22px; border-top: 1px solid var(--line); }
+
+.sources ol{
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.sources li{ margin-bottom: 6px; }
+
+.sources a{ color: var(--brand-ink); }
+
+/* 占位提示（7-2 骨架阶段使用：明确标出"这里的内容还没填"） */
+.placeholder{
+  padding: 14px 16px;
+  font-size: 13.5px;
+  color: var(--ink-faint);
+  background: #fbf7f3;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+}
+
+.placeholder code{
+  font-size: 12.5px;
+  color: var(--brand-ink);
+}
+
+/* ---------- 页脚 ---------- */
+
+.site-footer{
+  padding: 18px 40px 26px;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+/* ---------- 关键事实清单 ---------- */
+
+.facts ul{
+  margin: 0;
+  padding-left: 22px;
+}
+
+.facts li{ margin-bottom: 12px; }
+
+.facts .zh-text,
+.facts .en-text{ display: block; }
+
+.facts .zh-text{ margin-bottom: 2px; }
+
+/* 出处列表里的"访问日期" */
+.sources .accessed{
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* 入口卡片上的"内容整理中"小标签 */
+.dish-entry .pending-tag{
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 1px 8px;
+  font-size: 11.5px;
+  line-height: 18px;
+  color: var(--ink-soft);
+  background: #f2efec;
+  border-radius: 999px;
+}
+
+/* 卡片内的"内容整理中"说明框 */
+.pending-note{
+  margin-top: 22px;
+  padding: 16px 18px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: #fbf7f3;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+}
+
+.pending-note p{ margin: 0; }
+
+.pending-note p + p{ margin-top: 6px; }
+
+/* ---------- 窄屏兜底（本期不做移动端，仅保证不崩） ---------- */
+
+@media (max-width: 900px){
+  .site-header, main, .site-footer{ padding-left: 20px; padding-right: 20px; }
+  .dish-list{ grid-template-columns: repeat(2, 1fr); }
+  .card{ padding: 24px 20px; }
+}
