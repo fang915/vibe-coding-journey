@@ -20,6 +20,18 @@
   <main>
 
     <!-- ===================== 视图一：检索 ===================== -->
+    <!--
+      一句话需求（Day 8 定稿，留档在这里）：
+      寻味主视图 = 搜索框 + 已收录列表 + 中英双语文化卡片，
+      并且要分别有「加载中 / 无结果 / 加载失败 / 正常显示」四种状态。
+
+      四种状态分别住在哪里：
+        · 正常显示 —— #dish-list（本文件下方，数据由 js/app.js 渲染）
+        · 加载中   —— #state-loading（骨架屏）
+        · 无结果   —— #state-empty
+        · 加载失败 —— #state-error（带「重试」按钮）
+      后三个默认 hidden，由 js/app.js 在取数过程中切换；同一时刻只显示一个。
+    -->
     <section id="search-view" class="view">
 
       <form id="search-form" class="search" role="search">
@@ -36,10 +48,49 @@
       <!-- 提示条：命中别名/错别字、或"暂未收录"时显示 -->
       <p id="search-hint" class="hint" hidden></p>
 
-      <h2 class="section-title">已收录 · Included</h2>
+      <!-- 状态：加载中（骨架屏。先占住位置，数据到了才不会跳一下） -->
+      <div id="state-loading" class="state state-loading" hidden aria-busy="true">
+        <p class="state-text">
+          正在读取美食资料…<span class="en">· Loading dishes…</span>
+        </p>
+        <ul class="skeleton" aria-hidden="true">
+          <li class="skeleton-row"></li>
+          <li class="skeleton-row"></li>
+          <li class="skeleton-row"></li>
+        </ul>
+      </div>
 
-      <!-- 列表由 js/app.js 依据 data/dishes.json 重建；
-           下面这 5 个静态入口是"脚本没跑起来"时的兜底，保证页面不至于空白 -->
+      <!-- 状态：无结果（搜索没命中） -->
+      <div id="state-empty" class="state state-empty" hidden aria-live="polite">
+        <p class="state-title">
+          没找到这道菜<span class="en">· Nothing found</span>
+        </p>
+        <p id="state-empty-text" class="state-text">
+          换个说法再试试，比如：螺蛳粉 / Luosifen
+        </p>
+        <button id="state-empty-all-btn" class="state-btn" type="button">
+          看看已收录的 · Show all
+        </button>
+      </div>
+
+      <!-- 状态：加载失败（读不到数据） -->
+      <div id="state-error" class="state state-error" hidden aria-live="assertive">
+        <p class="state-title">
+          资料没能读出来<span class="en">· Failed to load</span>
+        </p>
+        <p id="state-error-text" class="state-text">
+          可能是文件读取或网络出了问题，点下面重试一次。
+        </p>
+        <button id="retry-btn" class="state-btn" type="button">
+          重试 · Retry
+        </button>
+      </div>
+
+      <h2 id="list-title" class="section-title">已收录 · Included</h2>
+
+      <!-- 列表由 js/app.js 依据 data/dishes.json 重建。
+           下面这 5 个静态入口只在"脚本完全没跑起来"时才看得见（兜底），
+           正常情况下取数刚开始就会被「加载中」状态顶掉。 -->
       <ul id="dish-list" class="dish-list">
         <li>
           <button class="dish-entry" type="button" data-id="luosifen">
@@ -132,6 +183,9 @@
     <span class="en">Content sourced from public, traceable references.</span>
   </footer>
 
+  <!-- 数据来源层（Day 8 新增）。必须排在 app.js 前面：app.js 靠它取数据。
+       换真实 API 时只改 js/data-source.js，这个文件不用动。 -->
+  <script src="js/data-source.js"></script>
   <script src="js/app.js"></script>
 
 </body>

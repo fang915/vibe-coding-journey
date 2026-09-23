@@ -184,6 +184,90 @@ main{ padding: 28px 40px 48px; }
   color: var(--ink-faint);
 }
 
+/* ---------- 页面状态（加载中 / 无结果 / 加载失败） ----------
+   正常态就是上面的 .dish-list；下面三种跟它互斥，同一时刻只出现一个。
+   Day 8 新增：把这"说不出口的三种时刻"也当成页面的一部分来设计。 */
+
+.state{
+  margin-top: 34px;
+  padding: 30px 26px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.state-title{
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--brand-ink);
+}
+
+.state-title .en{
+  margin-left: 8px;
+  font-size: 12.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.state-text{
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.state-btn{
+  margin-top: 18px;
+  padding: 9px 20px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--brand-ink);
+  background: var(--brand-bg);
+  border: 1px solid #e3cfc8;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.state-btn:hover{ background: #eedcd5; }
+
+/* 加载中：骨架条。让人知道"在读"，而不是"页面坏了" */
+.state-loading{ text-align: left; }
+
+.skeleton{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skeleton-row{
+  height: 96px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, #f2efec 25%, #e8e2dc 37%, #f2efec 63%);
+  background-size: 400% 100%;
+  animation: skeleton-breathe 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-breathe{
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* 无结果：用虚线框，跟"正常但恰好没有"的气质对齐 */
+.state-empty{ border-style: dashed; }
+
+/* 加载失败：只换边框和底色。失败是"可以重试"，不是"完蛋了" */
+.state-error{
+  border-color: #e3cfc8;
+  background: #fdf7f4;
+}
+
 /* ---------- 文化卡片 ---------- */
 
 .back{
@@ -366,5 +450,11 @@ main{ padding: 28px 40px 48px; }
 @media (max-width: 900px){
   .site-header, main, .site-footer{ padding-left: 20px; padding-right: 20px; }
   .dish-list{ grid-template-columns: repeat(2, 1fr); }
+  .skeleton{ grid-template-columns: repeat(2, 1fr); }
   .card{ padding: 24px 20px; }
+}
+
+/* 系统开了"减少动态效果"就不让骨架条闪 —— 无障碍，也省电 */
+@media (prefers-reduced-motion: reduce){
+  .skeleton-row{ animation: none; }
 }

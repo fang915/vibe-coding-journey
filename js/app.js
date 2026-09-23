@@ -1,21 +1,27 @@
 /* =========================================================
-   寻味 / Xunwei —— MVP v0.1 前端逻辑
+   寻味 / Xunwei —— 前端逻辑（Day 8：补齐四种页面状态）
    技术约束（见 TECH_DESIGN.md §2）：原生 JavaScript，无框架、无依赖。
+
    这个文件只做三件事：
-     1. 把 data/dishes.json 读进内存
+     1. 让 js/data-source.js 把数据取回来（数据从哪来，这里不管）
      2. 按用户输入的关键词找出匹配的美食
      3. 把结果画到页面上（检索视图 / 文化卡片视图）
+
+   ⚠️ 四种页面状态（Day 8 的正题）——同一时刻只亮一个，切换一律走 applyState()：
+     success  成功   —— 列表 / 卡片正常显示
+     loading  加载中 —— 骨架屏
+     empty    无结果 —— 数据一条都没有，或者搜索没命中
+     error    失败   —— 读不到数据，给一个「重试」按钮
    ========================================================= */
 
 (function () {
   'use strict';
 
-  var DATA_URL = 'data/dishes.json';
-
-  // 内存里的数据：一次读入，后面反复用
+  // 内存里的数据和当前状态
   var state = {
-    dishes: [],   // 全部美食
-    loaded: false
+    dishes: [],          // 全部美食
+    loaded: false,       // 数据是否已经成功读进来
+    listState: 'loading' // 列表区当前是四种状态里的哪一种
   };
 
   // 页面上要反复用到的元素，统一在 init 里取一次
@@ -32,8 +38,18 @@
     el.form        = document.getElementById('search-form');
     el.input       = document.getElementById('search-input');
     el.hint        = document.getElementById('search-hint');
+    el.listTitle   = document.getElementById('list-title');
     el.dishList    = document.getElementById('dish-list');
     el.backBtn     = document.getElementById('back-btn');
+
+    // 三种"非正常"状态的容器
+    el.stateLoading   = document.getElementById('state-loading');
+    el.stateEmpty     = document.getElementById('state-empty');
+    el.stateEmptyText = document.getElementById('state-empty-text');
+    el.stateEmptyAll  = document.getElementById('state-empty-all-btn');
+    el.stateError     = document.getElementById('state-error');
+    el.stateErrorText = document.getElementById('state-error-text');
+    el.retryBtn       = document.getElementById('retry-btn');
 
     el.nameZh      = document.getElementById('card-name-zh');
     el.nameEn      = document.getElementById('card-name-en');
@@ -55,30 +71,88 @@
 
     el.form.addEventListener('submit', onSubmit);
     el.backBtn.addEventListener('click', showSearchView);
+    el.retryBtn.addEventListener('click', loadDishes);          // 失败 → 重试
+    el.stateEmptyAll.addEventListener('click', showAllDishes);  // 没搜到 → 看全部
 
-    loadData();
+    loadDishes();
   }
 
   /* ---------------------------------------------------------
-     1. 读数据
+     状态切换：先把四种状态全部熄灯，再点亮要显示的那一个
      --------------------------------------------------------- */
-  function loadData() {
-    fetch(DATA_URL)
-      .then(function (res) {
-        if (!res.ok) { throw new Error('HTTP ' + res.status); }
-        return res.json();
-      })
-      .then(function (data) {
-        state.dishes = (data && data.dishes) || [];
+  function applyState(name, opts) {
+    opts = opts || {};
+    state.listState = name;
+
+    // 熄灯
+    el.stateLoading.hidden = true;
+    el.stateEmpty.hidden   = true;
+    el.stateError.hidden   = true;
+    el.listTitle.hidden    = true;
+    el.dishList.hidden     = true;
+
+    if (name === 'loading') {
+      el.stateLoading.hidden = false;
+      return;
+    }
+
+    if (name === 'empty') {
+      if (opts.dataEmpty) {
+        // 情况一：数据本身就是空的
+        el.stateEmptyText.textContent = '目前还没有收录任何美食。· Nothing here yet.';
+        el.stateEmptyAll.hidden = true;
+      } else {
+        // 情况二：搜索没命中
+        var q = opts.query || '';
+        el.stateEmptyText.textContent =
+          '暂未收录「' + q + '」。换个说法再试试，比如：螺蛳粉 / Luosifen' +
+          ' · Not found: “' + q + '”';
+        el.stateEmptyAll.hidden = false;
+      }
+      el.stateEmpty.hidden = false;
+      return;
+    }
+
+    if (name === 'error') {
+      el.stateErrorText.textContent = opts.message || '资料没能读出来，点下面重试一次。';
+      el.stateError.hidden = false;
+      return;
+    }
+
+    // success
+    el.listTitle.hidden = false;
+    el.dishList.hidden  = false;
+  }
+
+  /* ---------------------------------------------------------
+     1. 读数据（取数逻辑全在 js/data-source.js）
+     --------------------------------------------------------- */
+  function loadDishes() {
+    applyState('loading');
+
+    window.DataSource.getDishes()
+      .then(function (dishes) {
+        state.dishes = dishes || [];
         state.loaded = true;
+        hideHint();
+
+        if (state.dishes.length === 0) {
+          el.dishList.innerHTML = '';
+          applyState('empty', { dataEmpty: true });
+          return;
+        }
+
         renderDishList(state.dishes);
+        applyState('success');
       })
       .catch(function (err) {
-        // 最常见的失败原因：直接双击 index.html 打开（浏览器的同源策略不允许读本地 json）
-        showHint(
-          '数据没能读出来。如果你是在文件夹里双击 index.html 打开的，请改用本地服务器打开' +
-          '（这不是你写错了，是浏览器的安全规则）。技术信息：' + err.message
-        );
+        state.loaded = false;
+        applyState('error', {
+          message:
+            '可能是文件读取或网络出了问题。如果你是在文件夹里双击 index.html 打开的，' +
+            '请改用本地服务器打开（这不是你写错了，是浏览器的安全规则）。' +
+            '技术信息：' + err.message
+        });
       });
   }
 
@@ -266,7 +340,7 @@
   }
 
   /* ---------------------------------------------------------
-     5. 交互：提交搜索 / 返回
+     5. 交互：提交搜索 / 返回 / 看全部
      --------------------------------------------------------- */
   function onSubmit(event) {
     event.preventDefault();
@@ -274,6 +348,16 @@
     var query = el.input.value.trim();
     if (!query) {
       showHint('请输入菜名，例如：螺蛳粉 / Luosifen');
+      return;
+    }
+
+    // 这两种状态下先别搜：还在读、或者刚才读失败了
+    if (state.listState === 'loading') {
+      showHint('资料还在读取中，稍等一下再搜。· Still loading, one moment.');
+      return;
+    }
+    if (state.listState === 'error') {
+      showHint('资料还没读出来，先点上面的「重试」。· Please retry first.');
       return;
     }
 
@@ -291,14 +375,23 @@
       showHint('找到 ' + matches.length + ' 道与「' + query + '」相关的美食 · ' +
                matches.length + ' results for “' + query + '”');
       renderDishList(matches);
+      applyState('success');
       return;
     }
 
-    // 一道都没命中 → 明确说"暂未收录"，并把全部收录列表摆出来
-    showHint('暂未收录「' + query + '」。目前已收录 ' + state.dishes.length +
-             ' 道美食，见下方列表。 · Not found: “' + query + '”. Showing all ' +
-             state.dishes.length + ' included dishes.');
+    // 一道都没命中 → 走"无结果"状态（不再是页面顶上的一行小字）
+    hideHint();
+    el.dishList.innerHTML = '';
+    applyState('empty', { query: query });
+  }
+
+  // 「看看已收录的」：清空搜索框，回到完整列表
+  function showAllDishes() {
+    el.input.value = '';
+    hideHint();
+    if (state.dishes.length === 0) { return; }
     renderDishList(state.dishes);
+    applyState('success');
   }
 
   function showSearchView() {
