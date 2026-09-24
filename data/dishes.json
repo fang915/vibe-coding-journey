@@ -2,11 +2,11 @@
   "meta": {
     "product": "寻味 / Xunwei",
     "version": "MVP v0.1",
-    "generatedOn": "2026-09-22",
+    "generatedOn": "2026-09-24",
     "dishesCount": 5,
-    "contentReadyCount": 1,
+    "contentReadyCount": 5,
     "rule": "本文件中的文化内容全部来自可溯源的公开资料，不由模型生成（见 PRD.md 非目标第 8 条）。文本中的 [[sourceId]] 标记指向该道菜 sources 里的具体出处。",
-    "authorNote": "螺蛳粉为已核实内容；其余 4 道为占位（status = pending），待逐条查证后填入。"
+    "authorNote": "5 道菜全部为已核实内容（status = published），每一条事实性陈述都标注了可溯源的公开出处。凡遇资料之间存在分歧（如狗不理的始创年份、沙县小吃的品种总数），一律两说并存、不一刀切。"
   },
   "dishes": [
     {
@@ -136,7 +136,7 @@
     },
     {
       "id": "lanzhou-beef-noodles",
-      "status": "pending",
+      "status": "published",
       "name": {
         "zh": "兰州牛肉面",
         "en": "Lanzhou Beef Noodles"
@@ -145,48 +145,236 @@
         "兰州拉面",
         "兰州牛肉拉面",
         "牛肉面",
+        "牛大",
+        "牛大碗",
         "lanzhou beef noodles",
-        "lanzhou noodles"
+        "lanzhou noodles",
+        "lanzhou beef lamian",
+        "lanzhou lamian",
+        "beef noodles",
+        "niuda"
       ],
       "region": {
         "zh": "甘肃兰州",
         "en": "Lanzhou, Gansu"
       },
-      "note": {
-        "zh": "内容整理中。按 PRD 要求，每一条文化内容都必须先查到可溯源的公开资料再填入，因此本页暂不展示内容。",
-        "en": "Content in progress. Every cultural statement must first be traced to a public, citable source, so this page is not filled in yet."
+      "tagline": {
+        "zh": "一碗清汤，九种面型，兰州人管它叫「牛大」。",
+        "en": "One clear broth, nine noodle shapes — locals call it niuda, \"the big beef bowl\"."
       },
-      "blocks": null,
-      "facts": [],
-      "sources": []
+      "blocks": {
+        "origin": {
+          "zh": "兰州牛肉面出自甘肃兰州。兰州是黄河唯一穿城而过的省会城市，南岸是农耕文化、北岸是游牧文化，正处在中国地势第一级阶梯与第二级阶梯的交替处——黄土高原产的小麦，加上甘南、青海一带产的牛肉，凑成了这碗面的两样好食材[[ihchina]]。\n\n这碗面已有一百多年历史。据近代地方志记载，技艺由回族厨师马保子始创：1915 年，他挑着担子沿街叫卖自创的「热锅子面」；1919 年，他在兰州东城壕开出了第一家门店[[ihchina]][[gansu]]。2021 年，「传统面食制作技艺（兰州牛肉面制作技艺）」被列入第五批国家级非物质文化遗产代表性项目名录（编号 Ⅷ-160，扩展项目，申报地区甘肃省兰州市，保护单位兰州市文化馆）[[ihchina]]。\n\n在兰州本地，它的名字是「牛肉面」，兰州人亲昵地叫它「牛大」[[gansu]]；「兰州拉面」更多是外地人的叫法[[ctdsb]]。",
+          "en": "Lanzhou beef noodles come from Lanzhou in Gansu. Lanzhou is the only provincial capital the Yellow River runs through — farmland on the south bank, herding country on the north — and it sits where China's first and second steps of land meet. Wheat from the loess plateau on one side, beef from the Gannan grasslands and Qinghai on the other: that is what gives the bowl its two key ingredients [[ihchina]].\n\nThe craft is over a hundred years old. According to modern local gazetteers it was founded by the Hui chef Ma Baozi: in 1915 he sold his own \"hot-pot noodles\" from a shoulder pole, and in 1919 he opened his first shop at Dongchenghao in Lanzhou [[ihchina]][[gansu]]. In 2021 the traditional noodle-making technique of Lanzhou beef noodles was added to China's fifth national list of intangible cultural heritage (item no. Ⅷ-160, an extended item; declaring region Lanzhou City, Gansu; safeguarding body the Lanzhou Mass Art Centre) [[ihchina]].\n\nIn Lanzhou itself the dish is simply niurou mian, \"beef noodles\", or affectionately niuda — \"the big beef\" [[gansu]]. \"Lanzhou lamian\" is mostly what people outside Gansu call it [[ctdsb]]."
+        },
+        "story": {
+          "zh": "马保子只是开头。真正把「清」做成招牌的是他的儿子马杰三——他在「清」字上下功夫，不断改进技艺，最后得了个「闻香下马，知味停车」的名声[[ihchina]]。到今天，这门技艺已经传了 6 代[[ihchina]]。\n\n在兰州，这碗面还长在日常生活里。当地人讲究赶早去喝「头汤」（一天里第一锅汤，最清最鲜），形容自己离不开它，说的是「三天不来个牛大碗，心里就七上八下」[[gansu]]。\n\n外地人最容易困惑的是招牌：兰州本地几乎不挂「兰州拉面」的牌子[[ctdsb]]。20 世纪 80 年代末起，青海化隆、尖扎、循化一带的人外出开面馆，因为「青海」在外地没什么人认识，就借用了名气更大的「兰州」二字；1988 年，化隆农民韩录带着 7000 元和同乡到厦门，开了青海人在内地的第一家拉面馆[[ctdsb]]。这条路走了近四十年，近年青海省正推动把招牌换成「青海拉面」——按该省拉面产业行业协会的说法，这是品牌自立，不是两地相争[[ctdsb]]。",
+          "en": "Ma Baozi was only the beginning. It was his son Ma Jiesan who turned the idea of \"clear\" into the shop's signature: he worked on that single quality, kept refining the craft, and earned the saying \"smell the fragrance and dismount, taste the flavour and stop your cart\" [[ihchina]]. Today the craft has passed through six generations [[ihchina]].\n\nIn Lanzhou the bowl also lives inside daily routine. People make a point of going early for the toutang — the \"first broth\" of the day, the clearest and freshest. Locals describe their dependence on it with the line: three days without a big bowl of niuda and everything feels off [[gansu]].\n\nWhat puzzles visitors most is the signage. In Lanzhou itself shops almost never use the name \"Lanzhou lamian\" [[ctdsb]]. From the late 1980s, people from Hualong, Jianzha and Xunhua in Qinghai went out to open noodle shops; because \"Qinghai\" meant little to customers elsewhere, they borrowed the far better known name \"Lanzhou\". In 1988 the Hualong farmer Han Lu took 7,000 yuan and some fellow villagers to Xiamen and opened the first Qinghai-run noodle shop in the interior [[ctdsb]]. That road ran for nearly forty years, and in recent years Qinghai has been encouraging shops to change their signs to \"Qinghai lamian\" — in the words of the province's noodle industry association, a bid for its own brand identity rather than a contest between two provinces [[ctdsb]]."
+        },
+        "technique": {
+          "zh": "面是骨。做面分选料、和面、饧面、溜条、拉面五步[[ihchina]]（饧面：把揉好的面团静置一段时间，让面筋松弛，后面才拉得开）。面团用高筋面粉，按「三遍水、三遍灰，九九八十一遍揉」的技法反复捣揉，还借助一种天然碱水——蓬灰。它由戈壁滩上的野生蓬草烧制而成，能让面条柔滑透亮、富有弹性[[gansu]]。\n\n面型可以自己点：圆的从细如发丝的「毛细」，到细、二细、三细，再到较粗的「二柱子」；扁的有宽如韭叶的「韭叶」，以及更宽的「宽」和「大宽」；还有一种截面呈三角形的「荞麦棱子」[[gansu]]。国家级非遗项目页则把面型概括为 5 种粗细（粗、二细、三细、细、毛细）加 3 种宽度（大宽、宽、韭叶）[[ihchina]]。\n\n汤是魂。选用甘南草原出产的新鲜牦牛肉或黄牛肉，清水洗净、浸泡后熬煮，放入草果、姜片、花椒、肉豆蔻、丁香、胡椒、白芷等十几种调料，小火炖 5 至 7 小时，让牛肉和牛骨的鲜味溶进汤里[[ihchina]]；甘肃省政府网站的说法是二十余种香料、文火慢炖四到七个小时[[gansu]]。\n\n最后一步是浇汤：煮熟的拉面浇上清汤，佐以熟牛肉丁、香菜和蒜苗，调入红亮的辣椒油[[ihchina]]，再配上煮到透明的白萝卜片[[gansu]]——这几样凑齐，就是那句「一清、二白、三红、四绿、五黄」[[ihchina]][[gansu]]。",
+          "en": "The noodles are the bones of the dish. Making them takes five steps — choosing the flour, mixing the dough, resting it, working the strips and pulling [[ihchina]] (resting the dough: letting it stand so the gluten relaxes and the strands can be pulled). High-gluten flour is kneaded over and over by the rule \"three rounds of water, three rounds of ash, eighty-one kneadings\", helped along by a natural alkaline water called penghui, made by burning wild tumbleweed from the Gobi, which leaves the noodles smooth, translucent and springy [[gansu]].\n\nYou choose your shape: round noodles run from hair-thin maoxi through xi, erxi and sanxi up to the thicker erzhuizi; flat ones include leek-leaf-wide jiuye, the wider kuan and the widest dakuang; and there is even a triangular-cut shape called qiaomai lengzi [[gansu]]. The national heritage listing sums the range up as five thicknesses (cu, erxi, sanxi, xi, maoxi) plus three widths (dakuang, kuan, jiuye) [[ihchina]].\n\nThe broth is the soul. Fresh yak or yellow beef from the Gannan grasslands is washed, soaked, then simmered with a dozen or so spices — black cardamom, ginger, Sichuan pepper, nutmeg, clove, pepper and angelica — over a low flame for five to seven hours until the flavour of beef and bone dissolves into the liquid [[ihchina]]. The Gansu provincial government's account says more than twenty spices and four to seven hours [[gansu]].\n\nThe last step is the ladling: cooked noodles are topped with clear broth, diced cooked beef, coriander and garlic sprouts, then bright red chilli oil [[ihchina]], with slices of white radish boiled until translucent [[gansu]] — and that combination is what the well-known phrase describes: \"one clear, two white, three red, four green, five yellow\" [[ihchina]][[gansu]]."
+        }
+      },
+      "facts": [
+        {
+          "zh": "2021 年，「传统面食制作技艺（兰州牛肉面制作技艺）」列入第五批国家级非物质文化遗产代表性项目名录，项目序号 943，编号 Ⅷ-160，类别传统技艺，类型为扩展项目，申报地区甘肃省兰州市，保护单位兰州市文化馆。",
+          "en": "In 2021 the traditional noodle-making technique of Lanzhou beef noodles was added to China's fifth national list of intangible cultural heritage — item no. 943, code Ⅷ-160, category traditional craftsmanship, an extended item, declared by Lanzhou City, Gansu, with the Lanzhou Mass Art Centre as safeguarding body.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "兰州牛肉面制作技艺至今已有 100 余年历史；据近代地方志记载，该技艺由回民马保子始创。",
+          "en": "The craft of making Lanzhou beef noodles is over a hundred years old; according to modern local gazetteers it was founded by the Hui chef Ma Baozi.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "1915 年，马保子沿街叫卖自创的「热锅子面」；1919 年，他在兰州东城壕开设了第一家门店。",
+          "en": "In 1915 Ma Baozi sold his own invention, \"hot-pot noodles\", from a shoulder pole; in 1919 he opened his first shop at Dongchenghao in Lanzhou.",
+          "sources": ["gansu"]
+        },
+        {
+          "zh": "面的制作分选料、和面、饧面、溜条和拉面五步。",
+          "en": "Making the noodles has five steps: choosing the flour, mixing the dough, resting it, working the strips and pulling.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "按食客需求，面条可分为粗、二细、三细、细、毛细 5 种粗细，以及大宽、宽、韭叶 3 种宽度。",
+          "en": "To suit the customer, noodles come in five thicknesses — cu, erxi, sanxi, xi and maoxi — and three widths: dakuang, kuan and jiuye.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "汤选用甘南草原出产的新鲜牦牛肉或黄牛肉，放草果、姜片、花椒、肉豆蔻、丁香、胡椒、白芷等十几种调料，小火炖 5 至 7 小时。",
+          "en": "The broth uses fresh yak or yellow beef from the Gannan grasslands, simmered with a dozen or so spices including black cardamom, ginger, Sichuan pepper, nutmeg, clove, pepper and angelica over a low flame for five to seven hours.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "其制作精髓被概括为「汤清者亮，肉烂者香，面细者长」，汤面特点为「一清、二白、三红、四绿、五黄」。",
+          "en": "The craft is summed up as \"clear broth that shines, tender beef that smells good, fine noodles that run long\", with the bowl's signature described as \"one clear, two white, three red, four green, five yellow\".",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "制作技艺已传承 6 代；目前仅兰州市就有牛肉面馆 1300 多家，全国现有兰州牛肉面馆（店）4 万多家，直接参与的从业者约 50 万人；40 多个海外国家有牛肉面馆 160 余家。",
+          "en": "The craft has passed through six generations; Lanzhou alone has more than 1,300 beef-noodle shops, China has over 40,000, and about 500,000 people work in the trade directly; more than 160 shops operate in over 40 countries overseas.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "和面用高筋面粉，遵循「三遍水、三遍灰，九九八十一遍揉」的技法，并借助由戈壁滩野生蓬草烧制的天然碱水「蓬灰」，使面条柔滑透亮、富有弹性。",
+          "en": "The dough uses high-gluten flour and the rule \"three rounds of water, three rounds of ash, eighty-one kneadings\", helped by penghui — a natural alkaline water made by burning wild Gobi tumbleweed — which leaves the noodles smooth, translucent and springy.",
+          "sources": ["gansu"]
+        },
+        {
+          "zh": "兰州本地人称牛肉面为「牛大」，本地餐饮很少直接打「兰州拉面」的招牌；20 世纪 80 年代末起，青海化隆、尖扎等地群众外出开面馆时多借用「兰州拉面」之名，1988 年化隆农民韩录在厦门开了青海人在内地的第一家拉面馆，近年青海正推动其更名为「青海拉面」。",
+          "en": "People in Lanzhou call the dish niuda, and local restaurants rarely use the sign \"Lanzhou lamian\"; from the late 1980s people from Hualong and Jianzha in Qinghai borrowed the Lanzhou name when opening shops elsewhere, with the Hualong farmer Han Lu opening the first Qinghai-run noodle shop in the interior in Xiamen in 1988 — and in recent years Qinghai has been encouraging a change to \"Qinghai lamian\".",
+          "sources": ["ctdsb"]
+        },
+        {
+          "zh": "「牛头标」授权门店已达一千五百余家；兰州牛肉面被评为「中华第一面」、「中国十大面条」之一，并入选「首批中国消费名品名单」；近三百四十家专业培训机构建立了拉面技艺教学体系。",
+          "en": "\"Ox-head mark\" licensed shops have reached more than 1,500; Lanzhou beef noodles has been named \"China's number-one noodle\" and one of \"China's top ten noodles\", and was included in the first list of Chinese consumer name-brand products; nearly 340 training institutions teach the pulling technique.",
+          "sources": ["gansu"]
+        }
+      ],
+      "sources": [
+        {
+          "id": "ihchina",
+          "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《传统面食制作技艺（兰州牛肉面制作技艺）》项目页",
+          "url": "https://www.ihchina.cn/project_details/23794/",
+          "accessed": "2026-09-24"
+        },
+        {
+          "id": "gansu",
+          "title": "甘肃省人民政府网站「走进甘肃 · 甘味 · 美食」栏目《兰州牛肉面》",
+          "url": "https://www.gansu.gov.cn/gsszf/c100394/201909/162305.shtml",
+          "accessed": "2026-09-24"
+        },
+        {
+          "id": "ctdsb",
+          "title": "楚天都市报（湖北日报传媒集团）《从兰州拉面到青海拉面 变的不仅是一块老招牌》（2026-08-15）",
+          "url": "https://ctdsbepaper.hubeidaily.net/pc/content/202608/15/content_355860.html",
+          "accessed": "2026-09-24"
+        }
+      ]
     },
     {
       "id": "shaxian-snacks",
-      "status": "pending",
+      "status": "published",
       "name": {
         "zh": "沙县小吃",
         "en": "Shaxian Snacks"
       },
       "aliases": [
         "沙县小吃制作技艺",
+        "沙县",
+        "福建小吃",
+        "扁肉",
+        "拌面",
         "shaxian snacks",
-        "shaxian delicacies"
+        "shaxian delicacies",
+        "shaxian xiaochi",
+        "fujian snacks"
       ],
       "region": {
         "zh": "福建三明沙县",
         "en": "Shaxian, Sanming, Fujian"
       },
-      "note": {
-        "zh": "内容整理中。按 PRD 要求，每一条文化内容都必须先查到可溯源的公开资料再填入，因此本页暂不展示内容。",
-        "en": "Content in progress. Every cultural statement must first be traced to a public, citable source, so this page is not filled in yet."
+      "tagline": {
+        "zh": "中原南迁带来的一手点心，被一个县做成了 8.8 万家店。",
+        "en": "A snack repertoire carried south from the Central Plains — grown by a single county into 88,000 shops."
       },
-      "blocks": null,
-      "facts": [],
-      "sources": []
+      "blocks": {
+        "origin": {
+          "zh": "沙县小吃出自福建三明沙县。它是古代中原民众向百越地区移民的过程中，为应付时令节气与民俗节庆活动需要而慢慢形成的一门技艺，因此既继承中原做法，也用南方食材——主要流布在三明市的沙县区、永安县、明溪县、清流县和宁化县，以沙县最为集中[[ihchina]]。沙县地处福建中部，历史上是南北与东西交流的重要通道，中原民众南迁、东南沿海与内陆的客货交通都在这里交汇；正因为要方便往来的商贾与游人，才长出了「经济实惠、品种繁多、方便快捷」这三个特征[[ihchina]]。\n\n在名录上它有两个身份。省级层面叫「沙县小吃制作工艺」，2007 年 8 月 28 日由福建省人民政府公布列入第二批省级非物质文化遗产名录，保护单位为三明市沙县小吃同业公会[[fjwlt]]；2021 年，它以「小吃制作技艺（沙县小吃制作技艺）」列入第五批国家级非物质文化遗产代表性项目名录（项目序号 1522，编号 Ⅷ-276，类别传统技艺，新增项目，申报地区福建省三明市，保护单位沙县小吃同业公会）[[ihchina]]。\n\n据《八闽通志》记载，沙县小吃兴于唐宋、盛于明清，在当代得到进一步发展[[ihchina]]。",
+          "en": "Shaxian snacks come from Shaxian in Sanming, Fujian. The craft took shape as people from the Central Plains migrated into the Baiyue lands and needed food for the farming calendar and for festivals, so it inherits Central Plains technique while using southern ingredients; it is found mainly across the Sanming districts of Shaxian, Yong'an, Mingxi, Qingliu and Ninghua, most densely in Shaxian itself [[ihchina]]. Shaxian sits in the middle of Fujian, historically a corridor between north and south and between the coast and the interior, where the southward migration of Central Plains people and the movement of goods to and from the coast both passed through. Serving travelling merchants and visitors is precisely what produced its three defining traits: affordable, varied and quick [[ihchina]].\n\nIt holds two heritage listings. At provincial level it appears as \"Shaxian snack-making craft\", proclaimed by the Fujian provincial government on 28 August 2007 in the province's second batch of intangible cultural heritage, with the Shaxian Snack Trade Association as safeguarding body [[fjwlt]]. In 2021 it entered China's fifth national list of intangible cultural heritage as \"snack-making technique (Shaxian snack-making technique)\" — item no. 1522, code Ⅷ-276, category traditional craftsmanship, a newly added item, declared by Sanming City, Fujian, safeguarded by the Shaxian Snack Trade Association [[ihchina]].\n\nThe Fujian gazetteer Bamin Tongzhi records that Shaxian snacks rose in the Tang and Song dynasties and flourished in the Ming and Qing [[ihchina]]."
+        },
+        "story": {
+          "zh": "沙县在闽中，人多地少，资源并不宽裕。20 世纪 90 年代以来，沙县小吃同业公会在当地政府的支持下，把这门小吃推向了全国；如今沙县小吃从业者多达 6 万余人，店铺共 8.8 万个。近年来它开始拓展海外市场，以工艺独特、取材时令、注重健康、力争还原本味等特点受到好评[[ihchina]]。这门技艺以血缘传承、业缘传承的方式延续至今，也带出了一批名店、名厨[[ihchina]]。\n\n门里还有讲究。沙县小吃大体分为两大流派：一派以城关为代表，受福州、厦门等沿海城市风味小吃影响，制作精细，口味清、鲜、淡、甜，代表品种有扁肉、烧麦、肉包、花椒饼、鱼丸、豆腐丸、烫嘴豆腐、烤豆干等，调味靠鲜香豆豉油，独具特色；另一派以夏茂一带为代表，原料以米、薯、芋为主，制作原始纯朴，原汁原味，口味咸、辣、酸，如米冻、喜粿、米冻皮、豆腐包、金钱蛋、芋包、浆糍、芋丝饼、牛肉系列食品等。此外，南霞泥鳅粉干、南阳蛋索、郑湖板鸭等也有一定知名度[[fjysg]]。",
+          "en": "Shaxian sits in central Fujian with little land for its population. Since the 1990s the Shaxian Snack Trade Association, backed by the local government, has pushed these snacks out across the country; today the trade employs more than 60,000 people and runs 88,000 shops. In recent years it has begun moving overseas, winning praise for its distinctive craft, seasonal ingredients, healthy emphasis and effort to keep flavours close to the original [[ihchina]]. The technique has survived through kinship and through trade apprenticeship, producing a set of well-known shops and chefs [[ihchina]].\n\nThere are schools within the tradition. Shaxian snacks divide broadly into two lineages. One is represented by Chenguan, influenced by the coastal snacks of Fuzhou and Xiamen: finely made, with a clear, fresh, light and sweet profile — bianrou (wonton-like dumplings), shaomai, meat buns, Sichuan-pepper cakes, fish balls, tofu balls, scalding-hot tofu and grilled dried tofu, seasoned distinctively with savoury fermented black-bean oil. The other is represented by the Xiamao area, built on rice, potato and taro: plainer and more original, salty, spicy and sour — rice jelly, xiguo rice cakes, rice-jelly sheets, stuffed tofu, coin eggs, taro dumplings, jiangci rice cakes, shredded-taro cakes and a range of beef dishes. Nanxia loach rice noodles, Nanyang egg twists and Zhenghu pressed duck also have a following [[fjysg]]."
+        },
+        "technique": {
+          "zh": "底子是本地食材：沙县小吃的食材多数取自本地，以竹荪、香芋、茶树菇等植物性原料为主，鸡、鸭、牛、羊等动物性原料为辅；主要佐料包括沙县纯辣酱、豆豉油、茂溪冬酒、花生酱等[[ihchina]]。\n\n技法上，它把游、泡、捶、磨、踅、揉、晒、包、酿等制作工艺，与蒸、煮、烤、煎、烙、炖等烹饪方式相结合，用的工具也还是老一套——木槌、木墩、木楻、竹苈、舂臼、舂槌、饭甑、笊篱、烤炉、蒸笼、汤锅、灶、烙粑锅[[ihchina]]。这样做出来的是沙县扁肉、包心豆腐丸、沙县喜粿、米冻皮、板鸭等 110 余个小吃品种，其中可提前备好、或在数分钟内就能做好的快餐食品占沙县小吃总量的 90% 以上[[ihchina]]。\n\n品种总数两处口径不同，一并列出：国家级项目页记「110 余个」，福建省数字文化馆的介绍则是「据不完全统计，目前沙县小吃有 240 多个品种」[[ihchina]][[fjysg]]。",
+          "en": "The base is local. Most ingredients come from Shaxian itself, dominated by plant materials such as bamboo fungus, taro and tea-tree mushrooms, with chicken, duck, beef and mutton as supporting animal ingredients; the main seasonings are Shaxian pure chilli sauce, fermented black-bean oil, Maoxi winter wine and peanut sauce [[ihchina]].\n\nAs for method, the craft combines you, pao, chui, mo, xue, rou, shai, bao and niang — parching, soaking, pounding, grinding, rolling, kneading, sun-drying, wrapping and stuffing — with steaming, boiling, roasting, frying, griddling and stewing, using tools that remain traditional: wooden mallets and blocks, a wooden rice steamer, bamboo mats, mortars and pestles, rice steamers, strainers, roasting ovens, steaming baskets, soup pots, stoves and griddle pans [[ihchina]]. The result is more than 110 snack varieties, among them Shaxian bianrou, stuffed tofu balls, xiguo rice cakes, rice-jelly sheets and pressed duck — and fast foods that can be prepared in advance or finished within minutes account for over 90 percent of the total [[ihchina]].\n\nTwo figures circulate for the number of varieties, so both are given here: the national heritage project page says \"more than 110\", while the Fujian Digital Culture Centre notes that \"according to incomplete statistics, Shaxian snacks now number more than 240 varieties\" [[ihchina]][[fjysg]]."
+        }
+      },
+      "facts": [
+        {
+          "zh": "2021 年，「小吃制作技艺（沙县小吃制作技艺）」列入第五批国家级非物质文化遗产代表性项目名录，项目序号 1522，编号 Ⅷ-276，类别传统技艺，类型为新增项目，申报地区福建省三明市，保护单位沙县小吃同业公会。",
+          "en": "In 2021 the snack-making technique of Shaxian was added to China's fifth national list of intangible cultural heritage — item no. 1522, code Ⅷ-276, category traditional craftsmanship, a newly added item, declared by Sanming City, Fujian, with the Shaxian Snack Trade Association as safeguarding body.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "2007 年 8 月 28 日，福建省人民政府公布第二批省级非物质文化遗产名录，「沙县小吃制作工艺」列入其中，保护单位为三明市沙县小吃同业公会。",
+          "en": "On 28 August 2007 the Fujian provincial government proclaimed its second batch of provincial intangible cultural heritage, including the \"Shaxian snack-making craft\", with the Shaxian Snack Trade Association as safeguarding body.",
+          "sources": ["fjwlt"]
+        },
+        {
+          "zh": "该技艺是古代中原民众向百越地区移民过程中形成的，兼具北方与南方饮食文化特色；主要流布于福建省三明市沙县区、永安县、明溪县、清流县和宁化县，以沙县最为集中。",
+          "en": "The craft formed as people from the Central Plains migrated into the Baiyue lands and blends northern and southern food cultures; it is found mainly in Shaxian, Yong'an, Mingxi, Qingliu and Ninghua in Sanming, Fujian, and most densely in Shaxian itself.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "沙县小吃食材多数来自本地，以竹荪、香芋、茶树菇等植物性原料为主，鸡、鸭、牛、羊等动物性原料为辅；主要佐料包括沙县纯辣酱、豆豉油、茂溪冬酒、花生酱等。",
+          "en": "Most ingredients are local, dominated by plant materials such as bamboo fungus, taro and tea-tree mushrooms, with chicken, duck, beef and mutton as supporting animal ingredients; the main seasonings include Shaxian pure chilli sauce, fermented black-bean oil, Maoxi winter wine and peanut sauce.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "该技艺将游、泡、捶、磨、踅、揉、晒、包、酿等制作工艺与蒸、煮、烤、煎、烙、炖等烹饪方式相结合，运用木槌、木墩、木楻、竹苈、舂臼、舂槌、饭甑、笊篱、烤炉、蒸笼、汤锅、灶、烙粑锅等工具。",
+          "en": "The craft combines parching, soaking, pounding, grinding, rolling, kneading, sun-drying, wrapping and stuffing with steaming, boiling, roasting, frying, griddling and stewing, using traditional tools: wooden mallets and blocks, a wooden rice steamer, bamboo mats, mortars and pestles, rice steamers, strainers, roasting ovens, steaming baskets, soup pots, stoves and griddle pans.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "沙县小吃可制作成沙县扁肉、包心豆腐丸、沙县喜粿、米冻皮、板鸭等 110 余个小吃品种；可提前备好或在数分钟内即可做好的快餐食品占沙县小吃总量的 90% 以上。",
+          "en": "The tradition yields more than 110 snack varieties including Shaxian bianrou, stuffed tofu balls, xiguo rice cakes, rice-jelly sheets and pressed duck; fast foods that can be prepared in advance or finished within minutes make up over 90 percent of the total.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "关于品种总数，两处资料口径不同：国家级非遗项目页记载为「110 余个」，福建省数字文化馆的介绍为「据不完全统计，目前沙县小吃有 240 多个品种」。",
+          "en": "The two sources give different totals for the number of varieties: the national heritage project page records \"more than 110\", while the Fujian Digital Culture Centre says that \"according to incomplete statistics, Shaxian snacks now number more than 240 varieties\".",
+          "sources": ["ihchina", "fjysg"]
+        },
+        {
+          "zh": "据《八闽通志》记载，沙县小吃兴于唐宋、盛于明清，在当代得到进一步发展。",
+          "en": "According to the Fujian gazetteer Bamin Tongzhi, Shaxian snacks rose in the Tang and Song dynasties, flourished in the Ming and Qing, and were further developed in modern times.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "沙县小吃大体分为两大流派：以城关小吃为代表的一派受福州、厦门等沿海城市风味小吃影响，口味清、鲜、淡、甜，代表品种有扁肉、烧麦、肉包、花椒饼、鱼丸、豆腐丸、烫嘴豆腐、烤豆干等；以夏茂一带为代表的一派原料以米、薯、芋为主，口味咸、辣、酸，代表品种有米冻、喜粿、米冻皮、豆腐包、金钱蛋、芋包、浆糍、芋丝饼、牛肉系列食品等。",
+          "en": "Shaxian snacks divide into two lineages: the Chenguan style, influenced by the coastal snacks of Fuzhou and Xiamen, is clear, fresh, light and sweet — bianrou, shaomai, meat buns, pepper cakes, fish balls, tofu balls, scalding-hot tofu and grilled dried tofu; the Xiamao style is built on rice, potato and taro and is salty, spicy and sour — rice jelly, xiguo rice cakes, rice-jelly sheets, stuffed tofu, coin eggs, taro dumplings, jiangci rice cakes, shredded-taro cakes and beef dishes.",
+          "sources": ["fjysg"]
+        },
+        {
+          "zh": "沙县小吃以血缘传承、业缘传承的方式延续至今，形成了一批名店、名厨；20 世纪 90 年代以来，沙县小吃同业公会在当地政府支持下将其推向全国。",
+          "en": "The craft has been passed down through kinship and trade apprenticeship, producing well-known shops and chefs; since the 1990s the Shaxian Snack Trade Association, backed by the local government, has promoted it nationwide.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "目前沙县小吃从业者多达 6 万余人，沙县小吃店铺共 8.8 万个；近年来开始拓展海外市场，以工艺独特、取材时令、注重健康、力争还原本味等特点广受赞誉。",
+          "en": "The trade now employs more than 60,000 people and operates 88,000 shops; in recent years it has begun expanding overseas, praised for its distinctive craft, seasonal ingredients, healthy emphasis and effort to keep flavours close to the original.",
+          "sources": ["ihchina"]
+        }
+      ],
+      "sources": [
+        {
+          "id": "ihchina",
+          "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《小吃制作技艺（沙县小吃制作技艺）》项目页",
+          "url": "https://www.ihchina.cn/project_details/23591",
+          "accessed": "2026-09-24"
+        },
+        {
+          "id": "fjwlt",
+          "title": "福建省文化和旅游厅《福建省第二批省级非物质文化遗产名录项目名单（含国家级）》（2007 年 8 月 28 日省政府公布，第 70 项「沙县小吃制作工艺」）",
+          "url": "https://wlt.fujian.gov.cn/zwgk/sjfb/fycx/fwzwhycdbxxmml/202003/t20200319_5219570.htm",
+          "accessed": "2026-09-24"
+        },
+        {
+          "id": "fjysg",
+          "title": "福建省数字文化馆（福建省艺术馆）《小吃制作技艺（沙县小吃制作技艺）》项目介绍",
+          "url": "https://www.fjysg.net/portal/feiyi/read?id=357&nid=28",
+          "accessed": "2026-09-24"
+        }
+      ]
     },
     {
       "id": "mengzi-rice-noodles",
-      "status": "pending",
+      "status": "published",
       "name": {
         "zh": "蒙自过桥米线",
         "en": "Mengzi Crossing-the-Bridge Rice Noodles"
@@ -194,24 +382,122 @@
       "aliases": [
         "过桥米线",
         "云南过桥米线",
+        "云南米线",
+        "蒙自米线",
         "crossing the bridge rice noodles",
-        "guoqiao mixian"
+        "crossing-the-bridge noodles",
+        "guoqiao mixian",
+        "mengzi rice noodles",
+        "yunnan rice noodles"
       ],
       "region": {
         "zh": "云南蒙自",
         "en": "Mengzi, Yunnan"
       },
-      "note": {
-        "zh": "内容整理中。按 PRD 要求，每一条文化内容都必须先查到可溯源的公开资料再填入，因此本页暂不展示内容。",
-        "en": "Content in progress. Every cultural statement must first be traced to a public, citable source, so this page is not filled in yet."
+      "tagline": {
+        "zh": "汤上封着一层鸡油，看着不冒气，却能烫熟生肉片；米线只过一半，所以叫「过桥」。",
+        "en": "A film of chicken oil keeps the broth looking calm while it cooks raw meat slices — and the noodles cross only halfway, which is what gives the dish its name."
       },
-      "blocks": null,
-      "facts": [],
-      "sources": []
+      "blocks": {
+        "origin": {
+          "zh": "过桥米线出自云南红河州蒙自市。米线在南方产稻区是古老食物：云南最早的地方志《万历云南通志》里记有「食有米缆、蓬饵、蒜脍」，「米缆」就是米线的早期称谓；《滇南志略》则说「明中叶蒙自已有碓房七十二户，昼夜舂米为线」。明正德六年（1511）设新安守御千户所，江南军民进入蒙自，带来了「米缆」的制作技术，蒙自米线从此有了规模化生产[[dfz]]。据国家级非遗项目页记载，这门技艺始于明代——大量内地军民戍边蒙自，带来不同的饮食习俗，最终演绎成了风味特别的「蒙自过桥米线」[[ihchina]]。\n\n2014 年，「蒙自过桥米线制作技艺」列入第四批国家级非物质文化遗产代表性项目名录（项目序号 1349，编号 Ⅷ-235，类别传统技艺，新增项目，申报地区云南省蒙自市，保护单位蒙自市文化馆）[[ihchina]]。",
+          "en": "Mengzi crossing-the-bridge rice noodles come from Mengzi in Yunnan's Honghe prefecture. Rice noodles are an old food across the rice-growing south: Yunnan's earliest gazetteer, the Wanli Yunnan Tongzhi, records \"rice noodles, rice cakes and minced fish among the foods\", where \"rice cable\" is the early name for rice noodles; the Diannan Zhilue adds that \"by the middle of the Ming dynasty Mengzi already had seventy-two husking workshops, pounding rice into noodles day and night\". In 1511 a garrison was established at Xin'an, bringing soldiers and civilians from the lower Yangtze into Mengzi along with the technique for making those \"rice cables\", and Mengzi's noodle production scaled up from there [[dfz]]. The national heritage project page records that the craft began in the Ming dynasty: as large numbers of soldiers and civilians from the interior garrisoned Mengzi they brought their own food customs, and out of that mixture came the distinctive Mengzi crossing-the-bridge rice noodles [[ihchina]].\n\nIn 2014 the craft was added to China's fourth national list of intangible cultural heritage — item no. 1349, code Ⅷ-235, category traditional craftsmanship, a newly added item, declared by Mengzi City, Yunnan, with the Mengzi Mass Art Centre as safeguarding body [[ihchina]]."
+        },
+        "story": {
+          "zh": "关于名字，蒙自有一则被写进县志的传说。清代有位秀才在蒙自南湖小岛上苦读，妻子怜惜他的身体，送米线过去；汤上覆着一层厚厚的鸡油，久放不凉，生肉片入汤即熟，而送饭的路上要经过一座石拱桥，人们就把这碗吃食叫作「过桥米线」。秀才后来赴京赶考高中，又留下「过桥一碗香，十全食美时」的说法[[ihchina]]。1995 年版《蒙自县志》把这个故事和年份一并写进了志书，称其「源于明末清初」，至 1989 年已有三百余年历史[[dfz]]。\n\n这碗米线后来跟着路走。清光绪时期，蒙自、建水出现专营食馆，如建水的宝兴楼；清至民国滇越铁路通车、蒙自开埠通商之后，过桥米线随商旅传到昆明、个旧、河口，「德鑫园」「仁和园」等店把它带进了昆明，成为云南名吃，《续蒙自县志》记「汤米线、生片烫食，城乡盛行，为滇南名食」[[dfz]]。抗战时期西南联大暂迁蒙自，闻一多、朱自清等人常食米线，它在《蒙自杂记》等文人记载中扬名[[dfz]]。\n\n今天它既是地方名片，也是一条产业。2009 年，蒙自获封「中国过桥米线之乡」，过桥米线获评「中华名小吃」，并取得国家地理标志证明商标；2018 年，王丽珠被文化和旅游部认定为该项目的国家级代表性传承人；2022 年，蒙自被世界中餐业联合会评选为「国际（过桥米线）美食名城」[[dfz]]。据人民网报道，蒙自过桥米线的品牌授权店已达 1052 家，其中 8 家开在海外[[people]]。",
+          "en": "For the name, Mengzi has a legend that made it into the county gazetteer. In the Qing dynasty a scholar was studying hard on a small island in Mengzi's South Lake, and his wife, worried about his health, brought him rice noodles; the broth was sealed under a thick layer of chicken oil so it stayed hot, and raw meat slices cooked the moment they went in. Because her route crossed a stone arch bridge, people called the dish \"crossing-the-bridge rice noodles\". The scholar later passed the imperial examination in the capital, and the saying arose that \"one bowl across the bridge, perfect at the tenth taste\" [[ihchina]]. The 1995 edition of the Mengzi County Gazetteer wrote both the story and the dating into the record, saying the dish \"originates in the late Ming and early Qing\" and by 1989 was over three hundred years old [[dfz]].\n\nThe noodles then travelled with the roads. In the Guangxu period specialist eateries appeared in Mengzi and Jianshui, such as Baoxinglou in Jianshui; after the Yunnan-Vietnam railway opened and Mengzi became a treaty port in the late Qing and Republican era, the dish spread with merchants to Kunming, Gejiu and Hekou, and shops such as Dexinyuan and Renheyuan carried it into Kunming, where it became a celebrated Yunnan speciality — the Continued Mengzi County Gazetteer records that \"soup rice noodles with scalded raw slices were popular in town and countryside alike, a famous dish of southern Yunnan\" [[dfz]]. During the war, when the National Southwestern Associated University moved temporarily to Mengzi, Wen Yiduo and Zhu Ziqing ate the noodles regularly, and it became known through literati writings such as Mengzi Notes [[dfz]].\n\nToday it is both a regional emblem and an industry. In 2009 Mengzi was named \"home of China's crossing-the-bridge rice noodles\", the dish was rated a \"famous Chinese snack\" and received a national geographical indication trademark; in 2018 Wang Lizhu was recognised by the Ministry of Culture and Tourism as the national-level representative inheritor of the craft; and in 2022 Mengzi was named an \"international (crossing-the-bridge rice noodle) food city\" by the World Federation of Chinese Catering Industry [[dfz]]. According to People's Daily, the dish now has 1,052 licensed brand shops, eight of them overseas [[people]]."
+        },
+        "technique": {
+          "zh": "国家级非遗项目页把这道吃食的技艺拆成三道工序：米线榨制、汤料制作、佐菜配料[[ihchina]]。\n\n米线先来。经过配米、磨浆、发酵、合成、初蒸、压榨、煮熟、漂洗等工艺流程榨出米线，成品纤细劲道，直径在 2 毫米之内，烹煮不易断碎；蒙自盛产的优质大米和古城大井的「甜水」，是榨制米线的必要原料[[ihchina]]。县志记的汤法更具体：以壮鸡、肥鸭、鲜猪排骨、筒子骨为料，加水煨五六小时，先用猛火去浮沫，后用微火慢炖，汤呈乳白，再以鸡油封汤，久热不凉[[dfz]]。\n\n配料分生熟两类。生菜如鹌鹑蛋、猪脊肉片、菊花、姜末；熟菜有鸡肉、豆腐皮、豌豆坨、韭菜等[[ihchina]]。吃法也定得明白：用口径足有 30 厘米的土陶大海碗盛着滚烫的秘制高汤，与多碟生熟配菜一并上桌，放料按先生后熟的顺序，一边搅动一边以汤煮菜，再把另一碗中的米线适量过入汤碗，使米线一头入汤、一头留在原碗里——这就是「过桥」的喻义[[ihchina]]。",
+          "en": "The national heritage project page breaks the craft into three stages: extracting the noodles, making the broth and preparing the garnishes [[ihchina]].\n\nThe noodles come first. They are pressed out through a sequence of matching the rice, grinding the slurry, fermenting, combining, pre-steaming, pressing, boiling and rinsing; the finished strands are fine and springy, under two millimetres across, and do not break up on cooking. Mengzi's high-quality rice, and the \"sweet water\" from the old city's great well, are the essential raw materials [[ihchina]]. The gazetteer's account of the broth is more specific: strong chicken, fat duck, fresh pork ribs and marrow bones are simmered with water for five or six hours — first over a fierce flame to skim off the scum, then over a low flame until the broth turns milky, sealed with chicken oil so it stays hot [[dfz]].\n\nThe garnishes split into raw and cooked. Raw ones include quail eggs, slices of pork loin, chrysanthemum petals and minced ginger; cooked ones include chicken, tofu skin, pea paste and chives [[ihchina]]. The eating method is equally prescribed: a large earthenware bowl 30 centimetres across holds the scalding secret-recipe broth and comes to the table with several plates of raw and cooked garnishes; ingredients go in raw first and cooked afterwards, stirred so the broth cooks them, and then noodles from a second bowl are drawn across into the soup so that one end sits in the broth and the other stays in the original bowl — which is exactly what \"crossing the bridge\" means [[ihchina]]."
+        }
+      },
+      "facts": [
+        {
+          "zh": "2014 年，「蒙自过桥米线制作技艺」列入第四批国家级非物质文化遗产代表性项目名录，项目序号 1349，编号 Ⅷ-235，类别传统技艺，类型为新增项目，申报地区云南省蒙自市，保护单位蒙自市文化馆。",
+          "en": "In 2014 the craft of Mengzi crossing-the-bridge rice noodles was added to China's fourth national list of intangible cultural heritage — item no. 1349, code Ⅷ-235, category traditional craftsmanship, a newly added item, declared by Mengzi City, Yunnan, with the Mengzi Mass Art Centre as safeguarding body.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "过桥米线由米线、鲜汤和配料三部分组成，以「玉带过桥式」吃法称奇；其制作技艺主要有米线榨制、汤料制作和佐菜配料三道工序。",
+          "en": "The dish has three parts — noodles, fresh broth and garnishes — and is known for its \"jade-belt crossing the bridge\" way of eating; the craft has three stages: extracting the noodles, making the broth and preparing the garnishes.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "米线经过配米、磨浆、发酵、合成、初蒸、压榨、煮熟、漂洗等工艺流程榨出，成品纤细劲道，直径在 2 毫米之内，烹煮不易断碎；蒙自盛产的优质大米和古城大井的「甜水」是必要原料。",
+          "en": "The noodles are pressed out through matching the rice, grinding the slurry, fermenting, combining, pre-steaming, pressing, boiling and rinsing; the finished strands are fine and springy, under two millimetres across, and do not break up on cooking. Mengzi's high-quality rice and the \"sweet water\" of the old city's great well are essential raw materials.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "汤以鸡肉、猪肉和大骨为主料煨成老汤；配料分生熟两类，生菜如鹌鹑蛋、猪脊肉片、菊花、姜末，熟菜有鸡肉、豆腐皮、豌豆坨、韭菜等。",
+          "en": "The broth is simmered from chicken, pork and large bones as the main ingredients; the garnishes divide into raw and cooked — raw ones such as quail eggs, pork loin slices, chrysanthemum petals and minced ginger, cooked ones such as chicken, tofu skin, pea paste and chives.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "食用时用口径足有 30 厘米大小的土陶大海碗，盛着滚烫的秘制高汤与多碟生熟配菜一并上桌，放料按先生后熟的顺序，再将米线适量过入汤碗，使之一头入汤一头在原碗里，喻义「过桥」。",
+          "en": "It is served in a large earthenware bowl 30 centimetres across holding scalding secret-recipe broth together with several plates of raw and cooked garnishes; ingredients go in raw first and cooked afterwards, then noodles are drawn across into the soup so one end sits in the broth and the other stays in the original bowl — which is what \"crossing the bridge\" refers to.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "《蒙自县志》记载：清代有一秀才在蒙自南湖小岛苦读，妻子怜其身体送食米线，无意中创此佳肴，因送米线途经石拱桥而得名「过桥米线」；技艺始于明代，大量内地军民戍边蒙自带来不同饮食习俗。",
+          "en": "The Mengzi County Gazetteer records that a Qing-dynasty scholar studied hard on a small island in Mengzi's South Lake and his wife, worried about his health, brought him rice noodles — an accidental invention; because her route crossed a stone arch bridge the dish was named \"crossing the bridge\". The craft began in the Ming dynasty, when large numbers of soldiers and civilians garrisoning Mengzi brought their own food customs.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "云南最早的地方志《万历云南通志》载「食有米缆、蓬饵、蒜脍」，「米缆」即米线早期称谓；《滇南志略》载「明中叶蒙自已有碓房七十二户，昼夜舂米为线」；明正德六年（1511）设新安守御千户所，江南军民入蒙自，带来「米缆」制作技术。",
+          "en": "Yunnan's earliest gazetteer, the Wanli Yunnan Tongzhi, records \"rice noodles, rice cakes and minced fish among the foods\", where \"rice cable\" is the early name for rice noodles; the Diannan Zhilue records that \"by the middle of the Ming dynasty Mengzi already had seventy-two husking workshops, pounding rice into noodles day and night\"; in 1511 a garrison was established at Xin'an and soldiers and civilians from the lower Yangtze entered Mengzi, bringing the technique for making those \"rice cables\".",
+          "sources": ["dfz"]
+        },
+        {
+          "zh": "1995 年版《蒙自县志·卷二十一·社会·饮食》载其「源于明末清初」，至 1989 年已有三百余年历史；并记汤法为「以壮鸡、肥鸭、鲜猪排骨、筒子骨为料，加水煨五六小时，始用猛火去浮沫，后用微火慢炖，汤呈乳白，鸡油封汤，久热不凉」。",
+          "en": "The 1995 edition of the Mengzi County Gazetteer (vol. 21, society and diet) dates the dish to \"the late Ming and early Qing\", over three centuries old by 1989, and records the broth method: \"strong chicken, fat duck, fresh pork ribs and marrow bones simmered with water for five or six hours — first a fierce flame to skim the scum, then a low flame until the broth turns milky, sealed with chicken oil so it stays hot\".",
+          "sources": ["dfz"]
+        },
+        {
+          "zh": "清光绪时期，蒙自、建水出现专营食馆（如建水宝兴楼）；清至民国滇越铁路通车、蒙自开埠通商后，过桥米线随商旅传至昆明、个旧、河口，「德鑫园」「仁和园」等店将其引入昆明；《续蒙自县志》载「汤米线、生片烫食，城乡盛行，为滇南名食」。",
+          "en": "In the Guangxu period specialist eateries appeared in Mengzi and Jianshui, such as Baoxinglou; after the Yunnan-Vietnam railway opened and Mengzi became a treaty port, the dish spread with merchants to Kunming, Gejiu and Hekou, with shops such as Dexinyuan and Renheyuan introducing it to Kunming; the Continued Mengzi County Gazetteer records that \"soup rice noodles with scalded raw slices were popular in town and countryside alike, a famous dish of southern Yunnan\".",
+          "sources": ["dfz"]
+        },
+        {
+          "zh": "2009 年，蒙自获封「中国过桥米线之乡」，过桥米线获评「中华名小吃」并获国家地理标志证明商标；2018 年王丽珠被认定为此项国家级非物质文化遗产代表性传承人；2022 年蒙自被世界中餐业联合会评选为「国际（过桥米线）美食名城」。",
+          "en": "In 2009 Mengzi was named \"home of China's crossing-the-bridge rice noodles\", the dish was rated a \"famous Chinese snack\" and received a national geographical indication trademark; in 2018 Wang Lizhu was recognised as the national-level representative inheritor of the craft; in 2022 the World Federation of Chinese Catering Industry named Mengzi an \"international (crossing-the-bridge rice noodle) food city\".",
+          "sources": ["dfz"]
+        },
+        {
+          "zh": "截至人民网报道，蒙自过桥米线的品牌授权店达 1052 家，其中 8 家开在海外；全市有 28 家米线生产主体、3000 余个经营主体、3 万余名从业人员，年产值 45 亿元。",
+          "en": "At the time of the People's Daily report the dish had 1,052 licensed brand shops, eight of them overseas; the city counted 28 noodle producers, more than 3,000 food businesses and over 30,000 workers, with an annual output value of 4.5 billion yuan.",
+          "sources": ["people"]
+        },
+        {
+          "zh": "据人民网报道，蒙自熬汤讲究用老母鸡、筒子骨小火慢炖 6 小时以上，汤色清、鲜味醇；米线经浸泡、磨浆、发酵、压榨等 10 多道工序，每百斤大米出粉率超过 92%，产品合格率达到 99.5%。",
+          "en": "According to People's Daily, Mengzi broth is made by slow-simmering old hen and marrow bones over a low flame for more than six hours to a clear, deeply savoury result; the noodles go through more than ten processes including soaking, slurry-grinding, fermenting and pressing, with a yield above 92 percent per hundred jin of rice and a pass rate of 99.5 percent.",
+          "sources": ["people"]
+        }
+      ],
+      "sources": [
+        {
+          "id": "ihchina",
+          "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《蒙自过桥米线制作技艺》项目页",
+          "url": "https://www.ihchina.cn/project_details/14760",
+          "accessed": "2026-09-24"
+        },
+        {
+          "id": "dfz",
+          "title": "云南省地方志编纂委员会办公室《方志视觉下的红河（第七期）：志载米线香，百年过桥韵——方志味寻蒙自过桥米线》（2026-04-27，中共红河州委党史研究室供稿）",
+          "url": "https://dfz.yn.gov.cn/portal/xwxq/a6329477dbf9408a8b5aa354b86df8be/01",
+          "accessed": "2026-09-24"
+        },
+        {
+          "id": "people",
+          "title": "人民网－人民日报《过桥米线，从街边灶台走向世界餐桌》（神州看点·一方水土一方味，2026-05-21）",
+          "url": "https://yn.people.com.cn/n2/2026/0521/c378439-41586461.html",
+          "accessed": "2026-09-24"
+        }
+      ]
     },
     {
       "id": "goubuli-baozi",
-      "status": "pending",
+      "status": "published",
       "name": {
         "zh": "狗不理包子",
         "en": "Goubuli Baozi"
@@ -219,20 +505,106 @@
       "aliases": [
         "狗不理",
         "天津狗不理包子",
+        "狗不理包子制作技艺",
+        "天津包子",
         "goubuli",
-        "goubuli baozi"
+        "goubuli baozi",
+        "tianjin baozi"
       ],
       "region": {
         "zh": "天津",
         "en": "Tianjin"
       },
-      "note": {
-        "zh": "内容整理中。按 PRD 要求，每一条文化内容都必须先查到可溯源的公开资料再填入，因此本页暂不展示内容。",
-        "en": "Content in progress. Every cultural statement must first be traced to a public, citable source, so this page is not filled in yet."
+      "tagline": {
+        "zh": "每个不少于 15 个褶，形似白菊待放——天津「三绝」之首。",
+        "en": "Fifteen pleats or more per bun, shaped like a white chrysanthemum about to open — the first of Tianjin's \"three wonders\"."
       },
-      "blocks": null,
-      "facts": [],
-      "sources": []
+      "blocks": {
+        "origin": {
+          "zh": "狗不理包子出自天津。据国家级非遗项目页记载，它为天津名优食品「三绝」之首，系用水馅半发面制作，状若凝脂，形似菊花，口感鲜香不腻，在大江南北独树一帜；在制馅、和面、揉肥、擀皮、捏包、上灶等各方面均有自己独特的操作方法[[ihchina]]。中国日报网转引的介绍则把它记作始创于公元 1858 年（清朝咸丰年间），是中华老字号之一[[chinadaily]]。\n\n在国家级名录里，它属于「传统面食制作技艺」这条大项下的扩展项目。2011 年（第三批），「天津『狗不理』包子制作技艺」以扩展项目身份列入国家级非物质文化遗产代表性项目名录（项目序号 943，编号 Ⅷ-160，类别传统技艺，申报地区天津市和平区，保护单位狗不理集团股份有限公司）[[ihchina]]。商务部流通发展司 2011 年 8 月 30 日的通报把它列为第三批名录中涉及「中华老字号」企业的项目之一，该行序号 96、编号 Ⅷ-160[[mofcom]]。\n\n一个值得留意的细节：Ⅷ-160 这个编号后来也被「兰州牛肉面制作技艺」（第五批扩展项目）沿用——两者是同一个母项「传统面食制作技艺」下的不同扩展项，本项目页同样标为序号 943、编号 Ⅷ-160[[ihchina]]。",
+          "en": "Goubuli baozi comes from Tianjin. The national heritage project page records it as the first of Tianjin's \"three wonders\" among famous local foods: made with a juicy filling and half-leavened dough, described as \"like congealed cream\" in appearance and chrysanthemum-like in shape, savoury without being greasy and unlike anything else in the country, with its own distinctive methods at every stage — filling, dough, resting, rolling, pleating and steaming [[ihchina]]. An account republished by China Daily dates its founding to 1858, in the Xianfeng reign of the Qing dynasty, and calls it one of China's time-honoured brands [[chinadaily]].\n\nOn the national list it is an extended item under the parent project \"traditional noodle-making technique\". In 2011, in the third batch, the Tianjin Goubuli baozi technique was added to China's national list of intangible cultural heritage as such an extended item — item no. 943, code Ⅷ-160, category traditional craftsmanship, declared by Heping District, Tianjin, with the Goubuli Group as safeguarding body [[ihchina]]. A bulletin from the Ministry of Commerce's circulation development department on 30 August 2011 listed it among the third-batch entries belonging to \"China Time-honoured Brand\" enterprises, at row 96 under code Ⅷ-160 [[mofcom]].\n\nOne detail worth noting: that code, Ⅷ-160, was later also used for the Lanzhou beef-noodle technique in the fifth batch. Both are extended items under the same parent project, \"traditional noodle-making technique\", and this project page likewise carries item no. 943 and code Ⅷ-160 [[ihchina]]."
+        },
+        "story": {
+          "zh": "传说在清同治八年（1869），靠运河码头侯家后的刘记蒸食铺招了个徒弟，姓高名贵友——他就是后来狗不理包子的创始人。高贵友学徒期满后辞职出号，清光绪八年（1882）自己投资经营包子铺，取名「德聚号」。他对包子做了改革，使包子不但好吃，而且外观漂亮，形状要求为「菊花项、抓髻扣」——把包子与漂亮的花连在一起，物质享受和精神满足一并给了顾客[[ihchina]]。\n\n吃的人一多，就得等候。有的顾客问这问那，高贵友语言不佳，有时答不上来；相熟的顾客知道他的乳名，就笑着说他「狗子不理人」。这话被当时天后宫的一位道士听见，便建议他：「人家说你狗子不理人——狗不理，你不如把德聚号改成狗不理，又新又奇，准能招揽顾客。」高贵友接受建议，挂起了「狗不理」的牌子[[ihchina]]。\n\n一百五十余年来，这门技艺被认定为「中国驰名商标」「中华老字号」，还获得「国际名品中华美食奖」，并在国内外烹饪大赛中屡获殊荣[[ihchina]]。关于起点年份，两处口径不同：非遗项目页记 1869 年学徒、1882 年开店，中国日报网转引的介绍则记「始创于公元 1858 年（清朝咸丰年间）」[[ihchina]][[chinadaily]]。",
+          "en": "The story goes that in 1869, in the eighth year of the Tongzhi reign, a steamed-food shop run by the Liu family at Houjiahou by the canal wharf took on an apprentice named Gao Guiyou — the man who would found Goubuli baozi. When his apprenticeship ended he left and, in 1882, in the eighth year of the Guangxu reign, set up his own bun shop under the name Dejuhao. He reformed the buns so that they were not only good to eat but good to look at, in the shape described as \"chrysanthemum crown, hair-bun knot\" — linking the bun to a beautiful flower and giving customers physical pleasure and spiritual satisfaction at once [[ihchina]].\n\nAs the buns drew crowds, waiting became normal. Some customers asked this and that, and Gao Guiyou, no great talker, could not always answer; regulars who knew his childhood name joked that \"Gouzi ignores people\" — gouzi meaning \"puppy\". A Daoist priest from the nearby Tianhou Temple overheard and advised him: \"People say Gouzi ignores people — goubuli. Why not change Dejuhao to Goubuli? It is new and strange, and it will certainly draw customers.\" Gao Guiyou took the advice and hung up the Goubuli sign [[ihchina]].\n\nFor more than 150 years the technique has been recognised as a \"China Well-known Trademark\" and a \"China Time-honoured Brand\", has won the \"International Famous Brand Chinese Cuisine Award\", and has repeatedly taken prizes in cooking competitions at home and abroad [[ihchina]]. The two accounts differ on when it began: the heritage project page records an apprenticeship in 1869 and a shop in 1882, while the account republished by China Daily says it was \"founded in 1858, in the Xianfeng reign of the Qing dynasty\" [[ihchina]][[chinadaily]]."
+        },
+        "technique": {
+          "zh": "皮和馅都按自己的规矩来。狗不理用的是水馅半发面：和面时水温要根据季节变化，一般情况下用温水，采用「一拱肥」的方法，揉好后放一会儿，发酵后即用。死面在这里起「骨头」的作用，发面起「肉」的作用——这种面的优点是不透油、有咬劲、面皮光泽度好、软硬兼备[[ihchina]]。\n\n包子讲究形。擀皮时要求达到薄厚均匀、圆、大小适当；每个包子装馅 3 钱左右；捏包时要求褶花均匀、整齐、美观，形似白菊待放[[ihchina]]，中国日报网给出的数量标准是「每个包子都不少于 15 个褶」[[chinadaily]]。最后一道关键环节是上灶，掌握火候要恰到好处[[ihchina]]。\n\n品种上，它以鲜肉包为主，兼有三鲜包、海鲜包、酱肉包、素包子等 6 大类、98 个品种；刚出笼的包子鲜而不腻、清香适口[[chinadaily]]。",
+          "en": "Skin and filling each follow their own rules. Goubuli uses a juicy filling with half-leavened dough: the water temperature changes with the season, generally warm water, using the \"single-arch leaven\" method — knead, then leave the dough briefly and use it once it has risen. Here the unyeasted dough acts as \"bone\" and the leavened dough as \"flesh\", and the result is a dough that does not let oil through, has bite, gives the skin a good sheen and manages to be both soft and firm [[ihchina]].\n\nShape matters too. The skins must be rolled evenly thin and thick, round and suitably sized; each bun takes about three qian of filling; and the pleating must be even, neat and handsome, like a white chrysanthemum about to open [[ihchina]] — with the count given by China Daily as \"no fewer than fifteen pleats per bun\" [[chinadaily]]. The last critical step is the steaming, where the heat must be judged exactly [[ihchina]].\n\nAs for range, fresh-pork buns dominate, alongside a mixed three-fresh bun, seafood, braised-pork and vegetarian versions — six broad categories and 98 varieties. Straight from the steamer the buns are fresh without being greasy, clean and agreeable in flavour [[chinadaily]]."
+        }
+      },
+      "facts": [
+        {
+          "zh": "2011 年（第三批），「传统面食制作技艺（天津『狗不理』包子制作技艺）」列入国家级非物质文化遗产代表性项目名录，项目序号 943，编号 Ⅷ-160，类别传统技艺，类型为扩展项目，申报地区天津市和平区，保护单位狗不理集团股份有限公司。",
+          "en": "In 2011, in the third batch, the traditional noodle-making technique of Tianjin Goubuli baozi was added to China's national list of intangible cultural heritage — item no. 943, code Ⅷ-160, category traditional craftsmanship, an extended item, declared by Heping District, Tianjin, with the Goubuli Group as safeguarding body.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "商务部流通发展司通报：国务院公布的第三批国家级非物质文化遗产名录共 191 项，其中涉及「中华老字号」企业的项目共 15 项，「传统面食制作技艺（天津『狗不理』包子制作技艺、稷山传统面点制作技艺）」在列，该行序号 96、编号 Ⅷ-160，子项为「天津狗不理包子制作工艺」。",
+          "en": "A bulletin from the Ministry of Commerce records that the third batch of the national intangible cultural heritage list contained 191 items, 15 of them belonging to \"China Time-honoured Brand\" enterprises, including the traditional noodle-making technique covering Tianjin Goubuli baozi and Jishan traditional pastries — row 96, code Ⅷ-160, sub-item \"Tianjin Goubuli baozi making craft\".",
+          "sources": ["mofcom"]
+        },
+        {
+          "zh": "狗不理包子为天津名优食品「三绝」之首，系用水馅半发面制作，状若凝脂，形似菊花，口感鲜香不腻；在制馅、和面、揉肥、擀皮、捏包、上灶等各方面均有自己独特的操作方法。",
+          "en": "Goubuli baozi is the first of Tianjin's \"three wonders\" among famous local foods: made with a juicy filling and half-leavened dough, like congealed cream in appearance and chrysanthemum-like in shape, savoury without being greasy, with its own distinctive methods at every stage from filling and dough to resting, rolling, pleating and steaming.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "中国日报网转引的介绍记载：狗不理包子始创于公元 1858 年（清朝咸丰年间），为「天津三绝」之首，是中华老字号之一。",
+          "en": "An account republished by China Daily records that Goubuli baozi was founded in 1858, in the Xianfeng reign of the Qing dynasty; it is the first of the \"three wonders of Tianjin\" and one of China's time-honoured brands.",
+          "sources": ["chinadaily"]
+        },
+        {
+          "zh": "据非遗项目页记载，创始人高贵友于清同治八年（1869）在侯家后的刘记蒸食铺学徒；学徒期满后辞职出号，清光绪八年（1882）自己投资经营包子铺，取名「德聚号」。",
+          "en": "According to the heritage project page, the founder Gao Guiyou apprenticed in 1869 at the Liu family's steamed-food shop at Houjiahou; after his apprenticeship he left and in 1882 set up his own bun shop under the name Dejuhao.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "「狗不理」之名来自熟客打趣：高贵友乳名「狗子」，因忙于生意、言语不多而被说成「狗子不理人」；天后宫一位道士建议他把「德聚号」改名为「狗不理」，他采纳后挂出招牌。",
+          "en": "\"Goubuli\" came from customers' teasing: Gao Guiyou's childhood name was Gouzi, and because he was busy and not talkative people said \"Gouzi ignores people\". A Daoist priest from the Tianhou Temple suggested renaming Dejuhao to Goubuli, and Gao Guiyou hung up the new sign.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "和面时水温要根据季节变化，一般情况下用温水，采用「一拱肥」的方法；死面起「骨头」作用，发面起「肉」的作用，这种面的优点是不透油、有咬劲、面皮光泽度好、软硬兼备。",
+          "en": "The water temperature for the dough changes with the season, generally warm water, using the \"single-arch leaven\" method; the unyeasted dough acts as \"bone\" and the leavened dough as \"flesh\", giving a dough that does not let oil through, has bite, gives the skin a good sheen and manages to be both soft and firm.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "擀皮时要求达到薄厚均匀、圆、大小适当；每个包子装馅 3 钱左右；捏包时要求褶花均匀、整齐、美观，形似白菊待放；关键环节是上灶，掌握火候要恰到好处。",
+          "en": "The skins must be rolled evenly thin and thick, round and suitably sized; each bun takes about three qian of filling; the pleating must be even, neat and handsome, like a white chrysanthemum about to open; and the critical step is the steaming, where the heat must be judged exactly.",
+          "sources": ["ihchina"]
+        },
+        {
+          "zh": "据中国日报网转引的介绍，狗不理包子褶花匀称，每个包子都不少于 15 个褶；以鲜肉包为主，兼有三鲜包、海鲜包、酱肉包、素包子等 6 大类、98 个品种；刚出笼的包子鲜而不腻、清香适口。",
+          "en": "According to the account republished by China Daily, the pleats are evenly spaced with no fewer than fifteen per bun; fresh-pork buns dominate, alongside a mixed three-fresh bun, seafood, braised-pork and vegetarian versions — six broad categories and 98 varieties; straight from the steamer they are fresh without being greasy and clean in flavour.",
+          "sources": ["chinadaily"]
+        },
+        {
+          "zh": "一百五十余年来，狗不理包子制作技艺以其丰富的饮食文化价值，被认定为「中国驰名商标」「中华老字号」，并获得「国际名品中华美食奖」，在国内外烹饪大赛中屡获殊荣。",
+          "en": "For more than 150 years the craft has been recognised for its rich culinary-cultural value as a \"China Well-known Trademark\" and a \"China Time-honoured Brand\", has won the \"International Famous Brand Chinese Cuisine Award\" and repeatedly taken prizes in cooking competitions at home and abroad.",
+          "sources": ["ihchina"]
+        }
+      ],
+      "sources": [
+        {
+          "id": "ihchina",
+          "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《传统面食制作技艺（天津「狗不理」包子制作技艺）》项目页",
+          "url": "https://www.ihchina.cn/project_details/14644",
+          "accessed": "2026-09-24"
+        },
+        {
+          "id": "mofcom",
+          "title": "商务部「中华老字号」信息管理平台《十五项中华老字号项目列入第三批国家级非物质文化遗产名录》（商务部流通发展司，2011-08-30）",
+          "url": "https://zhlzh.mofcom.gov.cn/news/getNews/18642",
+          "accessed": "2026-09-24"
+        },
+        {
+          "id": "chinadaily",
+          "title": "中国日报网《国庆假期快乐生活：来天津一定要吃的狗不理》（转北方网·津云，2019-10-04）",
+          "url": "https://cnews.chinadaily.com.cn/a/201910/04/WS5d97f1d7a31099ab995e3af8.html",
+          "accessed": "2026-09-24"
+        }
+      ]
     }
   ]
 }
