@@ -54,6 +54,9 @@
     el.nameZh      = document.getElementById('card-name-zh');
     el.nameEn      = document.getElementById('card-name-en');
     el.meta        = document.getElementById('card-meta');
+    el.cardFigure  = document.getElementById('card-figure');
+    el.cardImage   = document.getElementById('card-image');
+    el.cardCredit  = document.getElementById('card-credit');
     el.cardNote    = document.getElementById('card-note');
     el.origin      = document.getElementById('block-origin');
     el.story       = document.getElementById('block-story');
@@ -199,6 +202,18 @@
       btn.className = 'dish-entry';
       btn.setAttribute('data-id', dish.id);
 
+      // 缩略图（数据里配了才画）。alt 留空是有意的：
+      // 菜名和地区就在下面紧挨着，读屏再念一遍图片描述是重复噪音。
+      if (dish.image && dish.image.thumb) {
+        var thumb = document.createElement('img');
+        thumb.className = 'entry-thumb';
+        thumb.src = dish.image.thumb;
+        thumb.alt = '';
+        thumb.loading = 'lazy';     // 列表有 5 张图，先只加载看得见的
+        thumb.decoding = 'async';
+        btn.appendChild(thumb);
+      }
+
       btn.appendChild(makeSpan('zh', dish.name ? dish.name.zh : ''));
       btn.appendChild(makeSpan('en', dish.name ? dish.name.en : ''));
       if (dish.region) {
@@ -251,6 +266,7 @@
     // 没有核实过的内容，一个字都不展示（PRD.md 非目标第 8 条）
     if (!isPublished) {
       var note = dish.note || {};
+      el.cardFigure.hidden = true;
       el.cardNote.hidden = false;
       el.cardNote.innerHTML =
         '<p>' + escapeHtml(note.zh || '内容整理中。') + '</p>' +
@@ -267,6 +283,7 @@
     el.cardNote.hidden = true;
     el.cardNote.innerHTML = '';
     setSectionsVisible(true);
+    renderImage(dish);
 
     el.origin.innerHTML    = bilingual(dish, dish.blocks.origin);
     el.story.innerHTML     = bilingual(dish, dish.blocks.story);
@@ -276,9 +293,14 @@
     el.factList.innerHTML = '';
     (dish.facts || []).forEach(function (fact) {
       var li = document.createElement('li');
+      // 事实的出处是写在 sources 字段里的（不像板块正文那样内嵌 [[id]] 标记），
+      // 所以这里渲染完中英文之后，再把角标补在末尾。
+      // 万一将来有人在正文里也内嵌了标记，就不重复追加，免得出现两组角标。
+      var inlineMarks = /\[\[[A-Za-z0-9_-]+\]\]/.test(fact.zh + fact.en);
       li.innerHTML =
         '<span class="zh-text">' + richText(dish, fact.zh) + '</span>' +
-        '<span class="en-text">'  + richText(dish, fact.en) + '</span>';
+        '<span class="en-text">'  + richText(dish, fact.en) + '</span>' +
+        (inlineMarks ? '' : citeMarkers(dish, fact.sources));
       el.factList.appendChild(li);
     });
 
@@ -302,6 +324,41 @@
     });
   }
 
+  /* 详情页的美食图 + 署名行。
+     署名不是可选项：这些图来自 Wikimedia Commons，许可是 CC BY-SA 4.0，
+     条件之一就是「标出作者与许可」——所以这一行走的是许可要求，不是装饰。
+     数据里没配图（或配得不全）就整块藏起来，不留半张空图。 */
+  function renderImage(dish) {
+    var img = dish.image;
+
+    if (!img || !img.hero) {
+      el.cardFigure.hidden = true;
+      el.cardImage.removeAttribute('src');
+      el.cardCredit.innerHTML = '';
+      return;
+    }
+
+    el.cardImage.src = img.hero;
+    // 详情页这张给完整描述（列表页那张用的是空 alt，两处不一样是有意的）
+    el.cardImage.alt = (img.alt && img.alt.zh) || (dish.name ? dish.name.zh : '');
+    if (img.heroWidth)  { el.cardImage.width  = img.heroWidth; }
+    if (img.heroHeight) { el.cardImage.height = img.heroHeight; }
+
+    var c = img.credit || {};
+    var parts = [];
+    if (c.author)  { parts.push('图 / Photo：' + escapeHtml(c.author)); }
+    if (c.license) {
+      parts.push('<a href="' + escapeHtml(c.licenseUrl || '#') +
+                 '" target="_blank" rel="noopener noreferrer">' + escapeHtml(c.license) + '</a>');
+    }
+    if (c.page) {
+      parts.push('<a href="' + escapeHtml(c.page) +
+                 '" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>');
+    }
+    el.cardCredit.innerHTML = parts.join('　·　');
+    el.cardFigure.hidden = false;
+  }
+
   // 一个板块 = 中文段落 + 英文段落
   function bilingual(dish, block) {
     if (!block) { return ''; }
@@ -309,21 +366,49 @@
            '<p class="en-text">' + richText(dish, block.en) + '</p>';
   }
 
-  /* 把文本里的 [[sourceId]] 标记渲染成可点的出处角标。
-     例：[[ihchina]] → <a class="cite" href="#src-luosifen-ihchina">[1]</a>
-     序号就是该来源在 sources 数组里的位置 —— 所以角标和文末出处列表能一一对应。 */
-  function richText(dish, text) {
+  /* 一个来源 id 在该道菜 sources 数组里的位置（从 0 数）。
+     角标序号 = 这个位置 + 1，所以角标和文末出处列表能一一对应。
+     找不到就返回 -1 —— 调用方据此决定「不渲染这个角标」，避免留下点了没反应的死链。 */
+  function sourceIndex(dish, sourceId) {
     var sources = dish.sources || [];
+    for (var i = 0; i < sources.length; i++) {
+      if (sources[i].id === sourceId) { return i; }
+    }
+    return -1;
+  }
+
+  // 一个角标：<a class="cite" href="#src-luosifen-ihchina">[1]</a>
+  function citeLink(dish, sourceId, index) {
+    return '<a class="cite" href="#src-' + dish.id + '-' + sourceId +
+           '" title="查看出处 / view source">[' + (index + 1) + ']</a>';
+  }
+
+  /* 事实条目专用：把 fact.sources 里声明的 id 列表渲染成一串角标。
+     事实正文本身不含 [[id]] 标记，出处是单独声明在字段里的，所以要走这条路。 */
+  function citeMarkers(dish, sourceIds) {
+    if (!sourceIds || !sourceIds.length) { return ''; }
+
+    var html = '';
+    sourceIds.forEach(function (sourceId) {
+      // 只接受安全字符集的 id，同时必须真能在 sources 里找到
+      if (!/^[A-Za-z0-9_-]+$/.test(sourceId)) { return; }
+      var index = sourceIndex(dish, sourceId);
+      if (index === -1) { return; }
+      html += citeLink(dish, sourceId, index);
+    });
+
+    return html ? '<span class="fact-cites">' + html + '</span>' : '';
+  }
+
+  /* 把文本里的 [[sourceId]] 标记渲染成可点的出处角标。
+     例：[[ihchina]] → <a class="cite" href="#src-luosifen-ihchina">[1]</a> */
+  function richText(dish, text) {
     var html = escapeHtml(text);
 
     html = html.replace(/\[\[([A-Za-z0-9_-]+)\]\]/g, function (whole, sourceId) {
-      var index = -1;
-      for (var i = 0; i < sources.length; i++) {
-        if (sources[i].id === sourceId) { index = i; break; }
-      }
+      var index = sourceIndex(dish, sourceId);
       if (index === -1) { return ''; }
-      return '<a class="cite" href="#src-' + dish.id + '-' + sourceId +
-             '" title="查看出处 / view source">[' + (index + 1) + ']</a>';
+      return citeLink(dish, sourceId, index);
     });
 
     // 数据里用空行分段，这里换成换行（样式里已设好行高）

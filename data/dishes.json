@@ -32,6 +32,24 @@
         "zh": "广西柳州",
         "en": "Liuzhou, Guangxi"
       },
+      "image": {
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Luosifen_at_Guangya%2C_Liuzhou_%2820190420141814%29.jpg/330px-Luosifen_at_Guangya%2C_Liuzhou_%2820190420141814%29.jpg",
+        "thumbWidth": 330,
+        "thumbHeight": 222,
+        "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Luosifen_at_Guangya%2C_Liuzhou_%2820190420141814%29.jpg/1280px-Luosifen_at_Guangya%2C_Liuzhou_%2820190420141814%29.jpg",
+        "heroWidth": 1280,
+        "heroHeight": 862,
+        "alt": {
+          "zh": "一碗柳州螺蛳粉：米粉上铺着酸笋、花生、腐竹与青菜",
+          "en": "A bowl of Liuzhou luosifen: rice noodles topped with pickled bamboo shoots, peanuts, fried tofu skin and greens"
+        },
+        "credit": {
+          "author": "N509FZ",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "page": "https://commons.wikimedia.org/wiki/File:Luosifen_at_Guangya,_Liuzhou_(20190420141814).jpg"
+        }
+      },
       "tagline": {
         "zh": "一碗闻着「臭」、吃着香的米粉，来自柳江边的夜市。",
         "en": "A rice-noodle bowl that smells strong and tastes unforgettable — born in the night markets by the Liujiang River."
@@ -158,6 +176,24 @@
         "zh": "甘肃兰州",
         "en": "Lanzhou, Gansu"
       },
+      "image": {
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/%E5%85%B0%E5%B7%9E%E7%89%9B%E8%82%89%E9%9D%A2.jpg/330px-%E5%85%B0%E5%B7%9E%E7%89%9B%E8%82%89%E9%9D%A2.jpg",
+        "thumbWidth": 330,
+        "thumbHeight": 220,
+        "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/%E5%85%B0%E5%B7%9E%E7%89%9B%E8%82%89%E9%9D%A2.jpg/1280px-%E5%85%B0%E5%B7%9E%E7%89%9B%E8%82%89%E9%9D%A2.jpg",
+        "heroWidth": 1280,
+        "heroHeight": 852,
+        "alt": {
+          "zh": "一碗兰州牛肉面：清汤、白萝卜片、红辣油与香菜蒜苗",
+          "en": "A bowl of Lanzhou beef noodles: clear broth, white radish slices, chilli oil and herbs"
+        },
+        "credit": {
+          "author": "三猎",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "page": "https://commons.wikimedia.org/wiki/File:%E5%85%B0%E5%B7%9E%E7%89%9B%E8%82%89%E9%9D%A2.jpg"
+        }
+      },
       "tagline": {
         "zh": "一碗清汤，九种面型，兰州人管它叫「牛大」。",
         "en": "One clear broth, nine noodle shapes — locals call it niuda, \"the big beef bowl\"."
@@ -276,6 +312,24 @@
         "zh": "福建三明沙县",
         "en": "Shaxian, Sanming, Fujian"
       },
+      "image": {
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Shaxian_County_snacks_-_wonton.jpg/330px-Shaxian_County_snacks_-_wonton.jpg",
+        "thumbWidth": 330,
+        "thumbHeight": 247,
+        "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Shaxian_County_snacks_-_wonton.jpg/1280px-Shaxian_County_snacks_-_wonton.jpg",
+        "heroWidth": 1280,
+        "heroHeight": 960,
+        "alt": {
+          "zh": "沙县小吃的招牌之一：一碗扁肉（馄饨），皮薄馅嫩，汤清味鲜",
+          "en": "One of the Shaxian snack staples: a bowl of bianrou wontons with thin wrappers in a clear broth"
+        },
+        "credit": {
+          "author": "我乃野云鹤",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "page": "https://commons.wikimedia.org/wiki/File:Shaxian_County_snacks_-_wonton.jpg"
+        }
+      },
       "tagline": {
         "zh": "中原南迁带来的一手点心，被一个县做成了 8.8 万家店。",
         "en": "A snack repertoire carried south from the Central Plains — grown by a single county into 88,000 shops."
@@ -393,6 +447,24 @@
       "region": {
         "zh": "云南蒙自",
         "en": "Mengzi, Yunnan"
+      },
+      "image": {
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Crossing_the_Bridge_Rice_Noodles_in_Mengzi_%2820200126132350%29.jpg/330px-Crossing_the_Bridge_Rice_Noodles_in_Mengzi_%2820200126132350%29.jpg",
+        "thumbWidth": 330,
+        "thumbHeight": 220,
+        "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Crossing_the_Bridge_Rice_Noodles_in_Mengzi_%2820200126132350%29.jpg/1280px-Crossing_the_Bridge_Rice_Noodles_in_Mengzi_%2820200126132350%29.jpg",
+        "heroWidth": 1280,
+        "heroHeight": 853,
+        "alt": {
+          "zh": "蒙自本地一碗过桥米线：大碗热汤上飘着菊花瓣，配菜分碟摆放",
+          "en": "A bowl of crossing-the-bridge rice noodles in Mengzi: hot broth topped with chrysanthemum petals, side plates arranged around it"
+        },
+        "credit": {
+          "author": "N509FZ",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "page": "https://commons.wikimedia.org/wiki/File:Crossing_the_Bridge_Rice_Noodles_in_Mengzi_(20200126132350).jpg"
+        }
       },
       "tagline": {
         "zh": "汤上封着一层鸡油，看着不冒气，却能烫熟生肉片；米线只过一半，所以叫「过桥」。",
@@ -514,6 +586,24 @@
       "region": {
         "zh": "天津",
         "en": "Tianjin"
+      },
+      "image": {
+        "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/%E5%A4%A9%E6%B4%A5%E7%8B%97%E4%B8%8D%E7%90%86%E5%8C%85%E5%AD%90.JPG/330px-%E5%A4%A9%E6%B4%A5%E7%8B%97%E4%B8%8D%E7%90%86%E5%8C%85%E5%AD%90.JPG",
+        "thumbWidth": 330,
+        "thumbHeight": 186,
+        "hero": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/%E5%A4%A9%E6%B4%A5%E7%8B%97%E4%B8%8D%E7%90%86%E5%8C%85%E5%AD%90.JPG/1280px-%E5%A4%A9%E6%B4%A5%E7%8B%97%E4%B8%8D%E7%90%86%E5%8C%85%E5%AD%90.JPG",
+        "heroWidth": 1280,
+        "heroHeight": 720,
+        "alt": {
+          "zh": "刚出笼的狗不理包子：皮白、褶花均匀，收口形似白菊",
+          "en": "Freshly steamed Goubuli baozi: white wrappers with evenly pleated tops shaped like a chrysanthemum"
+        },
+        "credit": {
+          "author": "Techyan",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "page": "https://commons.wikimedia.org/wiki/File:%E5%A4%A9%E6%B4%A5%E7%8B%97%E4%B8%8D%E7%90%86%E5%8C%85%E5%AD%90.JPG"
+        }
       },
       "tagline": {
         "zh": "每个不少于 15 个褶，形似白菊待放——天津「三绝」之首。",

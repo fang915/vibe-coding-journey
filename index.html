@@ -9,7 +9,7 @@
        浏览器会把 ?v=… 不同的地址当成「新文件」去取，
        避免改完样式却因为缓存看不到变化（我们为此排查过一轮）。
        以后每次改 css/style.css，把这里的日期改掉即可。 -->
-  <link rel="stylesheet" href="css/style.css?v=20260924">
+  <link rel="stylesheet" href="css/style.css?v=20260924c">
 </head>
 <body>
 
@@ -147,6 +147,14 @@
           <p id="card-name-en" class="name-en"></p>
           <p id="card-meta" class="meta"></p>
         </header>
+
+        <!-- 美食图。数据里配了 image 才显示（Day 9 补内容时新增）。
+             图片来自 Wikimedia Commons，许可是 CC BY-SA 4.0，
+             作者与许可写在图下那行小字里，可点回原页面核对。 -->
+        <figure id="card-figure" class="card-figure" hidden>
+          <img id="card-image" src="" alt="">
+          <figcaption id="card-credit" class="card-credit"></figcaption>
+        </figure>
 
         <!-- 未收录完整内容时（status = pending）显示这段说明 -->
         <div id="card-note" class="pending-note" hidden></div>

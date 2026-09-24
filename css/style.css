@@ -215,6 +215,21 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   color: var(--ink-faint);
 }
 
+/* ---------- 美食图（Day 9 补内容时新增） ---------- */
+
+/* 列表卡片缩略图。固定 3:2 比例 + object-fit:cover，
+   让五张原图比例不一（330x186 ~ 330x247）的缩略图看起来整齐。
+   底色调成品牌淡色：图没加载出来时是一块淡色，而不是刺眼的空白。
+   alt 在 JS 里留空 —— 菜名就在图的正下方，重复朗读对读屏用户是噪音。 */
+.dish-entry .entry-thumb{
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 8px;          /* 小圆角，与全文其他小控件一致 */
+  background: var(--brand-bg);
+}
+
 /* ---------- 页面状态（加载中 / 无结果 / 加载失败） ----------
    正常态就是上面的 .dish-list；下面三种跟它互斥，同一时刻只出现一个。
    Day 8 新增：把这"说不出口的三种时刻"也当成页面的一部分来设计。 */
@@ -447,6 +462,13 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 
 .facts .zh-text{ margin-bottom: var(--sp-1); }
 
+/* 事实条目末尾的出处角标：跟在「中文 + 英文」之后单独成行。
+   角标之间的横向间距由 .cite 自己的 margin-left 负责。 */
+.facts .fact-cites{
+  display: block;
+  margin-top: var(--sp-1);
+}
+
 /* 出处列表里的"访问日期" */
 .sources .accessed{
   display: block;
@@ -481,6 +503,30 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 .pending-note p{ margin: 0; }
 
 .pending-note p + p{ margin-top: var(--sp-1); }
+
+/* 详情页美食图。图片是外链（Wikimedia Commons），页面不托管图片文件。
+   ——代价：断网或对方抽风时图会空掉，此时露出的就是下面这块淡色底。 */
+.card-figure{
+  margin: var(--sp-5) 0 0;
+}
+
+.card-figure img{
+  display: block;
+  width: 100%;
+  height: auto;                 /* 配合 HTML 上的 width/height 属性，加载前就占住高度，页面不跳 */
+  border-radius: var(--radius);
+  background: var(--brand-bg);
+}
+
+/* 署名行：CC BY-SA 4.0 要求署名，所以这行不是装饰，是许可条件的一部分。
+   文字用的是达标色（--ink-faint 对白底/米底都 >= 4.5:1），链接沿用出处列表的 --brand-ink。 */
+.card-credit{
+  margin-top: var(--sp-2);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.card-credit a{ color: var(--brand-ink); }
 
 /* ---------- 窄屏兜底（本期不做移动端，仅保证不崩） ---------- */
 
