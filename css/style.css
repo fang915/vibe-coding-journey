@@ -1,6 +1,14 @@
 /* =========================================================
    寻味 / Xunwei —— 中华美食文化检索  ·  MVP v0.1 样式
    技术约束（见 TECH_DESIGN.md §2）：纯 CSS，无框架、无外部资源
+
+   Day 9 变更（用设计规则做的一次前端审查与修复）：
+   · 颜色按「职责」分工，不再一支色身兼数职（门槛不同，共用必然有一头不合格）
+       --line        只做装饰：分隔线、卡片边框（卡片另有阴影辅助识别）
+       --line-strong 只做控件边界：对白底 / 米底 / 淡粉底均 >= 3:1（WCAG 1.4.11）
+       --ink-faint   只做文字：对全部底色均 >= 4.5:1（WCAG 1.4.3）
+   · 间距一律从 --sp-* 尺度取值（4 的倍数），页面左右留白用 --gutter
+   · 搜索区改为左对齐，与列表共用同一条左参考线
    ========================================================= */
 
 :root{
@@ -8,13 +16,27 @@
   --surface:   #ffffff;
   --ink:       #2b2320;
   --ink-soft:  #6b5f59;
-  --ink-faint: #9b908a;
-  --line:      #e8ded5;
+  --ink-faint: #786d67;   /* Day 9：原 #9b908a 只有 2.92~3.11，不足正文要求的 4.5 */
+  --line:      #e8ded5;   /* 装饰专用 */
+  --line-strong:#8a827c;  /* Day 9 新增：控件边界专用，白 3.77 / 米 3.63 / 粉 3.20 */
   --brand:     #a63a2a;
   --brand-ink: #7d2a1e;
   --brand-bg:  #f6eae5;
+  --brand-lift:#eedcd5;   /* 品牌淡底上的 hover */
   --radius:    12px;
   --shadow:    0 1px 2px rgba(43,35,32,.05), 0 6px 20px rgba(43,35,32,.06);
+
+  /* 间距尺度（Day 9 新增）：组件内部间距只从这里取，4 的倍数 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+
+  /* 页面左右留白：布局常量，不属于组件间距尺度，故单独命名 */
+  --gutter: 40px;
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
@@ -40,7 +62,7 @@ body{
 /* ---------- 页头 ---------- */
 
 .site-header{
-  padding: 26px 40px 14px;
+  padding: var(--sp-5) var(--gutter) var(--sp-4);
   border-bottom: 1px solid var(--line);
   background: var(--surface);
 }
@@ -52,43 +74,49 @@ body{
   color: var(--brand-ink);
 }
 
+/* 中英并置的后置标签：横向间距统一取 --sp-2
+   （Day 9 统一：原先品牌名 6px、状态标题 8px、板块标题 8px，同一种关系三个值） */
 .brand .en{
   font-size: 15px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  margin-left: 6px;
+  margin-left: var(--sp-2);
 }
 
 .tagline{
-  margin: 4px 0 0;
+  margin: var(--sp-1) 0 0;
   font-size: 14px;
   color: var(--ink-soft);
 }
 
 /* ---------- 主区域 ---------- */
 
-main{ padding: 28px 40px 48px; }
+main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 
 .view{ max-width: 1180px; margin: 0 auto; }
 
 /* ---------- 搜索区 ---------- */
 
+/* Day 9：不再写 margin:auto 居中。
+   原来搜索框居中（640px），下方列表左对齐到 1180px 容器，
+   同屏出现两条左参考线，按 1088px 窗口推算错开约 184px。 */
 .search{
   display: flex;
-  gap: 10px;
+  gap: var(--sp-2);
   max-width: 640px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .search input{
   flex: 1;
-  padding: 13px 18px;
+  min-width: 0;               /* Day 9：flex 子项默认 min-width:auto 不能收缩，窄屏会溢出 */
+  padding: var(--sp-3) var(--sp-4);
   font: inherit;
   font-size: 16px;
   color: var(--ink);
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);  /* 控件边界：输入框白底与页面米底只差 1.04，边框是唯一线索 */
   border-radius: var(--radius);
   outline: none;
   transition: border-color .15s, box-shadow .15s;
@@ -101,13 +129,14 @@ main{ padding: 28px 40px 48px; }
   box-shadow: 0 0 0 3px var(--brand-bg);
 }
 
+/* 一级按钮（实心）：纵向 --sp-3、横向 --sp-5。二级按钮见 .state-btn / .back */
 .search button{
-  padding: 13px 24px;
+  padding: var(--sp-3) var(--sp-5);
   font: inherit;
   font-size: 15px;
   color: #fff;
   background: var(--brand);
-  border: 1px solid var(--brand);
+  border: 1px solid var(--brand);   /* 实心填充本身已高对比，边框无需另设 */
   border-radius: var(--radius);
   cursor: pointer;
   white-space: nowrap;
@@ -116,11 +145,11 @@ main{ padding: 28px 40px 48px; }
 
 .search button:hover{ background: var(--brand-ink); }
 
-/* 搜索提示（命中别名 / 未收录 等） */
+/* 搜索提示（命中别名 / 未收录 等）：与搜索框同宽、同左边界 */
 .hint{
   max-width: 640px;
-  margin: 12px auto 0;
-  padding: 10px 16px;
+  margin: var(--sp-3) 0 0;
+  padding: var(--sp-3) var(--sp-4);
   font-size: 14px;
   color: var(--brand-ink);
   background: var(--brand-bg);
@@ -130,7 +159,7 @@ main{ padding: 28px 40px 48px; }
 /* ---------- 收录列表 ---------- */
 
 .section-title{
-  margin: 34px 0 14px;
+  margin: var(--sp-6) 0 var(--sp-3);
   font-size: 15px;
   font-weight: 600;
   letter-spacing: .06em;
@@ -140,23 +169,24 @@ main{ padding: 28px 40px 48px; }
 .dish-list{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  gap: var(--sp-4);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* 小盒子：内边距统一 --sp-4 */
 .dish-entry{
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--sp-1);          /* 组内（中文名↔英文名）4px */
   width: 100%;
-  padding: 20px 18px;
+  padding: var(--sp-4);
   text-align: left;
   font: inherit;
   color: var(--ink);
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line);   /* 装饰边：卡片可点击性另有阴影这一条线索 */
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   cursor: pointer;
@@ -178,8 +208,9 @@ main{ padding: 28px 40px 48px; }
   line-height: 1.4;
 }
 
+/* 组间（英文名↔地区）：4+4=8px。走同一支尺度，不再另起一套 margin 数值 */
 .dish-entry .region{
-  margin-top: 6px;
+  margin-top: var(--sp-1);
   font-size: 12px;
   color: var(--ink-faint);
 }
@@ -189,8 +220,8 @@ main{ padding: 28px 40px 48px; }
    Day 8 新增：把这"说不出口的三种时刻"也当成页面的一部分来设计。 */
 
 .state{
-  margin-top: 34px;
-  padding: 30px 26px;
+  margin-top: var(--sp-6);
+  padding: var(--sp-6) var(--sp-5);
   text-align: center;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -206,7 +237,7 @@ main{ padding: 28px 40px 48px; }
 }
 
 .state-title .en{
-  margin-left: 8px;
+  margin-left: var(--sp-2);
   font-size: 12.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -214,25 +245,27 @@ main{ padding: 28px 40px 48px; }
 }
 
 .state-text{
-  margin: 8px 0 0;
+  margin: var(--sp-2) 0 0;
   font-size: 14px;
   color: var(--ink-soft);
 }
 
+/* 二级按钮（淡底）：纵向 --sp-2、横向 --sp-4。
+   淡底与白底只差 1.11，所以形状必须靠边框认出来 → 用 --line-strong */
 .state-btn{
-  margin-top: 18px;
-  padding: 9px 20px;
+  margin-top: var(--sp-4);
+  padding: var(--sp-2) var(--sp-4);
   font: inherit;
   font-size: 14px;
   color: var(--brand-ink);
   background: var(--brand-bg);
-  border: 1px solid #e3cfc8;
+  border: 1px solid var(--line-strong);
   border-radius: 999px;
   cursor: pointer;
   transition: background .15s;
 }
 
-.state-btn:hover{ background: #eedcd5; }
+.state-btn:hover{ background: var(--brand-lift); }
 
 /* 加载中：骨架条。让人知道"在读"，而不是"页面坏了" */
 .state-loading{ text-align: left; }
@@ -240,8 +273,8 @@ main{ padding: 28px 40px 48px; }
 .skeleton{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-  margin: 18px 0 0;
+  gap: var(--sp-4);
+  margin: var(--sp-4) 0 0;
   padding: 0;
   list-style: none;
 }
@@ -270,22 +303,24 @@ main{ padding: 28px 40px 48px; }
 
 /* ---------- 文化卡片 ---------- */
 
+/* 二级按钮（白底）：形状同样只能靠边框认，所以也用 --line-strong */
 .back{
-  margin-bottom: 18px;
-  padding: 8px 16px;
+  margin-bottom: var(--sp-4);
+  padding: var(--sp-2) var(--sp-4);
   font: inherit;
   font-size: 14px;
   color: var(--ink-soft);
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 999px;
   cursor: pointer;
 }
 
 .back:hover{ border-color: var(--brand); color: var(--brand-ink); }
 
+/* 大盒子：内边距统一 --sp-6 */
 .card{
-  padding: 32px 36px;
+  padding: var(--sp-6);
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -293,7 +328,7 @@ main{ padding: 28px 40px 48px; }
 }
 
 .card-head{
-  padding-bottom: 18px;
+  padding-bottom: var(--sp-4);
   border-bottom: 1px solid var(--line);
 }
 
@@ -304,23 +339,23 @@ main{ padding: 28px 40px 48px; }
 }
 
 .card-head .name-en{
-  margin: 2px 0 0;
+  margin: var(--sp-1) 0 0;
   font-size: 15px;
   letter-spacing: .04em;
   color: var(--ink-faint);
 }
 
 .card-head .meta{
-  margin: 8px 0 0;
+  margin: var(--sp-2) 0 0;
   font-size: 13px;
   color: var(--ink-soft);
 }
 
 /* 三个内容板块 */
-.block{ margin-top: 26px; }
+.block{ margin-top: var(--sp-5); }
 
 .block h3{
-  margin: 0 0 8px;
+  margin: 0 0 var(--sp-2);
   font-size: 17px;
   color: var(--brand-ink);
 }
@@ -329,10 +364,10 @@ main{ padding: 28px 40px 48px; }
   font-size: 12.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
-  margin-left: 8px;
+  margin-left: var(--sp-2);
 }
 
-.block .zh-text{ margin: 0 0 6px; }
+.block .zh-text{ margin: 0 0 var(--sp-1); }
 
 .block .en-text{
   margin: 0;
@@ -340,41 +375,43 @@ main{ padding: 28px 40px 48px; }
   color: var(--ink-soft);
 }
 
-/* 出处标记：贴在事实性陈述末尾的小角标 */
+/* 出处标记：贴在事实性陈述末尾的小角标。
+   它跟在句子后面，属于"行内角标"而非"中英并置"，所以横向间距仍取 --sp-1。
+   边框同样是控件边界（可点击）→ 用 --line-strong */
 .cite{
   display: inline-block;
-  margin-left: 4px;
-  padding: 0 6px;
+  margin-left: var(--sp-1);
+  padding: 0 var(--sp-2);   /* 与 .pending-tag 同为行内小角标，横向内边距取同一个值 */
   font-size: 11.5px;
   line-height: 18px;
   color: var(--brand-ink);
   background: var(--brand-bg);
-  border: 1px solid #e3cfc8;
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
   text-decoration: none;
   cursor: pointer;
   vertical-align: 1px;
 }
 
-.cite:hover{ background: #eedcd5; }
+.cite:hover{ background: var(--brand-lift); }
 
 /* 出处列表 */
-.sources{ padding-top: 22px; border-top: 1px solid var(--line); }
+.sources{ padding-top: var(--sp-5); border-top: 1px solid var(--line); }
 
 .sources ol{
   margin: 0;
-  padding-left: 20px;
+  padding-left: var(--sp-5);
   font-size: 14px;
   color: var(--ink-soft);
 }
 
-.sources li{ margin-bottom: 6px; }
+.sources li{ margin-bottom: var(--sp-1); }
 
 .sources a{ color: var(--brand-ink); }
 
 /* 占位提示（7-2 骨架阶段使用：明确标出"这里的内容还没填"） */
 .placeholder{
-  padding: 14px 16px;
+  padding: var(--sp-4);
   font-size: 13.5px;
   color: var(--ink-faint);
   background: #fbf7f3;
@@ -390,7 +427,7 @@ main{ padding: 28px 40px 48px; }
 /* ---------- 页脚 ---------- */
 
 .site-footer{
-  padding: 18px 40px 26px;
+  padding: var(--sp-4) var(--gutter) var(--sp-5);
   font-size: 12.5px;
   color: var(--ink-faint);
   text-align: center;
@@ -400,20 +437,20 @@ main{ padding: 28px 40px 48px; }
 
 .facts ul{
   margin: 0;
-  padding-left: 22px;
+  padding-left: var(--sp-5);
 }
 
-.facts li{ margin-bottom: 12px; }
+.facts li{ margin-bottom: var(--sp-3); }
 
 .facts .zh-text,
 .facts .en-text{ display: block; }
 
-.facts .zh-text{ margin-bottom: 2px; }
+.facts .zh-text{ margin-bottom: var(--sp-1); }
 
 /* 出处列表里的"访问日期" */
 .sources .accessed{
   display: block;
-  margin-top: 2px;
+  margin-top: var(--sp-1);
   font-size: 12px;
   color: var(--ink-faint);
 }
@@ -421,8 +458,8 @@ main{ padding: 28px 40px 48px; }
 /* 入口卡片上的"内容整理中"小标签 */
 .dish-entry .pending-tag{
   align-self: flex-start;
-  margin-top: 8px;
-  padding: 1px 8px;
+  margin-top: var(--sp-2);
+  padding: 0 var(--sp-2);
   font-size: 11.5px;
   line-height: 18px;
   color: var(--ink-soft);
@@ -432,8 +469,8 @@ main{ padding: 28px 40px 48px; }
 
 /* 卡片内的"内容整理中"说明框 */
 .pending-note{
-  margin-top: 22px;
-  padding: 16px 18px;
+  margin-top: var(--sp-5);
+  padding: var(--sp-4);
   font-size: 14px;
   color: var(--ink-soft);
   background: #fbf7f3;
@@ -443,15 +480,23 @@ main{ padding: 28px 40px 48px; }
 
 .pending-note p{ margin: 0; }
 
-.pending-note p + p{ margin-top: 6px; }
+.pending-note p + p{ margin-top: var(--sp-1); }
 
 /* ---------- 窄屏兜底（本期不做移动端，仅保证不崩） ---------- */
 
 @media (max-width: 900px){
-  .site-header, main, .site-footer{ padding-left: 20px; padding-right: 20px; }
+  .site-header, main, .site-footer{ padding-left: calc(var(--gutter) / 2); padding-right: calc(var(--gutter) / 2); }
   .dish-list{ grid-template-columns: repeat(2, 1fr); }
   .skeleton{ grid-template-columns: repeat(2, 1fr); }
-  .card{ padding: 24px 20px; }
+  .card{ padding: var(--sp-5); }
+}
+
+/* Day 9 新增：窄屏不许横向溢出 —— 上面那句话写的是「仅保证不崩」，这几行就是在兑现它 */
+@media (max-width: 560px){
+  .search{ flex-direction: column; }              /* 搜索框与按钮改上下排列，避免按钮撑破一行 */
+  .search button{ width: 100%; }
+  .dish-entry .en{ overflow-wrap: break-word; }   /* 长英文名允许断行，不撑破卡片 */
+  .card{ padding: var(--sp-4); }
 }
 
 /* 系统开了"减少动态效果"就不让骨架条闪 —— 无障碍，也省电 */
