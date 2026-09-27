@@ -61,32 +61,69 @@ body{
 
 /* ---------- 页头 ---------- */
 
+/* Day 10：页头内容整体居中（用户要求"标题位于正中间"）。
+   和 main 的关系要交代清楚：main 里的 .view 是 max-width + margin:auto 居中的，
+   两边都居中 → 共用同一条中心线，不会打架。 */
 .site-header{
-  padding: var(--sp-5) var(--gutter) var(--sp-4);
+  padding: var(--sp-6) var(--gutter) var(--sp-5);
   border-bottom: 1px solid var(--line);
   background: var(--surface);
+  text-align: center;
 }
 
+/* Day 10：品牌名放大成"封面字"（甲案 · 极简大字）：26px → 44px，字距拉开、字重加粗。
+   居中的精度问题说明一下：letter-spacing 会在最后一个字后面也多留一份空隙，
+   这份空隙属于"盒子宽度"却不属于"眼睛看到的宽度"，所以光靠 text-align:center
+   会偏右一点点（实测偏 3px）。解决办法放在下面的 .brand .en 里（负 margin-right），
+   不用 text-indent 硬凑数字 —— 那样一改字号就会失准。 */
 .brand{
   margin: 0;
-  font-size: 26px;
-  letter-spacing: .04em;
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1.25;
   color: var(--brand-ink);
 }
 
+/* 标题下的短红线：40px 宽、2px 高、品牌红，居中。
+   装饰性的东西不占 HTML 结构，所以用伪元素画。 */
+.brand::after{
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin: var(--sp-3) auto 0;
+  background: var(--brand);
+  border-radius: 2px;
+}
+
 /* 中英并置的后置标签：横向间距统一取 --sp-2
-   （Day 9 统一：原先品牌名 6px、状态标题 8px、板块标题 8px，同一种关系三个值） */
+   （Day 9 统一：原先品牌名 6px、状态标题 8px、板块标题 8px，同一种关系三个值）
+   Day 10 补的负 margin-right：抵消自身 letter-spacing 在英文末尾多留的那份空隙，
+   让 h1 的内容盒宽度 = 眼睛看到的宽度，text-align:center 才是真的居中。
+   .12em 对应的是上面这个 letter-spacing，改字距时这里要同步。 */
 .brand .en{
-  font-size: 15px;
+  font-size: 18px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--ink-faint);
   margin-left: var(--sp-2);
+  margin-right: -.12em;
 }
 
+/* Day 10：标语分两层。
+   第一层点文化底蕴（一味一城，一菜一史），
+   第二层告诉第一次来的人"这是个干什么的网站" —— 光有腔调不够，新访客得能看懂用途。 */
 .tagline{
+  margin: var(--sp-4) 0 0;
+  font-size: 17px;
+  letter-spacing: .08em;
+  color: var(--ink);
+}
+
+.tagline-sub{
   margin: var(--sp-1) 0 0;
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--ink-soft);
 }
 
@@ -98,14 +135,17 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 
 /* ---------- 搜索区 ---------- */
 
-/* Day 9：不再写 margin:auto 居中。
-   原来搜索框居中（640px），下方列表左对齐到 1180px 容器，
-   同屏出现两条左参考线，按 1088px 窗口推算错开约 184px。 */
+/* Day 9 曾把搜索框从左对齐改回"不居中"，理由是它与左对齐的列表形成两条错开的参考线。
+   Day 10 用户要求搜索框居中，于是改回 margin: 0 auto。
+   两次不矛盾，区别在列表：Day 9 的列表是左对齐的，会真的错开；
+   现在列表是满宽居中（.view 自带 margin:auto），搜索框 640px 也居中，
+   两者共用同一条中心线，只是宽窄不同，不会显得歪。
+   实测（1080 窗口）：搜索框 220~860，页面中心 540，左右留白相等。 */
 .search{
   display: flex;
   gap: var(--sp-2);
   max-width: 640px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .search input{
@@ -145,10 +185,11 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 
 .search button:hover{ background: var(--brand-ink); }
 
-/* 搜索提示（命中别名 / 未收录 等）：与搜索框同宽、同左边界 */
+/* 搜索提示（命中别名 / 未收录 等）：与搜索框同宽、同边界。
+   Day 10：搜索框居中后，它也跟着居中，否则一行提示会从左边冒出来，跟搜索框对不齐。 */
 .hint{
   max-width: 640px;
-  margin: var(--sp-3) 0 0;
+  margin: var(--sp-3) auto 0;
   padding: var(--sp-3) var(--sp-4);
   font-size: 14px;
   color: var(--brand-ink);
@@ -174,6 +215,14 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   padding: 0;
   list-style: none;
 }
+
+/* Day 10 修复：五张卡片高度不齐。
+   原因：Grid 只把 li（格子）拉到同一行高，但 li 里面的按钮没人要求它撑满，
+   它依旧是"内容多高就多高"。于是英文名占两行的卡片（如蒙自过桥米线、
+   螺蛳粉）把下面的「地区」行整个顶下去，五张卡片的地区行差 17px。
+   做法：让 li 变成弹性容器 —— 交叉轴默认 stretch，按钮就被拉满整格高度。
+   只加这一行，卡片就等高；地区行贴底见下面 .region 的 margin-top:auto。 */
+.dish-list > li{ display: flex; }
 
 /* 小盒子：内边距统一 --sp-4 */
 .dish-entry{
@@ -208,9 +257,15 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   line-height: 1.4;
 }
 
-/* 组间（英文名↔地区）：4+4=8px。走同一支尺度，不再另起一套 margin 数值 */
+/* 地区行（Day 10 改）：原来只写 margin-top: var(--sp-1)，
+   卡片等高之后，五张卡片里"英文名剩几行"各不相同，地区行还是会各自飘。
+   改成 margin-top:auto —— 弹性容器里的 auto 外边距会把这一行推到卡片最底部，
+   于是五张卡片的地区行落在同一条水平线上。
+   下面那行 padding-top 是补救：auto 在空间不足时会缩成 0，
+   padding 保证地区行与英文名之间至少留 4px，永远不会贴住。 */
 .dish-entry .region{
-  margin-top: var(--sp-1);
+  margin-top: auto;
+  padding-top: var(--sp-1);
   font-size: 12px;
   color: var(--ink-faint);
 }
@@ -318,8 +373,16 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 
 /* ---------- 文化卡片 ---------- */
 
-/* 二级按钮（白底）：形状同样只能靠边框认，所以也用 --line-strong */
+/* 二级按钮（白底）：形状同样只能靠边框认，所以也用 --line-strong。
+   Day 10：改成吸顶（sticky）。
+   起因：详情页很长，返回按钮原来待在页面顶部，往下滚就看不见了，想返回得手动滚回顶上。
+   现在 top: var(--sp-3) —— 往下滚时它停在离窗口顶 12px 的地方，随时可点；
+   不贴死在 0 是有意的：留一道缝，让正文从它上面"擦过去"时不至于像被切断。
+   因为粘住时会压在正文上面，必须给它 z-index 和阴影，否则文字会和按钮糊在一起。 */
 .back{
+  position: sticky;
+  top: var(--sp-3);
+  z-index: 10;
   margin-bottom: var(--sp-4);
   padding: var(--sp-2) var(--sp-4);
   font: inherit;
@@ -328,6 +391,7 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(43,35,32,.06), 0 4px 12px rgba(43,35,32,.08);
   cursor: pointer;
 }
 
@@ -448,6 +512,47 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   text-align: center;
 }
 
+/* ---------- 回到顶部（Day 10 新增） ---------- */
+
+/* 固定在窗口右下角。默认 hidden，滚到一定距离后由 js/app.js 放开。
+   为什么做成"滚下去才出现"而不是一直在：第一屏本来就在顶部，摆个"回到顶部"
+   是多余的东西；只在真正需要它的时候出现，才不占视线。 */
+.to-top{
+  position: fixed;
+  right: var(--sp-5);
+  bottom: var(--sp-5);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: var(--sp-2) var(--sp-4);
+  font: inherit;
+  font-size: 14px;
+  color: #fff;
+  background: var(--brand);
+  border: 1px solid var(--brand);
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(43,35,32,.18);
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.to-top:hover{ background: var(--brand-ink); }
+
+/* 按钮里那个英文小标签：全局 .en 是深灰的（给浅底用），
+   放在品牌红实心按钮上会糊成一团，所以这里按"白底反色"重设。
+   .85 的白对 #a63a2a 仍是 5.1:1，过 WCAG 4.5:1 的门槛。 */
+.to-top .en{ color: rgba(255,255,255,.85); }
+
+/* 出现时轻微上浮 + 淡入。硬闪一下会很突兀。
+   系统开了"减少动态效果"时，文件末尾的媒体查询会把这段动画关掉。 */
+.to-top:not([hidden]){ animation: to-top-in .18s ease-out; }
+
+@keyframes to-top-in{
+  from{ opacity: 0; transform: translateY(8px); }
+  to  { opacity: 1; transform: none; }
+}
+
 /* ---------- 关键事实清单 ---------- */
 
 .facts ul{
@@ -545,7 +650,8 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   .card{ padding: var(--sp-4); }
 }
 
-/* 系统开了"减少动态效果"就不让骨架条闪 —— 无障碍，也省电 */
+/* 系统开了"减少动态效果"就不让骨架条闪、也不让按钮上浮 —— 无障碍，也省电 */
 @media (prefers-reduced-motion: reduce){
   .skeleton-row{ animation: none; }
+  .to-top:not([hidden]){ animation: none; }
 }

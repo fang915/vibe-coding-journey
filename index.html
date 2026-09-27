@@ -9,13 +9,22 @@
        浏览器会把 ?v=… 不同的地址当成「新文件」去取，
        避免改完样式却因为缓存看不到变化（我们为此排查过一轮）。
        以后每次改 css/style.css，把这里的日期改掉即可。 -->
-  <link rel="stylesheet" href="css/style.css?v=20260924c">
+  <link rel="stylesheet" href="css/style.css?v=20260927c">
 </head>
 <body>
 
+  <!-- Day 10：页头改成居中排版，标语分两层。
+       上层 · 一味一城，一菜一史 —— 点文化底蕴；
+       下层 · 读懂一道中国菜的文化来头 —— 告诉第一次来的人这网站干什么用。
+       两行都留是有意的：只有腔调、不说用途，新访客会不知道能拿它干什么。
+       样式（大字、短红线、居中）全在 css/style.css 的「页头」一节。 -->
   <header class="site-header">
     <h1 class="brand">寻味 <span class="en">Xunwei</span></h1>
     <p class="tagline">
+      一味一城，一菜一史
+      <span class="en">· One flavor, one city; one dish, one history</span>
+    </p>
+    <p class="tagline-sub">
       读懂一道中国菜的文化来头
       <span class="en">· Understand the story behind a Chinese dish</span>
     </p>
@@ -195,10 +204,24 @@
     <span class="en">Content sourced from public, traceable references.</span>
   </footer>
 
+  <!-- Day 10：回到顶部按钮。
+       为什么放在 body 末尾而不是卡片里面：它要相对"窗口"固定（position:fixed），
+       放在任何有定位祖先的容器里都可能被带偏，直接挂在 body 下最不容易出意外。
+       默认 hidden（display:none），由 js/app.js 监听滚动来决定什么时候露出来 ——
+       滚到下面才出现，是因为第一屏根本不需要它。 -->
+  <button id="to-top" class="to-top" type="button" hidden>
+    <span aria-hidden="true">↑</span>
+    回到顶部 <span class="en">Top</span>
+  </button>
+
   <!-- 数据来源层（Day 8 新增）。必须排在 app.js 前面：app.js 靠它取数据。
-       换真实 API 时只改 js/data-source.js，这个文件不用动。 -->
-  <script src="js/data-source.js"></script>
-  <script src="js/app.js"></script>
+       换真实 API 时只改 js/data-source.js，这个文件不用动。
+       Day 10：两个 script 补上 ?v= 版本号。
+       教训来自 Day 9 —— 当时只给 CSS 加了版本号、JS 没加，
+       结果浏览器重新取了新样式、却还在用缓存的旧脚本，页面处在"半新"状态，
+       现象是"明明改了却没变化"，排查了很久。规则：改哪个文件，就动它那条版本号。 -->
+  <script src="js/data-source.js?v=20260927c"></script>
+  <script src="js/app.js?v=20260927c"></script>
 
 </body>
 </html>

@@ -2,10 +2,11 @@
    寻味 / Xunwei —— 前端逻辑（Day 8：补齐四种页面状态）
    技术约束（见 TECH_DESIGN.md §2）：原生 JavaScript，无框架、无依赖。
 
-   这个文件只做三件事：
+   这个文件做四件事：
      1. 让 js/data-source.js 把数据取回来（数据从哪来，这里不管）
      2. 按用户输入的关键词找出匹配的美食
      3. 把结果画到页面上（检索视图 / 文化卡片视图）
+     4. 监听滚动，决定"回到顶部"按钮什么时候出现（Day 10 新增）
 
    ⚠️ 四种页面状态（Day 8 的正题）——同一时刻只亮一个，切换一律走 applyState()：
      success  成功   —— 列表 / 卡片正常显示
@@ -41,6 +42,7 @@
     el.listTitle   = document.getElementById('list-title');
     el.dishList    = document.getElementById('dish-list');
     el.backBtn     = document.getElementById('back-btn');
+    el.toTop       = document.getElementById('to-top');   // Day 10
 
     // 三种"非正常"状态的容器
     el.stateLoading   = document.getElementById('state-loading');
@@ -76,6 +78,12 @@
     el.backBtn.addEventListener('click', showSearchView);
     el.retryBtn.addEventListener('click', loadDishes);          // 失败 → 重试
     el.stateEmptyAll.addEventListener('click', showAllDishes);  // 没搜到 → 看全部
+
+    // Day 10：回到顶部。
+    // passive: true 是告诉浏览器"这个监听里不会阻止滚动"，滚动因此更顺、不掉帧。
+    el.toTop.addEventListener('click', scrollToTop);
+    window.addEventListener('scroll', syncToTop, { passive: true });
+    syncToTop();   // 刷新页面时可能停在中间，先按当前位置对一次
 
     loadDishes();
   }
@@ -250,6 +258,7 @@
     el.searchView.hidden = true;
     el.cardView.hidden = false;
     window.scrollTo(0, 0);
+    syncToTop();   // 立即把"回到顶部"收起来，不等 scroll 事件绕一圈
   }
 
   function renderCard(dish) {
@@ -483,6 +492,7 @@
     el.cardView.hidden = true;
     el.searchView.hidden = false;
     window.scrollTo(0, 0);
+    syncToTop();
   }
 
   function showHint(message) {
@@ -493,6 +503,27 @@
   function hideHint() {
     el.hint.textContent = '';
     el.hint.hidden = true;
+  }
+
+  /* ---------------------------------------------------------
+     6. 回到顶部（Day 10 新增）
+     --------------------------------------------------------- */
+
+  /* 往下滚超过这个距离，才让"回到顶部"按钮出现。
+     取 320px：大致是"第一屏已经看完"的位置；比这更浅的地方，
+     随手往回滚一下就上去了，按钮反而是多余的。 */
+  var TO_TOP_AT = 320;
+
+  function syncToTop() {
+    el.toTop.hidden = window.scrollY < TO_TOP_AT;
+  }
+
+  /* 平滑滚回顶部。开了"减少动态效果"的用户，长距离滚动动画可能引起不适，
+     那就退化成瞬间跳回 —— 功能一样，只是不晃。 */
+  function scrollToTop() {
+    var reduce = window.matchMedia &&
+                 window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
   }
 
 })();
