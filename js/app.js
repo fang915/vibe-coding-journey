@@ -2,12 +2,13 @@
    寻味 / Xunwei —— 前端逻辑（Day 8：补齐四种页面状态）
    技术约束（见 TECH_DESIGN.md §2）：原生 JavaScript，无框架、无依赖。
 
-   这个文件做五件事：
+   这个文件做六件事：
      1. 让 js/data-source.js 把数据取回来（数据从哪来，这里不管）
      2. 按用户输入的关键词找出匹配的美食
      3. 把结果画到页面上（检索视图 / 文化卡片视图）
      4. 监听滚动，决定"回到顶部"按钮什么时候出现（Day 10 新增）
      5. 详情页的"复制名称与链接"，并给四重反馈（Day 11 新增）
+     6. 按地区筛选，并把筛选结果与关键词取交集（Day 12 新增）
 
    ⚠️ 四种页面状态（Day 8 的正题）——同一时刻只亮一个，切换一律走 applyState()：
      success  成功   —— 列表 / 卡片正常显示
@@ -24,7 +25,8 @@
     dishes: [],          // 全部美食
     loaded: false,       // 数据是否已经成功读进来
     listState: 'loading',// 列表区当前是四种状态里的哪一种
-    currentDish: null    // 详情页正在看的那一道（Day 11：复制按钮要知道复制的是哪道菜）
+    currentDish: null,   // 详情页正在看的那一道（Day 11：复制按钮要知道复制的是哪道菜）
+    region: 'all'        // 当前选中的地区（Day 12）：'all' 表示不筛，否则是省份名如 '广西'
   };
 
   // 页面上要反复用到的元素，统一在 init 里取一次
@@ -43,6 +45,12 @@
     el.hint        = document.getElementById('search-hint');
     el.listTitle   = document.getElementById('list-title');
     el.dishList    = document.getElementById('dish-list');
+
+    // Day 12：地区筛选条。按钮是静态写在 HTML 里的，这里只取引用。
+    el.filterBar   = document.getElementById('region-filter');
+    el.filterBtns  = el.filterBar
+      ? Array.prototype.slice.call(el.filterBar.querySelectorAll('.filter-btn'))
+      : [];
     el.backBtn     = document.getElementById('back-btn');
     el.toTop       = document.getElementById('to-top');   // Day 10
 
@@ -83,6 +91,15 @@
     ];
 
     el.form.addEventListener('submit', onSubmit);
+
+    // Day 12：点地区按钮只重画列表，不跳详情 ——
+    // 用户点筛选是想"看这一片有哪些"，跳进详情会把这个意图打断。
+    el.filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setRegion(btn.getAttribute('data-region'));
+      });
+    });
+
     el.backBtn.addEventListener('click', showSearchView);
     el.copyBtn.addEventListener('click', copyCardLink);         // Day 11：复制并反馈
     el.retryBtn.addEventListener('click', loadDishes);          // 失败 → 重试
@@ -122,11 +139,24 @@
         el.stateEmptyText.textContent = '目前还没有收录任何美食。· Nothing here yet.';
         el.stateEmptyAll.hidden = true;
       } else {
-        // 情况二：搜索没命中
+        // 情况二：搜索 / 筛选没命中。
+        // Day 12：有筛选时要说清是"哪个地区 + 哪个关键词"叠加后没命中，
+        // 否则用户看着空页面，不知道是搜错了还是筛错了。
         var q = opts.query || '';
-        el.stateEmptyText.textContent =
-          '暂未收录「' + q + '」。换个说法再试试，比如：螺蛳粉 / Luosifen' +
-          ' · Not found: “' + q + '”';
+        var r = (opts.region && opts.region !== 'all') ? opts.region : '';
+
+        if (r && q) {
+          el.stateEmptyText.textContent =
+            '「' + r + '」里没有匹配「' + q + '」的菜。换个说法，或点下面的按钮看全部。' +
+            ' · No match for “' + q + '” in ' + r;
+        } else if (r) {
+          el.stateEmptyText.textContent =
+            '「' + r + '」暂时还没有收录的菜。· Nothing in ' + r + ' yet.';
+        } else {
+          el.stateEmptyText.textContent =
+            '暂未收录「' + q + '」。换个说法再试试，比如：螺蛳粉 / Luosifen' +
+            ' · Not found: “' + q + '”';
+        }
         el.stateEmptyAll.hidden = false;
       }
       el.stateEmpty.hidden = false;
@@ -203,6 +233,80 @@
         return normalize(key).indexOf(q) !== -1;
       });
     });
+  }
+
+  /* ---------------------------------------------------------
+     2b. 筛选：地区（Day 12）
+     筛选与关键词是「交集」：两个条件都满足才留在列表里。
+     实现上写在同一条链上（先按关键词挑，再按地区过一遍），
+     所以不可能出现"两个条件各算各的再拼起来" —— 那不是筛选，那是并集。
+     --------------------------------------------------------- */
+
+  // 一道菜是否落在当前选中的地区里。
+  // 约定：data/dishes.json 里 region.zh 以省份名开头（"广西柳州" / "天津"），所以比前缀。
+  // 以后加新菜时若 region.zh 不这么写，那道菜在筛选里会漏掉 —— 加菜时记得看一眼。
+  function regionMatches(dish) {
+    if (state.region === 'all') { return true; }
+    if (!dish.region || !dish.region.zh) { return false; }
+    return dish.region.zh.indexOf(state.region) === 0;
+  }
+
+  // 当前的筛选 + 当前的关键词，取交集之后的结果
+  function currentMatches() {
+    var query = el.input.value.trim();
+    var byQuery = query ? findMatches(query) : state.dishes;
+    return byQuery.filter(regionMatches);
+  }
+
+  // 把 state.region 同步到按钮上。
+  // aria-pressed 不只是给读屏用的 —— 样式也靠它选中，
+  // 这样"看起来选中的那个"和"读屏读到的那个"不可能对不上。
+  function syncFilterButtons() {
+    el.filterBtns.forEach(function (btn) {
+      var on = btn.getAttribute('data-region') === state.region;
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  function setRegion(region) {
+    state.region = region || 'all';
+    syncFilterButtons();
+    refreshList();
+  }
+
+  // 按当前条件重画列表。只有"成功 / 无结果"归它管：
+  // 加载中、读取失败这两态数据还没到手，筛了也没意义，直接不动。
+  function refreshList() {
+    if (state.listState === 'loading' || state.listState === 'error') { return; }
+    if (state.dishes.length === 0) { return; }
+
+    var list = currentMatches();
+
+    if (list.length === 0) {
+      el.dishList.innerHTML = '';
+      applyState('empty', { query: el.input.value.trim(), region: state.region });
+      return;
+    }
+
+    renderDishList(list);
+    applyState('success');
+    showFilterHint(list.length);
+  }
+
+  // 反馈层：让用户知道"现在筛的是什么、还剩几道"。
+  // 复用现成的提示条，不新增元素 —— 页面上的反馈渠道越少，越看得懂。
+  function showFilterHint(count) {
+    var query = el.input.value.trim();
+    if (state.region === 'all' && !query) { hideHint(); return; }
+
+    var desc = '';
+    if (state.region !== 'all') { desc = '地区「' + state.region + '」'; }
+    if (query) {
+      desc = desc ? desc + ' + 关键词「' + query + '」' : '关键词「' + query + '」';
+    }
+
+    showHint('当前条件：' + desc + ' → ' + count + ' 道 · ' +
+             count + (count === 1 ? ' result' : ' results'));
   }
 
   /* ---------------------------------------------------------
@@ -451,7 +555,10 @@
     event.preventDefault();
 
     var query = el.input.value.trim();
+
+    // 空关键词：如果此刻有筛选在生效，那就不是"输错了"，而是「把筛选结果给我看」
     if (!query) {
+      if (state.region !== 'all') { refreshList(); return; }
       showHint('请输入菜名，例如：螺蛳粉 / Luosifen');
       return;
     }
@@ -466,33 +573,28 @@
       return;
     }
 
-    var matches = findMatches(query);
+    var matches = currentMatches();   // Day 12：先把筛选与关键词取交集
 
-    // 恰好一道 → 直接进卡片
-    if (matches.length === 1) {
+    // 没按地区筛、又恰好只有一道 → 直接进卡片（Day 1–11 一直有的顺手路径，不动它）。
+    // 有筛选时不跳：用户正看着某个地区的子集，跳走会把这个上下文丢掉。
+    if (matches.length === 1 && state.region === 'all') {
       hideHint();
       openDish(matches[0].id);
       return;
     }
 
-    // 命中多道 → 只显示这几道
-    if (matches.length > 1) {
-      showHint('找到 ' + matches.length + ' 道与「' + query + '」相关的美食 · ' +
-               matches.length + ' results for “' + query + '”');
-      renderDishList(matches);
-      applyState('success');
-      return;
-    }
-
-    // 一道都没命中 → 走"无结果"状态（不再是页面顶上的一行小字）
-    hideHint();
-    el.dishList.innerHTML = '';
-    applyState('empty', { query: query });
+    // 其余情况（多道 / 有筛选 / 一道都没命中）统一交给 refreshList：
+    // 选状态、画列表、给提示都只有一个出口，三种状态就不会互相打架
+    refreshList();
   }
 
-  // 「看看已收录的」：清空搜索框，回到完整列表
+  // 「看看已收录的」：把筛选和关键词一起清掉，回到完整列表。
+  // Day 12：空态必须能一键回到全量 —— 只清搜索框却留着筛选，
+  // 用户会觉得"我点了怎么还是这些"，那空态就成了死胡同。
   function showAllDishes() {
     el.input.value = '';
+    state.region = 'all';
+    syncFilterButtons();
     hideHint();
     if (state.dishes.length === 0) { return; }
     renderDishList(state.dishes);

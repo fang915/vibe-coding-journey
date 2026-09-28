@@ -222,6 +222,53 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   border-radius: 8px;
 }
 
+/* ---------- 地区筛选（Day 12） ---------- */
+
+/* 与搜索框共用同一条中心线（Day 10 定下的"上下一律居中"节奏）。
+   这里刻意不给 max-width：六个胶囊排成一行才是它该有的样子 ——
+   跟着搜索框限死 640 会把「天津」挤到第二行孤零零待着（真踩过）。 */
+.filter-bar{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-2);
+  margin: var(--sp-3) auto 0;
+}
+
+/* 描边胶囊按钮：识别形状靠 --line-strong，与 .state-btn / .back 同一套视觉语言 */
+.filter-btn{
+  padding: var(--sp-2) var(--sp-4);
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+.filter-btn .en{
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.filter-btn:hover{ background: var(--bg); }
+
+/* 选中态：除了换色，还加粗 + 底部压一条实线 ——
+   颜色之外另有两条线索，色觉障碍用户也能分辨（WCAG 1.4.1）。
+   而"谁选中了"这件事，样式和读屏读的都是同一个 aria-pressed，
+   两边不可能对不上（Day 12 技能库判据⑤的依据）。 */
+.filter-btn[aria-pressed="true"]{
+  color: var(--brand-ink);
+  background: var(--brand-bg);
+  border-color: var(--brand);
+  font-weight: 500;
+  box-shadow: inset 0 -3px 0 var(--brand);
+}
+
+.filter-btn[aria-pressed="true"] .en{ color: var(--brand-ink); }
+
 /* ---------- 收录列表 ---------- */
 
 .section-title{

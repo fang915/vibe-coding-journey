@@ -9,7 +9,7 @@
        浏览器会把 ?v=… 不同的地址当成「新文件」去取，
        避免改完样式却因为缓存看不到变化（我们为此排查过一轮）。
        以后每次改 css/style.css，把这里的日期改掉即可。 -->
-  <link rel="stylesheet" href="css/style.css?v=20260927d">
+  <link rel="stylesheet" href="css/style.css?v=20260928b">
 </head>
 <body>
 
@@ -58,7 +58,33 @@
         <button type="submit">搜索 Search</button>
       </form>
 
-      <!-- 提示条：命中别名/错别字、或"暂未收录"时显示 -->
+      <!-- 地区筛选（Day 12）。
+           六个按钮静态写在 HTML 里 —— 地区就这几个，交给 JS 生成反而多一层
+           看不出来的东西（Day 8 的教训：能静态就别动态）。
+           选中态用 aria-pressed 表达：样式靠它选、读屏也读它，两边不可能对不上。 -->
+      <div id="region-filter" class="filter-bar" role="group"
+           aria-label="按地区筛选 · Filter by region">
+        <button type="button" class="filter-btn" data-region="all" aria-pressed="true">
+          全部 <span class="en">All</span>
+        </button>
+        <button type="button" class="filter-btn" data-region="广西" aria-pressed="false">
+          广西 <span class="en">Guangxi</span>
+        </button>
+        <button type="button" class="filter-btn" data-region="甘肃" aria-pressed="false">
+          甘肃 <span class="en">Gansu</span>
+        </button>
+        <button type="button" class="filter-btn" data-region="福建" aria-pressed="false">
+          福建 <span class="en">Fujian</span>
+        </button>
+        <button type="button" class="filter-btn" data-region="云南" aria-pressed="false">
+          云南 <span class="en">Yunnan</span>
+        </button>
+        <button type="button" class="filter-btn" data-region="天津" aria-pressed="false">
+          天津 <span class="en">Tianjin</span>
+        </button>
+      </div>
+
+      <!-- 提示条：命中别名/错别字、"暂未收录"、或当前筛选条件 -->
       <p id="search-hint" class="hint" hidden></p>
 
       <!-- 状态：加载中（骨架屏。先占住位置，数据到了才不会跳一下） -->
@@ -240,8 +266,8 @@
        教训来自 Day 9 —— 当时只给 CSS 加了版本号、JS 没加，
        结果浏览器重新取了新样式、却还在用缓存的旧脚本，页面处在"半新"状态，
        现象是"明明改了却没变化"，排查了很久。规则：改哪个文件，就动它那条版本号。 -->
-  <script src="js/data-source.js?v=20260927d"></script>
-  <script src="js/app.js?v=20260927d"></script>
+  <script src="js/data-source.js?v=20260928b"></script>
+  <script src="js/app.js?v=20260928b"></script>
 
 </body>
 </html>
