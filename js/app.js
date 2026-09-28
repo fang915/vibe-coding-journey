@@ -2,11 +2,12 @@
    寻味 / Xunwei —— 前端逻辑（Day 8：补齐四种页面状态）
    技术约束（见 TECH_DESIGN.md §2）：原生 JavaScript，无框架、无依赖。
 
-   这个文件做四件事：
+   这个文件做五件事：
      1. 让 js/data-source.js 把数据取回来（数据从哪来，这里不管）
      2. 按用户输入的关键词找出匹配的美食
      3. 把结果画到页面上（检索视图 / 文化卡片视图）
      4. 监听滚动，决定"回到顶部"按钮什么时候出现（Day 10 新增）
+     5. 详情页的"复制名称与链接"，并给四重反馈（Day 11 新增）
 
    ⚠️ 四种页面状态（Day 8 的正题）——同一时刻只亮一个，切换一律走 applyState()：
      success  成功   —— 列表 / 卡片正常显示
@@ -22,7 +23,8 @@
   var state = {
     dishes: [],          // 全部美食
     loaded: false,       // 数据是否已经成功读进来
-    listState: 'loading' // 列表区当前是四种状态里的哪一种
+    listState: 'loading',// 列表区当前是四种状态里的哪一种
+    currentDish: null    // 详情页正在看的那一道（Day 11：复制按钮要知道复制的是哪道菜）
   };
 
   // 页面上要反复用到的元素，统一在 init 里取一次
@@ -43,6 +45,12 @@
     el.dishList    = document.getElementById('dish-list');
     el.backBtn     = document.getElementById('back-btn');
     el.toTop       = document.getElementById('to-top');   // Day 10
+
+    // Day 11：复制按钮 + 它的读屏播报区
+    el.copyBtn     = document.getElementById('copy-btn');
+    el.copyLabel   = document.getElementById('copy-label');
+    el.copyLabelEn = document.getElementById('copy-label-en');
+    el.copyLive    = document.getElementById('copy-live');
 
     // 三种"非正常"状态的容器
     el.stateLoading   = document.getElementById('state-loading');
@@ -76,6 +84,7 @@
 
     el.form.addEventListener('submit', onSubmit);
     el.backBtn.addEventListener('click', showSearchView);
+    el.copyBtn.addEventListener('click', copyCardLink);         // Day 11：复制并反馈
     el.retryBtn.addEventListener('click', loadDishes);          // 失败 → 重试
     el.stateEmptyAll.addEventListener('click', showAllDishes);  // 没搜到 → 看全部
 
@@ -254,6 +263,8 @@
       showHint('没找到这道菜的数据。');
       return;
     }
+    state.currentDish = dish;   // Day 11：复制按钮要知道复制的是哪一道
+    resetCopy();                // 换了一道菜，按钮先复位成默认样子
     renderCard(dish);
     el.searchView.hidden = true;
     el.cardView.hidden = false;
@@ -489,6 +500,8 @@
   }
 
   function showSearchView() {
+    state.currentDish = null;   // Day 11：离开详情页就把复制目标清掉
+    resetCopy();                // 免得"已复制"残留到下次进详情时还亮着
     el.cardView.hidden = true;
     el.searchView.hidden = false;
     window.scrollTo(0, 0);
@@ -524,6 +537,142 @@
     var reduce = window.matchMedia &&
                  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  }
+
+  /* ---------------------------------------------------------
+     7. 复制名称与链接（Day 11 新增）
+
+     为什么挑这个做：它是全站第一个「确认式」反馈。
+     前面所有交互的反馈都是"环境变了"——页面切走、内容变多、位置移动，
+     用户得自己对比前后才敢确认；而这里，**按钮自己变了样**，
+     因果锁在眼皮底下，不需要对比。
+     四种反馈同时给（正是今天的正题要比的四个动作）：
+       ① 文案   复制名称与链接 → 已复制，可直接粘贴
+       ② 视觉   实心品牌红 → 实心墨绿（整块换色）
+       ③ 动效   轻微弹一下
+       ④ 读屏   播报"已复制：菜名"
+     --------------------------------------------------------- */
+
+  /* 状态亮着多久后自动复位。取 1800ms：
+     要够人读完"已复制，可直接粘贴"，又不能长到让人以为按钮坏了。 */
+  var COPY_RESET_MS = 1800;
+
+  // 当前的复位定时器。★ 全局只留一个 —— 原因见 setCopyState 里的说明
+  var copyResetTimer = null;
+
+  /* 要复制进剪贴板的文字。
+     目前网站没有"每道菜一个网址"（没做路由），所以链接复制的是本站首页。
+     这是诚实的做法：宁可能力小一点，也不复制一个点开打不开的假链接。
+     等以后加了路由（比如 #dish-luosifen），改这一个函数即可，别处不用动。 */
+  function copyText(dish) {
+    var zh  = dish.name ? dish.name.zh : '';
+    var en  = dish.name ? dish.name.en : '';
+    var url = window.location.origin + window.location.pathname;
+    return zh + ' · ' + en + '\n' + url;
+  }
+
+  /* 真正去写剪贴板。
+     两套方案是有必要的：navigator.clipboard 只在"安全上下文"里存在 ——
+     https 或 localhost 有；哪天用 file:// 双击打开 index.html，它就没有。
+     那条兜底能让人照样复制得动。 */
+  function writeClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+
+    return new Promise(function (resolve, reject) {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';    // 移出画面即可，别用 display:none —— 那样根本选不中
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = document.execCommand('copy');   // 老办法，新浏览器仍然支持
+        document.body.removeChild(ta);
+        if (ok) { resolve(); } else { reject(new Error('execCommand 返回 false')); }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  function currentDishName() {
+    var dish = state.currentDish;
+    if (!dish || !dish.name) { return ''; }
+    return dish.name.zh + ' ' + dish.name.en;
+  }
+
+  // 点一下按钮：复制 → 按结果切到"已复制"或"复制失败"
+  function copyCardLink() {
+    var dish = state.currentDish;
+    if (!dish) { return; }
+
+    writeClipboard(copyText(dish)).then(
+      function () { setCopyState('copied'); },
+      function () { setCopyState('failed'); }
+    );
+  }
+
+  /* 按钮的三种样子：default / copied / failed。
+     文案、配色、播报全在这一个地方改 —— 集中在一处，
+     是为了板块③ 连着点十次时，状态不会出现两套说法。 */
+  function setCopyState(kind) {
+    // 先摘掉两个状态类，避免"上次失败"的颜色残留到"这次成功"上
+    el.copyBtn.classList.remove('is-copied', 'is-failed');
+
+    /* 读一次布局，逼浏览器立刻结算上面那次删除。
+       不读这一下，紧接着加回同一个类名时，浏览器会认为"样式没变"，
+       弹跳动画就不会重播 —— 现象是：连着点第二次没有动效。
+       （只是读宽度，不会让页面闪。） */
+    void el.copyBtn.offsetWidth;
+
+    if (kind === 'copied') {
+      el.copyBtn.classList.add('is-copied');
+      el.copyLabel.textContent   = '已复制，可直接粘贴';
+      el.copyLabelEn.textContent = 'Copied';
+      announce('已复制：' + currentDishName());
+    } else if (kind === 'failed') {
+      el.copyBtn.classList.add('is-failed');
+      el.copyLabel.textContent   = '复制失败，请手动选中';
+      el.copyLabelEn.textContent = 'Copy failed';
+      announce('复制失败，请手动选中上面的文字复制');
+    } else {
+      el.copyLabel.textContent   = '复制名称与链接';
+      el.copyLabelEn.textContent = 'Copy name & link';
+      announce('');
+    }
+
+    /* 定时复位。
+       ★ 关键：一定先清掉上一个定时器再设新的。
+       不然连点 5 次会留下 5 个定时器，最早那个到点就把状态抹掉，
+       用户看到的现象是"已复制"一闪就没了 —— 这正是板块③ 要测的东西。 */
+    if (copyResetTimer) {
+      clearTimeout(copyResetTimer);
+      copyResetTimer = null;
+    }
+    if (kind !== 'default') {
+      copyResetTimer = setTimeout(function () { setCopyState('default'); }, COPY_RESET_MS);
+    }
+  }
+
+  /* 读屏播报区。
+     先清空、下一帧再写入：连点两次时文案一字不差，
+     屏幕阅读器会认为"内容没变"而不重念；中间空一拍，它才会当成新消息播报。 */
+  function announce(text) {
+    el.copyLive.textContent = '';
+    if (!text) { return; }
+    window.requestAnimationFrame(function () {
+      el.copyLive.textContent = text;
+    });
+  }
+
+  /* 换菜 / 回列表时复位。
+     注意这里也顺手清掉了待执行的定时器 ——
+     否则"上一道菜的复位闹钟"会在下一道菜上把状态抹掉。 */
+  function resetCopy() {
+    setCopyState('default');
   }
 
 })();

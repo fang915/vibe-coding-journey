@@ -9,7 +9,7 @@
        浏览器会把 ?v=… 不同的地址当成「新文件」去取，
        避免改完样式却因为缓存看不到变化（我们为此排查过一轮）。
        以后每次改 css/style.css，把这里的日期改掉即可。 -->
-  <link rel="stylesheet" href="css/style.css?v=20260927c">
+  <link rel="stylesheet" href="css/style.css?v=20260927d">
 </head>
 <body>
 
@@ -155,6 +155,26 @@
           <h2 id="card-name-zh">菜名</h2>
           <p id="card-name-en" class="name-en"></p>
           <p id="card-meta" class="meta"></p>
+
+          <!-- Day 11：复制按钮 —— 本日那个「有反馈的交互」。
+               为什么放在卡片头部：它是这张卡片上唯一的"主动作"，
+               贴在菜名下面，看完名字顺手就能复制，不必滚到底。
+               按钮会同时给四种反馈（逻辑见 js/app.js 的 setCopyState）：
+                 ① 文案  复制名称与链接 → 已复制，可直接粘贴
+                 ② 视觉  实心品牌红 → 实心墨绿
+                 ③ 动效  轻微弹一下（系统开了"减少动态效果"就不弹）
+                 ④ 读屏  播报"已复制：菜名"（靠下面那个视觉隐藏的 live 区域） -->
+          <div class="card-actions">
+            <button id="copy-btn" class="copy-btn" type="button">
+              <span id="copy-label">复制名称与链接</span>
+              <span id="copy-label-en" class="en">Copy name &amp; link</span>
+            </button>
+
+            <!-- 读屏专用播报区：视觉上看不见，但屏幕阅读器会念出里面的字，
+                 所以"已经复制好了"这件事，看不见屏幕的用户也能知道。
+                 role="status" + aria-live="polite" = 等用户手头的操作停下来再念，不打断他。 -->
+            <span id="copy-live" class="sr-only" role="status" aria-live="polite"></span>
+          </div>
         </header>
 
         <!-- 美食图。数据里配了 image 才显示（Day 9 补内容时新增）。
@@ -220,8 +240,8 @@
        教训来自 Day 9 —— 当时只给 CSS 加了版本号、JS 没加，
        结果浏览器重新取了新样式、却还在用缓存的旧脚本，页面处在"半新"状态，
        现象是"明明改了却没变化"，排查了很久。规则：改哪个文件，就动它那条版本号。 -->
-  <script src="js/data-source.js?v=20260927c"></script>
-  <script src="js/app.js?v=20260927c"></script>
+  <script src="js/data-source.js?v=20260927d"></script>
+  <script src="js/app.js?v=20260927d"></script>
 
 </body>
 </html>
