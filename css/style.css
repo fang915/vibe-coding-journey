@@ -269,6 +269,51 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 
 .filter-btn[aria-pressed="true"] .en{ color: var(--brand-ink); }
 
+/* ---------- 目录页入口（Day 13） ---------- */
+
+/* 放在搜索框下面一行，与它共用同一条中心线（沿用 Day 10 定下的"上下一律居中"节奏）。
+   刻意做成一行文字而不是第二个按钮：搜索是这个页面的主行动，
+   按钮再来一个会跟它抢注意力，"逛"应该比"搜"轻一档。 */
+.browse-link{
+  max-width: 640px;
+  margin: var(--sp-3) auto 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.browse-link a{ color: var(--brand-ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* ---------- 面包屑（Day 13） ---------- */
+
+/* 三个视图可寻址之后，页面有了层级（首页 → 收录地区 → 某地区 → 某道菜）。
+   面包屑就是那条"我在哪、怎么上去"的线索，所以它是导航、不是内容：
+   字号小一档、颜色轻一档，不跟正文抢。
+   每一级都能点 → "返回上一级"不用另做按钮，URL 就是层级本身。 */
+.breadcrumb{
+  margin: 0 auto var(--sp-5);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.breadcrumb a{
+  color: var(--brand-ink);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover{ text-decoration: underline; }
+
+/* 分隔符「›」用 aria-hidden 藏在读屏之外（HTML 那边处理）：
+   它只是视觉分隔，念出来是噪音。 */
+.breadcrumb .crumb-sep{ margin: 0 var(--sp-2); color: var(--ink-faint); }
+
+/* 当前页：颜色回到正文色 + 加粗。★ 不用"变淡"来表达"这是当前页"——
+   面包屑里淡色通常读作"不可点"，两者会混淆。
+   同时也标了 aria-current="page"，读屏读到的和眼睛看到的是同一件事。 */
+.breadcrumb .crumb-current{ color: var(--ink); font-weight: 500; }
+
+.breadcrumb .en{ font-size: 12px; }
+
 /* ---------- 收录列表 ---------- */
 
 .section-title{
@@ -442,6 +487,120 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   border-color: #e3cfc8;
   background: #fdf7f4;
 }
+
+/* ---------- 地区索引视图（Day 13 新增） ---------- */
+
+.region-lead{
+  margin: var(--sp-2) 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* 卡片视图的加载骨架（Day 13 板块③）。
+   卡片视图没有"一排 5 张"的形状，所以不复用 .skeleton 那套 5 列骨架，
+   而是画成"一条粗标题 + 两条正文"的正在写字的样子 ——
+   骨架的意义是"预演即将出现的形状"，形状对不上就成了干扰。 */
+.skeleton-card{ margin-top: var(--sp-4); }
+
+.skeleton-line{
+  display: block;
+  height: 14px;
+  margin-top: var(--sp-3);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f2efec 25%, #e8e2dc 37%, #f2efec 63%);
+  background-size: 400% 100%;
+  animation: skeleton-breathe 1.4s ease-in-out infinite;
+}
+
+.skeleton-line.lg{ height: 28px; width: 46%; margin-top: 0; }
+.skeleton-line.sm{ width: 62%; }
+
+/* 一个地理分区 = 小标题 + 一组地区卡片 */
+.region-group{ margin-top: var(--sp-6); }
+
+/* 小标题底下压一条细线：把"这一组到哪里为止"说清楚。
+   线是装饰，所以用 --line（Day 9 定的分工：--line-strong 只给控件边界用）。 */
+.region-group-title{
+  margin: 0 0 var(--sp-3);
+  padding-bottom: var(--sp-2);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.region-group-title .en{
+  margin-left: var(--sp-1);
+  font-size: 11.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* 列数与 .dish-list 一致（桌面 5 列、窄屏 2 列）：
+   两屏卡片的节奏一样，切换视图时视觉不会跳。 */
+.region-list{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--sp-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 与 .dish-list > li 同样的道理：让格子变成弹性容器，
+   里面的按钮才会被拉满整格高度，"已收录几道"那一行才能横着对齐。 */
+.region-list > li{ display: flex; }
+
+/* 与 .dish-entry 同一套视觉语言（白底 + 细描边 + 阴影 = 可点的小盒子），
+   但更矮：这里只要"名字 + 收录数"，没有缩略图，也没有长英文名。 */
+.region-card{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .15s, border-color .15s;
+}
+
+.region-card:hover{
+  transform: translateY(-2px);
+  border-color: var(--brand);
+}
+
+.region-card .zh{ font-size: 16px; font-weight: 600; }
+.region-card .en{ font-size: 12px; line-height: 1.4; }
+
+/* 收录数贴底：同一行里"地区名长短不一、英文名一行两行不一"，
+   靠 margin-top:auto 把这一行统一推到格子底部，横向对齐。
+   （与 Day 10 修卡片高度用的是同一招） */
+.region-card .region-count{
+  margin-top: auto;
+  padding-top: var(--sp-1);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* 还没收录的地区：不藏起来 —— "哪里还没有"本身就是信息。
+   靠"虚线边 + 无阴影 + 浅字"与已收录的区分，但仍然是可点按钮
+   （点了给一句话说明），不是灰掉的失效控件。
+   ★ 不是只靠颜色区分：虚线/实线、有阴影/无阴影，形状上也不同（WCAG 1.4.1）。 */
+.region-card.is-empty{
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.region-card.is-empty .zh{ color: var(--ink-soft); font-weight: 500; }
 
 /* ---------- 文化卡片 ---------- */
 
@@ -779,6 +938,7 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 @media (max-width: 900px){
   .site-header, main, .site-footer{ padding-left: calc(var(--gutter) / 2); padding-right: calc(var(--gutter) / 2); }
   .dish-list{ grid-template-columns: repeat(2, 1fr); }
+  .region-list{ grid-template-columns: repeat(2, 1fr); }   /* Day 13：与列表保持一致 */
   .skeleton{ grid-template-columns: repeat(2, 1fr); }
   .card{ padding: var(--sp-5); }
 }
@@ -811,4 +971,5 @@ button:focus-visible{
   .to-top:not([hidden]){ animation: none; }
   .copy-btn{ transition: none; }
   .copy-btn.is-copied{ animation: none; }  /* Day 11：不弹了，但底色照样翻 —— 反馈不丢，只是不晃 */
+  .region-card{ transition: none; }        /* Day 13：卡片同样不再上浮 */
 }

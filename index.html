@@ -9,7 +9,7 @@
        浏览器会把 ?v=… 不同的地址当成「新文件」去取，
        避免改完样式却因为缓存看不到变化（我们为此排查过一轮）。
        以后每次改 css/style.css，把这里的日期改掉即可。 -->
-  <link rel="stylesheet" href="css/style.css?v=20260928b">
+  <link rel="stylesheet" href="css/style.css?v=20260929b">
 </head>
 <body>
 
@@ -31,6 +31,14 @@
   </header>
 
   <main>
+
+    <!-- Day 13：面包屑。三个视图变成"可寻址"之后，页面就有了层级
+         （首页 → 收录地区 → 某地区 → 某道菜），需要一条"我在哪、怎么上去"的线索。
+         内容由 js/app.js 的 renderBreadcrumb() 生成，首页（#/）上它整体隐藏。
+         里面的链接就是普通的 <a href="#/…">：点它浏览器自己改 hash、
+         再触发一次路由，不需要额外绑事件。 -->
+    <nav id="breadcrumb" class="breadcrumb view"
+         aria-label="当前位置 · Breadcrumb" hidden></nav>
 
     <!-- ===================== 视图一：检索 ===================== -->
     <!--
@@ -57,6 +65,16 @@
           placeholder="输入菜名，如：螺蛳粉 / Luosifen">
         <button type="submit">搜索 Search</button>
       </form>
+
+      <!-- Day 13：通往"地区索引"这个目录页的入口。
+           搜索框解决"我知道要找什么"，这一条解决"我先看看你们都有什么"——
+           两种意图，所以两条路径并存。三个视图互相走得通，
+           "多级切换"才算真的成立。 -->
+      <p class="browse-link">
+        <a href="#/regions">还不知道想吃什么？按地区浏览 34 个地区
+          <span class="en">· Browse by region</span>
+        </a>
+      </p>
 
       <!-- 地区筛选（Day 12）。
            六个按钮静态写在 HTML 里 —— 地区就这几个，交给 JS 生成反而多一层
@@ -88,7 +106,7 @@
       <p id="search-hint" class="hint" hidden></p>
 
       <!-- 状态：加载中（骨架屏。先占住位置，数据到了才不会跳一下） -->
-      <div id="state-loading" class="state state-loading" hidden aria-busy="true">
+      <div id="state-loading" class="state state-loading" data-state="loading" hidden aria-busy="true">
         <p class="state-text">
           正在读取美食资料…<span class="en">· Loading dishes…</span>
         </p>
@@ -100,8 +118,8 @@
       </div>
 
       <!-- 状态：无结果（搜索没命中） -->
-      <div id="state-empty" class="state state-empty" hidden aria-live="polite">
-        <p class="state-title">
+      <div id="state-empty" class="state state-empty" data-state="empty" hidden aria-live="polite">
+        <p class="state-title" id="state-empty-title">
           没找到这道菜<span class="en">· Nothing found</span>
         </p>
         <p id="state-empty-text" class="state-text">
@@ -113,7 +131,7 @@
       </div>
 
       <!-- 状态：加载失败（读不到数据） -->
-      <div id="state-error" class="state state-error" hidden aria-live="assertive">
+      <div id="state-error" class="state state-error" data-state="error" hidden aria-live="assertive">
         <p class="state-title">
           资料没能读出来<span class="en">· Failed to load</span>
         </p>
@@ -125,12 +143,12 @@
         </button>
       </div>
 
-      <h2 id="list-title" class="section-title">已收录 · Included</h2>
+      <h2 id="list-title" class="section-title" data-state="content">已收录 · Included</h2>
 
       <!-- 列表由 js/app.js 依据 data/dishes.json 重建。
            下面这 5 个静态入口只在"脚本完全没跑起来"时才看得见（兜底），
            正常情况下取数刚开始就会被「加载中」状态顶掉。 -->
-      <ul id="dish-list" class="dish-list">
+      <ul id="dish-list" class="dish-list" data-state="content">
         <li>
           <button class="dish-entry" type="button" data-id="luosifen">
             <span class="zh">螺蛳粉</span>
@@ -170,12 +188,111 @@
 
     </section>
 
-    <!-- ===================== 视图二：文化卡片 ===================== -->
+    <!-- ===================== 视图二：地区索引（Day 13 新增） =====================
+         三个视图里唯一的"目录页"（一级）：
+         按七大地理分区 + 港澳台，列出 34 个省级行政区，各显示已收录几道。
+
+         ★ 这里只留一个空容器，内容全部由 js/app.js 的 renderRegionIndex() 生成。
+           原因：34 个地区 × 分区归属是一张静态表（写在 JS 里，属于"界面结构"），
+           把它誊一份到 HTML 里就等于同一个东西存两处 —— 改一处忘一处是迟早的事。
+           数据仍然是零新增：全站内容只有 data/dishes.json 一个来源，
+           这里显示的"已收录几道"是现算出来的。
+
+         ★ 港澳台单独成组，与内容计划的分批口径一致（批5），
+           名字一律写「中国香港 / 中国澳门 / 中国台湾」。 -->
+    <section id="region-view" class="view" hidden>
+
+      <h2 class="section-title">收录地区 · Regions</h2>
+
+      <p class="region-lead">
+        按地区翻一翻。灰色虚线的是还没收录的，我们正在逐一补齐。
+        <span class="en">Browse by region. Dashed ones are not covered yet — coming soon.</span>
+      </p>
+
+      <!-- 索引视图自己的提示条（比如点了还没收录的地区）。
+           为什么不在视图之间搬用同一条：两个视图的布局位置本来就不同，
+           搬来搬去要动 DOM 结构；这里各留一条，由 JS 按当前视图挑着写。 -->
+      <p id="region-hint" class="hint" hidden></p>
+
+      <!-- 索引视图的三块状态（Day 13 板块③：从"列表专用"升级为每个视图自带）。
+           与列表视图的三块长得一样、走同一套开关逻辑，只是文案不同 ——
+           "读美食资料"和"读地区资料"是同一份数据，但用户看的这一屏不一样，
+           文案就得跟着这一屏说话。 -->
+
+      <div id="region-state-loading" class="state state-loading" data-state="loading" hidden aria-busy="true">
+        <p class="state-text">
+          正在读取地区资料…<span class="en">· Loading regions…</span>
+        </p>
+        <ul class="skeleton" aria-hidden="true">
+          <li class="skeleton-row"></li>
+          <li class="skeleton-row"></li>
+          <li class="skeleton-row"></li>
+        </ul>
+      </div>
+
+      <div id="region-state-empty" class="state state-empty" data-state="empty" hidden aria-live="polite">
+        <p class="state-title">
+          这张目录还空着<span class="en">· Nothing listed yet</span>
+        </p>
+        <p class="state-text">
+          美食资料一条都没有，所以 34 个地区也没得可列。等数据补齐，这里会自己长出来。
+        </p>
+      </div>
+
+      <!-- 失败态必须给一条出路：这里放一个"重试"，直接复用取数函数 ——
+           没有出路的错误提示等于把用户关在死胡同里。 -->
+      <div id="region-state-error" class="state state-error" data-state="error" hidden aria-live="assertive">
+        <p class="state-title">
+          地区资料没能读出来<span class="en">· Failed to load</span>
+        </p>
+        <p class="state-text">
+          这张目录和首页看的是同一份资料，读不到就都读不到。点下面重试一次。
+        </p>
+        <button id="region-retry-btn" class="state-btn" type="button">
+          重试 · Retry
+        </button>
+      </div>
+
+      <div id="region-groups" data-state="content"></div>
+
+    </section>
+
+    <!-- ===================== 视图三：文化卡片 ===================== -->
     <section id="card-view" class="view" hidden>
 
       <button id="back-btn" class="back" type="button">← 返回 / Back</button>
 
-      <article class="card">
+      <!-- 卡片视图的两块状态（Day 13 板块③）。
+           为什么卡片也得有：直接打开 #/dish/xxx 时数据还没到手，
+           原先的做法是把视图偷偷换成列表 —— 于是出现"地址栏和面包屑说在卡片页、
+           画面却是列表"的矛盾。现在让卡片视图自己说"正在读"，
+           地址、面包屑、画面三者才是一致的。
+           没有"无结果"这一态：一张卡不存在，就是地址里的 id 不对，
+           那种情况由路由统一挡回首页并说明，不放一个空壳卡片在这儿骗人。 -->
+      <div id="card-state-loading" class="state state-loading" data-state="loading" hidden aria-busy="true">
+        <p class="state-text">
+          正在读取这张卡片…<span class="en">· Loading card…</span>
+        </p>
+        <div class="skeleton-card" aria-hidden="true">
+          <span class="skeleton-line lg"></span>
+          <span class="skeleton-line"></span>
+          <span class="skeleton-line sm"></span>
+        </div>
+      </div>
+
+      <div id="card-state-error" class="state state-error" data-state="error" hidden aria-live="assertive">
+        <p class="state-title">
+          这张卡片没能读出来<span class="en">· Failed to load</span>
+        </p>
+        <p class="state-text">
+          卡片和首页看的是同一份资料，资料读不到就画不出来。点下面重试一次。
+        </p>
+        <button id="card-retry-btn" class="state-btn" type="button">
+          重试 · Retry
+        </button>
+      </div>
+
+      <article class="card" data-state="content">
 
         <header class="card-head">
           <h2 id="card-name-zh">菜名</h2>
@@ -266,8 +383,12 @@
        教训来自 Day 9 —— 当时只给 CSS 加了版本号、JS 没加，
        结果浏览器重新取了新样式、却还在用缓存的旧脚本，页面处在"半新"状态，
        现象是"明明改了却没变化"，排查了很久。规则：改哪个文件，就动它那条版本号。 -->
-  <script src="js/data-source.js?v=20260928b"></script>
-  <script src="js/app.js?v=20260928b"></script>
+  <script src="js/data-source.js?v=20260929b"></script>
+  <!-- Day 13：路由脚本必须排在 app.js 前面 —— app.js 一执行（还在 DOMContentLoaded
+       之前）就要用 Router.parse() 决定先露哪个视图，好消掉"直接打开
+       #/regions 却先闪一下检索列表"。 -->
+  <script src="js/router.js?v=20260929b"></script>
+  <script src="js/app.js?v=20260929b"></script>
 
 </body>
 </html>
