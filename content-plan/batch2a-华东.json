@@ -1,0 +1,428 @@
+[
+  {
+    "id": "xiaolongbao",
+    "status": "published",
+    "name": {
+      "zh": "小笼包（南翔小笼馒头）",
+      "en": "Xiaolongbao (Nanxiang Steamed Soup Buns)"
+    },
+    "aliases": [
+      "小笼包",
+      "小笼馒头",
+      "南翔小笼",
+      "南翔小笼馒头",
+      "上海小笼",
+      "鲜肉小笼",
+      "蟹粉小笼",
+      "汤包",
+      "xiaolongbao",
+      "xiaolong mantou",
+      "nanxiang steamed buns",
+      "soup dumplings"
+    ],
+    "region": {
+      "zh": "上海",
+      "en": "Shanghai"
+    },
+    "tagline": {
+      "zh": "上海人叫它「小笼馒头」——十八个折褶，包住一口汤。",
+      "en": "Shanghai calls it \"xiaolong mantou\" — eighteen pleats wrapped around a mouthful of soup."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "上海人俗称的「小笼馒头」并不是北方人所指的馒头，而是有馅的包子[[ihchina-nanxiang]]。这一传统面食制作技艺发源于上海市嘉定区南翔镇，后又发展到了上海市城隍庙地区，目前遍布上海市乃至江南地区[[ihchina-nanxiang]]。\n\n1871 年（清同治十年），南翔镇日华轩点心店主黄明贤对流行当地的大肉馒头做了「重馅薄皮，以大改小」的改良，这是南翔小笼馒头制作技艺的最初形态[[ihchina-nanxiang]]。1900 年，上海城隍庙开设南翔小笼馒头店，从此南翔小笼馒头声名远扬[[ihchina-nanxiang]]。\n\n2014 年，南翔小笼馒头制作技艺作为「传统面食制作技艺」的扩展项目，被列入第四批国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-160，申报地区或单位为上海市嘉定区[[ihchina-nanxiang]]。",
+        "en": "What Shanghai calls \"xiaolong mantou\" is not the plain steamed bun of the north but a filled bun [[ihchina-nanxiang]]. The craft originated in Nanxiang town, Jiading district, Shanghai, then spread to the City God Temple area and now across Shanghai and the whole Jiangnan region [[ihchina-nanxiang]].\n\nIn 1871 (the 10th year of Tongzhi in the Qing dynasty), Huang Mingxian, owner of the Rihuaxuan teahouse in Nanxiang, reworked the local large meat bun by \"thickening the filling and thinning the skin, turning large into small\" — the first form of the Nanxiang xiaolong mantou technique [[ihchina-nanxiang]]. In 1900 a Nanxiang xiaolong mantou shop opened at the City God Temple in Shanghai, and the name travelled [[ihchina-nanxiang]].\n\nIn 2014 the craft was added to China's fourth batch of national intangible cultural heritage as an extension of \"traditional wheaten food techniques\", item no. Ⅷ-160, declared by Jiading district, Shanghai [[ihchina-nanxiang]]."
+      },
+      "story": {
+        "zh": "这项技艺 140 多年来靠师徒相传，前后共传六代[[ihchina-nanxiang]]。1997 年，上海古猗园小笼餐厅的李建钢成为第六代传人；他在 2000 年制定了南翔小笼的制作标准和规范，2012 年成立李建钢工作室，2013 年在上海大众工业学校开设学习班，为这项技艺储备人才[[chinanews-nanxiang]]。\n\n吃小笼有一套流传很广的口诀：「轻轻提，慢慢移，先开窗，后喝汤」[[jiading-nanxiang]]。另一说更直白——「一口开天窗，二口喝汤，三口吃光」[[chinanews-nanxiang]]。\n\n如今南翔镇 30 余家小笼馆年销量近 2400 万只，200 多位匠人每天重复着同样的动作，蒸制时仍坚持使用手编草垫，这一微小细节一直沿用至今[[jiading-nanxiang]]。",
+        "en": "The craft has passed down through six generations of masters and apprentices over more than 140 years [[ihchina-nanxiang]]. In 1997 Li Jiangang of the xiaolongbao restaurant in Shanghai's Guyi Garden became the sixth-generation inheritor; he drew up production standards in 2000, founded a studio in 2012 and opened a training class at a Shanghai vocational school in 2013 [[chinanews-nanxiang]].\n\nThere is a well-known rhyme for eating them: \"lift gently, move slowly, open a window first, then drink the soup\" [[jiading-nanxiang]]. Another version is blunter — \"first bite a skylight, second sip the soup, third finish it off\" [[chinanews-nanxiang]].\n\nToday the more than 30 xiaolongbao shops in Nanxiang sell close to 24 million buns a year, with over 200 craftspeople repeating the same motions daily; they still steam them on hand-woven straw mats, a detail kept to this day [[jiading-nanxiang]]."
+      },
+      "technique": {
+        "zh": "南翔小笼馒头以皮薄、馅大、汁多、形美著称，采用不发酵的精面粉为皮，夹心腿肉为馅，并加入肉皮冻等调料调制而成[[ihchina-nanxiang]]。\n\n馅料以定点直供的猪前腿肉为主料，肥瘦配比为 3 比 7，加上 10 种辅料配置而成，馅料为秘制配方；面皮则以上等精白面粉加清水和成面团，通过手工制胚[[ihchina-nanxiang]]。\n\n做工上有明确的规格标准：每只小笼面皮厚 1.5 毫米、重 8 克，包入肉馅 16 克，捏出 18 个折褶[[ihchina-nanxiang]]。上笼蒸时严格控温、控时，根据温度调整 3 到 10 层的笼屉高度，出笼时方可晶莹剔透[[ihchina-nanxiang]]。从和面到烹蒸共 9 道工序，其中 8 道全手工完成[[jiading-nanxiang]]。\n\n主要品种为鲜肉小笼，近几年又开发出蟹粉小笼、虾仁小笼、干贝小笼和榨菜小笼[[ihchina-nanxiang]]。",
+        "en": "Nanxiang xiaolong mantou is known for thin skin, generous filling, abundant soup and elegant shape: an unleavened fine-flour wrapper holds minced pork leg with aspic and seasonings [[ihchina-nanxiang]].\n\nThe filling uses pork foreleg from designated suppliers, lean to fat at 3 to 7, with ten auxiliary ingredients and a secret recipe; the wrapper is top-grade flour kneaded with water and shaped by hand [[ihchina-nanxiang]].\n\nThe specifications are explicit: each wrapper is 1.5 mm thick and weighs 8 g, holds 16 g of filling and is pleated 18 times [[ihchina-nanxiang]]. Steaming temperature and time are strictly controlled, with the number of steamer tiers adjusted between 3 and 10 according to the heat, so that the buns come out translucent [[ihchina-nanxiang]]. From mixing dough to steaming there are nine steps, eight of them entirely by hand [[jiading-nanxiang]].\n\nThe main variety is fresh-pork; in recent years crab roe, shrimp, scallop and pickled-mustard versions have been added [[ihchina-nanxiang]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "南翔小笼馒头制作技艺于 2014 年以「传统面食制作技艺」扩展项目列入第四批国家级非物质文化遗产代表性项目名录：项目编号 Ⅷ-160，项目序号 943，类别传统技艺，申报地区或单位为上海市嘉定区，保护单位为上海南翔老街建设发展有限公司。",
+        "en": "The Nanxiang xiaolong mantou technique was added to China's fourth-batch national intangible cultural heritage list in 2014 as an extension of \"traditional wheaten food techniques\": item no. Ⅷ-160, sequence no. 943, category traditional craftsmanship, declared by Jiading district, Shanghai, and safeguarded by Shanghai Nanxiang Old Street Construction and Development Co., Ltd.",
+        "sources": [
+          "ihchina-nanxiang"
+        ]
+      },
+      {
+        "zh": "1871 年（清同治十年），南翔镇日华轩点心店主黄明贤以「重馅薄皮，以大改小」改良当地大肉馒头，是这项技艺的最初形态；1900 年上海城隍庙开设南翔小笼馒头店，从此声名远扬。",
+        "en": "In 1871 (the 10th year of Tongzhi), Huang Mingxian, owner of the Rihuaxuan teahouse in Nanxiang, reworked the local large meat bun with \"thicker filling, thinner skin, large made small\" — the earliest form of the craft. In 1900 a Nanxiang xiaolong mantou shop opened at Shanghai's City God Temple, and the name became famous.",
+        "sources": [
+          "ihchina-nanxiang"
+        ]
+      },
+      {
+        "zh": "工艺规格：每只面皮厚 1.5 毫米、重 8 克，包入肉馅 16 克，捏出 18 个折褶；馅料以猪前腿肉为主料，肥瘦配比 3 比 7，另加 10 种辅料。",
+        "en": "Specifications: each wrapper is 1.5 mm thick and weighs 8 g, takes 16 g of filling and is pleated 18 times; the filling is mainly pork foreleg at a lean-to-fat ratio of 3 to 7 plus ten auxiliary ingredients.",
+        "sources": [
+          "ihchina-nanxiang"
+        ]
+      },
+      {
+        "zh": "关于成品直径，公开资料口径不一：中国非物质文化遗产网记为「成品直径 2.5 厘米」，上海市嘉定区人民政府的报道记为「成品直径 3 厘米」；面皮 1.5 毫米、重 8 克、馅 16 克、18 个折褶这几项两处一致。",
+        "en": "Accounts differ on the finished diameter: the China Intangible Cultural Heritage website records 2.5 cm, while a report by the Jiading District People's Government gives 3 cm. The other figures — 1.5 mm skin, 8 g wrapper, 16 g filling, 18 pleats — agree.",
+        "sources": [
+          "ihchina-nanxiang",
+          "jiading-nanxiang"
+        ]
+      },
+      {
+        "zh": "这项技艺 140 多年来共传六代。1997 年李建钢成为第六代传人，2000 年制定了南翔小笼的制作标准和规范，2012 年成立李建钢工作室，2013 年在上海大众工业学校开设学习班。",
+        "en": "The craft has passed through six generations in over 140 years. Li Jiangang became the sixth-generation inheritor in 1997; he set production standards in 2000, founded the Li Jiangang Studio in 2012 and opened a training class at Shanghai Dazhong Industrial School in 2013.",
+        "sources": [
+          "chinanews-nanxiang",
+          "ihchina-nanxiang"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-nanxiang",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《传统面食制作技艺（南翔小笼馒头制作技艺）》项目页",
+        "url": "https://www.ihchina.cn/news_1_details/14647.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "jiading-nanxiang",
+        "title": "上海市嘉定区人民政府《十年深耕、滋味新生：南翔小笼的“变”与“守”》",
+        "url": "https://www.jiading.gov.cn/xinwen/ztbda/content_948526",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "chinanews-nanxiang",
+        "title": "中国新闻网《南翔小笼制作入选国家非遗 有143年历史》",
+        "url": "https://www.chinanews.com/cul/2014/08-14/6491770.shtml",
+        "accessed": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "fuchun-tea-dim-sum",
+    "status": "published",
+    "name": {
+      "zh": "扬州富春茶点",
+      "en": "Yangzhou Fuchun Tea and Dim Sum"
+    },
+    "aliases": [
+      "富春茶点",
+      "富春茶社",
+      "富春",
+      "魁龙珠",
+      "三丁包",
+      "三丁大包",
+      "翡翠烧卖",
+      "千层油糕",
+      "扬州早茶",
+      "扬州富春茶点制作技艺",
+      "fuchun tea house",
+      "yangzhou morning tea",
+      "kui long zhu",
+      "san ding bao"
+    ],
+    "region": {
+      "zh": "江苏扬州",
+      "en": "Yangzhou, Jiangsu"
+    },
+    "tagline": {
+      "zh": "一壶水煮三省茶，一笼点心吃了 140 年。",
+      "en": "One pot brews tea from three provinces; one steamer of dim sum has been served for 140 years."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "富春茶社创建于清代光绪十一年（1885），以独创的茶点制作技艺享誉国内[[ihchina-fuchun]]。2006 年 12 月，富春茶社被商业部认定为首批「中华老字号」[[ihchina-fuchun]]。\n\n它把花卉、茶艺、点心、菜肴结合在一起，让人在闲静雅致的环境中品赏色、香、味、形俱佳的美食[[ihchina-fuchun]]。富春「魁龙珠」茶系富春茶社独家创制，取浙江龙井之味、安徽魁针（太平猴魁绿茶）之色、福建珠兰之香，以扬子江水沏泡，谓之「一壶水煮三省茶」[[ihchina-fuchun]]。\n\n2008 年，茶点制作技艺（富春茶点制作技艺）被列入第二批国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-161，申报地区或单位为江苏省扬州市[[ihchina-fuchun]]。2022 年 11 月 29 日，「中国传统制茶技艺及其相关习俗」列入联合国教科文组织人类非物质文化遗产代表作名录，富春茶点制作技艺是其中 44 个子项目之一[[yangzhou-daj]][[mct-jiangsu]]。",
+        "en": "Fuchun Tea House was founded in 1885 (the 11th year of Guangxu in the Qing dynasty) and became known across China for its own tea-and-dim-sum craft [[ihchina-fuchun]]. In December 2006 it was named one of the first batch of \"China Time-honoured Brands\" by the Ministry of Commerce [[ihchina-fuchun]].\n\nIt brings flowers, tea craft, dim sum and cooked dishes together, so that guests can enjoy food excellent in colour, aroma, taste and form in a quiet, refined setting [[ihchina-fuchun]]. Fuchun's \"Kui Long Zhu\" tea is the house's own invention: the flavour of Zhejiang Longjing, the colour of Anhui Kuizhen (Taiping Houkui green tea) and the fragrance of Fujian zhulan, brewed with water from the Yangtze — hence \"one pot brews tea from three provinces\" [[ihchina-fuchun]].\n\nIn 2008 the tea-and-dim-sum craft (Fuchun tea and dim sum) was added to China's second-batch national intangible cultural heritage list, item no. Ⅷ-161, declared by Yangzhou, Jiangsu [[ihchina-fuchun]]. On 29 November 2022 \"traditional Chinese tea-making techniques and related practices\" was inscribed on UNESCO's Representative List of the Intangible Cultural Heritage of Humanity, with the Fuchun tea-and-dim-sum craft as one of its 44 sub-items [[yangzhou-daj]][[mct-jiangsu]]."
+      },
+      "story": {
+        "zh": "富春的起点不在茶，而在花。茶社最早以花局起家，后来以茶会友，再以点心待客——「富春创立之初，最早以花养局，后以茶会友，再以点飨客」[[chinanews-fuchun]]。\n\n自 1885 年创立至今，富春与扬州的城市发展、运河文化、民俗民风交织在一起；百余年连续发展经营，是富春茶社的一大特点[[yangzhou-daj]]。2025 年 11 月 19 日，富春茶社举行 140 周年庆典，同日《中国富春茶点志》首发，扬州市档案部门接收了富春集团捐赠的档案史料[[yangzhou-daj]]。\n\n对扬州人来说，「早上皮包水」就是日常：一壶魁龙珠、几笼点心，一顿早茶吃出「食不厌精」的匠人精神[[yangzhou-daj]]。富春点心被商业部认定为「中国名点」「中华名小吃」[[ihchina-fuchun]]；三丁包、蟹黄包、翡翠烧卖、千层油糕、大煮干丝、蟹粉狮子头等名点名菜多次荣获国内顶级大奖，被公认为淮扬菜点的正宗代表[[yangzhou-sw]]。",
+        "en": "Fuchun did not begin with tea but with flowers. The house started as a flower business, then welcomed guests over tea, and only afterwards served dim sum — \"at its founding Fuchun lived on flowers, then befriended people with tea, then treated them to dim sum\" [[chinanews-fuchun]].\n\nFrom 1885 to today, Fuchun has been woven into Yangzhou's urban growth, canal culture and folk customs; more than a century of unbroken operation is one of its defining features [[yangzhou-daj]]. On 19 November 2025 the house marked its 140th anniversary and launched The Annals of Chinese Fuchun Tea and Dim Sum, with the city archives receiving donated company records [[yangzhou-daj]].\n\nFor Yangzhou residents, \"soaking the skin in water in the morning\" — a pot of Kui Long Zhu and a few steamers — is simply daily life, a breakfast that embodies the craftsman's refusal to cut corners [[yangzhou-daj]]. Fuchun dim sum has been recognised by the Ministry of Commerce as \"famous Chinese pastry\" and \"famous Chinese snack\" [[ihchina-fuchun]]; its three-dice buns, crab-roe buns, jade shaomai, layered oil cake, shredded tofu and lion's head meatballs have won top national awards and are regarded as the authentic standard of Huaiyang pastry [[yangzhou-sw]]."
+      },
+      "technique": {
+        "zh": "富春点心采用传统方法手工制作，技艺精湛，造型雅致，品种繁多，各具滋味[[ihchina-fuchun]]。\n\n做包子的手法有专门的讲究：用酵要「手捺之不盈半寸，放松能挺然而高」，松软柔韧、恰到好处；成形的包子外形如鲫鱼嘴、荸荠鼓，褶皱达三十多道[[ihchina-xu]]。《中国富春茶点志》则记录了更细的非遗规范：三丁包讲「鲫鱼嘴、荸荠鼓、剪刀褶」，翡翠烧卖讲「皮薄透绿」，千层油糕讲数十层起酥[[yangzhou-daj]]。\n\n茶的功夫同样是一套工艺。魁龙珠由浙江龙井、安徽魁针与珠兰兑配窨制而成，古法为三次窨花、五次烘焙[[yangzhou-daj]]；三丁包、蟹黄包、翡翠烧卖、千层油糕等常年供应，另有随季节上市的时鲜品种[[yangzhou-sw]]。",
+        "en": "Fuchun dim sum is made by hand in traditional ways, with fine technique, elegant shapes, many varieties and distinct flavours [[ihchina-fuchun]].\n\nThe buns follow precise rules: the leavened dough must be soft yet springy — \"pressed down it sinks less than half an inch, released it stands tall again\" — and the finished bun has a crucian-carp mouth, a water-chestnut bulge and more than thirty pleats [[ihchina-xu]]. The Annals of Chinese Fuchun Tea and Dim Sum records even finer standards: the three-dice bun's \"carp mouth, water-chestnut bulge, scissor pleats\"; jade shaomai's \"thin skin showing the green through\"; the layered oil cake's dozens of pastry layers [[yangzhou-daj]].\n\nThe tea is equally a craft. Kui Long Zhu blends Zhejiang Longjing, Anhui Kuizhen and zhulan, classically by three rounds of scenting and five of roasting [[yangzhou-daj]]. Three-dice buns, crab-roe buns, jade shaomai and layered oil cake are available year-round, alongside seasonal varieties [[yangzhou-sw]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "茶点制作技艺（富春茶点制作技艺）于 2008 年列入第二批国家级非物质文化遗产代表性项目名录：项目编号 Ⅷ-161，项目序号 944，类别传统技艺，申报地区或单位为江苏省扬州市，保护单位为扬州富春饮服集团有限公司富春茶社。",
+        "en": "The tea-and-dim-sum craft (Fuchun tea and dim sum) entered China's second-batch national intangible cultural heritage list in 2008: item no. Ⅷ-161, sequence no. 944, category traditional craftsmanship, declared by Yangzhou, Jiangsu, and safeguarded by Yangzhou Fuchun Catering Group Co., Ltd. Fuchun Tea House.",
+        "sources": [
+          "ihchina-fuchun"
+        ]
+      },
+      {
+        "zh": "2022 年 11 月 29 日，联合国教科文组织保护非物质文化遗产政府间委员会将「中国传统制茶技艺及其相关习俗」列入人类非物质文化遗产代表作名录。该项目涉及 15 个省（区、市）的 44 个国家级非遗代表性项目，富春茶点制作技艺是其中之一。",
+        "en": "On 29 November 2022 the UNESCO Intergovernmental Committee for the Safeguarding of the Intangible Cultural Heritage inscribed \"traditional Chinese tea-making techniques and related practices\" on the Representative List of the Intangible Cultural Heritage of Humanity. The nomination covered 44 national-level intangible heritage items across 15 provinces, and the Fuchun tea-and-dim-sum craft was one of them.",
+        "sources": [
+          "yangzhou-daj",
+          "mct-jiangsu"
+        ]
+      },
+      {
+        "zh": "富春茶社创建于清光绪十一年（1885），2006 年 12 月被商业部认定为首批「中华老字号」。2025 年 11 月 19 日，富春茶社举行 140 周年庆典，《中国富春茶点志》同日首发，扬州市档案部门接收了富春集团捐赠的档案史料。",
+        "en": "Fuchun Tea House was founded in 1885 (the 11th year of Guangxu, Qing dynasty) and was named among the first batch of \"China Time-honoured Brands\" by the Ministry of Commerce in December 2006. On 19 November 2025 it held its 140th-anniversary celebration and launched The Annals of Chinese Fuchun Tea and Dim Sum.",
+        "sources": [
+          "yangzhou-daj",
+          "ihchina-fuchun"
+        ]
+      },
+      {
+        "zh": "关于魁龙珠茶的三种原料，公开资料口径不一：中国非物质文化遗产网记为「取浙江龙井之味、安徽魁针之色、福建珠兰之香」；扬州档案方志网记为「浙江龙井取色、安徽魁针提味、自种珠兰增香」，并记古法为三次窨花、五次烘焙。两说并存。",
+        "en": "Sources differ on how the three ingredients of Kui Long Zhu are used: the China Intangible Cultural Heritage website says it takes the flavour of Zhejiang Longjing, the colour of Anhui Kuizhen and the fragrance of Fujian zhulan, while the Yangzhou Archives and Local Records site says Longjing supplies the colour, Kuizhen the flavour, and home-grown zhulan the fragrance — added by three rounds of scenting and five of roasting.",
+        "sources": [
+          "ihchina-fuchun",
+          "yangzhou-daj"
+        ]
+      },
+      {
+        "zh": "点心的成形有明确规范：三丁包为「鲫鱼嘴、荸荠鼓、剪刀褶」，翡翠烧卖讲「皮薄透绿」，千层油糕为数十层起酥。国家级非物质文化遗产代表性项目代表性传承人徐永珍（1944 年 6 月生，第三批）制作的包子褶皱达三十多道，能制作三百多种淮扬名点。",
+        "en": "Shaping follows explicit standards: the three-dice bun has a \"carp mouth, water-chestnut bulge and scissor pleats\", jade shaomai a \"thin skin that shows the green through\", and the layered oil cake dozens of pastry layers. Xu Yongzhen (born June 1944), a third-batch national representative inheritor, makes buns with more than thirty pleats and can produce over three hundred kinds of Huaiyang pastry.",
+        "sources": [
+          "yangzhou-daj",
+          "ihchina-xu"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-fuchun",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《茶点制作技艺（富春茶点制作技艺）》项目页",
+        "url": "https://www.ihchina.cn/art/detail/id/14648.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "ihchina-xu",
+        "title": "中国非物质文化遗产网《徐永珍》国家级非物质文化遗产代表性项目代表性传承人页",
+        "url": "https://www.ihchina.cn/ccr_detail/3174.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "yangzhou-sw",
+        "title": "扬州市商务局《富春茶社简介》",
+        "url": "https://yzzjj.yangzhou.gov.cn/ztzl/gcbhml/mdlzh/art/2021/art_cfb2cd726beb4d419109e5d79097b2ca.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "yangzhou-daj",
+        "title": "扬州档案方志网《〈中国富春茶点志〉首发》",
+        "url": "https://daj.yangzhou.gov.cn/xwzx/gzdt/art/2025/art_d225ba097fbf491f9eab829e06727bdf.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "mct-jiangsu",
+        "title": "中华人民共和国文化和旅游部《水韵江苏奏响茶旅“交响乐”》",
+        "url": "https://mct.gov.cn/whzx/qgwhxxlb/js/202302/t20230210_939019.htm",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "chinanews-fuchun",
+        "title": "中国新闻网《中国传统制茶技艺申遗成功 “富春茶点制作技艺”位列其中》",
+        "url": "https://m.chinanews.com/wap/detail/cht/zw/ft9905766.shtml",
+        "accessed": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "jinhua-ham",
+    "status": "published",
+    "name": {
+      "zh": "金华火腿",
+      "en": "Jinhua Ham"
+    },
+    "aliases": [
+      "金华火腿",
+      "金华火腿腌制技艺",
+      "火腿",
+      "两头乌",
+      "金华猪",
+      "火腿制作技艺",
+      "jinhua ham",
+      "jinhua huo tui",
+      "chinese dry-cured ham"
+    ],
+    "region": {
+      "zh": "浙江金华",
+      "en": "Jinhua, Zhejiang"
+    },
+    "tagline": {
+      "zh": "立冬开腌，立春上架——时间本身就是配料。",
+      "en": "Cured at the start of winter, hung up at the start of spring — time itself is an ingredient."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "浙江省金华火腿以鲜艳的色泽、独特的芳香、诱人的风味、美观的外形，即色、香、味、形「四绝」而闻名天下，是我国腌腊肉制品中的精品[[ihchina-jinhua-ham]]。金华地区四季分明的亚热带气候和独特的地理环境，造就了别具一格的火腿腌制技艺[[ihchina-jinhua-ham]]。\n\n早在唐代，金华即已有了火腿的腌制工艺；及至明代，金华火腿被列为贡品，其生产遍布金华地区的东阳、永康等地[[ihchina-jinhua-ham]]。2001 年，金华火腿获批为国家地理标志保护产品[[jhnews-chen]]。\n\n2008 年，火腿制作技艺（金华火腿腌制技艺）被列入第二批国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-166，申报地区或单位为浙江省金华市[[ihchina-jinhua-ham]]。\n\n需要说明的是：火腿是一种食材，不是一道成菜。它的文化就在「腌、晒、发酵、出香」这条时间线上——这既是它入选国家级非遗的原因，也是它在中餐里被当作提鲜底味的原因。",
+        "en": "Jinhua ham from Zhejiang is famed for its \"four excellences\" — vivid colour, distinctive aroma, tempting flavour and handsome form — and is a fine product among China's cured meats [[ihchina-jinhua-ham]]. Jinhua's four-season subtropical climate and particular geography shaped its distinctive curing technique [[ihchina-jinhua-ham]].\n\nCuring already existed in Jinhua by the Tang dynasty; by the Ming dynasty the ham was a tribute item, produced across Dongyang, Yongkang and elsewhere [[ihchina-jinhua-ham]]. In 2001 Jinhua ham was granted protection as a national geographical-indication product [[jhnews-chen]].\n\nIn 2008 the craft of ham making (Jinhua ham curing) entered China's second-batch national intangible cultural heritage list, item no. Ⅷ-166, declared by Jinhua, Zhejiang [[ihchina-jinhua-ham]].\n\nOne clarification: ham is an ingredient, not a finished dish. Its culture lies on the timeline of curing, drying, fermenting and coming into aroma — which is both why it was listed and why Chinese kitchens treat it as a savoury base note."
+      },
+      "story": {
+        "zh": "千年的历史传承造就了金华火腿独特的腌制工艺和与之相关的饮食及地方民俗文化[[ihchina-jinhua-ham]]。1905 年，金华火腿在德国莱比锡万国博览会上荣获金奖；此后金华火腿在国际餐饮业中声誉日高，成为海外华人餐饮中的高级佐料[[ihchina-jinhua-ham]]。\n\n做火腿的原料猪有「中华熊猫猪」之誉：头颈部和臀尾部呈黑色，其余部位为白色，俗称「两头乌」[[ihchina-jinhua-ham]]。它又称金华猪，是中国四大名猪之一，也是我国首批畜禽遗传资源保护地方猪种，还是中欧地理标志协定保护清单中唯一入选的猪肉类畜种[[jhnews-chen]]。\n\n国家级非物质文化遗产代表性传承人陈顺通出身火腿世家，与火腿打了 38 年交道。据金华市新闻传媒中心 2025 年 5 月报道，他于当年 3 月获评第六批国家级非物质文化遗产代表性传承人，是当时全国第三个获此荣誉的火腿大师；他已培养 27 名传承人[[jhnews-chen]]。他的一句心得是：「火腿腌制是传统技艺，时代在变，创新势在必行。」[[jhnews-chen]]",
+        "en": "A thousand years of transmission produced both the technique and the foodways and local customs around it [[ihchina-jinhua-ham]]. In 1905 Jinhua ham won a gold medal at the Leipzig World's Fair in Germany, after which its reputation in international catering grew, and it became a premium seasoning in overseas Chinese kitchens [[ihchina-jinhua-ham]].\n\nThe pig behind it is nicknamed the \"Chinese panda pig\" — black at neck and rump, white elsewhere, hence \"two-ends-black\" (liangtouwu) [[ihchina-jinhua-ham]]. Also called the Jinhua pig, it is one of China's four famous pig breeds, among the first nationally protected local livestock genetic resources, and the only pork breed on the China–EU geographical-indication protection list [[jhnews-chen]].\n\nChen Shuntong, a national representative inheritor, comes from a ham-making family and has spent 38 years at the trade. According to a May 2025 report by the Jinhua media centre, he was named a sixth-batch national representative inheritor that March — the third ham master in the country to receive the honour — and has trained 27 inheritors [[jhnews-chen]]. His summary: \"Ham curing is a traditional craft; times change, and innovation is unavoidable.\" [[jhnews-chen]]"
+      },
+      "technique": {
+        "zh": "制作金华火腿所选用的猪体型大小适中，骨细，皮薄，肥瘦适度，肉质细嫩，腿心饱满，腌制火腿时即以后腿为专用原料[[ihchina-jinhua-ham]]。猪必须在立冬和次年立春之间屠宰；选用的后腿要求爪白、脚直、腿形完好无损，重量在 6 至 7.5 公斤之间[[ihchina-jinhua-ham]]。\n\n金华火腿一般在每年立冬到次年立春之间以低温进行腌制，而后经过中温脱水、高温发酵等一系列工序，入伏后才最终出香成熟[[ihchina-jinhua-ham]]。「立冬开腌，立春上架」是老师傅们挂在嘴边的一句话[[jhnews-chen]]。\n\n制作过程中以削、割、修、压、绞、敲、捧、拍等多种手法统一火腿形状，使成品形如竹叶或琵琶[[ihchina-jinhua-ham]]。腌制成的金华火腿瘦肉呈玫瑰红色，肥肉晶莹透亮，肥而不腻，口味鲜美，在自然温度下贮存三四年仍能保持原有品质[[ihchina-jinhua-ham]]。\n\n就工序而言，成就一只金华火腿需要经过八大步骤 48 道工序，耗时约一年。其中上盐是腌制的灵魂，须根据腿支大小、腿心厚薄、肉质粗细、新鲜程度和气温湿度高低掌握用盐时间与数量，一般分六次用盐，整个腌制过程约需 25 至 45 天[[jhnews-chen]]。上盐的手法被编成口诀：「头盐上滚盐，大盐雪花飞，三盐四盐扣骨头，五盐六盐保签头。」[[jhnews-chen]]",
+        "en": "The pigs chosen are medium-sized with fine bones, thin skin, balanced fat and tender meat and a full thigh, and only the hind leg is used [[ihchina-jinhua-ham]]. Pigs must be slaughtered between the start of winter and the start of spring the following year; the hind leg must have white trotters, a straight stance, an unblemished shape and weigh 6 to 7.5 kg [[ihchina-jinhua-ham]].\n\nJinhua ham is cured at low temperature between the start of winter and the start of spring, then goes through moderate-temperature dehydration and high-temperature fermentation, only reaching full aroma and maturity after the start of the dog days [[ihchina-jinhua-ham]]. \"Cured at the start of winter, hung up at the start of spring\" is the old masters' refrain [[jhnews-chen]].\n\nParing, cutting, trimming, pressing, twisting, tapping, cupping and patting shape the ham into something like a bamboo leaf or a pipa lute [[ihchina-jinhua-ham]]. The finished ham has rose-red lean meat and translucent fat, rich but not greasy, and keeps its quality for three or four years at ambient temperature [[ihchina-jinhua-ham]].\n\nIn terms of steps, one ham takes eight stages and 48 operations over about a year. Salting is the soul of it: the timing and amount depend on the size of the leg, the thickness of the core, the texture of the meat, its freshness and the temperature and humidity, normally in six rounds over about 25 to 45 days [[jhnews-chen]]. The salting motions are captured in a rhyme: \"first salt rolls on the salt, the big salt flies like snow, the third and fourth salts lock the bone, the fifth and sixth guard the signature.\" [[jhnews-chen]]"
+      }
+    },
+    "facts": [
+      {
+        "zh": "火腿制作技艺（金华火腿腌制技艺）于 2008 年列入第二批国家级非物质文化遗产代表性项目名录：项目编号 Ⅷ-166，项目序号 949，类别传统技艺，类型新增项目，申报地区或单位为浙江省金华市，保护单位为金华火腿行业协会。",
+        "en": "The craft of ham making (Jinhua ham curing) entered China's second-batch national intangible cultural heritage list in 2008: item no. Ⅷ-166, sequence no. 949, category traditional craftsmanship, type new item, declared by Jinhua, Zhejiang, and safeguarded by the Jinhua Ham Industry Association.",
+        "sources": [
+          "ihchina-jinhua-ham"
+        ]
+      },
+      {
+        "zh": "早在唐代，金华即已有了火腿的腌制工艺；及至明代，金华火腿被列为贡品，其生产遍布金华地区的东阳、永康等地。2001 年，金华火腿获批为国家地理标志保护产品。",
+        "en": "Ham curing already existed in Jinhua by the Tang dynasty; in the Ming dynasty the ham became a tribute item, made across Dongyang, Yongkang and other parts of Jinhua. In 2001 Jinhua ham was granted national geographical-indication protection.",
+        "sources": [
+          "ihchina-jinhua-ham",
+          "jhnews-chen"
+        ]
+      },
+      {
+        "zh": "原料用「两头乌」（又称金华猪，中国四大名猪之一）的后腿。猪必须在立冬与次年立春之间屠宰，后腿要求爪白、脚直、腿形完好无损，重量 6 至 7.5 公斤。",
+        "en": "The raw material is the hind leg of the \"two-ends-black\" pig (also called the Jinhua pig, one of China's four famous breeds). Pigs must be slaughtered between the start of winter and the start of spring; the leg must have white trotters, a straight stance and an unblemished shape, weighing 6 to 7.5 kg.",
+        "sources": [
+          "ihchina-jinhua-ham"
+        ]
+      },
+      {
+        "zh": "工艺上，每年立冬到次年立春之间低温腌制，再经中温脱水、高温发酵，入伏后出香成熟；成品瘦肉玫瑰红、肥肉晶莹透亮，自然温度下可贮存三四年。另据金华市新闻传媒中心报道，一只火腿需经八大步骤 48 道工序、耗时约一年，上盐分六次，腌制过程约 25 至 45 天。",
+        "en": "The ham is cured at low temperature between the start of winter and the start of spring, then dehydrated at moderate temperature and fermented at high temperature, reaching full aroma after the start of the dog days; the finished ham has rose-red lean and translucent fat and stores three or four years at ambient temperature. A Jinhua media report adds that one ham takes eight stages and 48 operations over about a year, with salt applied in six rounds over roughly 25 to 45 days.",
+        "sources": [
+          "ihchina-jinhua-ham",
+          "jhnews-chen"
+        ]
+      },
+      {
+        "zh": "1905 年，金华火腿在德国莱比锡万国博览会上荣获金奖，此后成为海外华人餐饮中的高级佐料。据金华市新闻传媒中心 2025 年 5 月报道，国家级非物质文化遗产代表性传承人陈顺通于当年 3 月获评第六批国家级非物质文化遗产代表性传承人，是当时全国第三个获此荣誉的火腿大师，已培养 27 名传承人。",
+        "en": "In 1905 Jinhua ham won a gold medal at the Leipzig World's Fair in Germany and went on to become a premium seasoning in overseas Chinese kitchens. According to a May 2025 report by the Jinhua media centre, national representative inheritor Chen Shuntong was named a sixth-batch national representative inheritor that March — the third ham master in the country to receive the honour — and has trained 27 inheritors.",
+        "sources": [
+          "ihchina-jinhua-ham",
+          "jhnews-chen"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-jinhua-ham",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《火腿制作技艺（金华火腿腌制技艺）》项目页",
+        "url": "https://www.ihchina.cn/project_details/14654",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "jhnews-chen",
+        "title": "金华市新闻传媒中心《新时代产业工人的时代回响②｜陈顺通：千年火腿“匠心造”》",
+        "url": "https://www.jhnews.com.cn/xw/1774323",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "ihchina-chen",
+        "title": "中国非物质文化遗产网《陈顺通》国家级非物质文化遗产代表性项目代表性传承人页",
+        "url": "https://www.ihchina.cn/ccr_detail/30596.html",
+        "accessed": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "jinyun-shaobing",
+    "status": "published",
+    "name": {
+      "zh": "缙云烧饼",
+      "en": "Jinyun Shaobing (Clay-oven Baked Bun)"
+    },
+    "aliases": [
+      "缙云烧饼",
+      "缙云烧饼制作技艺",
+      "桶饼",
+      "烧饼",
+      "缙云菜干",
+      "jinyun shaobing",
+      "jinyun baked bun",
+      "zhuyun shaobing"
+    ],
+    "region": {
+      "zh": "浙江丽水缙云",
+      "en": "Jinyun, Lishui, Zhejiang"
+    },
+    "tagline": {
+      "zh": "炉温 250—300 度，烤三到五分钟：麦香、肉香、葱香、芝麻香、菜干香一起出炉。",
+      "en": "250–300°C for three to five minutes — wheat, pork, scallion, sesame and dried greens come out of the oven together."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "缙云烧饼制作技艺是流布于浙江省丽水地区并辐射至周边的一种传统面食制作技艺[[ihchina-jinyun]]。缙云县位于浙中南丘陵山区，地貌可以用「九山半水半分田」来概括，该地气候湿润、四季分明，适合种植小麦、水稻、九头芥菜等，再加上本地饲养的土猪，为缙云烧饼制作技艺提供了充足的优质原材料[[ihchina-jinyun]]。\n\n缙云烧饼制作技艺源于明朝初年的缙云壶镇，历史悠久，世代传承，是缙云县最著名的传统美食，也是缙云农民创业就业的传统方式[[lishui-jinyun]]。\n\n2021 年，传统面食制作技艺（缙云烧饼制作技艺）作为扩展项目被列入第五批国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-160，申报地区或单位为浙江省丽水市缙云县[[ihchina-jinyun]]。",
+        "en": "Jinyun shaobing is a traditional wheaten-food craft that spreads from Lishui in Zhejiang and reaches the surrounding region [[ihchina-jinyun]]. Jinyun county sits in the hilly country of south-central Zhejiang, its landscape summed up as \"nine parts mountain, half a part water, half a part field\"; a damp, four-season climate suits wheat, rice and jiutou mustard greens, and locally raised pigs supply the raw material [[ihchina-jinyun]].\n\nThe craft originates in Huzhen, Jinyun, in the early Ming dynasty; it is the county's best-known traditional food and a long-standing route to self-employment for local farmers [[lishui-jinyun]].\n\nIn 2021, as an extension item, the traditional wheaten-food technique (Jinyun shaobing) entered China's fifth-batch national intangible cultural heritage list, item no. Ⅷ-160, declared by Jinyun county, Lishui, Zhejiang [[ihchina-jinyun]]."
+      },
+      "story": {
+        "zh": "缙云烧饼制作技艺的传承方式主要有三种：一是家族传承，通过父子相传的形式子承父业；二是师徒传承，通过徒弟入门拜师学艺的方式传承；三是亲戚相带，相互指点、相互学习[[ihchina-jinyun]]。\n\n目前已形成朱家烧饼、鲍家烧饼、吕家烧饼、北山烧饼 4 个传承群体及多名传承人，其中朱家已传 27 代，鲍家已传 4 代。从 2014 年开始，传承人采用集中培训方式推进项目传承。至 2018 年，缙云烧饼相关从业者超过 1.7 万人[[ihchina-jinyun]]。\n\n缙云烧饼还和当地民俗绑在一起：除日常食用外，它还随着农村兴盛的婺剧表演开展经营活动，俗称「赶台前」，自食、请客、布施给剧情里的落难行乞者均可，由此形成了颇具特色的民俗[[ihchina-jinyun]]。近年来当地政府注重打造品牌，确定 LOGO 图案，连年举办「烧饼节」；如今在全国各地都有缙云烧饼的身影，甚至走出了国门[[lishui-jinyun]]。",
+        "en": "The craft passes down in three ways: within families, father to son; through apprenticeship; and among relatives who coach one another [[ihchina-jinyun]].\n\nFour inheriting groups have formed — the Zhu, Bao, Lü and Beishan families — among them the Zhu family now in its 27th generation and the Bao family in its fourth. Since 2014 inheritors have also run centralised training. By 2018 more than 17,000 people worked in the Jinyun shaobing trade [[ihchina-jinyun]].\n\nShaobing is bound up with local custom too: beyond daily eating, vendors follow the thriving rural performances of Wu opera, a practice called \"chasing the stage front\", where the buns may be eaten, offered to guests or given to the destitute beggar in the story [[ihchina-jinyun]]. In recent years the local government has built the brand, set a logo and held an annual shaobing festival; today Jinyun shaobing is found across the country and has gone abroad [[lishui-jinyun]]."
+      },
+      "technique": {
+        "zh": "缙云烧饼制作技艺有 5 个特色。一是烤制工具较为独特：烧饼桶以木桶为外胆，内胆则是用壶镇一带的「猪脂泥」烧制成的陶鼎，内外胆中间用本地珍珠岩粉作保温隔热材料，烧饼桶具有温度高、散热慢的优点[[ihchina-jinyun]]。\n\n二是馅料制作独特：以猪肉拌缙云菜干为馅料，缙云菜干选用本地细叶九头芥腌制，经三蒸三晒而成，色泽黑亮、鲜甜可口、香味浓郁[[ihchina-jinyun]]。三是发面技术独特：以面娘发面使面团发酵适度；以开水和面，使面团能够黏住陶罐内壁不掉炉[[ihchina-jinyun]]。\n\n四是燃料独特：一般用木炭或白炭为燃料，炉温 250—300 度，烤制时间 3—5 分钟[[ihchina-jinyun]]。五是风味独特：经高温烧烤，兼具麦香、肉香、葱香、芝麻香、菜干香，表皮松脆、内质软糯、咸淡适宜、油而不腻[[ihchina-jinyun]]。\n\n按丽水市人民政府公布的口径，其主要工具为「烧饼桶」，燃料用「木炭」；主辅料为精制面粉、夹心肉、葱、干面娘、黑芝麻；调味料为精制食盐、麦芽饴糖。制作流程为四步：发面制作、馅料加工、饼坯制作、烧烤饼坯[[lishui-jinyun]]。",
+        "en": "The craft has five distinctive features. First, the oven: the barrel has a wooden outer shell and an inner vessel — a pottery ding fired from Huzhen's \"pig-fat clay\" — with local perlite powder between them as insulation, giving high heat and slow cooling [[ihchina-jinyun]].\n\nSecond, the filling: pork is mixed with Jinyun dried greens, made from local thin-leaf jiutou mustard steamed and sun-dried three times, glossy black, sweet-savoury and intensely aromatic [[ihchina-jinyun]]. Third, the dough: a starter leavens it to the right degree, and boiling water is used to knead it so the dough sticks to the pottery wall without falling into the fire [[ihchina-jinyun]].\n\nFourth, the fuel: charcoal or white charcoal, an oven temperature of 250–300°C, and three to five minutes of baking [[ihchina-jinyun]]. Fifth, the flavour: high heat gives wheat, pork, scallion, sesame and dried-green aromas at once, with a crisp crust and soft chewy interior, well salted and not greasy [[ihchina-jinyun]].\n\nAccording to the Lishui municipal government, the key tool is the \"shaobing barrel\" and the fuel is charcoal; ingredients are fine flour, streaky pork, scallion, dried starter and black sesame, seasoned with fine salt and malt syrup. The process has four steps: making the dough, preparing the filling, shaping the cakes and baking them [[lishui-jinyun]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "2021 年，传统面食制作技艺（缙云烧饼制作技艺）作为扩展项目列入第五批国家级非物质文化遗产代表性项目名录：项目编号 Ⅷ-160，项目序号 943，类别传统技艺，申报地区或单位为浙江省丽水市缙云县，保护单位为缙云县缙云烧饼协会。",
+        "en": "In 2021 the traditional wheaten-food technique (Jinyun shaobing) was added to China's fifth-batch national intangible cultural heritage list as an extension item: item no. Ⅷ-160, sequence no. 943, category traditional craftsmanship, declared by Jinyun county, Lishui, Zhejiang, and safeguarded by the Jinyun Shaobing Association.",
+        "sources": [
+          "ihchina-jinyun"
+        ]
+      },
+      {
+        "zh": "缙云烧饼制作技艺源于明朝初年的缙云壶镇。按丽水市人民政府公布的口径，主要工具为「烧饼桶」，燃料用「木炭」；主辅料为精制面粉、夹心肉、葱、干面娘、黑芝麻，调味料为精制食盐、麦芽饴糖；制作流程为发面制作、馅料加工、饼坯制作、烧烤饼坯四步。",
+        "en": "The craft originates in Huzhen, Jinyun, in the early Ming dynasty. According to the Lishui municipal government, the key tool is the \"shaobing barrel\" and the fuel is charcoal; ingredients are fine flour, streaky pork, scallion, dried starter and black sesame, seasoned with fine salt and malt syrup; the process runs through four steps — dough, filling, shaping, baking.",
+        "sources": [
+          "lishui-jinyun"
+        ]
+      },
+      {
+        "zh": "烤制工具独特：烧饼桶以木桶为外胆，内胆是用壶镇一带的「猪脂泥」烧制成的陶鼎，内外胆中间用本地珍珠岩粉作保温隔热材料；燃料用木炭或白炭，炉温 250—300 度，烤制时间 3—5 分钟。",
+        "en": "The oven is distinctive: a wooden outer barrel with an inner pottery ding fired from Huzhen's \"pig-fat clay\", insulated with local perlite powder between the two layers. Charcoal or white charcoal is used, at 250–300°C for three to five minutes.",
+        "sources": [
+          "ihchina-jinyun"
+        ]
+      },
+      {
+        "zh": "馅料以猪肉拌缙云菜干制成；缙云菜干选用本地细叶九头芥腌制，经三蒸三晒而成。发面以面娘发酵，并以开水和面，使面团能黏住陶罐内壁不掉炉。",
+        "en": "The filling is pork mixed with Jinyun dried greens, made from local thin-leaf jiutou mustard pickled and then steamed and sun-dried three times. A starter leavens the dough, and boiling water is used so the dough clings to the pottery wall instead of dropping into the fire.",
+        "sources": [
+          "ihchina-jinyun"
+        ]
+      },
+      {
+        "zh": "传承以家族传承、师徒传承、亲戚相带三种方式并行，已形成朱家、鲍家、吕家、北山 4 个传承群体，其中朱家已传 27 代；从 2014 年起采用集中培训方式推进传承，至 2018 年相关从业者超过 1.7 万人。",
+        "en": "Transmission runs in parallel through families, apprenticeship and relatives coaching one another; four inheriting groups have formed (Zhu, Bao, Lü, Beishan), the Zhu family now in its 27th generation. Centralised training began in 2014, and by 2018 more than 17,000 people worked in the trade.",
+        "sources": [
+          "ihchina-jinyun"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-jinyun",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《传统面食制作技艺（缙云烧饼制作技艺）》项目页",
+        "url": "https://www.ihchina.cn/project_details/23791",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "lishui-jinyun",
+        "title": "丽水市人民政府《丽水三项目入选国家级非物质文化遗产代表性项目名录》",
+        "url": "https://www.lishui.gov.cn/art/2021/6/23/art_1229218389_57322821.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "zjnews-jinyun",
+        "title": "浙江在线·丽水日报《缙云烧饼制作技艺入选第五批国家级非遗名录》",
+        "url": "https://zjnews.zjol.com.cn/zjnews/lsnews/202107/t20210715_22800085.shtml",
+        "accessed": "2026-09-28"
+      }
+    ]
+  }
+]

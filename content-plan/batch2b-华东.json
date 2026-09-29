@@ -1,0 +1,326 @@
+[
+  {
+    "id": "chouguiyu",
+    "status": "published",
+    "name": {
+      "zh": "徽州臭鳜鱼（腌鲜鳜鱼）",
+      "en": "Huizhou Stinky Mandarin Fish"
+    },
+    "aliases": [
+      "臭鳜鱼",
+      "徽州臭鳜鱼",
+      "腌鲜鳜鱼",
+      "腌鲜鱼",
+      "桶鲜鱼",
+      "臭桂鱼",
+      "黄山臭鳜鱼",
+      "chouguiyu",
+      "stinky mandarin fish",
+      "stinky fish",
+      "huizhou stinky mandarin fish",
+      "yanxian guiyu"
+    ],
+    "region": {
+      "zh": "安徽黄山",
+      "en": "Huangshan, Anhui"
+    },
+    "tagline": {
+      "zh": "闻起来臭，吃起来香——一条被徽商挑在扁担上的鱼。",
+      "en": "Smells foul, tastes sublime — a fish carried home on a Huizhou merchant's shoulder pole."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "臭鳜鱼发源于古徽州府，即今天黄山市一带[[ahny-chouguiyu]]。古徽州一府辖歙县、休宁、黟县、绩溪、婺源、祁门六县，人口众多却山多田少，当地人为了生存，不少转而外出经商讨生活[[ahny-chouguiyu]]。\n\n臭鳜鱼形成于徽商沿江挑运水产或携鱼返乡省亲的途中：相传徽州商人用食盐等佐料将新鲜的鳜鱼腌制，用木桶贮存运输，不料路远天热，鳜鱼发出异味，本想丢弃，但节俭惯了的家中老人坚持不许；按徽菜技艺制作成菜后，大家一尝却连声叫好，臭鳜鱼由此「一臭成名」[[ahny-chouguiyu]]。这种「盐腌＋轻度发酵」的工艺，创造出既能长期保存又具有独特风味的臭鳜鱼[[ahny-chouguiyu]]。\n\n在非遗名录里，与臭鳜鱼直接相关的国家级项目是徽菜烹饪技艺，2021 年列入第五批国家级非物质文化遗产代表性项目名录；徽州臭鳜鱼制作技艺本身则是省级项目，2022 年列入安徽省第六批省级非物质文化遗产代表性项目名录[[ihchina-huicai]][[ahgov-chouguiyu]]。",
+        "en": "Stinky mandarin fish comes from the old Huizhou prefecture, today's Huangshan area in Anhui [[ahny-chouguiyu]]. The prefecture governed six counties — Shexian, Xiuning, Yixian, Jixi, Wuyuan and Qimen. Crowded but short of farmland, many locals left to trade for a living [[ahny-chouguiyu]].\n\nThe dish took shape on the roads travelled by Huizhou merchants carrying river fish home. A merchant salted fresh mandarin fish with seasonings and packed them in wooden tubs; the journey was long and the weather hot, the fish began to smell, and he meant to throw them away — but the thrifty elders of the family would not hear of it. Cooked with Huizhou technique, the fish drew exclamations of delight, and so it first made its name [[ahny-chouguiyu]]. This \"salting plus light fermentation\" made a fish that kept well and tasted like nothing else [[ahny-chouguiyu]].\n\nOn the heritage register, the national-level item directly tied to the dish is Huizhou cuisine cookery, added to China's fifth batch in 2021; the stinky mandarin fish technique itself is a provincial item, listed by Anhui in its sixth provincial batch in 2022 [[ihchina-huicai]][[ahgov-chouguiyu]]."
+      },
+      "story": {
+        "zh": "古徽州有民谚「前世不修，生在徽州，十三四岁，往外一丢」，道出农耕时代徽州山多田少的生存环境[[ahny-chouguiyu]]。对徽州人来说，鳜鱼是稀罕物，万万不可浪费，何况当地本就有腌制肉类的传统[[ahny-chouguiyu]]。\n\n「闻起来臭，但是吃起来很香，似臭非臭。鱼肉经过腌制改变了蛋白质结构，呈蒜瓣状，一片一片的很紧实、有弹性。」省级非物质文化遗产代表性传承人钟少华说，臭鳜鱼的「臭」是鱼肉蛋白质经腌制转化而来的一种氨基酸散发的气味，与腐烂变质的臭味完全不同，这种独特的「酵香味」恰恰是诱人食欲的前奏[[ahny-chouguiyu]]。\n\n「西塞山前白鹭飞，桃花流水鳜鱼肥。」唐代诗人张志和的名句，奠定了鳜鱼在中华饮食图谱中名贵食材的文化意象；而两千多年前《吕氏春秋》便已提出「臭恶犹美，皆有所以」——尽管食材会有不太好的气味，只要掌握好烹调方法，就能做出美味佳肴[[ahny-chouguiyu]]。\n\n传承上，钟少华是紫云馆掌门人，他的大弟子王军为迎合年轻人口味，推出了干锅臭鳜鱼、酱香臭鳜鱼、臭鳜鱼汉堡等创新菜式；另一位徽州臭鳜鱼腌制工艺代表性传承人吴永学 2021 年返乡创业，2024 年牵头成立安徽省臭鳜鱼特色产业创新研究院[[ahny-chouguiyu]]。2025 年 11 月，一批经黄山海关检验检疫合格的臭鳜鱼发往新加坡，为黄山臭鳜鱼首次出口[[ahny-chouguiyu]]。",
+        "en": "An old Huizhou saying goes, \"poor fate, to be born in Huizhou, cast out at thirteen or fourteen\" — a reminder of how little farmland the mountains allowed in farming times [[ahny-chouguiyu]]. To Huizhou people mandarin fish was a rarity never to be wasted, and the region already had a tradition of curing meat [[ahny-chouguiyu]].\n\n\"It smells foul but tastes wonderful, a smell that is yet not quite a smell. Curing changes the protein structure, so the flesh separates into firm, springy clove-like flakes.\" Zhong Shaohua, a provincial-level inheritor, says the smell comes from amino acids produced as the fish protein ferments and is nothing like the stench of spoilage — this particular \"ferment aroma\" is what whets the appetite [[ahny-chouguiyu]].\n\n\"White egrets fly before Xisai Mountain, mandarin fish grow fat in peach-blossom waters.\" The Tang poet Zhang Zhihe's lines fixed the mandarin fish as a prized ingredient in Chinese food culture; and over two thousand years ago the Lüshi Chunqiu already held that \"even the foul and the ugly have their reasons\" — an unpromising smell, properly cooked, can become a delicacy [[ahny-chouguiyu]].\n\nZhong Shaohua heads the Ziyun Hall restaurant; his senior apprentice Wang Jun, to appeal to younger palates, created dry-pot, soy-sauce and even stinky-mandarin-fish burger versions. Another inheritor of the curing craft, Wu Yongxue, returned home to start a business in 2021 and in 2024 led the founding of the Anhui Stinky Mandarin Fish Industrial Innovation Research Institute [[ahny-chouguiyu]]. In November 2025 a batch passed Huangshan customs inspection and was shipped to Singapore — the first export of Huangshan stinky mandarin fish [[ahny-chouguiyu]]."
+      },
+      "technique": {
+        "zh": "传统腌制有「三大法宝」：一是新安江的鹅卵石，二是盐，三是杉木桶[[ahny-chouguiyu]]。制作要挑选新鲜的新安江山水桃花鳜，采用上好的食盐，根据季节、天气用秘制配方进行腌制[[ahny-chouguiyu]]。\n\n腌制和烧制是制作臭鳜鱼最关键的两个环节，前一个环节尤其要控制温度和湿度：温度高了容易腐烂变质，温度低了则会变成咸鱼。目前比较通用的标准是在 5℃ 至 12℃ 的环境中腌制 7 至 9 天[[ahny-chouguiyu]]。\n\n如何判断一条鱼是否腌好？要同时满足三个条件：腌鱼的卤水成稠状；鱼的「臭味」得当；外形上鱼的眼珠要红、肉质要紧实，手指触按鱼肉可立刻反弹恢复原状[[ahny-chouguiyu]]。\n\n烹制时多取红烧、干烧等技法，鱼肉入口呈极致鲜美、醇厚咸香的「微醺感」，与嗅觉形成极大反差。近年来黄山市推动标准化：已主导制订安徽省地方标准《臭鳜鱼加工技术规程》等 8 个技术规程与标准，超 90% 规模以上企业实现「控盐降臭」标准化生产；科研集成使工业用盐量降低 67% 以上、发酵时间缩短 29%、次品率低于 0.5%[[ahny-chouguiyu]]。",
+        "en": "Traditional curing relies on three treasures: pebbles from the Xin'an River, salt, and fir tubs [[ahny-chouguiyu]]. Makers pick fresh peach-blossom mandarin fish from the Xin'an River, use fine salt and follow a secret recipe adjusted to the season and weather [[ahny-chouguiyu]].\n\nCuring and cooking are the two critical steps, and curing above all demands control of temperature and humidity: too warm and the fish rots, too cool and it simply becomes salted fish. The common standard now is 7 to 9 days at 5–12 °C [[ahny-chouguiyu]].\n\nHow do you know a fish is ready? Three conditions must hold at once — the brine has thickened; the smell is right; and the eye is red, the flesh firm enough that a fingertip pressed into it springs straight back [[ahny-chouguiyu]].\n\nCooking is usually by red-braising or dry-braising; the flesh lands with an intense, savoury, faintly heady richness that contrasts sharply with the smell. In recent years Huangshan has pushed standardisation: it has led the drafting of eight technical regulations and standards including the Anhui provincial standard \"Technical Code for Stinky Mandarin Fish Processing\", and over 90% of large-scale producers now practise standardised \"salt-controlled, odour-reduced\" production; research has cut industrial salt use by over 67%, shortened fermentation by 29% and brought the defect rate below 0.5% [[ahny-chouguiyu]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "徽菜烹饪技艺于 2021 年列入第五批国家级非物质文化遗产代表性项目名录：项目序号 1516，项目编号 Ⅷ-270，类别传统技艺，申报地区为安徽省，保护单位为安徽省文化馆。徽州臭鳜鱼制作技艺本身则是省级项目——2022 年 5 月被安徽省人民政府批准列入第六批省级非物质文化遗产代表性项目名录，编号 Ⅷ—178，申报地区黄山市。",
+        "en": "Huizhou cuisine cookery was added to China's fifth-batch national intangible cultural heritage list in 2021: sequence no. 1516, item no. Ⅷ-270, category traditional craftsmanship, declared by Anhui province, safeguarded by the Anhui Provincial Cultural Centre. The stinky mandarin fish technique itself is a provincial item — in May 2022 the Anhui provincial government added it to the sixth batch of its provincial list, no. Ⅷ—178, declared by Huangshan city.",
+        "sources": [
+          "ihchina-huicai",
+          "ahgov-chouguiyu"
+        ]
+      },
+      {
+        "zh": "臭鳜鱼形成于徽商沿江挑运水产或携鱼返乡省亲的途中：徽州商人用食盐等佐料将新鲜鳜鱼腌制，以木桶贮存运输，路远天热使鱼发出异味，本想丢弃，节俭惯了的家中老人坚持不许，按徽菜技艺做成菜后众人连声叫好。「盐腌＋轻度发酵」的工艺，创造出既能长期保存又具有独特风味的臭鳜鱼。",
+        "en": "The dish took shape on the routes of Huizhou merchants carrying river fish home: fresh mandarin fish were salted with seasonings and packed in wooden tubs, and on a long hot journey the fish began to smell. The merchant meant to discard them, but the thrifty elders of the family refused; cooked by Huizhou technique, the fish won delighted praise. \"Salting plus light fermentation\" produced a fish both long-keeping and uniquely flavoured.",
+        "sources": [
+          "ahny-chouguiyu"
+        ]
+      },
+      {
+        "zh": "传统腌制有「三大法宝」：新安江的鹅卵石、盐、杉木桶；要挑选新鲜的新安江山水桃花鳜，用上好食盐，按季节与天气以秘制配方腌制。腌制尤其要控制温度与湿度，温度高了容易腐烂变质，温度低了则会变成咸鱼，目前比较通用的标准是在 5℃ 至 12℃ 的环境中腌制 7 至 9 天。判定腌好要同时满足三个条件：卤水成稠状、臭味得当、鱼眼珠呈红色且手指按鱼肉能立刻反弹。",
+        "en": "Traditional curing has three treasures: Xin'an River pebbles, salt and fir tubs; makers pick fresh peach-blossom mandarin fish from the Xin'an River, use fine salt and follow a secret recipe tuned to season and weather. Curing above all demands control of temperature and humidity — too warm and the fish rots, too cool and it turns into salted fish — and the common standard is now 7 to 9 days at 5–12 °C. Three conditions must hold at once: thickened brine, the right smell, and red eyes with flesh that springs back under a fingertip.",
+        "sources": [
+          "ahny-chouguiyu"
+        ]
+      },
+      {
+        "zh": "关于产业规模，两处口径不同：安徽省农业农村厅 2025 年报道记为「截至 2024 年底，黄山市臭鳜鱼加工主体 100 余家，规模以上企业数量占安徽全省 80% 以上，臭鳜鱼年加工量 5.9 万吨、占全国的 50%，加工产值达 57 亿元」；中国食品安全网记为「年加工量近 6 万吨」「年加工产值超 50 亿元，2024 年前三季度加工量 4.4 万吨、加工产值超 42 亿元」。两处一致的是黄山市提出到 2027 年臭鳜鱼全产业链产值力争突破 100 亿元。",
+        "en": "Figures for the industry differ between sources: a 2025 report by the Anhui Provincial Department of Agriculture and Rural Affairs states that by the end of 2024 Huangshan had over 100 stinky mandarin fish processors, whose large-scale enterprises accounted for over 80% of Anhui's total, with annual processing of 59,000 tonnes — half the national total — and an output value of 5.7 billion yuan; China Food Safety News gives \"nearly 60,000 tonnes a year\" and \"annual processing output value over 5 billion yuan, with 44,000 tonnes and over 4.2 billion yuan in the first three quarters of 2024\". What both agree on is Huangshan's goal of pushing the whole industry chain past 10 billion yuan by 2027.",
+        "sources": [
+          "ahny-chouguiyu",
+          "cfsn-chouguiyu"
+        ]
+      },
+      {
+        "zh": "钟少华是徽州臭鳜鱼制作技艺省级非物质文化遗产代表性传承人、屯溪百年老店紫云馆掌门人；吴永学是徽州臭鳜鱼腌制工艺代表性传承人，2021 年返乡创立食品供应链公司，2024 年牵头成立安徽省臭鳜鱼特色产业创新研究院。2025 年 11 月，一批经黄山海关检验检疫合格的臭鳜鱼发往新加坡，是黄山臭鳜鱼首次出口。",
+        "en": "Zhong Shaohua is a provincial-level inheritor of the stinky mandarin fish technique and head of the century-old Ziyun Hall in Tunxi; Wu Yongxue is an inheritor of the curing craft who returned home in 2021 to found a food supply-chain company and in 2024 led the founding of the Anhui Stinky Mandarin Fish Industrial Innovation Research Institute. In November 2025 a batch that had passed Huangshan customs inspection was shipped to Singapore — the first export of Huangshan stinky mandarin fish.",
+        "sources": [
+          "ahny-chouguiyu"
+        ]
+      },
+      {
+        "zh": "关于非遗级别，部分公开报道称「臭鳜鱼制作技艺于 2008 年被列入国家级非物质文化遗产名录」，但核对官方名录可见：国家级名录中并没有单独列项的「臭鳜鱼制作技艺」，与臭鳜鱼直接相关的国家级项目是 2021 年第五批的「徽菜烹饪技艺」（Ⅷ-270）；臭鳜鱼本项可查的名录为 2019 年黄山市非物质文化遗产保护名录与 2022 年安徽省第六批省级非物质文化遗产代表性项目名录（Ⅷ—178）。",
+        "en": "On heritage level, some public reports say the stinky mandarin fish technique was \"listed as national intangible cultural heritage in 2008\", but the official registers show otherwise: there is no separately listed national item for the technique — the national item directly tied to the dish is \"Huizhou cuisine cookery\" from the fifth batch of 2021 (Ⅷ-270). The dish's own listing is in the 2019 Huangshan municipal heritage register and the 2022 sixth batch of Anhui's provincial list (Ⅷ—178).",
+        "sources": [
+          "ahny-chouguiyu",
+          "ahgov-chouguiyu",
+          "ihchina-huicai",
+          "cfsn-chouguiyu"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-huicai",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《徽菜烹饪技艺》项目页",
+        "url": "https://www.ihchina.cn/project_details/23584/",
+        "accessed": "2026-09-29"
+      },
+      {
+        "id": "ahgov-chouguiyu",
+        "title": "安徽省人民政府《关于公布第六批省级非物质文化遗产代表性项目名录的通知》（皖政秘〔2022〕67号）",
+        "url": "https://www.ah.gov.cn/szf/zfgb/554149651.html",
+        "accessed": "2026-09-29"
+      },
+      {
+        "id": "ahny-chouguiyu",
+        "title": "安徽省农业农村厅《从徽州古味到百亿产业，臭鳜鱼何以一味风行？》（转载农民日报）",
+        "url": "https://nync.ah.gov.cn/snzx/ymkahsn/58093671.html",
+        "accessed": "2026-09-29"
+      },
+      {
+        "id": "cfsn-chouguiyu",
+        "title": "中国食品安全网《安徽拟成立臭鳜鱼特色产业创新研究院》",
+        "url": "https://www.cfsn.cn/news/detail/35/279159.html",
+        "accessed": "2026-09-29"
+      }
+    ]
+  },
+  {
+    "id": "nanchang-waguan-tang",
+    "status": "published",
+    "name": {
+      "zh": "南昌瓦罐煨汤（瓦罐汤）",
+      "en": "Nanchang Clay-Jar Slow-Simmered Soup"
+    },
+    "aliases": [
+      "瓦罐汤",
+      "南昌瓦罐汤",
+      "煨汤",
+      "南昌煨汤",
+      "瓦罐煨汤",
+      "南昌小瓦罐汤",
+      "瓦罐药膳汤",
+      "waguan tang",
+      "nanchang soup",
+      "clay pot soup",
+      "slow-simmered soup"
+    ],
+    "region": {
+      "zh": "江西南昌",
+      "en": "Nanchang, Jiangxi"
+    },
+    "tagline": {
+      "zh": "不施明火，一罐煨一夜——南昌人的早餐，是一碗汤。",
+      "en": "No open flame, one jar simmered overnight — in Nanchang, breakfast is a bowl of soup."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "南昌瓦罐汤又称煨汤，是江西民间传统饮食，其制作技艺历史悠久[[jxich-waguan]]。关于源头，两种说法并存：江西省非物质文化遗产研究保护中心的项目页称其「可上溯至春秋」，并引《吕氏春秋·本味篇》「凡味之本，水最为始。五味三材，九沸九变，则成至味」与唐《瓦罐煨汤记》「瓦罐香沸，四方飘逸，一罐煨汤，天下奇鲜」为证[[jxich-waguan]]；南昌市东湖区人民政府的报道则称其「源头可追溯到宋代，形成于嘉祐年间（公元 1056 年），距今已有千年历史」[[donghu-waguan]]。\n\n民间传说则指向北宋：相传嘉祐年间，一洪州才子约友人郊游，命随从就地烹鱼煮鸡烧肉，临走时把剩余的鸡鱼肉及佐料转入瓦罐，加满清泉水，盖压封严，塞进未熄的灰炉中用土封存，仅留一孔通气；次日众人将瓦罐搬出打开，已是香飘四溢，此后这种做法被引进饭庄，在民间广泛流传[[jxich-waguan]][[jxwmw-waguan]]。\n\n技艺的传承有两种方式：一是民间仿效，相传南昌一才子将食材用灶灰掩埋而获得味美可口的煨汤，百姓由此产生灵感、纷纷效仿；二是饭庄带徒传承，新建人李茂发自幼目睹母亲用大灶煨汤，在新建县乐化镇街上开铺并亲自带徒经营[[jxich-waguan]]。到清末民初，技艺得到改进，由土灶改为瓦缸，采用六面受热的灶炉[[jxich-waguan]]。",
+        "en": "Nanchang waguan tang, also called wei tang, is a traditional Jiangxi folk food with a long history [[jxich-waguan]]. Two accounts of its origin coexist: the Jiangxi Intangible Cultural Heritage centre's project page traces it \"as far back as the Spring and Autumn period\", citing the Lüshi Chunqiu — \"in flavour, water comes first; five tastes from three materials, nine boils and nine transformations make the ultimate savour\" — and a Tang text, the \"Record of Clay-Jar Soup\", with its line \"the jar seethes with fragrance that drifts four ways; one jar of soup holds all the world's freshness\" [[jxich-waguan]]. A report by the Nanchang Donghu District People's Government instead dates it to the Song dynasty, taking shape in the Jiayou era (1056 CE) and so a thousand years old [[donghu-waguan]].\n\nFolk legend points to the Northern Song: in the Jiayou era a Hongzhou scholar on an outing had his servant cook fish, chicken and pork on the spot; on leaving, the servant put the leftovers and seasonings into a clay jar, filled it with spring water, sealed it tightly and buried it in the still-glowing stove ash with only a vent left open. Next day the jar was dug out and opened amid a cloud of fragrance. The method was then taken up by restaurants and spread widely among the people [[jxich-waguan]][[jxwmw-waguan]].\n\nThe craft passed on in two ways: by folk imitation — a Nanchang scholar's food, buried in stove ash, came out delicious, and ordinary people copied the idea — and by apprenticeship in restaurants, such as Li Maofa of Xinjian, who as a boy watched his mother simmer soup on a big stove and later opened a shop and took apprentices on the street in Lehua town [[jxich-waguan]]. Around the late Qing and early Republic the technique improved, the earthen stove giving way to a clay jar heated from six sides [[jxich-waguan]]."
+      },
+      "story": {
+        "zh": "北宋时，著名政治家、思想家、文学家，「唐宋八大家」之一的王安石，经江南东路刑狱至豫章，途经一煨汤店，香气诱人、门庭若市；王安石一碗尝之，顿觉鲜香醇美，其味似当年慈母所做煨汤，叹曰「汤如母爱，人间王味」[[jxich-waguan]]。\n\n民间还流传着一种说法：「瓦罐煨汤数千年，四海宾朋长流连，天下奇鲜一罐收，过了吾店无此馆。」[[jxich-waguan]]\n\n南昌人历来早餐爱喝汤。路边的遮阳棚里，摊主们用大铝缸蒸汤，铝缸里设了夹层，夹层中放着一个个砂钵，蒸出来的砂钵汤只有在早餐时才能买到[[jxwmw-waguan]]。从 20 世纪 90 年代开始，有饭店研制出大瓦罐煨汤，在南昌酒店的饭桌上很受欢迎[[jxwmw-waguan]]。\n\n1998 年，豫章大老五煨汤店开业，创始人刘慧把南昌流行的砂钵汤与瓦罐煨制相结合，研制出更加鲜美的小瓦罐汤；小瓦罐汤煨制成功后立刻替代砂钵汤，在南昌风行起来，因为店开在解放西路上、离绳金塔不远，周边几家瓦罐汤店也相继火起来，绳金塔一下子成为南昌小瓦罐汤的「发源地」，以至于后来其他店迁至别处，店名也不能少了「绳金塔」三字以示「正牌」[[jxwmw-waguan]]。\n\n如今这碗汤与米粉一道，成了南昌的城市名片——「一汤一粉一座城，有滋有味有南昌」[[jxwmw-waguan]]。",
+        "en": "In the Northern Song, Wang Anshi — statesman and one of the \"Eight Great Prose Masters of the Tang and Song\" — passed through Yuzhang and came upon a soup shop, its fragrance drawing crowds. One bowl convinced him: so fresh and mellow it reminded him of soup his mother had made, and he declared, \"Soup like a mother's love, the king of flavours among men\" [[jxich-waguan]].\n\nA folk verse adds: \"Clay-jar soup for a thousand years, guests from the four seas linger; all the world's freshness in one jar — pass my shop and you'll find it nowhere else\" [[jxich-waguan]].\n\nNanchang people have always liked soup with breakfast. Under roadside awnings vendors steamed soup in large aluminium cylinders lined with partition shelves holding clay pots, and this pot-steamed soup was sold only in the morning [[jxwmw-waguan]]. From the 1990s some restaurants developed a large-jar simmered version that became a favourite on Nanchang dining tables [[jxwmw-waguan]].\n\nIn 1998 the Yuzhang Dalaowu soup shop opened. Its founder Liu Hui combined the popular pot-steamed soup with jar simmering to create a more savoury small-jar soup; once it succeeded it quickly replaced the old style and swept Nanchang. Because the shop stood on Jiefang West Road near Shengjin Pagoda, the neighbouring soup shops flourished too, and Shengjin Pagoda became known as the birthplace of Nanchang's small-jar soup — shops that later moved away still kept the words \"Shengjin Pagoda\" in their names to prove their pedigree [[jxwmw-waguan]].\n\nToday the soup and the rice noodles together are the city's calling card: \"one soup, one noodle, one city — Nanchang has flavour\" [[jxwmw-waguan]]."
+      },
+      "technique": {
+        "zh": "工艺上，它以土陶瓦罐为容器，配以多种食材和名贵药膳，以硬质木炭六面体受热，煨制而出；其味香气扑鼻，鲜润美妙，汤色清澈，肉质鲜而不腻[[donghu-waguan]]。\n\n讲究的是一个「煨」字：不施明火、不伤食材，通过高温加热煮沸、小火煨，使食物中的蛋白质直接分解、纤维分解，保留食物的本真性[[jxich-waguan]]。同时又食药交融——既传承中国传统煨汤技艺，又汲取中药膳食的理念，应人体需求在食材中添加药材[[jxich-waguan]]。\n\n江西民间有煨汤习俗：农村用大锅大灶煮饭烧菜，灶内以稻草、柴火做燃料，灶内周围放着瓦罐或铁罐，罐中可装珍禽、野味、蔬菜等；家里来了客人，便煨上一罐珍禽汤作为高档菜肴款待客人[[donghu-waguan]]。\n\n品种上，瓦罐汤涵盖家禽（鸡、鸭、鸽）、肉食（猪、牛、羊、猪内脏）、山珍（各类菌菇、山笋、野味、蔬菜）等近百种，一罐小小的瓦罐汤，涵盖了江西民间普通常见的食材[[jxich-waguan]]。当代做法需专门定制耐高温的瓦罐，用锡纸封盖，经过长时间小火慢煨，味道全部锁在罐里不会跑掉，不仅香味浓郁，汤的色泽也呈金黄色——这与「用汽水蒸熟的」砂钵汤很不一样[[jxwmw-waguan]]。",
+        "en": "Technically it uses earthenware jars holding various ingredients and prized medicinal foods, heated from six sides by hard charcoal and slowly simmered; the result is fragrant, delicate and clear, the meat tender without greasiness [[donghu-waguan]].\n\nEverything turns on the word wei — \"to simmer\": no open flame, no damage to the ingredients, but a high-heat boil followed by a long low simmer that breaks down proteins and fibres and keeps the food's true character [[jxich-waguan]]. Food and medicine meet here too: the craft inherits the old simmering tradition while borrowing the logic of Chinese dietary therapy, adding herbs according to what the body needs [[jxich-waguan]].\n\nJiangxi villages had their own soup custom: cooking was done on big stoves fired with straw and wood, and jars or iron pots tucked around the flames held game birds, wild foods or vegetables. When guests came, a jar of game-bird soup was simmered as a dish of honour [[donghu-waguan]].\n\nVarieties run to nearly a hundred — poultry such as chicken, duck and pigeon; pork, beef, mutton and offal; and mountain foods from mushrooms and bamboo shoots to wild vegetables — so that one small jar draws on the everyday ingredients of Jiangxi [[jxich-waguan]]. Today the jars are purpose-made to withstand high heat and sealed with foil, then simmered long over a low fire so the flavour never escapes, giving a rich aroma and a golden broth quite unlike the steam-cooked clay-pot soup it replaced [[jxwmw-waguan]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "南昌瓦罐煨汤制作技艺是江西省级非物质文化遗产代表性项目：项目编号 5-Ⅷ-4，第五批，类别传统技艺，级别省级，申报地区或单位为南昌市东湖区。此前 2014 年入选南昌市第四批市级非物质文化遗产名录，2017 年入选江西省第五批省级非物质文化遗产代表性项目名录。",
+        "en": "The Nanchang clay-jar simmered soup technique is a Jiangxi provincial intangible cultural heritage item: no. 5-Ⅷ-4, fifth batch, category traditional craftsmanship, provincial level, declared by Donghu district, Nanchang. It had earlier entered Nanchang's fourth municipal heritage list in 2014 and Jiangxi's fifth provincial list in 2017.",
+        "sources": [
+          "jxich-waguan",
+          "jxwmw-waguan"
+        ]
+      },
+      {
+        "zh": "关于源头，两处口径不同：江西省非物质文化遗产研究保护中心的项目页称其「历史悠久，可上溯至春秋」，并引《吕氏春秋·本味篇》与唐《瓦罐煨汤记》为证；南昌市东湖区人民政府的报道则称其「源头可追溯到宋代，形成于嘉祐年间（公元 1056 年），距今已有千年历史」。",
+        "en": "On origins the sources differ: the Jiangxi Intangible Cultural Heritage centre's page says the craft is \"long in history, reaching back to the Spring and Autumn period\", citing the Lüshi Chunqiu and the Tang \"Record of Clay-Jar Soup\"; the Donghu District People's Government report instead says it \"can be traced to the Song dynasty, taking shape in the Jiayou era (1056 CE), a thousand years ago\".",
+        "sources": [
+          "jxich-waguan",
+          "donghu-waguan"
+        ]
+      },
+      {
+        "zh": "工艺特征：以土陶瓦罐为容器，配以多种食材和名贵药膳，以硬质木炭六面体受热煨制；讲究「不施明火、不伤食材」，通过加热煮沸、小火慢煨使蛋白质与纤维分解，保留食材本真性，并汲取中药膳食理念、应人体需求添加药材。品种涵盖家禽、猪牛羊及内脏、各类菌菇山笋野味蔬菜等近百种。",
+        "en": "Technical features: earthenware jars hold assorted ingredients and prized medicinal foods, heated from six sides by hard charcoal; the rule is \"no open flame, no harm to the ingredients\", with a boil followed by a long low simmer that breaks down proteins and fibres and keeps the food's true nature, while borrowing from Chinese dietary therapy to add herbs as the body requires. Varieties reach nearly a hundred, from poultry and pork, beef, mutton and offal to mushrooms, bamboo shoots, wild foods and vegetables.",
+        "sources": [
+          "jxich-waguan",
+          "donghu-waguan"
+        ]
+      },
+      {
+        "zh": "相传北宋政治家王安石途经豫章一家煨汤店，一碗尝之，觉得鲜香醇美，其味似当年慈母所做煨汤，叹道「汤如母爱，人间王味」。民间另有一说流传：「瓦罐煨汤数千年，四海宾朋长流连，天下奇鲜一罐收，过了吾店无此馆。」",
+        "en": "Legend has it that the Northern Song statesman Wang Anshi, passing a soup shop in Yuzhang, tasted one bowl and found it so fresh and mellow, so like the soup his mother had made, that he exclaimed, \"Soup like a mother's love, the king of flavours among men\". A folk verse also circulates: \"Clay-jar soup for a thousand years, guests from the four seas linger; all the world's freshness in one jar — pass my shop and you'll find it nowhere else\".",
+        "sources": [
+          "jxich-waguan"
+        ]
+      },
+      {
+        "zh": "余绍武是南昌瓦罐煨汤制作技艺省级代表性传承人，执掌 1998 年开业、由其母亲刘慧创办的豫章大老五煨汤店；刘慧当年把南昌流行的砂钵汤与瓦罐煨制相结合，研制出小瓦罐汤，此后小瓦罐汤替代砂钵汤在南昌风行。当代做法需定制耐高温瓦罐并以锡纸封盖，长时间小火慢煨，汤色呈金黄色；余绍武自 2011 年起自学中医药典研究药膳，2013 年将药膳汤投放市场。",
+        "en": "Yu Shaowu is a provincial-level inheritor of the craft and runs the Yuzhang Dalaowu soup shop, opened in 1998 by his mother Liu Hui; she combined Nanchang's pot-steamed soup with jar simmering to create the small-jar soup, which then swept the city in place of the old style. Today's method needs purpose-made heat-resistant jars sealed with foil and simmered long over a low fire, giving a golden broth. Yu Shaowu has studied Chinese pharmacology since 2011 and put medicinal soups on the market in 2013.",
+        "sources": [
+          "jxwmw-waguan",
+          "jxich-waguan"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "jxich-waguan",
+        "title": "江西省非物质文化遗产研究保护中心《南昌瓦罐煨汤制作技艺》项目页",
+        "url": "https://www.jxich.cn/itemInfo.html?id=591",
+        "accessed": "2026-09-29"
+      },
+      {
+        "id": "donghu-waguan",
+        "title": "南昌市东湖区人民政府《【媒体报道】央视财经频道〈消费主张〉栏目报道我区非物质文化遗产南昌瓦罐汤》",
+        "url": "https://dhq.nc.gov.cn/dhqrmzf/bmgzdt15/202312/fa3502ce84dd433b8762035dd817ff38.shtml",
+        "accessed": "2026-09-29"
+      },
+      {
+        "id": "jxwmw-waguan",
+        "title": "江西文明网（江南都市报）《一罐煨汤天下奇鲜（图）》",
+        "url": "https://wmjx.m.jxwmw.cn/news/2538835",
+        "accessed": "2026-09-29"
+      }
+    ]
+  },
+  {
+    "id": "dezhou-paji",
+    "status": "published",
+    "name": {
+      "zh": "德州扒鸡（德州五香脱骨扒鸡）",
+      "en": "Dezhou Braised Chicken"
+    },
+    "aliases": [
+      "德州扒鸡",
+      "德州五香脱骨扒鸡",
+      "五香脱骨扒鸡",
+      "德州烧鸡",
+      "扒鸡",
+      "dezhou paji",
+      "dezhou braised chicken",
+      "braised chicken"
+    ],
+    "region": {
+      "zh": "山东德州",
+      "en": "Dezhou, Shandong"
+    },
+    "tagline": {
+      "zh": "趁热一抖，骨肉分离——三百年练就的「脱骨」。",
+      "en": "Shake it while hot and the meat slips off the bone — three centuries of practice in one \"boneless\" chicken."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "德州扒鸡制作技艺是发源于山东省德州市的传统饮食制作技艺，主要流布于山东省德州市及其周边地区。它由烧鸡制作技艺演变而成，包括选料、腌制、整型、油炸、煮制、焖煨等精细步骤[[ihchina-paji]]。\n\n据史料记载，随着京杭大运河的开通，德州成为京都通达九省的御路，经济繁荣。元末明初，码头、集市上就有了叫卖烧鸡的人[[ihchina-paji]]。\n\n关于扒鸡的创制时间，两处口径不同：中国非物质文化遗产网记「康熙三十一年，以贾健才为代表的烧鸡制作艺人，采用大火煮、小火焖，文武有序地改进工艺，创制了扒鸡的原始做法，以师带徒方式传承至今」[[ihchina-paji]]；德州市人民政府《德州年鉴》记「从 1905 年左右开始，当地开始试制扒鸡，到 1911 年，几经改进，创制出别具风味的五香脱骨扒鸡」[[dezhou-paji]]。两处一致的是德州制作烧鸡相传已有 300 余年历史[[dezhou-paji]]。\n\n2014 年，德州扒鸡制作技艺列入第四批国家级非物质文化遗产代表性项目名录，申报地区或单位为山东省德州市[[ihchina-paji]]。",
+        "en": "The Dezhou braised chicken technique originates in Dezhou, Shandong, and is practised mainly in the city and its surroundings. It evolved from roast-chicken technique and involves such meticulous steps as selecting ingredients, curing, shaping, frying, boiling and simmering [[ihchina-paji]].\n\nHistorical records show that with the opening of the Grand Canal, Dezhou became an imperial road linking the capital to nine provinces and prospered. By the late Yuan and early Ming, vendors were already crying roast chicken at wharves and markets [[ihchina-paji]].\n\nOn when braised chicken was created, two accounts differ: the China Intangible Cultural Heritage website records that \"in the 31st year of Kangxi (1692), roast-chicken makers led by Jia Jiancai improved the craft with a disciplined sequence of high boiling and low simmering, creating the original method of braised chicken, passed down master to apprentice ever since\" [[ihchina-paji]]; the Dezhou Municipal People's Government's Dezhou Yearbook records that \"from around 1905 the locality began trial-making braised chicken, and by 1911, after repeated improvements, produced the distinctive five-spice boneless braised chicken\" [[dezhou-paji]]. Both agree that Dezhou has made roast chicken for more than 300 years [[dezhou-paji]].\n\nIn 2014 the technique entered China's fourth-batch national intangible cultural heritage list, declared by Dezhou, Shandong [[ihchina-paji]]."
+      },
+      "story": {
+        "zh": "德州扒鸡全称「德州五香脱骨扒鸡」。因 16 种配料中茴香、花椒、大料、桂皮、丁香等五香突出，吃起来滑嫩松软、清香不腻，称为「五香」；成品鸡趁热一抖，骨肉分离，因此叫做「脱骨」[[dezhou-paji]]。\n\n南来北往的过客将这一美味携往京沪铁路沿线各地，德州扒鸡遂名传遍天下、享誉全国，被视为丰餐佳肴和馈赠礼品，现行销全国并远销亚欧等地[[dezhou-paji]]。\n\n300 余年来，经过一代代德州扒鸡传人的传承与创新，德州扒鸡的制作加工工艺日臻完善——制成的德州扒鸡色、香、味、形俱佳，已逐步由一种小吃发展为名吃，成为地方文化符号[[ihchina-paji]]。该技艺的演变与发展还承载了许多民间传说与历史典故，具有较高的历史文化价值[[ihchina-paji]]。",
+        "en": "Its full name is \"Dezhou five-spice boneless braised chicken\". Because fennel, Sichuan pepper, star anise, cassia and clove stand out among its 16 ingredients, it eats smooth and tender, fragrant and not greasy — hence \"five-spice\"; and a finished chicken, shaken while hot, comes apart meat from bone — hence \"boneless\" [[dezhou-paji]].\n\nTravellers carried the delicacy along the Beijing–Shanghai railway, and the name spread across the country, prized as a banquet dish and a gift; it now sells nationwide and as far as Asia and Europe [[dezhou-paji]].\n\nOver more than 300 years, generation after generation of makers have refined the craft until the chicken excels in colour, aroma, taste and form, growing from a street snack into a famous regional food and a symbol of the place [[ihchina-paji]]. Its evolution also carries many folk tales and historical allusions, giving it considerable cultural value [[ihchina-paji]]."
+      },
+      "technique": {
+        "zh": "原料选自鲁北特有的大尾花鸡，以饲养十周左右的童子鸡为主料，有宰鸡、烫鸡、开膛、洗鸡、盘鸡（即造型）、上色、炸鸡、杈鸡、煮鸡、起锅、包装等大小 11 道工序，加配 16 种名贵佐料，经蜜汁浇灌、素油烹炸、精工「扒」制而成[[ihchina-paji]]。传统德州扒鸡则精选农家散养的优良大尾花鸡，重量在 0.9 公斤至 1.1 公斤之间，肥瘦适度[[dezhou-paji-gongyi]]。\n\n制作综合运用传统的烧、熏、酥、炸、卤等手段，火候讲究文武有序，配料的多少要根据季节、温度的变化而变化，每一道制作工序要求十分严格，这是德州扒鸡的独特之处[[dezhou-paji]][[dezhou-paji-gongyi]]。\n\n配料考究、配方严格，按中医配伍，既从味道入手，更从养生考虑。除了严谨的配料程序外，扒鸡汤是核心要素，其颜色金红色，香气环绕[[ihchina-paji]]。\n\n风味上，德州扒鸡造型美观，色泽金黄、黄中透红，肉质鲜嫩，清淡爽口，香味透骨，香风熏堂，抖之骨肉分离；慢品扒鸡之脯，肉质酥嫩透着谷香，细嚼其骨，骨髓如膏，回味绵长[[ihchina-paji]]。",
+        "en": "The raw material is the large-tailed spotted chicken peculiar to northern Shandong, mainly cockerels of about ten weeks [[ihchina-paji]], and traditional practice selects free-range birds of prime quality weighing 0.9 to 1.1 kg, well balanced between fat and lean [[dezhou-paji-gongyi]]. Eleven operations follow — slaughtering, scalding, gutting, washing, trussing (shaping), colouring, frying, spitting, boiling, lifting from the pot and packaging — with 16 fine seasonings, a honey glaze, vegetable-oil frying and painstaking \"braising\" [[ihchina-paji]].\n\nThe making combines the traditional methods of roasting, smoking, crisping, frying and marinating; the heat must follow a disciplined sequence, and the quantity of seasonings changes with the season and temperature, with each step held to strict standards — this is what sets Dezhou braised chicken apart [[dezhou-paji]][[dezhou-paji-gongyi]].\n\nSeasonings are carefully chosen and the formula strict, composed on the principles of Chinese medicine so that flavour and health are considered together. Beyond the seasoning sequence, the braising broth is the core element, golden-red in colour and wreathed in aroma [[ihchina-paji]].\n\nIn flavour and appearance the chicken is shapely, golden with a blush of red, tender, light and refreshing, its fragrance reaching the bone and filling the room; shaken, the meat falls from the bone. Savour the breast slowly and it is crisp-tender with a scent of grain; chew the bone and the marrow is like paste, with a long finish [[ihchina-paji]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "德州扒鸡制作技艺于 2014 年列入第四批国家级非物质文化遗产代表性项目名录：项目序号 1347，项目编号 Ⅷ-233，类别传统技艺，申报地区或单位为山东省德州市，保护单位为山东德州扒鸡股份有限公司。",
+        "en": "The Dezhou braised chicken technique entered China's fourth-batch national intangible cultural heritage list in 2014: sequence no. 1347, item no. Ⅷ-233, category traditional craftsmanship, declared by Dezhou, Shandong, safeguarded by Shandong Dezhou Braised Chicken Co., Ltd.",
+        "sources": [
+          "ihchina-paji"
+        ]
+      },
+      {
+        "zh": "关于创制时间，两处口径不同：中国非物质文化遗产网记「康熙三十一年，以贾健才为代表的烧鸡制作艺人，采用大火煮、小火焖，文武有序地改进工艺，创制了扒鸡的原始做法，以师带徒方式传承至今」；德州市人民政府《德州年鉴》记「从 1905 年左右开始，当地开始试制扒鸡，到 1911 年，几经改进，创制出别具风味的五香脱骨扒鸡」。两处一致的是德州制作烧鸡相传已有 300 余年历史。",
+        "en": "On when it was created the sources differ: the China Intangible Cultural Heritage website records that \"in the 31st year of Kangxi (1692), roast-chicken makers led by Jia Jiancai improved the craft with a disciplined sequence of high boiling and low simmering, creating the original method, passed down master to apprentice\"; the Dezhou Municipal People's Government's Dezhou Yearbook records that \"from around 1905 the locality began trial-making braised chicken and by 1911 produced the distinctive five-spice boneless braised chicken\". Both agree Dezhou has made roast chicken for over 300 years.",
+        "sources": [
+          "ihchina-paji",
+          "dezhou-paji"
+        ]
+      },
+      {
+        "zh": "工艺规格：原料选自鲁北特有的大尾花鸡，以饲养十周左右的童子鸡为主料；传统做法精选农家散养的优良大尾花鸡，重量在 0.9 公斤至 1.1 公斤之间，肥瘦适度。共有宰鸡、烫鸡、开膛、洗鸡、盘鸡（造型）、上色、炸鸡、杈鸡、煮鸡、起锅、包装等大小 11 道工序，加配 16 种名贵佐料，经蜜汁浇灌、素油烹炸、精工「扒」制而成。",
+        "en": "Specifications: the raw material is the large-tailed spotted chicken peculiar to northern Shandong, mainly cockerels of about ten weeks; traditional practice selects free-range birds of prime quality weighing 0.9 to 1.1 kg, well balanced between fat and lean. Eleven operations follow — slaughtering, scalding, gutting, washing, trussing, colouring, frying, spitting, boiling, lifting and packaging — with 16 fine seasonings, a honey glaze, vegetable-oil frying and painstaking braising.",
+        "sources": [
+          "ihchina-paji",
+          "dezhou-paji-gongyi"
+        ]
+      },
+      {
+        "zh": "据史料记载，随着京杭大运河的开通，德州成为京都通达九省的御路，经济繁荣，元末明初码头、集市上就有了叫卖烧鸡的人；南来北往的过客把德州扒鸡携往京沪铁路沿线各地，德州扒鸡遂名传遍天下，被视为丰餐佳肴和馈赠礼品，现行销全国并远销亚欧等地。",
+        "en": "Historical records show that with the opening of the Grand Canal, Dezhou became an imperial road linking the capital to nine provinces and prospered; by the late Yuan and early Ming vendors sold roast chicken at wharves and markets. Travellers carried the braised chicken along the Beijing–Shanghai railway, and the name spread across the country as a banquet dish and gift; it now sells nationwide and as far as Asia and Europe.",
+        "sources": [
+          "ihchina-paji",
+          "dezhou-paji"
+        ]
+      },
+      {
+        "zh": "「五香」与「脱骨」的由来：因 16 种配料中茴香、花椒、大料、桂皮、丁香等五香突出，吃起来滑嫩松软、清香不腻，故称「五香」；成品鸡趁热一抖，骨肉分离，故称「脱骨」。配料考究、配方严格，按中医配伍，既从味道入手，更从养生考虑；扒鸡汤是核心要素，颜色金红色、香气环绕。",
+        "en": "The names explained: fennel, Sichuan pepper, star anise, cassia and clove stand out among the 16 ingredients, giving a smooth, tender, fragrant and not greasy bite — hence \"five-spice\"; and a finished chicken shaken while hot separates meat from bone — hence \"boneless\". Seasonings are carefully chosen and the formula strict, composed on Chinese medical principles so flavour and health are weighed together; the braising broth is the core element, golden-red and wreathed in aroma.",
+        "sources": [
+          "dezhou-paji",
+          "ihchina-paji"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-paji",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《德州扒鸡制作技艺》项目页",
+        "url": "https://www.ihchina.cn/project_details/14758/",
+        "accessed": "2026-09-29"
+      },
+      {
+        "id": "dezhou-paji",
+        "title": "德州市人民政府《德州扒鸡》（德州年鉴）",
+        "url": "https://www.dezhou.gov.cn/n19182539/n19182546/n90676957/c90677243/content.html",
+        "accessed": "2026-09-29"
+      },
+      {
+        "id": "dezhou-paji-gongyi",
+        "title": "德州市人民政府《德州扒鸡制作工艺》（德州年鉴）",
+        "url": "https://www.dezhou.gov.cn/n19182539/n19182546/n19182640/c29053323/content.html",
+        "accessed": "2026-09-29"
+      }
+    ]
+  }
+]

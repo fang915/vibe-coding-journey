@@ -1,0 +1,246 @@
+[
+  {
+    "id": "chicken-stewed-with-mushrooms",
+    "status": "published",
+    "name": {
+      "zh": "小鸡炖蘑菇",
+      "en": "Chicken Stewed with Mushrooms"
+    },
+    "aliases": [
+      "小鸡炖蘑菇",
+      "小鸡炖榛蘑",
+      "笨鸡炖蘑菇",
+      "蘑菇炖小鸡",
+      "本溪笨鸡炖蘑菇",
+      "chicken stewed with mushrooms",
+      "chicken and mushroom stew",
+      "xiaojidunmogu"
+    ],
+    "region": {
+      "zh": "辽宁",
+      "en": "Liaoning"
+    },
+    "tagline": {
+      "zh": "辽菜里最家常的一口锅：慢火，细做。",
+      "en": "The homeliest pot in Liaoning cooking — a low flame and a lot of patience."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "小鸡炖蘑菇是辽宁的家常名菜，2024 年入选辽宁省商务厅公示的「美市美食」辽宁地标美食名单——公示的名单里，本溪的「本溪笨鸡炖蘑菇」位列其中[[ln-swtw]]。\n\n它依托的是辽菜这套烹饪体系。辽菜是辽宁菜系的简称，利用辽宁产的绿色食品原料和特有的烹饪工艺，结合辽宁地区的民族特点、区域特点、饮食习俗和烹饪技法创建而成，以宫廷菜、王府菜、市井菜、民俗菜、民族菜和海鲜菜为基本框架[[ihchina-liaocai]]。\n\n2014 年，「辽菜传统烹饪技艺」被列入第四批国家级非物质文化遗产代表性项目名录，编号 Ⅷ-227，申报地区为辽宁省沈阳市[[ihchina-liaocai]]。",
+        "en": "Chicken stewed with mushrooms is a homely Liaoning classic; in 2024 it appeared on a list of Liaoning geographical-indication foods published for public comment by the provincial Department of Commerce, where \"Benxi free-range chicken stewed with mushrooms\" is named under Benxi [[ln-swtw]].\n\nThe dish rests on the wider Liaoning cooking system. \"Liao cuisine\" uses Liaoning's own green produce and distinctive techniques, shaped by the region's ethnic mix, geography and eating customs; it is built around court dishes, princely-house dishes, street food, folk dishes, ethnic dishes and seafood [[ihchina-liaocai]].\n\nIn 2014 the traditional cooking technique of Liao cuisine was added to China's fourth batch of national intangible cultural heritage (item no. Ⅷ-227), declared by Shenyang, Liaoning [[ihchina-liaocai]]."
+      },
+      "story": {
+        "zh": "辽菜的底子是慢慢攒出来的。这门技艺从辽金时期就已有了相当水平[[ihchina-liaocai]]。\n\n辽宁是清王朝的发祥地，老一代传承人梁忠、王占山、颜庆鸿等人，把鲁菜传统技艺的精华与满、蒙、朝、汉各民族的菜式特点结合起来，再运用辽宁本地的原材料，结合东北的气候山水优势，逐步形成了辽菜流派[[ihchina-liaocai]]。\n\n他们的弟子又把辽菜带到民间，在辽宁各地创办了多家饭店企业，构成了辽菜的市场体系。近年来通过恢复和保护，辽菜的师徒传承得以良性发展[[ihchina-liaocai]]。",
+        "en": "Liao cuisine was built up gradually, reaching a considerable standard as early as the Liao and Jin dynasties [[ihchina-liaocai]].\n\nLiaoning was the birthplace of the Qing dynasty. An earlier generation of inheritors — Liang Zhong, Wang Zhanshan and Yan Qinghong among them — combined the best of Shandong cooking with the characteristics of Manchu, Mongolian, Korean and Han dishes, applied Liaoning's own ingredients and worked with the region's climate and landscape to form what became the Liao school [[ihchina-liaocai]].\n\nTheir students then carried it into ordinary life, opening restaurants across Liaoning and building the cuisine's commercial base. Restoration and protection work in recent years has allowed master-to-apprentice transmission to develop well [[ihchina-liaocai]]."
+      },
+      "technique": {
+        "zh": "辽菜品种丰富，特别注重地方特产原料的使用，代表名店有沈阳鹿鸣春饭店和大连群英楼[[ihchina-liaocai]]。\n\n它擅长扒、熘、烧、炸、烩、烤等 30 余种技法，尤以「扒」著称——扒菜里的「大翻勺」是辽菜的独门绝技，扒三白等菜肴出勺后整齐划一、不变样[[ihchina-liaocai]]。\n\n操作上主张慢火细做、讲究调味，具有「一菜多味、咸甜分明、酥烂香脆、色艳味浓、紧汁抱芡、富于营养」的特点。总体的特征是讲究火候、醇厚香浓、原汁原味、朴素实惠，菜肴烹制嫩而不生、透而不老、烂而不柴、外脆内嫩、外酥内烂，以鲜味为核心，兼容酸、甜、苦、辣、咸[[ihchina-liaocai]]。",
+        "en": "Liao cuisine is rich in variety and pays particular attention to local ingredients; the landmark restaurants are Shenyang's Lumingchun and Dalian's Qunyinglou [[ihchina-liaocai]].\n\nIt excels at more than thirty techniques — braising, quick-frying, simmering, deep-frying, stewing and roasting among them — and is best known for pa, a braising method. The \"big wok flip\" used in pa dishes is a Liao speciality: dishes such as pa san bai come out of the wok uniform and unbroken [[ihchina-liaocai]].\n\nThe approach favours low heat, careful work and attention to seasoning, giving dishes that are multi-layered in flavour, distinctly savoury or sweet, tender yet crisp, richly coloured and generously sauced. Overall the cuisine is about heat control, deep savour, original flavours and honest value; dishes are tender without being raw, thoroughly cooked without going mushy, crisp outside and soft within — savoury at the core and accommodating of sour, sweet, bitter, spicy and salty [[ihchina-liaocai]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "2024 年，辽宁省商务厅公示的「美市美食」辽宁地标美食评审认定结果中，本溪的「本溪笨鸡炖蘑菇」入选。",
+        "en": "In 2024 the Liaoning Provincial Department of Commerce published for comment the results of its \"Beautiful Market Foods\" Liaoning geographical-indication food review; \"Benxi free-range chicken stewed with mushrooms\" was among the entries from Benxi.",
+        "sources": ["ln-swtw"]
+      },
+      {
+        "zh": "小鸡炖蘑菇所属的「辽菜传统烹饪技艺」于 2014 年（第四批）列入国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-227，项目序号 1341，类别为传统技艺，申报地区为辽宁省沈阳市，保护单位为沈阳鹿鸣春饭店有限公司。",
+        "en": "The traditional cooking technique of Liao cuisine, on which the dish rests, was added to China's fourth-batch national intangible cultural heritage list in 2014: item no. Ⅷ-227, sequence no. 1341, category traditional craftsmanship, declared by Shenyang, Liaoning, and safeguarded by Shenyang Lumingchun Restaurant Co., Ltd.",
+        "sources": ["ihchina-liaocai"]
+      },
+      {
+        "zh": "辽菜以宫廷菜、王府菜、市井菜、民俗菜、民族菜和海鲜菜为基本框架，目前主要流布于辽宁沈阳、锦州、丹东、营口、葫芦岛、铁岭、抚顺、辽阳、鞍山、朝阳、阜新等地。",
+        "en": "Liao cuisine is built around court dishes, princely-house dishes, street food, folk dishes, ethnic dishes and seafood, and is currently found across Shenyang, Jinzhou, Dandong, Yingkou, Huludao, Tieling, Fushun, Liaoyang, Anshan, Chaoyang and Fuxin.",
+        "sources": ["ihchina-liaocai"]
+      },
+      {
+        "zh": "辽菜擅长扒、熘、烧、炸、烩、烤等 30 余种技法，尤以「扒」著称；扒菜中的「大翻勺」是辽菜独门绝技，扒三白等菜肴出勺后整齐划一、不变样。",
+        "en": "Liao cuisine excels at more than thirty techniques including braising, quick-frying, simmering, deep-frying, stewing and roasting, and is best known for pa-style braising. The \"big wok flip\" used in those dishes is a Liao speciality that leaves dishes such as pa san bai uniform and intact.",
+        "sources": ["ihchina-liaocai"]
+      },
+      {
+        "zh": "辽菜烹饪技艺从辽金时期就已具有相当水平。老一代传承人梁忠、王占山、颜庆鸿等把鲁菜传统技艺精华与满、蒙、朝、汉民族菜的特点相结合，运用辽宁原材料，逐步形成了辽菜流派。",
+        "en": "Liao cooking had already reached a considerable standard in the Liao and Jin dynasties. Inheritors of the earlier generation — Liang Zhong, Wang Zhanshan and Yan Qinghong among them — combined the essence of Shandong cooking with Manchu, Mongolian, Korean and Han characteristics and Liaoning ingredients to form the Liao school.",
+        "sources": ["ihchina-liaocai"]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-liaocai",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《辽菜传统烹饪技艺》项目页",
+        "url": "https://www.ihchina.cn/project_details/14751",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "ln-swtw",
+        "title": "辽宁省商务厅《2024「美市美食」辽宁地标美食评审认定结果公示》（2024-10-29）",
+        "url": "https://swt.ln.gov.cn/swt/ywxx/tzgg/2024102916531538698/index.shtml",
+        "accessed": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "guo-bao-rou",
+    "status": "published",
+    "name": {
+      "zh": "锅包肉",
+      "en": "Guo Bao Rou (Harbin Sweet-and-Sour Pork)"
+    },
+    "aliases": [
+      "锅包肉",
+      "锅爆肉",
+      "老式锅包肉",
+      "哈尔滨锅包肉",
+      "焦炒肉片",
+      "guo bao rou",
+      "guobaorou",
+      "double cooked pork slices",
+      "harbin sweet and sour pork"
+    ],
+    "region": {
+      "zh": "黑龙江哈尔滨",
+      "en": "Harbin, Heilongjiang"
+    },
+    "tagline": {
+      "zh": "为了外国客人的一口酸甜，改出了一座城市的味觉名片。",
+      "en": "A sweet-and-sour adjustment made for foreign guests became a city's signature flavour."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "锅包肉原名「锅爆肉」，出自哈尔滨的道台府。清朝末期中东铁路通车后，哈尔滨迅速成为国际商埠，俄国人、犹太人、波兰人等各种面孔涌入，也带来了喜爱甜酸的饮食偏好[[xinhua-guobaorou]]。\n\n因应频繁的俄式外交宴请，道台府的厨师郑兴文在鲁菜「焦炒肉片」的基础上加入糖与醋，把咸鲜改成酸甜，创制出了「锅爆肉」[[xinhua-guobaorou]]。\n\n关于改名的说法是：外国人发不准「爆」这个音，久而久之读成了「包」，「锅爆肉」也就成了今天的「锅包肉」[[hljszw]]。",
+        "en": "Guo bao rou was originally called guo bao rou with a different second character, meaning \"explosion\", and it came out of Harbin's Daotai-fu — the office of the circuit intendant. After the Chinese Eastern Railway opened in the late Qing, Harbin quickly became an international trading port; Russians, Jews, Poles and others arrived, bringing with them a taste for sweet-and-sour food [[xinhua-guobaorou]].\n\nTo suit the frequent Russian diplomatic banquets, the office's chef Zheng Xingwen took the Shandong dish \"stir-fried pork slices\" and added sugar and vinegar, turning its savoury profile sweet-and-sour [[xinhua-guobaorou]].\n\nThe name change is explained this way: foreign diners could not pronounce the second character correctly and it drifted into the character for \"wrap\", so the dish became known as guo bao rou [[hljszw]]."
+      },
+      "story": {
+        "zh": "1907 年，郑兴文来到哈尔滨。因为滨江关道经常接待外国客人，他就琢磨怎么让外国人也喜欢这道菜，想起自己在北京经营真味居时，那些驻华使馆的官员喜爱甜酸食品，于是决定试着改口，加入糖醋[[hljszw]]。\n\n把铁锅烧热、急火快炒、把汁淋到锅里浸透到肉里，这道菜起初被起名叫「锅爆肉」。请俄国人品尝，他们连连叫好[[hljszw]]。\n\n1911 年 4 月 3 日，清政府在奉天（今沈阳）召开有十二个国家出席的万国鼠疫研究会——这是中国第一次召开国际科研大会。大会给伍连德颁发了「鼠疫斗士」匾牌，也给郑兴文颁发了「滨江膳祖」匾牌[[hljszw]]。",
+        "en": "Zheng Xingwen arrived in Harbin in 1907. Because the Harbin circuit office frequently hosted foreign guests, he set about making the dish appeal to them, recalling that embassy officials had favoured sweet-and-sour food when he ran a restaurant in Beijing — so he adjusted the seasoning and added sugar and vinegar [[hljszw]].\n\nHe heated the iron wok, cooked fast over high heat and poured the sauce in so it soaked into the meat. The dish was at first called \"guo bao rou\" with the character meaning \"explosion\". Russian guests pronounced it delicious [[hljszw]].\n\nOn 3 April 1911 the Qing government convened the International Plague Conference in Fengtian — present-day Shenyang — with twelve countries attending; it was China's first international scientific congress. The conference awarded Wu Lien-teh a plaque as a \"plague fighter\", and awarded Zheng Xingwen the title \"ancestor of Harbin cuisine\" [[hljszw]]."
+      },
+      "technique": {
+        "zh": "锅包肉在 1911 年那次大会上还经过一次改良。郑兴文注意到代表们虽然喜欢这道菜，但每一桌都有剩余——原来这种火候菜存放时间一长就容易发艮，人们就不爱吃了。于是他把「烹汁」改为「熘汁」，又增加了蕃茄酱让颜色更鲜艳，并强调二次油炸：一次炸使肉里嫩、捞出能保留水分不致干硬；再炸使其外焦[[hljszw]]。他还提醒别用蛋清抓糊，以免松软影响脆度[[hljszw]]。\n\n一般菜肴讲究色、香、味、型，这道菜还要再加一个「声」——咀嚼时应该发出类似吃苞米花的那种声音，这是酥脆的标志[[hljszw]]。\n\n1922 年，郑家在道里西十道街南侧经营老厨家饭店，经长子郑义林建议，去掉了锅包肉中的水果配料——老厨家是中餐饭店，不宜做颇像西餐的菜；同时恢复了添加姜丝、葱丝、香菜梗的做法，但保留了甜酸口[[hljszw]]。",
+        "en": "The dish was refined again at the 1911 conference. Zheng Xingwen noticed that although delegates liked it, plates kept coming back with leftovers — a dish cooked to order toughens if it sits, and people stop enjoying it. So he switched from a \"cooked-in sauce\" to a \"dressed sauce\", added tomato paste for a brighter colour, and insisted on double frying: the first fry keeps the inside tender and holds in moisture so it does not dry out, the second gives a crisp exterior [[hljszw]]. He also warned against using egg white in the batter, which would soften it and cost the crunch [[hljszw]].\n\nMost dishes are judged on colour, aroma, taste and appearance; this one adds a fifth — sound. Biting into it should produce a noise like eating popcorn, and that is the mark of proper crispness [[hljszw]].\n\nIn 1922, when the Zheng family ran the Laochujia restaurant on the south side of Xishidao Street in Daoli, the eldest son Zheng Yilin suggested dropping the fruit from the recipe — Laochujia was a Chinese restaurant and should not serve something so close to a Western dish. Shredded ginger, spring onion and coriander stem were restored instead, while the sweet-and-sour profile was kept [[hljszw]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "锅包肉原名「锅爆肉」，由哈尔滨道台府（滨江关道）厨师郑兴文创制。1907 年郑兴文到哈尔滨后，为适应经常来道台府的外国客人（尤其是俄罗斯人）的口味，把原本咸鲜的「焦炒肉片」改成了糖醋酸甜口。",
+        "en": "Guo bao rou was originally called guo bao rou with a different character, and was created by Zheng Xingwen, chef at Harbin's circuit-intendant office. After arriving in Harbin in 1907 he turned the savoury \"stir-fried pork slices\" into a sweet-and-sour dish to suit the foreign guests — Russians in particular — who frequented the office.",
+        "sources": ["hljszw", "xinhua-guobaorou"]
+      },
+      {
+        "zh": "因用急火快炒、把汁淋进锅里浸透肉片，这道菜起初叫「锅爆肉」；外国人发不准「爆」字，久而久之读成「包」，「锅包肉」之名由此而来。",
+        "en": "Because it was cooked fast over high heat with the sauce poured in to soak the meat, the dish was first called \"guo bao rou\" with the character for \"explosion\"; foreign diners could not pronounce it accurately and it shifted to the character for \"wrap\", giving the modern name.",
+        "sources": ["hljszw"]
+      },
+      {
+        "zh": "1911 年 4 月，清政府在奉天（今沈阳）召开有十二个国家出席的万国鼠疫研究会，郑兴文被点名出任会议总厨。他注意到锅包肉每桌都有剩余，原因是火候菜存放久了容易发艮，于是把「烹汁」改为「熘汁」并加入蕃茄酱，还强调二次油炸。",
+        "en": "In April 1911 the Qing government convened the International Plague Conference in Fengtian — today's Shenyang — with twelve countries attending, and Zheng Xingwen was specifically requested as head chef. Noticing that the guo bao rou was coming back uneaten because a made-to-order dish toughens as it sits, he changed from a cooked-in sauce to a dressed sauce, added tomato paste and insisted on double frying.",
+        "sources": ["hljszw"]
+      },
+      {
+        "zh": "1922 年，郑家在经营老厨家饭店时，经长子郑义林建议去掉锅包肉中的水果配料，并恢复添加姜丝、葱丝、香菜梗的做法，但保留了甜酸口。",
+        "en": "In 1922, when the Zheng family ran the Laochujia restaurant, the eldest son Zheng Yilin suggested removing the fruit from the recipe and restoring shredded ginger, spring onion and coriander stem — while keeping the sweet-and-sour taste.",
+        "sources": ["hljszw"]
+      },
+      {
+        "zh": "老式锅包肉讲究「汁要现调、醋要炝锅」；肉片裹上淀粉滑入热油时，老师傅靠听声音辨别火候——声音清脆就是火候正好，发闷则欠点火。",
+        "en": "Old-style guo bao rou insists that the sauce be mixed to order and the vinegar flashed in the wok. As the starch-coated pork slices go into the hot oil, experienced cooks judge the heat by ear — a clear, crisp sound means the timing is right; a dull one means it needs longer.",
+        "sources": ["xinhua-guobaorou"]
+      }
+    ],
+    "sources": [
+      {
+        "id": "hljszw",
+        "title": "中共黑龙江省委史志研究室《道台府的四道传世菜肴的故事》",
+        "url": "https://www.hljszw.org.cn/news/2684.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "xinhua-guobaorou",
+        "title": "新华网《新华走笔丨一声「滋啦」里的冰城百年》（2025-11-14）",
+        "url": "https://www.news.cn/politics/20251114/bd54df7bb93b450eb17dcd6c1806c8f8/c.html",
+        "accessed": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "korean-ethnic-paocai",
+    "status": "published",
+    "name": {
+      "zh": "朝鲜族泡菜",
+      "en": "Korean Ethnic Paocai (Kimchi)"
+    },
+    "aliases": [
+      "朝鲜族泡菜",
+      "辣白菜",
+      "朝鲜族辣白菜",
+      "泡菜",
+      "泡菜制作技艺",
+      "kimchi",
+      "korean ethnic paocai",
+      "paocai"
+    ],
+    "region": {
+      "zh": "吉林延边",
+      "en": "Yanbian, Jilin"
+    },
+    "tagline": {
+      "zh": "一缸泡菜要准备整整一年：春天腌鱼酱，初秋备辣椒。",
+      "en": "A jar of paocai takes a whole year of preparation — fish sauce in spring, chillies in early autumn."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "朝鲜族泡菜是以白菜、萝卜等蔬菜为主要原料，经过一系列加工发酵流程制作传统发酵食品的传统手工技艺[[ihchina-paocai]]。\n\n在东北地区，特别是吉林省延边州等朝鲜族世居地区，泡菜是朝鲜族人们一日三餐不可缺少的佐餐副食，这也是当地成为这一技艺主要流布地区的原因[[ihchina-paocai]]。\n\n2014 年，「泡菜制作技艺（朝鲜族泡菜制作技艺）」被列入第四批国家级非物质文化遗产代表性项目名录，编号 Ⅷ-228，申报地区为吉林省延吉市[[ihchina-paocai]]。",
+        "en": "Korean ethnic paocai is a traditional handicraft in which cabbage, radish and other vegetables are turned into a fermented food through a sequence of processing steps [[ihchina-paocai]].\n\nIn the northeast, and especially in Korean communities such as Yanbian Prefecture in Jilin, paocai is an indispensable side dish at all three daily meals — which is why the region became the craft's main home [[ihchina-paocai]].\n\nIn 2014 the technique was added to China's fourth batch of national intangible cultural heritage (item no. Ⅷ-228), declared by Yanji City in Jilin [[ihchina-paocai]]."
+      },
+      "story": {
+        "zh": "朝鲜族泡菜的历史很悠久，最初的历史记录可以追溯到《三国志·魏志》[[ihchina-paocai]]。古代的泡菜用咸盐或醋腌制；16 世纪中叶辣椒传入以后，现代传承的泡菜制作技艺才初见雏形[[ihchina-paocai]]。\n\n腌制泡菜是家庭妇女必学必会的手艺，这也是当下这一技艺得以传承的群众基础[[ihchina-paocai]]。\n\n对朝鲜族民众来说，腌制泡菜还是一种冬季文化：一家腌菜，邻里会纷纷来帮忙，女性分担腌制，男性收拾地窖，一起分享成果。这种协作体现了人们的社区归属感，使邻里之间相处和睦，家庭美德和社会公德得以弘扬[[ihchina-paocai]]。",
+        "en": "Paocai has a long history: the earliest written record goes back to the Record of Wei in the Records of the Three Kingdoms [[ihchina-paocai]]. Ancient versions were preserved with salt or vinegar; only after chillies arrived in the mid-16th century did the technique as it is passed down today begin to take shape [[ihchina-paocai]].\n\nMaking paocai was a skill every woman in the household was expected to master, and that is the popular base on which the craft survives [[ihchina-paocai]].\n\nFor Korean communities, paocai-making is also a winter culture: when one household makes a batch, neighbours come to help — women share the curing, men sort out the cellar, and the results are shared. That cooperation builds a sense of community, keeps neighbourly relations harmonious and reinforces both family and civic virtues [[ihchina-paocai]]."
+      },
+      "technique": {
+        "zh": "从广义上讲，朝鲜族泡菜包括泡菜、小咸菜、酱腌咸菜，其中最常见的是以白菜为主料腌制的咸菜[[ihchina-paocai]]。\n\n制作技艺的工序包括初渍、调制作料、涂抹作料、窖藏发酵等[[ihchina-paocai]]。用辣椒、大蒜、生姜等调味品腌制，使原来只有咸味或酸味的泡菜，具有辣、咸、甜、酸等多种味道，营养也更加丰富[[ihchina-paocai]]。\n\n这门技艺以制作辣白菜为主。过冬泡菜虽然在初冬才制作，但需要经过一整年的准备：春天就要开始腌制鱼酱，初秋的时候准备辣椒粉与大蒜，各种蔬菜也要经过半年才能收获，因而需要长期的准备、因时而作[[ihchina-paocai]]。腌制技艺的特点体现在善于选料、多次腌渍、使用陈盐等方面，制作出的泡菜咸淡适度、清脆爽口，色泽鲜艳、保鲜性好[[ihchina-paocai]]。",
+        "en": "In the broad sense Korean ethnic paocai covers pickled vegetables, small salted side dishes and soy-sauce pickles, the most common being cabbage [[ihchina-paocai]].\n\nThe steps run through initial brining, preparing the seasoning mix, coating the vegetables with it, and cellaring them to ferment [[ihchina-paocai]]. Seasoned with chilli, garlic and ginger, what was once simply salty or sour gains a range of flavours — spicy, salty, sweet and sour — and better nutrition [[ihchina-paocai]].\n\nThe craft centres on making spicy cabbage. Although winter paocai is made in early winter, it takes a whole year of preparation: fish sauce is started in spring, chilli powder and garlic are readied in early autumn, and the vegetables themselves need half a year to grow — so the work follows the seasons [[ihchina-paocai]]. The technique is characterised by careful selection of ingredients, repeated brining and the use of aged salt; the result is well-balanced, crisp and refreshing, brightly coloured and long-lasting [[ihchina-paocai]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "「泡菜制作技艺（朝鲜族泡菜制作技艺）」于 2014 年（第四批）列入国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-228，项目序号 1342，类别为传统技艺，申报地区为吉林省延吉市，保护单位为延吉友谊有限公司。",
+        "en": "The paocai-making technique of the Korean ethnic group was added to China's fourth-batch national intangible cultural heritage list in 2014: item no. Ⅷ-228, sequence no. 1342, category traditional craftsmanship, declared by Yanji City, Jilin, and safeguarded by Yanji Friendship Co., Ltd.",
+        "sources": ["ihchina-paocai"]
+      },
+      {
+        "zh": "该技艺以白菜、萝卜等蔬菜为主要原料，经一系列加工发酵流程制成，工序包括初渍、调制作料、涂抹作料、窖藏发酵等。",
+        "en": "The craft uses cabbage, radish and other vegetables as its main materials, taking them through a sequence of processing and fermentation steps: initial brining, preparing the seasoning mix, coating the vegetables and cellaring them to ferment.",
+        "sources": ["ihchina-paocai"]
+      },
+      {
+        "zh": "用辣椒、大蒜、生姜等调味品腌制，使原来只有咸味或酸味的泡菜具有辣、咸、甜、酸等多种味道，营养也更加丰富。",
+        "en": "Seasoned with chilli, garlic and ginger, what were once only salty or sour pickles take on spicy, salty, sweet and sour flavours together, with richer nutrition as well.",
+        "sources": ["ihchina-paocai"]
+      },
+      {
+        "zh": "朝鲜族泡菜最初的历史记录可追溯至《三国志·魏志》；16 世纪中叶辣椒传入以后，现代传承的泡菜制作技艺才初见雏形。",
+        "en": "The earliest written record of Korean ethnic paocai goes back to the Record of Wei in the Records of the Three Kingdoms; only after chillies arrived in the mid-16th century did the technique as it is passed down today begin to take shape.",
+        "sources": ["ihchina-paocai"]
+      },
+      {
+        "zh": "在吉林延边等朝鲜族世居地区，泡菜是一日三餐不可缺少的佐餐副食。腌制泡菜还是一种冬季文化：一家腌菜邻里来帮，女性分担腌制、男性收拾地窖，成果共同分享。",
+        "en": "In Korean communities such as Yanbian in Jilin, paocai is an indispensable side dish at all three daily meals. Making it is also a winter culture: neighbours help each other, women share the curing, men sort out the cellar, and the results are shared.",
+        "sources": ["ihchina-paocai"]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-paocai",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《泡菜制作技艺（朝鲜族泡菜制作技艺）》项目页",
+        "url": "https://www.ihchina.cn/art/detail/id/14752.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "yanji-gov",
+        "title": "延吉市人民政府《延吉市非物质文化遗产传承项目名录》（延吉市文化广播电视和旅游局，2023-10-31）",
+        "url": "http://www.yanji.gov.cn/yjszfxxgkw/gzbm/cyqsjj/xxgkml/202310/t20231031_436536.html",
+        "accessed": "2026-09-28"
+      }
+    ]
+  }
+]

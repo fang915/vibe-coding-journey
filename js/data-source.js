@@ -44,8 +44,16 @@ window.DataSource = (function () {
       return Promise.reject(new Error('调试开关生效：模拟读取数据失败（?state=error）'));
     }
 
-    /* ---- 正常流程：读本地 mock 数据文件 ---- */
-    return fetch(DATA_URL)
+    /* ---- 正常流程：读本地 mock 数据文件 ----
+
+       cache: 'no-cache' 是必须的，别删。
+       'no-cache' 不是"不用缓存"，而是"用之前先问服务器一句：变了没有"——
+       没变就回 304，照样省流量；变了就拿到新内容。
+       不加它的后果（2026-09-28 实测）：这个 .json 没有版本号，
+       浏览器会按启发式规则自己算一个"新鲜期"，在期内**根本不回源**，
+       于是数据文件已经 12 道菜了，页面上还是旧的 5 道。
+       CSS / JS 有 ?v= 版本号可以兜住，这个 fetch 没有，只能在这里兜。 */
+    return fetch(DATA_URL, { cache: 'no-cache' })
       .then(function (res) {
         if (!res.ok) { throw new Error('HTTP ' + res.status); }
         return res.json();

@@ -1,0 +1,349 @@
+[
+  {
+    "id": "beijing-roast-duck",
+    "status": "published",
+    "name": {
+      "zh": "北京烤鸭",
+      "en": "Beijing Roast Duck (Peking Duck)"
+    },
+    "aliases": [
+      "烤鸭",
+      "北京烤鸭",
+      "全聚德烤鸭",
+      "便宜坊烤鸭",
+      "挂炉烤鸭",
+      "焖炉烤鸭",
+      "北京填鸭",
+      "beijing roast duck",
+      "peking duck",
+      "roast duck"
+    ],
+    "region": {
+      "zh": "北京",
+      "en": "Beijing"
+    },
+    "tagline": {
+      "zh": "一只鸭子，两种火：明火的挂炉，暗火的焖炉。",
+      "en": "One bird, two fires — the open flame of the hanging oven and the banked heat of the closed one."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "北京烤鸭出自北京。它古称「烧鸭子」「炉烧鸭」「南炉鸭」等，据元代《饮膳正要》记载，当时宫廷里已经有烧鸭子；清代《帝京岁时纪胜》《都门杂记》也记载，宫廷御膳房每逢中秋佳节，除桂花月饼之外还要备「南炉鸭」供帝王享用，清高宗（乾隆）对此尤为喜爱[[ihchina-quanjude]]。\n\n北京的烤鸭店以便宜坊、全聚德为主：便宜坊创始于明代永乐十四年（1416），全聚德创始于清代同治三年（1864），两家都有很长的历史[[ihchina-quanjude]]。\n\n2008 年，烤鸭技艺被列入第二批国家级非物质文化遗产代表性项目名录（编号 Ⅷ-167），其中包含「全聚德挂炉烤鸭技艺」与「便宜坊焖炉烤鸭技艺」两个子项[[ihchina-quanjude]]。",
+        "en": "Beijing roast duck comes from Beijing. It was historically known as \"shaoyazi\", \"lushaoya\" or \"nanluya\"; the Yuan-dynasty dietary text Yinshan Zhengyao records that roast duck was already served at court [[ihchina-quanjude]]. Qing-era sources note that at Mid-Autumn the imperial kitchen prepared \"southern oven duck\" alongside osmanthus mooncakes for the emperor, and the Qianlong Emperor was especially fond of it [[ihchina-quanjude]].\n\nBeijing's roast-duck restaurants have long been led by Bianyifang, founded in 1416 (the 14th year of Yongle in the Ming dynasty), and Quanjude, founded in 1864 (the 3rd year of Tongzhi in the Qing dynasty) [[ihchina-quanjude]].\n\nIn 2008 the craft was added to China's second batch of national intangible cultural heritage (item no. Ⅷ-167), covering two sub-items: Quanjude's hanging-oven technique and Bianyifang's closed-oven technique [[ihchina-quanjude]]."
+      },
+      "story": {
+        "zh": "全聚德的创办人叫杨全仁。他雇佣山东名厨，把从宫廷御膳房流传出来的挂炉烤鸭技术用在自家店里，生意日渐兴隆，「全聚德」也由此成为北京烤鸭的代表之一[[ihchina-quanjude]]。\n\n便宜坊走的是另一条路。它以焖炉立足，明代名臣杨继盛曾为它题写匾额；乾隆皇帝以及许多清代臣僚、文人雅士都曾光顾[[ihchina-bianyifang]]。数百年来，到便宜坊吃焖炉烤鸭的人始终不断，既有政府领导人、社会知名人士，也有慕名而来的外国元首[[ihchina-bianyifang]]。",
+        "en": "Quanjude's founder was Yang Quanren. He hired celebrated chefs from Shandong and applied the hanging-oven technique that had come out of the imperial kitchen to his own restaurant; business grew steadily and Quanjude became one of the defining names in Beijing roast duck [[ihchina-quanjude]].\n\nBianyifang took a different path, built on the closed oven. The Ming official Yang Jisheng wrote a plaque for it, and the Qianlong Emperor, along with many Qing officials and literati, dined there [[ihchina-bianyifang]]. For centuries visitors kept coming — government leaders, public figures and foreign heads of state among them [[ihchina-bianyifang]]."
+      },
+      "technique": {
+        "zh": "北京烤鸭有挂炉（明火）、焖炉（暗火）、缸炉、叉烧等不同做法。挂炉以果木为燃料，把鸭坯挂在特制的烤炉中明火烤制[[ihchina-quanjude]]；便宜坊的焖炉烤鸭则「鸭子不见明火」，成品呈枣红色，外皮油亮酥脆、肉质洁白细嫩[[ihchina-bianyifang]]。\n\n全聚德挂炉烤鸭的整套工艺流程由宰烫、制坯、烤制、片鸭 4 道工序、31 个环节组成[[ihchina-quanjude]]。焖炉那边也有自己的讲究，被称为「三绝」：焖炉特制技艺绝、选鸭制坯技艺绝、烤制片鸭技艺绝[[ihchina-bianyifang]]。\n\n吃法同样有一整套规矩：用筷子夹起片好的鸭肉，蘸少许甜面酱，配上葱丝或黄瓜条，卷在荷叶饼里吃；也可以把鸭肉蘸上甜面酱、同葱丝一起夹进芝麻烧饼[[ihchina-quanjude]]。",
+        "en": "Beijing roast duck is made in several ways: the hanging oven (open flame), the closed oven (banked heat), the jar oven and spit-roasting. The hanging oven burns fruitwood and roasts the duck over an open fire inside a purpose-built oven [[ihchina-quanjude]]; Bianyifang's closed-oven duck sees \"no open flame at all\", coming out jujube-red with a glossy crisp skin and white, tender meat [[ihchina-bianyifang]].\n\nQuanjude's technique is organised into four stages — scalding, preparing the bird, roasting and carving — broken down into 31 steps [[ihchina-quanjude]]. The closed-oven school has its own \"three excellences\": the custom-built oven, the selection and preparation of the duck, and the roasting and carving [[ihchina-bianyifang]].\n\nEating it has its own ritual: pick up a slice of duck with chopsticks, dip it in a little sweet bean sauce, add shredded spring onion or cucumber, and roll it in a lotus-leaf pancake; or dip the duck and tuck it into a sesame bun with the spring onion [[ihchina-quanjude]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "烤鸭技艺（含全聚德挂炉烤鸭技艺、便宜坊焖炉烤鸭技艺）于 2008 年（第二批）列入国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-167，项目序号 950，类别为传统技艺，申报地区为北京市。",
+        "en": "The craft of roast duck — covering both Quanjude's hanging-oven technique and Bianyifang's closed-oven technique — was added to China's second-batch national intangible cultural heritage list in 2008: item no. Ⅷ-167, sequence no. 950, category traditional craftsmanship, declared by Beijing Municipality.",
+        "sources": ["ihchina-quanjude", "ihchina-bianyifang"]
+      },
+      {
+        "zh": "全聚德挂炉烤鸭技艺的申报地区或单位是北京市全聚德（集团）股份有限公司，保护单位是中国全聚德（集团）股份有限公司；便宜坊焖炉烤鸭技艺的申报与保护单位都是北京便宜坊烤鸭集团有限公司。",
+        "en": "The declaring body for Quanjude's hanging-oven technique is Beijing Quanjude (Group) Co., Ltd., which is also its safeguarding body; Bianyifang's closed-oven technique is both declared and safeguarded by Beijing Bianyifang Roast Duck Group Co., Ltd.",
+        "sources": ["ihchina-quanjude", "ihchina-bianyifang"]
+      },
+      {
+        "zh": "烤鸭古称「烧鸭子」「炉烧鸭」「南炉鸭」。据元代《饮膳正要》记载，当时宫廷已有烧鸭子；清代文献记载御膳房中秋除桂花月饼外还备「南炉鸭」，清高宗（乾隆）尤为喜爱。",
+        "en": "Roast duck was historically called \"shaoyazi\", \"lushaoya\" or \"nanluya\". The Yuan-dynasty text Yinshan Zhengyao records duck roasting at court, and Qing sources note that the imperial kitchen prepared \"southern oven duck\" at Mid-Autumn alongside osmanthus mooncakes — a dish the Qianlong Emperor was especially fond of.",
+        "sources": ["ihchina-quanjude"]
+      },
+      {
+        "zh": "便宜坊创始于明代永乐十四年（1416），全聚德创始于清代同治三年（1864），创办人为杨全仁。北京烤鸭有挂炉（明火）、焖炉（暗火）、缸炉、叉烧等不同制作工艺。",
+        "en": "Bianyifang was founded in 1416 (the 14th year of Yongle) and Quanjude in 1864 (the 3rd year of Tongzhi), the latter by Yang Quanren. Beijing roast duck is made by several methods: hanging oven (open flame), closed oven (banked heat), jar oven and spit-roasting.",
+        "sources": ["ihchina-quanjude"]
+      },
+      {
+        "zh": "全聚德挂炉烤鸭以果木为燃料、明火烤制，整套工艺由宰烫、制坯、烤制、片鸭 4 道工序、31 个环节组成。",
+        "en": "Quanjude's hanging-oven duck is roasted over an open fruitwood fire; the full technique consists of four stages — scalding, preparing the bird, roasting and carving — broken down into 31 steps.",
+        "sources": ["ihchina-quanjude"]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-quanjude",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《烤鸭技艺（全聚德挂炉烤鸭技艺）》项目页",
+        "url": "https://www.ihchina.cn/project_details/14657",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "ihchina-bianyifang",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《烤鸭技艺（便宜坊焖炉烤鸭技艺）》项目页",
+        "url": "https://www.ihchina.cn/project_details/14656",
+        "accessed": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "hejian-donkey-burger",
+    "status": "published",
+    "name": {
+      "zh": "驴肉火烧",
+      "en": "Hejian Donkey-Meat Huoshao (Donkey Burger)"
+    },
+    "aliases": [
+      "驴肉火烧",
+      "河间驴肉火烧",
+      "驴火",
+      "保定驴肉火烧",
+      "大火烧夹驴肉",
+      "donkey burger",
+      "donkey meat sandwich",
+      "hejian donkey burger",
+      "lvrou huoshao"
+    ],
+    "region": {
+      "zh": "河北河间",
+      "en": "Hejian, Hebei"
+    },
+    "tagline": {
+      "zh": "「天上龙肉，地上驴肉」——一句话，捧了这枚小火烧三百年。",
+      "en": "\"Dragon meat in heaven, donkey meat on earth\" — a saying that has praised this little bun for three hundred years."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "驴肉火烧是华北地区极为流行的传统小吃，起源于河北省保定市、沧州市河间市一带，广泛流传于冀中平原，其中「河间驴肉火烧」在民间已有 300 年以上的制作历史[[hebnews]]。\n\n它的做法说起来简单：把面食「火烧」烤出来，把驴肉卤（酱）好，再把驴肉、焖子等夹进火烧里[[hebnews]]。\n\n2012 年，「河间驴肉火烧制作技艺」被列入河北省第四批省级非物质文化遗产代表性项目名录[[hebnews]]。",
+        "en": "Donkey-meat huoshao is one of the most popular traditional snacks in north China. It originated around Baoding and Hejian in Hebei and spread across the central Hebei plain; the Hejian version has been made by hand for more than 300 years [[hebnews]].\n\nThe method is easy to describe: bake the wheat \"huoshao\" bun, braise (or soy-sauce simmer) the donkey meat, then tuck the meat and the local menzi jelly into the split bun [[hebnews]].\n\nIn 2012 the technique was added to the fourth batch of Hebei Province's intangible cultural heritage list [[hebnews]]."
+      },
+      "story": {
+        "zh": "河间一带自古水草丰美，出产的驴肉格外鲜美，加上祖传的烹制手艺，煮出来的驴肉色泽红润、鲜嫩可口[[peopleapp]]。\n\n民间流传着好几个版本的来历。一说唐代李世民登基前到过河间，有书生「杀驴煮秫」招待他，他吃后连连称赞，河间驴肉因而留名；另一说乾隆下江南路过河间，农家把精心煮制的驴肉加进层次松软的火烧里，乾隆吃后大喜，还留下一首诗[[peopleapp]]。这些说法都属于民间传说，如今人们更看重的，是这套手艺本身[[peopleapp]]。",
+        "en": "The Hejian area has always been well watered and grassy, and its donkeys were said to yield especially fine meat; with the family cooking skills passed down alongside, the braised meat comes out reddish and tender [[peopleapp]].\n\nSeveral origin stories circulate. One says that before he took the throne, the Tang emperor Taizong passed through Hejian and a scholar served him donkey cooked with millet, praising which left the local donkey meat famous. Another says the Qianlong Emperor, travelling south, was served donkey meat tucked into a soft layered bun and was so pleased he composed a poem about it [[peopleapp]]. Both are folk legends; what people value today is the craft itself [[peopleapp]]."
+      },
+      "technique": {
+        "zh": "火烧的制作要领被概括为「四绝」——色如金、酥如雪、形如书、薄如纸[[hejian-gov]]。\n\n河间市人民政府门户网站对这四绝的解释是：一绝「色如金」，通过烙与烤让火烧表皮呈金黄色，面皮酥而不糊；二绝「酥如雪」，咬下去酥脆至极的碎屑像雪花一样纷纷洒落；三绝「薄如纸」，火烧烤熟后可以捯开，家族秘传的案板工艺让它的长度可达约 2 米，薄可透字、遇火即燃；四绝「形如书」，火烧层数多达 25 至 30 层，横切面就像一本厚厚的书[[hejian-gov]]。\n\n夹在火烧里的驴肉也有讲究：要用陈年老汤，加 20 多种佐料大锅炖制[[peopleapp]]。还有一样不能少的配角——「焖子」，用烹制驴肉的汤加驴油和淀粉调成，味道与驴肉同源但更浓，民间有「驴肉火烧好不好吃，关键在香焖而不在肉」的说法[[peopleapp]]。河间驴肉火烧用凉肉夹饼，拌以尖椒为辅料，再加入香焖[[peopleapp]]。",
+        "en": "The bun is summed up in four \"excellences\": colour like gold, crispness like snow, shape like a book, thinness like paper [[hejian-gov]].\n\nThe Hejian municipal government's own explanation runs like this. Colour like gold: pan-frying and oven-baking give the surface a golden hue, crisp without scorching. Crispness like snow: bite in and the shattering flakes scatter like snowflakes. Thinness like paper: after baking the bun can be pulled open, and the family-secret board technique lets it stretch to about two metres — thin enough to read through, and it will catch light from a flame. Shape like a book: the bun has 25 to 30 layers, so a cross-section looks like a thick book [[hejian-gov]].\n\nThe meat has its own rules: an aged master stock and more than twenty seasonings, simmered in a large pot [[peopleapp]]. And there is one supporting player that cannot be left out — menzi, a set jelly made from the donkey stock with donkey fat and starch. It shares the meat's flavour but concentrates it; locals say the quality of a donkey huoshao depends on the menzi rather than the meat [[peopleapp]]. Hejian-style huoshao is served with cool meat rather than hot, with green chilli and menzi added [[peopleapp]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "「河间驴肉火烧」是流行于河北河间一带的传统小吃制作技艺，在民间已有 300 年以上的制作历史。",
+        "en": "Hejian donkey-meat huoshao is a traditional snack craft from Hejian in Hebei, made by hand for more than 300 years.",
+        "sources": ["hebnews", "peopleapp"]
+      },
+      {
+        "zh": "2012 年，「河间驴肉火烧制作技艺」被列入河北省第四批省级非物质文化遗产代表性项目名录。",
+        "en": "In 2012 the technique of making Hejian donkey-meat huoshao was added to the fourth batch of Hebei Province's intangible cultural heritage list.",
+        "sources": ["hebnews"]
+      },
+      {
+        "zh": "它的主要做法是面食「火烧」的烤制与卤制驴肉，将驴肉、焖子等夹入火烧之中，成品表皮酥脆劲道、味道香浓。",
+        "en": "The method combines a baked wheat bun with braised donkey meat, the meat and menzi jelly tucked inside; the result is a chewy, crisp crust with a rich savoury filling.",
+        "sources": ["hebnews"]
+      },
+      {
+        "zh": "火烧的制作要领被概括为「四绝」——色如金、酥如雪、形如书、薄如纸。据河间市人民政府门户网站的解释，火烧层数可达 25 至 30 层，捯开长度约 2 米。",
+        "en": "Making the bun comes down to four \"excellences\": colour like gold, crispness like snow, shape like a book and thinness like paper. According to the Hejian municipal government's website, the bun can have 25 to 30 layers and pull open to about two metres.",
+        "sources": ["hejian-gov"]
+      },
+      {
+        "zh": "驴肉以陈年老汤加 20 多种佐料大锅炖制；「焖子」用烹制驴肉的汤加驴油和淀粉调成，民间有「驴肉火烧好不好吃，关键在香焖而不在肉」的说法。",
+        "en": "The donkey meat is simmered in a large pot with an aged master stock and more than twenty seasonings. The menzi jelly is made from that stock with donkey fat and starch; locals say the quality of the huoshao rests on the menzi rather than the meat.",
+        "sources": ["peopleapp"]
+      }
+    ],
+    "sources": [
+      {
+        "id": "peopleapp",
+        "title": "人民日报客户端《舌尖上的非遗｜有乾隆皇帝「背书」的河间驴肉火烧》",
+        "url": "https://www.peopleapp.com/rmharticle/30020734020",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "hejian-gov",
+        "title": "河间市人民政府门户网站《河间驴肉火烧、酥糖、河间刻瓷惊艳「京津冀非遗」联展！》（2020-10）",
+        "url": "https://www.hejian.gov.cn/hejian/ADD01673/202010/edf76df2316c4c6192b176325d58fd5a.shtml",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "hebnews",
+        "title": "河北新闻网《全球连线｜河北河间：「舌尖」上的非遗技艺》（2021-11-15）",
+        "url": "https://hebei.hebnews.cn/2021-11/15/content_8667443.htm",
+        "accessed": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "shanxi-knife-cut-noodles",
+    "status": "published",
+    "name": {
+      "zh": "刀削面",
+      "en": "Shanxi Knife-Cut Noodles"
+    },
+    "aliases": [
+      "刀削面",
+      "山西刀削面",
+      "大同刀削面",
+      "飞刀削面",
+      "削面",
+      "knife-cut noodles",
+      "shaved noodles",
+      "dao xiao mian",
+      "shanxi noodles"
+    ],
+    "region": {
+      "zh": "山西",
+      "en": "Shanxi"
+    },
+    "tagline": {
+      "zh": "一手托面，一手飞刀，柳叶一样的面片落进沸水里。",
+      "en": "One hand holds the dough, one hand flies with the blade — willow-leaf noodles drop into the boiling water."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "山西传统面食历史悠久、品种繁多，其中以龙须拉面和刀削面最具代表性[[ihchina-mianshi]]。\n\n刀削面又称「飞刀削面」，相传始于元代[[ihchina-mianshi]]。2008 年，「传统面食制作技艺（龙须拉面和刀削面制作技艺）」被列入第二批国家级非物质文化遗产代表性项目名录，编号 Ⅷ-160，申报地区为山西省[[ihchina-mianshi]]。\n\n山西素有「中国面食之乡」的美称，而山西各地的刀削面中，又以大同刀削面最为出名[[dt-gov]]。2018 年，中国饭店协会授予大同「中国刀削面之乡」荣誉称号[[dt-gov]]。",
+        "en": "Shanxi has a long history of wheaten foods and an unusual variety of them; dragon-whisker hand-pulled noodles and knife-cut noodles are the two most representative [[ihchina-mianshi]].\n\nKnife-cut noodles are also called \"flying-knife noodles\" and are traditionally said to date from the Yuan dynasty [[ihchina-mianshi]]. In 2008 the technique was added to China's second batch of national intangible cultural heritage (item no. Ⅷ-160), declared by Shanxi Province [[ihchina-mianshi]].\n\nShanxi is known as \"China's home of wheaten food\", and among its regional versions the Datong style is the most famous [[dt-gov]]. In 2018 the China Hotel Association awarded Datong the title \"Home of Chinese Knife-Cut Noodles\" [[dt-gov]]."
+      },
+      "story": {
+        "zh": "关于刀削面的来历，民间有一个流传很广的传说。元代统治者没收了民间的金属器具，规定十户人家合用一把厨刀，用完还要交回保管[[yunzhou-gov]]。\n\n一天中午，一位老婆婆和好面，让老汉去取刀，刀却被别人先取走了。老汉回家时被一块薄铁皮绊了一下，顺手捡起来揣在怀里。进门一看锅已经烧开，全家人等着刀切面，老汉急中生智，取出那块铁皮说「就用这个切」。老婆婆嫌铁皮又薄又软，说这怎么切得动面条；老汉一急，说「切不动就砍」——一刀下去，面片落进锅里，煮出来竟格外好吃，刀削面就这样传开了[[yunzhou-gov]]。\n\n这是民间传说，不是信史，但它解释了「削」这个动作的由来[[yunzhou-gov]]。",
+        "en": "A widely told folk tale explains where the dish came from. Under Yuan-dynasty rule, so the story goes, household metalware was confiscated and ten families had to share a single kitchen knife, returned to the authorities after use [[yunzhou-gov]].\n\nOne midday an old woman mixed the dough and sent her husband to fetch the knife — but someone had already taken it. On his way home he tripped over a piece of thin sheet metal and pocketed it. Back at the house the pot was already boiling and the family was waiting for a knife. In desperation he produced the metal sheet and said, \"We'll cut it with this.\" His wife protested that something so thin and soft could never cut noodles. Exasperated, he answered, \"Then I'll hack it.\" One strike sent a sheet of dough into the pot — and it turned out delicious. That, the tale says, is how knife-cut noodles began [[yunzhou-gov]].\n\nIt is a legend, not documented history, but it explains where the \"cut\" in the name comes from [[yunzhou-gov]]."
+      },
+      "technique": {
+        "zh": "制作刀削面时，先把面揉成尺余长的筒状，而后站在烧开的锅前，一手托面，一手持特制的削刀由上往下一条条将面削进锅里[[ihchina-mianshi]]。\n\n削出的面条呈三棱形，宽厚长度相同，状似柳叶[[ihchina-mianshi]]。刀削面以细、薄、长著称，有筋骨、口感好、柔软光滑，也易于消化[[ihchina-mianshi]]。\n\n刀削面与炸酱面、伊府面、热干面、担担面同称为「五大面食名品」[[ihchina-mianshi]]；不过云州区人民政府网站的表述里，与它并列的是北京的打卤面而不是炸酱面[[yunzhou-gov]]。大同本地还发展出了勾刀削面等技法，当地并出台了《大同刀削面烹饪工艺规范》等行业标准[[shanxi-gov]]。",
+        "en": "To make knife-cut noodles the dough is first kneaded into a roll about a chi (roughly 33 cm) long. The cook stands at the boiling pot, one hand supporting the dough and the other holding a purpose-made blade, slicing strip after strip down into the water [[ihchina-mianshi]].\n\nThe strips come out triangular in cross-section, uniform in width and length, shaped like willow leaves [[ihchina-mianshi]]. Knife-cut noodles are known for being fine, thin and long — springy and smooth, and easy to digest [[ihchina-mianshi]].\n\nKnife-cut noodles are counted among China's \"five famous wheaten dishes\" together with zhajiang noodles, yifu noodles, hot-dry noodles and dandan noodles [[ihchina-mianshi]] — though the Yunzhou District government's account pairs it instead with Beijing's dalurou noodles [[yunzhou-gov]]. Datong has also developed its own variants such as the hooked-blade cut, and the city has issued trade standards for the cooking technique [[shanxi-gov]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "「传统面食制作技艺（龙须拉面和刀削面制作技艺）」于 2008 年（第二批）列入国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-160，项目序号 943，类别为传统技艺，申报地区为山西省，申报单位为山西省全晋会馆，保护单位为山西全晋饮食文化有限公司。",
+        "en": "The traditional wheaten-food technique covering dragon-whisker hand-pulled noodles and knife-cut noodles was added to China's second-batch national intangible cultural heritage list in 2008: item no. Ⅷ-160, sequence no. 943, category traditional craftsmanship, declared by Shanxi Province through the Shanxi Quanjin Guild Hall, and safeguarded by Shanxi Quanjin Food Culture Co., Ltd.",
+        "sources": ["ihchina-mianshi"]
+      },
+      {
+        "zh": "刀削面又称「飞刀削面」，相传始于元代。",
+        "en": "Knife-cut noodles are also known as \"flying-knife noodles\" and are traditionally said to date from the Yuan dynasty.",
+        "sources": ["ihchina-mianshi"]
+      },
+      {
+        "zh": "制作时先把面揉成尺余长的筒状，一手托面、一手持特制削刀由上往下逐条削入沸水锅；削出的面条呈三棱形，宽厚长度相同，状似柳叶。",
+        "en": "The dough is kneaded into a roll about a chi long, then held in one hand while the other slices strip after strip into the boiling pot with a purpose-made blade; the noodles come out triangular and uniform, shaped like willow leaves.",
+        "sources": ["ihchina-mianshi"]
+      },
+      {
+        "zh": "刀削面以细、薄、长著称，有筋骨、柔软光滑、易于消化。它与炸酱面、伊府面、热干面、担担面同称为中国「五大面食名品」（云州区人民政府的表述中，与它并列的是北京打卤面）。",
+        "en": "Knife-cut noodles are known for being fine, thin and long, with a pleasant chew and a smooth texture, and are easy to digest. They are listed among China's \"five famous wheaten dishes\" together with zhajiang noodles, yifu noodles, hot-dry noodles and dandan noodles — though the Yunzhou District government's account pairs them instead with Beijing's dalurou noodles.",
+        "sources": ["ihchina-mianshi", "yunzhou-gov"]
+      },
+      {
+        "zh": "山西素有「中国面食之乡」美称，山西各地刀削面中以大同刀削面最出名。2018 年，中国饭店协会授予大同「中国刀削面之乡」荣誉称号。",
+        "en": "Shanxi is known as \"China's home of wheaten food\", and the Datong style is the best known of the province's knife-cut noodles. In 2018 the China Hotel Association named Datong \"Home of Chinese Knife-Cut Noodles\".",
+        "sources": ["dt-gov", "yunzhou-gov"]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-mianshi",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《传统面食制作技艺（龙须拉面和刀削面制作技艺）》项目页",
+        "url": "https://www.ihchina.cn/project_details/14642.html",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "dt-gov",
+        "title": "大同市人民政府门户网站《从地方美食升级为城市文化IP——大同刀削面爆火解码系列报道之三》",
+        "url": "https://www.dt.gov.cn/dtszf/tzggnr/202608/ad4a04a536314833afb94c567320665c.shtml",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "yunzhou-gov",
+        "title": "大同市云州区人民政府网站《大同刀削面》（2020-07）",
+        "url": "https://www.yunzhou.gov.cn/yzqrmzfz/sqglmzzj/202007/e806464524534484962843b6f738a2f3.shtml",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "shanxi-gov",
+        "title": "山西省人民政府网站《大同：塞上古都的千年文脉》（2026-04-24）",
+        "url": "https://www.shanxi.gov.cn/zjsx/sxfg/cysx/202604/t20260424_10110564.shtml",
+        "accessed": "2026-09-28"
+      }
+    ]
+  },
+  {
+    "id": "chagan-idee",
+    "status": "published",
+    "name": {
+      "zh": "察干伊德",
+      "en": "Tsagaan Idee (Mongolian Dairy Foods)"
+    },
+    "aliases": [
+      "察干伊德",
+      "查干伊德",
+      "奶制品制作技艺",
+      "蒙古族奶食",
+      "奶豆腐",
+      "奶酪",
+      "tsagaan idee",
+      "mongolian dairy",
+      "dairy foods"
+    ],
+    "region": {
+      "zh": "内蒙古正蓝旗",
+      "en": "Zhenglan Banner, Inner Mongolia"
+    },
+    "tagline": {
+      "zh": "草原把鲜奶变成三十多种「白色的食品」。",
+      "en": "On the grassland, fresh milk becomes more than thirty kinds of \"white food\"."
+    },
+    "blocks": {
+      "origin": {
+        "zh": "「察干伊德」，汉语直译是「白色的食品」，由天然纯奶制成，品种繁多、味道鲜美、营养丰富，是蒙古族食品中的上品[[ihchina-chagan]]。\n\n这门技艺目前主要流布于内蒙古锡林郭勒盟南部的正蓝旗、正镶白旗、镶黄旗地区，尤以正蓝旗最具代表性[[ihchina-chagan]]。\n\n2014 年，「奶制品制作技艺（察干伊德）」被列入第四批国家级非物质文化遗产代表性项目名录，编号 Ⅷ-226，申报地区为内蒙古自治区正蓝旗，保护单位是正蓝旗文体旅游广电事业发展中心[[ihchina-chagan]]。",
+        "en": "\"Tsagaan idee\" translates literally as \"white food\". Made from pure natural milk, it comes in many varieties, tastes good and is highly nutritious — it is regarded as the finest category of Mongolian food [[ihchina-chagan]].\n\nThe craft is found mainly in Zhenglan Banner, Zhengxiangbai Banner and Xianghuang Banner in southern Xilin Gol League, Inner Mongolia, with Zhenglan Banner the most representative [[ihchina-chagan]].\n\nIn 2014 the technique was added to China's fourth batch of national intangible cultural heritage (item no. Ⅷ-226), declared by Zhenglan Banner in Inner Mongolia and safeguarded by the banner's culture, tourism, radio and television development centre [[ihchina-chagan]]."
+      },
+      "story": {
+        "zh": "早在元、清时期，正蓝旗就是皇家御用奶食品的供应基地[[ihchina-chagan]]。13 世纪，元世祖忽必烈设立「畜群局」，专门为元宫廷提供和制作肉与察干伊德[[ihchina-chagan]]。元代诗人萨都剌的诗句「牛羊散漫落日下，野草生香乳酪甜」，描绘的就是当时的奶食品文化[[ihchina-chagan]]。\n\n后来相关技艺流入民间，正蓝旗继承了元代以来宫廷察干伊德的制作技艺，并不断传承发展至今[[ihchina-chagan]]。今天，这一技艺主要在牧民家庭里通过口传心授和生活实践世代相传[[ihchina-chagan]]。\n\n对蒙古族而言，白色的食物是高贵吉祥之物：无论居家餐饮、宴宾待客，还是敬奉祖先神灵，察干伊德都是不可缺少的存在[[ihchina-chagan]]。",
+        "en": "As early as the Yuan and Qing dynasties, Zhenglan Banner supplied dairy foods to the imperial household [[ihchina-chagan]]. In the 13th century Kublai Khan established a \"herds bureau\" to provide the Yuan court with meat and tsagaan idee [[ihchina-chagan]]. The Yuan poet Sadula wrote of \"cattle and sheep scattered under the setting sun, wild grass fragrant and milk curd sweet\" — a line describing the dairy culture of the time [[ihchina-chagan]].\n\nThe technique later passed into ordinary life, and Zhenglan Banner carried the court tradition forward to the present day [[ihchina-chagan]]. Today it is transmitted in herding households through word of mouth, demonstration and daily practice [[ihchina-chagan]].\n\nFor Mongolians white food is noble and auspicious: whether at the family table, welcoming guests, or making offerings to ancestors and spirits, tsagaan idee is indispensable [[ihchina-chagan]]."
+      },
+      "technique": {
+        "zh": "察干伊德的产品有鲜奶干、过滤察干伊德、奶酪等 30 多种，相关饮品也有 10 余种[[ihchina-chagan]]。\n\n基本工艺是把鲜奶通过发酵转化、分离、温火炼制等手段，以不同的工艺和程序加工出各种不同的察干伊德[[ihchina-chagan]]。分离出的乳清可以制成奶酒，从而实现鲜奶的全部利用[[ihchina-chagan]]。\n\n这门手艺的核心要素，是在一定时间和特定环境下利用微生物转化，打造出另一种质感的美食，并使营养得到升华[[ihchina-chagan]]。技艺以牛奶、羊奶等为主要原料，原料来自天然放牧的牲畜，并采用手工搅拌和自然发酵的方式精细处理[[ihchina-chagan]]。",
+        "en": "The products include dried fresh milk curd, filtered tsagaan idee and cheese — more than thirty kinds in all, plus over ten related drinks [[ihchina-chagan]].\n\nThe basic process puts fresh milk through fermentation, separation and gentle heating, using different sequences to produce different types of tsagaan idee [[ihchina-chagan]]. The whey that separates out can be made into milk wine, so nothing is wasted [[ihchina-chagan]].\n\nThe heart of the craft is using microbial transformation — under controlled timing and conditions — to create a food with a different texture and elevated nutrition [[ihchina-chagan]]. The main raw materials are cow's and sheep's milk from free-grazing animals, handled carefully with hand-stirring and natural fermentation [[ihchina-chagan]]."
+      }
+    },
+    "facts": [
+      {
+        "zh": "「奶制品制作技艺（察干伊德）」于 2014 年（第四批）列入国家级非物质文化遗产代表性项目名录，项目编号 Ⅷ-226，项目序号 1340，类别为传统技艺，申报地区为内蒙古自治区正蓝旗，保护单位为正蓝旗文体旅游广电事业发展中心。",
+        "en": "Mongolian dairy-making (tsagaan idee) was added to China's fourth-batch national intangible cultural heritage list in 2014: item no. Ⅷ-226, sequence no. 1340, category traditional craftsmanship, declared by Zhenglan Banner in Inner Mongolia and safeguarded by the banner's culture, tourism, radio and television development centre.",
+        "sources": ["ihchina-chagan"]
+      },
+      {
+        "zh": "「察干伊德」汉语直译为「白色的食品」，由天然纯奶制成。它的产品有鲜奶干、过滤察干伊德、奶酪等 30 多种，相关饮品也有 10 余种。",
+        "en": "\"Tsagaan idee\" means literally \"white food\" and is made from pure natural milk. It includes more than thirty products — dried curd, filtered tsagaan idee, cheese and others — plus over ten related drinks.",
+        "sources": ["ihchina-chagan", "ihchina-chagan-art"]
+      },
+      {
+        "zh": "基本工艺是把鲜奶通过发酵转化、分离、温火炼制等手段，以不同工艺和程序加工出各种察干伊德；分离出的乳清可以制成奶酒，实现鲜奶的全部利用。",
+        "en": "Fresh milk is processed through fermentation, separation and gentle heating, with different sequences producing different types of tsagaan idee; the whey that separates out can be turned into milk wine, so the whole of the milk is used.",
+        "sources": ["ihchina-chagan"]
+      },
+      {
+        "zh": "13 世纪，元世祖忽必烈设立「畜群局」，专为元宫廷提供和制作肉与察干伊德。元代诗人萨都剌有诗句「牛羊散漫落日下，野草生香乳酪甜」。",
+        "en": "In the 13th century Kublai Khan established a herds bureau to supply the Yuan court with meat and tsagaan idee. The Yuan poet Sadula wrote: \"Cattle and sheep scattered under the setting sun, wild grass fragrant and milk curd sweet.\"",
+        "sources": ["ihchina-chagan"]
+      },
+      {
+        "zh": "该技艺主要流布于锡林郭勒盟南部的正蓝旗、正镶白旗、镶黄旗地区，尤以正蓝旗最具代表性；正蓝旗也被誉为「察干伊德文化之乡」。",
+        "en": "The craft is found mainly in Zhenglan, Zhengxiangbai and Xianghuang Banners in southern Xilin Gol League, with Zhenglan the most representative; the banner is also known as the \"home of tsagaan idee culture\".",
+        "sources": ["ihchina-chagan", "ihchina-chagan-art"]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ihchina-chagan",
+        "title": "中国非物质文化遗产网·中国非物质文化遗产数字博物馆《奶制品制作技艺（察干伊德）》项目页",
+        "url": "https://www.ihchina.cn/project_details/14750",
+        "accessed": "2026-09-28"
+      },
+      {
+        "id": "ihchina-chagan-art",
+        "title": "中国非物质文化遗产网《文化遗产在传承中焕新：多地奏响保护与创新的时代乐章》（含「内蒙古锡林郭勒盟正蓝旗：奶香飘进现代生活」一节）",
+        "url": "https://www.ihchina.cn/art/detail/id/31128.html",
+        "accessed": "2026-09-28"
+      }
+    ]
+  }
+]
