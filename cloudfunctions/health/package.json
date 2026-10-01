@@ -1,0 +1,8 @@
+{
+  "name": "health",
+  "version": "1.0.0",
+  "description": "寻味 Xunwei —— GET /api/health 健康检查云函数（无依赖）",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {}
+}
