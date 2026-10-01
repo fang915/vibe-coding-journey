@@ -786,7 +786,15 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 
 .sources li{ margin-bottom: var(--sp-1); }
 
-.sources a{ color: var(--brand-ink); }
+/* Day 14 最小修复：出处里的网址是「连续无空格的超长字符串」，浏览器默认不肯给它断行，
+   于是一条 604px 宽的链接就把整页顶宽 —— 手机上右侧内容被推出屏幕，得横滑才看得见
+   （实测 320px 屏溢出 345px，文档宽 665px ≈ 屏幕两倍）。
+   这两行只做一件事：允许它在必要时从任意位置断开。 */
+.sources a{
+  color: var(--brand-ink);
+  overflow-wrap: anywhere;   /* 标准写法：任意位置可断 */
+  word-break: break-word;    /* 老浏览器兜底 */
+}
 
 /* 占位提示（7-2 骨架阶段使用：明确标出"这里的内容还没填"） */
 .placeholder{

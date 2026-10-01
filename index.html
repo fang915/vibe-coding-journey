@@ -9,7 +9,7 @@
        浏览器会把 ?v=… 不同的地址当成「新文件」去取，
        避免改完样式却因为缓存看不到变化（我们为此排查过一轮）。
        以后每次改 css/style.css，把这里的日期改掉即可。 -->
-  <link rel="stylesheet" href="css/style.css?v=20260929b">
+  <link rel="stylesheet" href="css/style.css?v=20261001a">
 </head>
 <body>
 
@@ -383,12 +383,12 @@
        教训来自 Day 9 —— 当时只给 CSS 加了版本号、JS 没加，
        结果浏览器重新取了新样式、却还在用缓存的旧脚本，页面处在"半新"状态，
        现象是"明明改了却没变化"，排查了很久。规则：改哪个文件，就动它那条版本号。 -->
-  <script src="js/data-source.js?v=20260929b"></script>
+  <script src="js/data-source.js?v=20261001a"></script>
   <!-- Day 13：路由脚本必须排在 app.js 前面 —— app.js 一执行（还在 DOMContentLoaded
        之前）就要用 Router.parse() 决定先露哪个视图，好消掉"直接打开
        #/regions 却先闪一下检索列表"。 -->
-  <script src="js/router.js?v=20260929b"></script>
-  <script src="js/app.js?v=20260929b"></script>
+  <script src="js/router.js?v=20261001a"></script>
+  <script src="js/app.js?v=20261001a"></script>
 
 </body>
 </html>
