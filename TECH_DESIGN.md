@@ -407,3 +407,350 @@ Day 13 加了地区索引与卡片视图之后，这套机制没跟着长：
 而不是中文名 —— 因为此刻还不知道中文名。这是"只显示已知信息、不编造"的选择；
 数据一到就会换成正式名称。若以后觉得这一闪不好看，可以在加载态先不显示这一级。
 
+---
+
+## 13. 数据模型（第 3 周 · Day 16）
+
+> 本节记录 2026-10-02（Day 16）为「把数据从文件搬到数据库」设计的关系型模型。
+> 位置关系：`api-contract.md` 说**前端要什么形状**，本节说**这些形状落在库里哪几张表、哪几列**。
+> 本轮只做「设计 + 建表 + 灌种子」，**不写任何接口**（Day 17 开始）。
+
+### 13.1 先说清：这跟 §2.2「不用后端、不用数据库」冲不冲突
+
+**不冲突，是两件事。** §2.2 回答的是「*这个产品当前需不需要后端*」→ 不需要，这个结论今天依然成立。
+本节要的是「*完整练一遍前后端链路*」→ 这是**课程的学习目标**，不是产品需求。
+
+引入之后，前端页面、内容、行为**一个字都不变**，变的只是数据来源（本地文件 → 接口）。
+这正好是一次检验：`data-source.js` 那层抽象到底有没有白做。
+
+> `api-contract.md §7` 建议在 §2.2 处补一段说明 —— 那件事**等你拍板**，本节先只登记模型本身。
+
+### 13.2 依据：全部由 `dishes.json` 推导，不另造一套
+
+契约已定下一条硬规矩：**字段形状照抄 `dishes.json`**。所以表结构也不是新设计，是把它**拆成可校验的表**。
+下面每个数字都是量出来的（不是估的），用来定列宽和行数：
+
+| 项 | 实际数量 |
+|---|---|
+| 菜品 | 12 道（全部 `published`） |
+| 地区 | 34 个省级行政区，分 8 个地理分区 |
+| 别名 | 108 条（`aliases[]`） |
+| 事实 | 90 条（`facts[]`） |
+| 出处 | 33 条；被事实引用 **101** 次 |
+| 图片 | 5 道有，7 道没有（`image` 允许为空） |
+| 引用完整性预检 | **0 处问题**（所有 `[[sourceId]]` 与 `facts[].sources` 都能在本菜出处里找到） |
+
+### 13.3 六张表总览
+
+| # | 表 | 行数 | 角色 | 喂哪个接口 |
+|---|---|---|---|---|
+| 1 | `regions` | 34 | **核心** · 地区字典 | `GET /api/regions` |
+| 2 | `dishes` | 12 | **核心** · 菜品主表 | `GET /api/dishes`、`GET /api/dishes/{id}` |
+| 3 | `dish_aliases` | 108 | 扩展 · 别名 | 列表项 `aliases[]` |
+| 4 | `dish_facts` | 90 | 扩展 · 事实清单 | 详情 `facts[]` |
+| 5 | `dish_sources` | 33 | 扩展 · 出处 | 详情 `sources[]` |
+| 6 | `dish_fact_sources` | 101 | 扩展 · 事实 ↔ 出处 | 详情 `facts[].sources[]` |
+
+**为什么是 6 张，不是清单例子里的 2 张？**
+例子是打卡应用 —— `plan_days` / `checkins` 两张，因为它的数据天然就是两张。
+我们的数据里「一道菜 → N 条别名 / N 条事实 / N 条出处」，而且「一条事实 → N 条出处」，是典型的
+**一对多 + 多对多**。硬塞进 2 张表只能把数组序列化成 JSON 字符串存一列 —— 那就等于放弃外键，
+也就放弃了"数据库替我们挡住错数据"这唯一的好处。契约既已承诺 `aliases` / `facts` / `sources`，
+就得有地方放。
+
+### 13.4 `regions` —— 地区字典（34 行）
+
+| 列 | 类型 | 约束 | 装什么 |
+|---|---|---|---|
+| `slug` | `VARCHAR(32)` | **PK** | 地址栏用的英文短名，`guangxi`。陕西只能是 `shaanxi`（纯拼音与山西撞车） |
+| `name_zh` | `VARCHAR(32)` | NOT NULL, UNIQUE | 中文名「广西」。契约里这个字段叫 `key`，同时是地区筛选的依据 |
+| `name_en` | `VARCHAR(64)` | NOT NULL | `Guangxi` |
+| `group_id` | `VARCHAR(16)` | NOT NULL | 分区 id：`north` / `northeast` / `east` / `central` / `south` / `southwest` / `northwest` / `hmt` |
+| `group_name_zh` | `VARCHAR(16)` | NOT NULL | 分区中文名「华南」 |
+| `group_name_en` | `VARCHAR(32)` | NOT NULL | `South China` |
+| `group_order` | `SMALLINT` | NOT NULL, `CHECK (1–8)` | 分区顺序 1–8 |
+| `sort_order` | `SMALLINT` | NOT NULL, `CHECK (> 0)` | 区内顺序（目录页显示顺序） |
+
+★ 分区名**冗余在每一行上**，没有单独建第 7 张 `region_groups` 表。理由：只有 8 个分区、列宽极小，
+而分区目前**没有任何独立属性**（没有简介、没有图标），拆表只换来一次 JOIN。
+响应里的 `groups` 用 `SELECT DISTINCT group_id, group_name_zh, group_name_en ... ORDER BY group_order` 就能得到。
+（若以后分区要挂介绍文字或配图，那时再拆。）
+
+★ `count`（该省收录几道）**不存**，用 `JOIN dishes` 现算 —— 存下来就会和 `dishes` 不同步。
+
+### 13.5 `dishes` —— 菜品主表（12 行）
+
+| 列 | 类型 | 约束 | 装什么 |
+|---|---|---|---|
+| `id` | `VARCHAR(64)` | **PK** | ASCII 短名，卡片页地址 `#/dish/{id}`。**永不可改**（改了旧链接全断） |
+| `status` | `TEXT` + `CHECK (IN ('published','draft'))` | NOT NULL, 默认 `published` | 决定前端走"已核实"还是"内容整理中"（PG 无 `ENUM` 列类型） |
+| `name_zh` / `name_en` | `VARCHAR(32)` / `VARCHAR(64)` | NOT NULL | 螺蛳粉 / Liuzhou Luosifen (Snail Rice Noodles) |
+| `region_slug` | `VARCHAR(32)` | **FK → `regions.slug`** | ★ **就是这一列把两张表连起来** |
+| `region_zh` / `region_en` | `VARCHAR(32)` / `VARCHAR(64)` | NOT NULL | 展示用的**细地名**「广西柳州」/ `Liuzhou, Guangxi`（比省级更具体，与 `region_slug` 分工不同） |
+| `tagline_zh` / `tagline_en` | `VARCHAR(255)` ×2 | NOT NULL | 一句话卖点（实测最长 38 / 158 字符） |
+| `block_origin_zh` / `_en` | `TEXT` ×2 | NOT NULL | 起源段。**含 `[[sourceId]]` 标记，必须原样保存** |
+| `block_story_zh` / `_en` | `TEXT` ×2 | NOT NULL | 故事段，同上 |
+| `block_technique_zh` / `_en` | `TEXT` ×2 | NOT NULL | 做法段，同上 |
+| `note_zh` / `note_en` | `TEXT` ×2 | NULL | 仅 `draft` 时展示（本期 12 道都没用到） |
+| `image_thumb_url` / `image_hero_url` | `VARCHAR(512)` ×2 | NULL | 缩略图 / 大图 |
+| `image_thumb_width` / `_height` | `INTEGER` + `CHECK (> 0)` ×2 | NULL | 330 × 222 |
+| `image_hero_width` / `_height` | `INTEGER` + `CHECK (> 0)` ×2 | NULL | 1280 × 862 |
+| `image_alt_zh` / `image_alt_en` | `VARCHAR(255)` ×2 | NULL | 无障碍替代文字 |
+| `image_credit_author` | `VARCHAR(64)` | NULL | `N509FZ` |
+| `image_credit_license` | `VARCHAR(32)` | NULL | `CC BY-SA 4.0` |
+| `image_credit_license_url` | `VARCHAR(255)` | NULL | 许可证地址 |
+| `image_credit_page` | `VARCHAR(512)` | NULL | 图片原始页面 |
+| `search_text` | `VARCHAR(255)` | NOT NULL | ★ **派生列**：归一化后的检索串（见 §13.8），不进接口响应 |
+| `sort_order` | `SMALLINT` + `CHECK (> 0)` | NOT NULL | 列表默认顺序（= `dishes.json` 数组顺序） |
+| `created_at` / `updated_at` | `TIMESTAMPTZ` ×2 | 默认 `now()` | 审计用。PG 无 `ON UPDATE`，`updated_at` 本期靠写入方显式赋值（见 §13.12） |
+
+★ **图片字段为什么直接铺在 `dishes` 上，而不是单独一张 `dish_images` 表？**
+图片与菜是**一对一**，且一道菜最多 1 张。拆表只增加 JOIN，不解决任何问题。
+7 道菜没图 → 这些列全为 `NULL`，前端早已能处理"没图"。
+
+### 13.6 四张扩展表
+
+**`dish_aliases`** —— 别名（108 行）
+
+| 列 | 类型 | 约束 |
+|---|---|---|
+| `dish_id` | `VARCHAR(64)` | PK 组成 · FK → `dishes.id` **ON DELETE CASCADE** |
+| `alias` | `VARCHAR(64)` | PK 组成 · 原样别名（实测最长 32 字符） |
+| `alias_norm` | `VARCHAR(64)` | NOT NULL · 归一化别名，搜索用（见 §13.8） |
+| `sort_order` | `SMALLINT` | NOT NULL |
+
+**`dish_facts`** —— 事实清单（90 行）
+
+| 列 | 类型 | 约束 |
+|---|---|---|
+| `dish_id` | `VARCHAR(64)` | PK 组成 · FK → `dishes.id` ON DELETE CASCADE |
+| `seq` | `SMALLINT` | PK 组成 · 显示序号，从 1 开始 |
+| `text_zh` / `text_en` | `TEXT` ×2 | NOT NULL |
+
+★ 用 `(dish_id, seq)` 做**复合主键**，不另加自增 id：序号本身就是业务键（就是数组下标），
+这样种子数据是**确定性**的，不依赖自增 id 的生成顺序。
+
+**`dish_sources`** —— 出处（33 行）
+
+| 列 | 类型 | 约束 |
+|---|---|---|
+| `dish_id` | `VARCHAR(64)` | PK 组成 · FK → `dishes.id` ON DELETE CASCADE |
+| `source_id` | `VARCHAR(64)` | PK 组成 · **菜内局部 id**（`ihchina`、`xinhua`） |
+| `title` | `VARCHAR(255)` | NOT NULL（实测最长 79 字符） |
+| `url` | `VARCHAR(512)` | NOT NULL（实测最长 90 字符） |
+| `accessed` | `DATE` | NOT NULL |
+| `sort_order` | `SMALLINT` | NOT NULL |
+
+★★ **为什么主键是 `(dish_id, source_id)` 而不是 `source_id` 单列？**（实测发现的硬约束）
+`ihchina` 这个 id 出现在 **5 道菜**里，而且指向**5 个不同的网址**（每道菜的非遗项目页不同）。
+也就是说 `source_id` **只在"一道菜之内"唯一**，它不是全局 id。
+单列主键会当场撞车；做成全局出处的方案也可以，但那要先给每个网址分配全局 id，
+对 33 条数据属于过度设计。
+
+**`dish_fact_sources`** —— 事实 ↔ 出处（101 行，多对多）
+
+| 列 | 类型 | 约束 |
+|---|---|---|
+| `dish_id` | `VARCHAR(64)` | PK 组成 |
+| `fact_seq` | `SMALLINT` | PK 组成 |
+| `source_id` | `VARCHAR(64)` | PK 组成 |
+| `sort_order` | `SMALLINT` | NOT NULL（角标顺序 `[1][2]`） |
+
+★ 这张表上挂**两个复合外键**：
+
+- `(dish_id, fact_seq)` → `dish_facts(dish_id, seq)`
+- `(dish_id, source_id)` → `dish_sources(dish_id, source_id)`
+
+妙处在于**两条外键都带上了 `dish_id`** —— 于是数据库层面就**不可能**出现"螺蛳粉的第 3 条事实引用
+了兰州牛肉面的出处"这种错。这条约束不靠人自觉，靠外键。
+
+### 13.7 表关系一览
+
+```
+regions (34)                 dishes (12)                  dish_aliases (108)
+  slug  ←──┐                   id  ←──┬──────────────────  dish_id
+  name_zh  │                   region_slug ──┘            alias
+  ...      │                   ...                       alias_norm
+           │                                             
+      一对多（一个地区 ↔ 多道菜）     ├── dish_facts (90)  ──┬── dish_fact_sources (101)
+                                  │      (dish_id, seq)   │       (dish_id, fact_seq, source_id)
+                                  └── dish_sources (33) ───┘
+                                         (dish_id, source_id)
+```
+
+- `regions` **1 : N** `dishes` —— 一个地区有多道菜，一道菜只属于一个地区（`region_slug`）
+- `dishes` **1 : N** `dish_aliases` / `dish_facts` / `dish_sources` —— 删菜时子表级联删（`ON DELETE CASCADE`）
+- `dish_facts` **N : M** `dish_sources` —— 靠 `dish_fact_sources` 连接
+
+**删除策略**：删地区若还有菜 → 拒绝（`RESTRICT`，防止"菜指向一个不存在的地区"）；
+删菜 → 别名/事实/出处一起删（`CASCADE`，它们离开菜没有意义）。
+
+### 13.8 两个关键决定（都不改契约，只是让它落得下来）
+
+**① 地区筛选从"前缀匹配"改成"等值匹配" —— 修掉契约里的一处隐患**
+
+契约 §3.2 记着一条告警：现在前端靠「`region.zh` 以省名开头」来筛地区。这条规则很脆
+（谁写数据时忘了把省名放开头就坏），而且**前缀匹配走不了索引**。
+
+建表后变成：
+
+```sql
+-- 之前：靠字符串前缀的约定
+WHERE d.region_zh LIKE CONCAT(:province, '%')
+-- 之后：靠外键等值
+WHERE d.region_slug = :slug          -- idx_dishes_region 这个索引能用上
+```
+
+★ 顺带把契约 §3.4 那个隐患也消掉了：索引页写"广西 2 道"和点进去筛出 2 道，
+现在**两边算的是同一件事**（都走 `region_slug`），不可能再打架。
+
+**② `search_text` / `alias_norm`：把"归一化"提前算好**
+
+契约 §3.2 要求 `q` 匹配前先归一化（转小写、去掉空格与 `· ・ - _ / （） ( ) 「」 【】`）。
+在 SQL 里做这件事要套一串 `REPLACE()`，既难读也难维护。所以改成**播种时用 Python 算好、存成列**：
+
+| 列 | 内容 |
+|---|---|
+| `dishes.search_text` | 归一化的 `id` + `name.zh` + `name.en` + `region.zh` + `region.en` 拼接（≤ 255 字符，装得下） |
+| `dish_aliases.alias_norm` | 归一化后的别名 |
+
+于是 Day 17 的搜索是两句 `LIKE`：
+
+```sql
+WHERE d.status = 'published'
+  AND ( d.search_text LIKE CONCAT('%', :kwNorm, '%')
+     OR EXISTS (SELECT 1 FROM dish_aliases a
+                WHERE a.dish_id = d.id AND a.alias_norm LIKE CONCAT('%', :kwNorm, '%')) )
+```
+
+⚠️ 代价与前提：**归一化规则必须只有一份**（写进种子脚本），且**查询关键词也要用同一条规则归一化**。
+若两边规则不一致，会出现"前端搜得到、接口搜不到"。这条已记进契约待办。
+
+### 13.9 列宽是怎么定的（"为什么是这个类型"）
+
+不是拍脑袋定的，是按**实测最大值 + 留余地**：
+
+| 字段 | 实测最大 | 选定类型 | 理由 |
+|---|---|---|---|
+| `name_zh` | 6 | `VARCHAR(32)` | 中文菜名极短，留 5 倍余量 |
+| `name_en` | 42 | `VARCHAR(64)` | 英文名带括号注释，会偏长 |
+| `alias` | 32 | `VARCHAR(64)` | 别名里含英文短语 |
+| `tagline_en` | 158 | `VARCHAR(255)` | 一句话，量级稳定，用定长足够 |
+| `block_story_en` | **2312** | `TEXT` | 正文最长的一列。PG 的 `TEXT` **没有长度上限**，2312 字符随便装（这点和 MySQL 的 `TEXT` 不同） |
+| `facts.text_en` | 503 | `TEXT` | 恰好卡在 `VARCHAR(512)` 边界上，不冒这个险 |
+| `sources.url` | 90 | `VARCHAR(512)` | 网址会变长（政府站点的长路径），留足 |
+| `image.thumb/hero url` | 200 | `VARCHAR(512)` | 同上（维基缩略图带参数） |
+| `image_*_width/height` | 1280 | `INTEGER` + `CHECK (> 0)` | 图片尺寸只可能是正数，用 `CHECK` 挡掉 0 和负数。PG 没有无符号类型，`INTEGER` 上限 21 亿，够 |
+| `sort_order` | ≤ 34 | `SMALLINT` + `CHECK (> 0)` | PG 的 `SMALLINT` 上限 32767，够用；"必须从 1 开始"这件事交给 `CHECK` |
+| `accessed` | — | `DATE`（不是 `TIMESTAMPTZ`） | 来源只精确到"访问日期"（`2026-09-22`），不假装有时分秒 |
+
+字符集：**不用手写**。PostgreSQL 库级编码就是 **UTF8**，没有 MySQL 那种 `CHARSET` / `COLLATE` 表选项；中文、英文、以及正文里的 `·`、`Ⅷ-277` 都直接装得下。
+
+> ⚠️ 本表初稿是按 **MySQL** 定的（`TINYINT / SMALLINT UNSIGNED`、`utf8mb4`、`ENUM`）。
+> 2026-10-02 实测本环境是 **PG 模式**，已按 PostgreSQL 改写，差异见 §13.12。
+
+### 13.10 与接口的对应关系（Day 17 要用的那张图）
+
+| 接口 | 读哪些表 | 关键处理 |
+|---|---|---|
+| `GET /api/dishes` | `dishes` + `dish_aliases`（拼 `aliases[]`） | `status` 过滤、`region_slug` 等值筛、`search_text`/`alias_norm` 搜索、`limit`/`offset` |
+| `GET /api/dishes/{id}` | `dishes` + 别名 + 事实 + 出处 | 拿 `id` 查不到 → **404 不是 500**；`sources` 与 `facts[].sources` 在这里拼回原形状 |
+| `GET /api/regions` | `regions` LEFT JOIN `dishes` | `count = COUNT(d.id)`；没收录的省 **`count = 0` 也要返回**（前端要显示虚线"暂未收录"） |
+| `GET /api/health` | （不读表） | 已上线 |
+
+**接口响应形状 = 契约 §3 的形状，一个字都不改。** 表结构只影响"怎么拼"，不影响"拼成什么样"。
+这就是 §13.9 那条硬规矩的价值：前端渲染代码（`renderCard()` 等）第 3 周**一行都不用改**。
+
+### 13.11 本节未定 / 待拍板
+
+| # | 事项 | 说明 |
+|---|---|---|
+| 1 | 分区要不要拆成第 7 张 `region_groups` 表 | 当前冗余在 `regions` 行上（见 §13.4） |
+| 2 | ~~`status` 用 `ENUM` 还是 `VARCHAR(16)` + 应用层校验~~ | ✅ 已定：**PG 没有 `ENUM` 列类型**，改用 `TEXT` + `CHECK (status IN ('published','draft'))`。同样是"库层挡住非法值"，加新值要 `ALTER TABLE … DROP CONSTRAINT` + `ADD CONSTRAINT` |
+| 3 | `search_text` / `alias_norm` 方案是否采纳 | 见 §13.8 ②，代价是"归一化规则只有一份" |
+| 4 | 要不要在 §2.2 处补「第 3 周有意引入后端」的说明 | 见 §13.1，与契约 §7 同一件事 |
+
+### 13.12 方言改为 PostgreSQL（2026-10-02 实测后修正）
+
+**触发这件事的是一个截图。** 本打算按 MySQL 建库，脚本都写好了；进控制台一看，
+地址栏是 `#/db/postgres/data-editor`，左侧菜单写着「SQL 型数据库 → **PostgreSQL 管理**」。
+
+**原因（官方文档原文）**：创建云开发环境时要选数据库类型（云数据库 / PostgreSQL），
+**"环境运行模式由创建时选择的数据库类型确定，一旦确定不可切换"**。
+本环境建的时候是 **PG 模式**，所以：
+
+- 这个环境里**没有 MySQL**（MySQL 只存在于"云数据库"类型的环境）；
+- PG 模式环境**也不能**用文档型数据库当关系库（那是另一套，没有表和 SQL）；
+- 而免费体验版**单账号只能开 1 个**免费环境 —— 已经用在当前这个上了，
+  想再要一个 MySQL 环境就得开付费套餐（¥19.9/月起）。**不划算，所以改用 PostgreSQL。**
+
+**方言差异（改了什么，一个都没漏）**
+
+| 事项 | MySQL 写法（初稿） | PostgreSQL 写法（定稿） |
+|---|---|---|
+| 主键 | `PRIMARY KEY (id)` | 同（但建议显式命名 `CONSTRAINT pk_… PRIMARY KEY`） |
+| 枚举 | `ENUM('published','draft')` | `TEXT` + `CHECK (status IN ('published','draft'))` |
+| 无符号整数 | `TINYINT/SMALLINT UNSIGNED` | `SMALLINT` / `INTEGER` + `CHECK (> 0)` |
+| 列注释 | 列里内联 `COMMENT '…'` | 独立语句 `COMMENT ON COLUMN 表.列 IS '…'` |
+| 表注释 | 表尾 `COMMENT='…'` | 独立语句 `COMMENT ON TABLE 表 IS '…'` |
+| 索引 | 表内联 `KEY idx_x (…)` | 独立语句 `CREATE INDEX IF NOT EXISTS idx_x ON …` |
+| 唯一键 | `UNIQUE KEY uk_x (…)` | `CONSTRAINT uk_x UNIQUE (…)` |
+| 表选项 | `ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=…` | 无（库级就是 UTF8） |
+| 时间 | `TIMESTAMP` / `DATETIME` | `TIMESTAMPTZ`（带时区，`DEFAULT now()`） |
+| 自动更新时间 | `ON UPDATE CURRENT_TIMESTAMP` | **无等价写法**，要写触发器。本期没有写入场景 → 不加 |
+| 客户端编码 | `SET NAMES utf8mb4` | 无 |
+
+**没变的**：表、列、主键、外键、可空性、CHECK 的**语义**一模一样。
+`db/schema.sql` 已按上表改写，并在文件开头留了一份同样的对照表。
+
+**新增的一件必须知道的事：PG 的安全模型是两层的**
+
+- **GRANT（表级）** —— 谁能对这张表做什么（读 / 写 / 改 / 删）
+- **RLS（行级）** —— 每类人能看到哪些**行**
+- 三类角色：`anon`（Publishable Key）/ `authenticated`（登录用户）/ `service_role`（API Key，**绕过 RLS**）
+
+⚠️ **启用 RLS 却不建策略 = 除 `service_role` 外全部拒绝**（默认拒绝），接口会 403。
+官方推荐的顺序是 **建表 → 启用 RLS → GRANT → 建策略**，四步成对做，不能只做一半。
+
+**本期（Day 16）只做第一步"建表"**，`schema.sql` 末尾留了一段注释掉的 RLS 示例。
+要不要加、云函数用哪个角色连库 —— **Day 17 写接口时一起定**，今天不碰。
+
+### 13.13 脚本拆成两份：给人读的 / 给控制台执行的（2026-10-02 实测后新增）
+
+**触发点**：把 `schema.sql` 粘进云开发控制台的「SQL 编辑器」之前，发现编辑器自己写着
+一句提示 —— **「SQL 里避免用注释，否则容易出现错误结果」**。查了一下原因，是真的：
+
+> `schema.sql` 里有 **13 行注释带英文分号**（就是文件末尾那些自查 SQL 和"彻底重建"用的
+> `DROP TABLE …;`，它们被注释掉是为了防止手滑执行）。
+> 而这类编辑器普遍**按分号切分语句**再逐条执行 —— 那 13 行注释会被当成真语句送去执行，必然报错。
+
+于是定了个"两文件"方案：
+
+| 文件 | 给谁看 | 内容 |
+|---|---|---|
+| `db/schema.sql` | **人**（写文档、做 code review、以后自己回来看） | 333 行，含 156 行 `--` 说明：为什么是 PG、执行顺序、和 MySQL 的差异对照表、自查 SQL、RLS 留位 |
+| `db/schema.exec.sql` | **控制台**（复制粘贴执行） | 177 行**纯 SQL，零注释**，76 条语句：6 建表 + 5 建索引 + 65 注释语句（`COMMENT ON`） |
+
+**为什么不直接只留一份**：`--` 说明和"可执行"是两件互相打架的事，硬合成一份，两边都受损。
+而且**字段说明一个字都没少** —— 它们是用 `COMMENT ON` 写的，那是**真正的 SQL 语句**，
+不是注释，所以执行版里照样有 65 条，建完表在库里 `\d+ dishes` 就能看到每一列的中文说明。
+
+**两份永远同步的办法**：执行版是**生成**出来的，不手改。
+
+```bash
+python db/tools/make-exec-sql.py     # 从 schema.sql 重新生成 schema.exec.sql
+```
+
+生成脚本 `db/tools/make-exec-sql.py` 自带五道自检，任何一道不过就**不产出文件**：
+
+1. 剥注释前后内容除空格外**逐字符一致**（保证没削掉任何真 SQL）
+2. 执行版里**不含** `--` 或 `/*`
+3. 源文件里含 `--` 的字符串字面量必须**原样保住**（本文件 0 个，属兜底）
+4. 按分号数语句 = **76 条**
+5. 用 PG 解析器（sqlglot）真解析一遍：76 条 = 6 建表 + 5 建索引 + 65 注释
+
+**另外核过一件事**：执行版里 68 个字符串字面量中，**含分号的是 0 个** ——
+所以即使编辑器朴素地按分号切分，也不会把一个字符串劈成两半。
+
+> 改表的列定义时：先改 `schema.sql` → 跑生成脚本 → 再执行。**不要**直接改 `schema.exec.sql`。
+
