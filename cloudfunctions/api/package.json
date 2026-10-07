@@ -1,0 +1,8 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "寻味 Xunwei —— 读接口云函数：/api/dishes、/api/dishes/{id}、/api/regions（只用 Node 内置模块，无第三方依赖）",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {}
+}
