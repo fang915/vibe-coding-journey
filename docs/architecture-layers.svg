@@ -1,0 +1,46 @@
+<svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, 'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <rect x="0" y="0" width="680" height="560" fill="#fafafa"/>
+  <text x="340" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#333">寻味 · 云函数分层（Day 19 拆出数据访问层）</text>
+
+  <!-- 前端 -->
+  <rect x="120" y="52" width="440" height="52" rx="8" fill="#eef3f8" stroke="#9db8d2"/>
+  <text x="340" y="74" text-anchor="middle" font-size="13" font-weight="700" fill="#2c4a68">前端（静态托管）</text>
+  <text x="340" y="92" text-anchor="middle" font-size="11" fill="#4a6785">index.html · js/app.js · js/data-source.js</text>
+
+  <line x1="340" y1="104" x2="340" y2="136" stroke="#888" stroke-width="1.5"/>
+  <polygon points="335,134 345,134 340,144" fill="#888"/>
+  <text x="352" y="126" font-size="10.5" fill="#666">HTTP：GET 公开，POST 带 X-Admin-Token</text>
+
+  <!-- 云函数容器 -->
+  <rect x="90" y="146" width="500" height="286" rx="10" fill="#ffffff" stroke="#c9a24b" stroke-width="1.5"/>
+  <text x="340" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="#8a6d2f">云函数 api（CloudBase · Node.js 18）</text>
+
+  <!-- index.js 业务层 -->
+  <rect x="112" y="180" width="456" height="96" rx="8" fill="#f3f7f1" stroke="#7ba05b"/>
+  <text x="340" y="200" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3c5c28">index.js —— 业务层（听请求 · 验输入 · 组响应）</text>
+  <text x="340" y="220" text-anchor="middle" font-size="10.5" fill="#557a41">resolveRoute 路由分派 · assertAdmin 口令校验</text>
+  <text x="340" y="236" text-anchor="middle" font-size="10.5" fill="#557a41">validateNewDish 校验（中文报错） · mapDish* 行→JSON</text>
+  <text x="340" y="252" text-anchor="middle" font-size="10.5" fill="#557a41">ok / fail 统一响应包壳 {ok:true|false, data|error}</text>
+  <text x="340" y="268" text-anchor="middle" font-size="10" fill="#8aa57a">※ 今天没动任何业务逻辑，只把下面这层搬走了</text>
+
+  <!-- 拆层标注 -->
+  <line x1="112" y1="286" x2="568" y2="286" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="5,4"/>
+  <text x="340" y="301" text-anchor="middle" font-size="10.5" font-weight="700" fill="#c0392b">▲ Day 19 的这一刀：代码从"一个文件"拆成"两层"</text>
+
+  <!-- db.js 数据访问层 -->
+  <rect x="112" y="310" width="456" height="106" rx="8" fill="#f5f0fa" stroke="#8e6bb3"/>
+  <text x="340" y="330" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5b3a7e">db.js —— 数据访问层（Day 19 从 index.js 搬出）</text>
+  <text x="340" y="350" text-anchor="middle" font-size="10.5" fill="#6f5691">restGet 读 · restInsert 写（Prefer: return=representation）</text>
+  <text x="340" y="366" text-anchor="middle" font-size="10.5" fill="#6f5691">gatewayError：SQLSTATE 翻译（23505 → 409 conflict …）</text>
+  <text x="340" y="382" text-anchor="middle" font-size="10.5" fill="#6f5691">encodeValue / buildQueryString / parseTotal</text>
+  <text x="340" y="402" text-anchor="middle" font-size="10" fill="#9a86b3">只关心"怎么和数据库说话"，不知道接口路径与响应形状</text>
+
+  <line x1="340" y1="432" x2="340" y2="464" stroke="#888" stroke-width="1.5"/>
+  <polygon points="335,462 345,462 340,472" fill="#888"/>
+  <text x="352" y="454" font-size="10.5" fill="#666">HTTPS · Bearer CLOUDBASE_API_KEY（PostgREST 风格）</text>
+
+  <!-- 数据库 -->
+  <rect x="120" y="474" width="440" height="52" rx="8" fill="#fdf2e9" stroke="#d29d5a"/>
+  <text x="340" y="496" text-anchor="middle" font-size="13" font-weight="700" fill="#7c512a">PostgreSQL（6 张表）</text>
+  <text x="340" y="514" text-anchor="middle" font-size="11" fill="#9a6f45">regions · dishes · dish_aliases · dish_facts · dish_sources · dish_fact_sources</text>
+</svg>

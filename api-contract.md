@@ -5,7 +5,8 @@
 >
 > 这份文件是第 3 周（Day 16–20）**建表与写接口的唯一依据**。
 > 表的形状见 `db/schema.sql`，授权的 SQL 见 `db/grants.sql`（读）与 `db/grants-write.sql`（写），
-> 接口代码在 `cloudfunctions/api/index.js`，形状自测在 `tests/api-shape.test.js`。
+> 接口代码在 `cloudfunctions/api/`：**`index.js`（业务层：路由 / 校验 / 响应形状）+
+> `db.js`（数据访问层：网关请求 / SQLSTATE 翻译，Day 19 拆出）**，形状自测在 `tests/api-shape.test.js`。
 > 前端此刻**仍读本地 mock 数据**（`data/dishes.json`），行为与第 2 周完全一致 ——
 > 换数据源是下一步的事，做法见 §5。
 

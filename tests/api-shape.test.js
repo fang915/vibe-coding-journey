@@ -513,12 +513,21 @@ check('接口目录里已经登记了 POST，不再是"没有任何写接口"', 
 /* ---------- 异步那几条：走 main()，验方法/口令分派 ---------- */
 (async function () {
   const INDEX = path.join(ROOT, 'cloudfunctions', 'api', 'index.js');
+  const DB = path.join(ROOT, 'cloudfunctions', 'api', 'db.js');
+  /* Day 19 起云函数拆成 index.js（业务层）+ db.js（数据访问层）两个模块，
+     index.js 依赖 db.js。要让「改环境变量后重新 require」生效，
+     两个模块的缓存都得清 —— 只清 index.js 的话，db.js 里载过的旧配置
+     会盖住新环境变量（拆层后第一轮回归就抓出来的缝）。 */
+  function freshIndex() {
+    delete require.cache[require.resolve(INDEX)];
+    delete require.cache[require.resolve(DB)];
+    return require(INDEX);
+  }
 
   // (1) Day 17 就有的那条：缺密钥时的自诊分支
   const savedKey = process.env.CLOUDBASE_API_KEY;
   delete process.env.CLOUDBASE_API_KEY;
-  delete require.cache[require.resolve(INDEX)];
-  let fresh = require(INDEX);
+  let fresh = freshIndex();
 
   const res = await fresh.main({ path: '/api/dishes', httpMethod: 'GET' });
   const body = JSON.parse(res.body);
@@ -534,8 +543,7 @@ check('接口目录里已经登记了 POST，不再是"没有任何写接口"', 
   //     密钥填一个假值即可 —— 我们要验的是分派顺序，不是真连库。
   process.env.CLOUDBASE_API_KEY = 'dummy-for-offline-test';
   process.env.ADMIN_TOKEN = 'test-token';
-  delete require.cache[require.resolve(INDEX)];
-  fresh = require(INDEX);
+  fresh = freshIndex();
 
   async function call(ev) {
     const r = await fresh.main(ev);

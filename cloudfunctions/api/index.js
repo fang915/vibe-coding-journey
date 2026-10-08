@@ -65,26 +65,28 @@
         英文报错原样甩给调用者。
    ========================================================= */
 
-const https = require('https');
 const crypto = require('crypto');
+
+/* Day 19：查数据库的代码整段搬进了隔壁的 db.js（数据访问层）。
+   index.js 从此只管「听请求、验输入、组响应」，不再直接碰 https 和网关。
+   连库要用的 ENV_ID / CLOUDBASE_API_KEY / 网关地址 / 超时，都随它搬走了。 */
+const dbLayer = require('./db.js');
+const httpError = dbLayer.httpError;
+const restGet = dbLayer.restGet;
+const restInsert = dbLayer.restInsert;
+const parseTotal = dbLayer.parseTotal;
+const gatewayError = dbLayer.gatewayError;
+const API_KEY = dbLayer.API_KEY;
 
 /* ---------- 环境常量 ---------- */
 
-// 环境 ID 允许被环境变量覆盖；没配就用本项目的。注意这只是 ID，不是密钥。
-const ENV_ID = process.env.CLOUDBASE_ENV_ID || 'vibecodingstudy-d1f1el6a03d5aad8';
-// ★ 密钥只从环境变量来。代码里永远不写明文 Key。
-const API_KEY = process.env.CLOUDBASE_API_KEY || '';
 // ★ Day 18：写接口的管理口令。同样是环境变量，同样不写明文。
 //   它不是"用户身份"——寻味没有用户。它只回答一个问题：
 //   "这次调用是不是我们自己人发起的"。
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || '';
 
-const GATEWAY_HOST = ENV_ID + '.api.tcloudbasegateway.com';
-const REST_PREFIX = '/v1/rdb/rest/';
-
 const DEFAULT_LIMIT = 50;
 const MAX_LIMIT = 100;
-const GATEWAY_TIMEOUT_MS = 8000;
 // 写接口的请求体上限。不加这条，一段畸形输入能让函数吃满内存。
 const MAX_BODY_BYTES = 64 * 1024;
 
@@ -121,193 +123,7 @@ const COLS_SUMMARY = [
 const COLS_DISH = '*';
 
 /* =========================================================
-   一、和网关打交道
-   ========================================================= */
-
-/* 给查询参数编码。
-   和普通 URL 编码的唯一区别：PostgREST 的过滤表达式里，
-   逗号、点、冒号、括号属于**语法**而不是数据，编成 %2C 之类反而会被当成值。
-   （★ 星号 encodeURIComponent 本来就不编，所以 like.*螺* 里的 * 是安全的。） */
-function encodeValue(v) {
-  return encodeURIComponent(String(v))
-    .replace(/%2C/gi, ',')
-    .replace(/%2E/gi, '.')
-    .replace(/%3A/gi, ':')
-    .replace(/%28/gi, '(')
-    .replace(/%29/gi, ')');
-}
-
-// pairs 用数组而不是对象：PostgREST 的同一个键可以合法地出现多次，对象表达不了
-function buildQueryString(pairs) {
-  return pairs
-    .map(function (p) { return encodeURIComponent(p[0]) + '=' + encodeValue(p[1]); })
-    .join('&');
-}
-
-/* 向网关发一次 GET。返回 { rows, total }。
-   total 来自响应头 Content-Range（形如 0-11/12，斜杠后面那个才是"符合条件的总行数"）——
-   分页时它是取不到的：limit=5 时响应体只有 5 行，但 total 仍然是 12。 */
-function restGet(table, pairs, options) {
-  const opts = options || {};
-  const wantCount = opts.count !== false;
-
-  return new Promise(function (resolve, reject) {
-    const qs = buildQueryString(pairs || []);
-    const reqPath = REST_PREFIX + table + (qs ? '?' + qs : '');
-
-    const headers = {
-      Authorization: 'Bearer ' + API_KEY,
-      Accept: 'application/json'
-    };
-    if (wantCount) { headers.Prefer = 'count=exact'; }
-
-    const req = https.request({
-      host: GATEWAY_HOST,
-      path: reqPath,
-      method: 'GET',
-      headers: headers,
-      timeout: GATEWAY_TIMEOUT_MS
-    }, function (res) {
-      let body = '';
-      res.setEncoding('utf8');
-      res.on('data', function (chunk) { body += chunk; });
-      res.on('end', function () {
-        if (res.statusCode < 200 || res.statusCode >= 300) {
-          // 网关的报错原文很有信息量（比如权限不足会明说），带上前 300 字
-          return reject(new Error('网关返回 HTTP ' + res.statusCode + '：' + body.slice(0, 300)));
-        }
-        let json;
-        try {
-          json = JSON.parse(body || '[]');
-        } catch (e) {
-          return reject(new Error('网关返回的不是 JSON：' + body.slice(0, 200)));
-        }
-        resolve({
-          rows: Array.isArray(json) ? json : [json],
-          total: parseTotal(res.headers['content-range'], Array.isArray(json) ? json.length : 1)
-        });
-      });
-    });
-
-    req.on('timeout', function () {
-      req.destroy(new Error('请求网关超时（' + GATEWAY_TIMEOUT_MS + 'ms）'));
-    });
-    req.on('error', reject);
-    req.end();
-  });
-}
-
-// Content-Range: "0-11/12" → 12；"*/0" → 0；拿不到就退回本地行数
-function parseTotal(contentRange, fallback) {
-  if (!contentRange) { return fallback; }
-  const m = /\/(\d+)\s*$/.exec(contentRange);
-  return m ? Number(m[1]) : fallback;
-}
-
-/* 把网关（其实是网关背后的 PostgreSQL）的报错，翻成人能看懂的一句话。
-
-   ★ 这里是今天"防重复提交"能成立的关键一环：
-     重复提交不是我们在 JS 里"先查一遍再插"挡住的 —— 那样在并发下会漏。
-     真正挡它的是**库里的主键**（dishes 的 PRIMARY KEY (id)），
-     我们负责把 PostgreSQL 抛出的 SQLSTATE 翻成一个诚实的 HTTP 状态码：
-       23505 唯一冲突     → 409 conflict（重复提交，不是服务器坏了）
-       23502 非空违反     → 400（有必填字段没给）
-       23514 CHECK 违反   → 400（值不合法，如 status 不在允许集合里）
-       23503 外键违反     → 400（region_slug 指向一个不存在的省）
-       42501 权限不足     → 500 + 直接点名该执行哪个 SQL 文件
-     翻译这一步不能省：把 23505 原样当 500 报出去，调用者会以为服务坏了，
-     然后无脑重试，反而把一个"本来就被拒绝了"的请求又发一遍。 */
-function gatewayError(statusCode, bodyText) {
-  let info = null;
-  try { info = JSON.parse(bodyText); } catch (e) { info = null; }
-
-  /* SQLSTATE 不做全等比对，而是从 code（兜底再到 message）里**提取连续 5 位数字**。
-     实测（2026-10-08，Day 18 验证）网关会把 PG 的 23505 包成 "DATABASE_23505" ——
-     精确比对 '23505' 就漏了。提取式写法对两种信封都成立；
-     5 位数字里误撞出别的值的风险，由下面逐个白名单比对兜着（认不出的仍走兜底 500）。 */
-  const haystack = [info && info.code, info && info.message]
-    .map(function (v) { return v === null || v === undefined ? '' : String(v); })
-    .join(' ');
-  const m = /(\d{5})/.exec(haystack);
-  const sqlstate = m ? m[1] : '';
-
-  if (sqlstate === '23505') {
-    return httpError(409, 'conflict',
-      '这道菜已经在库里了（id 重复），本次没有重复写入 / Dish already exists, nothing was written twice');
-  }
-  if (sqlstate === '23502') {
-    return httpError(400, 'bad_request',
-      '有必填字段没给（数据库说：' + String((info && info.message) || '').slice(0, 160) + '）');
-  }
-  if (sqlstate === '23514') {
-    return httpError(400, 'bad_request',
-      '有字段没通过数据库的取值检查：' + String((info && info.message) || '').slice(0, 160));
-  }
-  if (sqlstate === '23503') {
-    return httpError(400, 'bad_request',
-      '引用了不存在的地区（region_slug）或菜品 / unknown region_slug');
-  }
-  if (sqlstate === '42501') {
-    return httpError(500, 'internal_error',
-      '数据库权限不够：service_role 还没有写权限，请先在 SQL 编辑器里执行 db/grants-write.sql / ' +
-      'service_role lacks INSERT privilege, run db/grants-write.sql first');
-  }
-  // 认不出来的：把网关原文带上前 300 字，别自己编一个原因
-  return new Error('网关返回 HTTP ' + statusCode + '：' + String(bodyText).slice(0, 300));
-}
-
-/* 向网关写一行。和 restGet 的区别只有两点：
-   ① 用 POST，请求体是 JSON 数组（PostgREST 收数组，不收到单个对象）；
-   ② Prefer: return=representation —— 让库里把"真正写进去的那一行"回给我们，
-      这样能拿它跟发出去的值比对（Day 18 的"写入 + 读回验证"就靠这个）。
-   注意：插入成功时 PostgREST 回的是 **201**，不是 200。 */
-function restInsert(table, rows) {
-  return new Promise(function (resolve, reject) {
-    const payload = JSON.stringify(Array.isArray(rows) ? rows : [rows]);
-
-    const req = https.request({
-      host: GATEWAY_HOST,
-      path: REST_PREFIX + table,
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + API_KEY,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Prefer: 'return=representation'
-      },
-      timeout: GATEWAY_TIMEOUT_MS
-    }, function (res) {
-      let body = '';
-      res.setEncoding('utf8');
-      res.on('data', function (chunk) { body += chunk; });
-      res.on('end', function () {
-        if (res.statusCode < 200 || res.statusCode >= 300) {
-          return reject(gatewayError(res.statusCode, body));
-        }
-        let json;
-        try {
-          json = JSON.parse(body || '[]');
-        } catch (e) {
-          return reject(new Error('网关写入后返回的不是 JSON：' + body.slice(0, 200)));
-        }
-        resolve({
-          rows: Array.isArray(json) ? json : [json],
-          statusCode: res.statusCode
-        });
-      });
-    });
-
-    req.on('timeout', function () {
-      req.destroy(new Error('写库请求超时（' + GATEWAY_TIMEOUT_MS + 'ms）'));
-    });
-    req.on('error', reject);
-    req.write(payload);
-    req.end();
-  });
-}
-
-/* =========================================================
-   二、和用户输入打交道
+   一、和用户输入打交道
    ========================================================= */
 
 // ★ 必须与 js/app.js 的 normalize() 逐字符一致，否则会出现"页面搜得到、接口搜不到"
@@ -317,13 +133,8 @@ function normalize(text) {
     .replace(/[\s·・\-_/（）()「」【】]/g, '');
 }
 
-// 这些错误会被 main 的 catch 认出来（带 status 的就是"我们自己判定的客户端错误"）
-function httpError(status, code, message) {
-  const err = new Error(message);
-  err.status = status;
-  err.code = code;
-  return err;
-}
+// httpError（带 status/code 的错误类型）Day 19 起改由 db.js 定义并导出，
+// 本文件从 dbLayer 里解构使用 —— 定义只保留一份。
 
 function readInt(raw, fallback, min, max, name, hint) {
   if (raw === undefined || raw === null || raw === '') { return fallback; }
@@ -355,7 +166,7 @@ function readSlug(raw) {
 }
 
 /* =========================================================
-   三、行 → 响应形状（这一步决定"前端要不要改代码"）
+   二、行 → 响应形状（这一步决定"前端要不要改代码"）
    ========================================================= */
 
 function bilingual(zh, en) {
@@ -448,7 +259,7 @@ function mapDishDetail(row, aliases, facts, sources) {
 }
 
 /* =========================================================
-   四、三条路由各自怎么做
+   三、三条路由各自怎么做
    ========================================================= */
 
 /* 搜索：先找出"可能命中的 id"，再由主查询统一过滤。
@@ -616,7 +427,7 @@ async function handleRegions() {
 }
 
 /* =========================================================
-   五、写接口：新增一道菜（Day 18）
+   四、写接口：新增一道菜（Day 18）
    ========================================================= */
 
 /* ---------- 5.1 管理口令：确认"是我们自己发起的" ---------- */
@@ -938,7 +749,7 @@ async function handleCreateDish(event) {
 }
 
 /* =========================================================
-   六、路由与响应包壳
+   五、路由与响应包壳
    ========================================================= */
 
 /* 云开发 HTTP 网关会把请求转成一个 event，形状是：
