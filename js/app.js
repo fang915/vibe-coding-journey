@@ -40,7 +40,9 @@
     currentDish: null,   // 详情页正在看的那一道（Day 11：复制按钮要知道复制的是哪道菜）
     region: 'all',       // 当前选中的地区（Day 12）：'all' 表示不筛，否则是省份名如 '广西'
     route: null,         // 当前路由对象（Day 13）
-    viewName: 'list'     // 当前露在外面的是哪个视图（Day 13），用于挑对提示条
+    viewName: 'list',    // 当前露在外面的是哪个视图（Day 13），用于挑对提示条
+    dataInfo: null,      // Day 20：这份数据从哪来（接口 / 本地示例）+ 读到的时刻
+    detailFor: null      // Day 20：卡片页正在取 / 已取过的那道菜 id（防重复请求）
   };
 
   // 页面上要反复用到的元素，统一在 init 里取一次
@@ -199,6 +201,11 @@
     el.regionHint   = document.getElementById('region-hint');
     el.breadcrumb   = document.getElementById('breadcrumb');
 
+    // Day 20：页脚状态栏（显示"数据来自接口 / 本地示例"与"最后更新时间"）。
+    // 余力加练要求的「最后更新时间」就落在这里 —— 它同时也是"页面真的读了接口"的自证：
+    // 时间会随每次刷新变，硬编码的假数据做不到这一点。
+    el.dataStatus   = document.getElementById('data-status');
+
     // Day 11：复制按钮 + 它的读屏播报区
     el.copyBtn     = document.getElementById('copy-btn');
     el.copyLabel   = document.getElementById('copy-label');
@@ -261,6 +268,16 @@
     el.copyBtn.addEventListener('click', copyCardLink);         // Day 11：复制并反馈
     el.retryBtn.addEventListener('click', loadDishes);          // 失败 → 重试
     el.stateEmptyAll.addEventListener('click', showAllDishes);  // 没搜到 → 看全部
+
+    /* Day 20 顺手修的既有 bug：另外两屏的「重试」按钮以前只取了引用、从没绑事件 ——
+       在索引页 / 卡片页撞上读取失败时，那两个按钮是死的（点了没反应），
+       而失败态的出路恰恰只有那个按钮。现在各接各的动作：
+         列表 / 索引 → 重新取全部数据；卡片 → 重新取这一道菜的详情。 */
+    el.regionRetryBtn.addEventListener('click', loadDishes);
+    el.cardRetryBtn.addEventListener('click', function () {
+      if (state.route && state.route.id) { loadDishDetail(state.route.id); }
+      else { loadDishes(); }
+    });
 
     // Day 10：回到顶部。
     // passive: true 是告诉浏览器"这个监听里不会阻止滚动"，滚动因此更顺、不掉帧。
@@ -454,6 +471,7 @@
     // 离开卡片视图：把复制按钮复位，免得"已复制"残留到下次进来还亮着
     if (route.view !== 'dish') {
       state.currentDish = null;
+      state.detailFor = null;   // Day 20：下次再进卡片，重新取一次详情（拿最新内容）
       resetCopy();
     }
 
@@ -500,11 +518,17 @@
         applyPendingState();
       } else {
         var dish = dishById(route.id);
-        if (dish) {
+        if (dish && dish.blocks) {
+          /* 手上已经是全文（本地示例数据那条路，或这张卡片早就取过详情）：直接画。 */
           state.currentDish = dish;
           resetCopy();
           renderCard(dish);
           applyState('success');
+        } else if (dish) {
+          /* Day 20：接口的列表返回是摘要形状（没有 blocks / facts / sources）——
+             先在卡片页摆"正在读这张卡片"，再按 id 取详情。
+             state.detailFor 保证同一次进入只请求一次（重复派发路由不会打两次接口）。 */
+          if (state.detailFor !== route.id) { loadDishDetail(route.id); }
         }
       }
     }
@@ -605,6 +629,51 @@
   }
 
   /* ---------------------------------------------------------
+     Day 20：页脚状态栏（余力加练的「最后更新时间」落在这里）
+
+     三种情况分开说，不含糊：
+       · 数据到手        → 来源（公网接口 / 本地示例数据）+ 本次读取时刻
+       · 读失败          → 明说失败，且**不给时间**（给了会像"刚更新过"）
+       · 还没开始读      → 留空（页脚本来就是空的，不闪一句假话）
+
+     ★ 为什么这个时间戳算得上证据：它会随每次刷新变，且来自接口响应到手的时刻；
+       写死的假数据做不到这件事（完成标准第 3 条"改库后刷新跟着变"就靠这条复核）。
+     --------------------------------------------------------- */
+  function pad2(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+
+  function updateDataStatus(errorMessage) {
+    if (!el.dataStatus) { return; }
+
+    var info = state.dataInfo;
+    if (errorMessage || !info || !info.source) {
+      el.dataStatus.textContent = '数据来源：读取失败 · 请点上面的「重试」';
+      el.dataStatus.setAttribute('data-source', 'error');
+      return;
+    }
+
+    var t = (info.updatedAt instanceof Date) ? info.updatedAt : null;
+    var stamp = t
+      ? (t.getFullYear() + '-' + pad2(t.getMonth() + 1) + '-' + pad2(t.getDate()) +
+         ' ' + pad2(t.getHours()) + ':' + pad2(t.getMinutes()) + ':' + pad2(t.getSeconds()))
+      : '未知';
+
+    if (info.source === 'api') {
+      el.dataStatus.textContent =
+        '数据来源：公网接口' + (info.note ? '（' + info.note + '）' : '') +
+        ' · 最后更新 ' + stamp;
+      el.dataStatus.setAttribute('data-source', 'api');
+    } else {
+      /* 降级路线：接口不通时用的是本地示例数据 —— 必须让看页面的人一眼知道，
+         否则截出来的图会显得像"接口真返回了这些"。 */
+      el.dataStatus.textContent =
+        '数据来源：本地示例数据（接口不可用）· 最后更新 ' + stamp;
+      el.dataStatus.setAttribute('data-source', 'sample');
+    }
+  }
+
+  /* ---------------------------------------------------------
      1. 读数据（取数逻辑全在 js/data-source.js）
      --------------------------------------------------------- */
   function loadDishes() {
@@ -615,6 +684,12 @@
         state.dishes = dishes || [];
         state.loaded = true;
         hideHint();
+
+        /* Day 20：记下"这份数据是哪来的、什么时候读的"，并写到页脚状态栏。
+           放在 Router.dispatch() 之前 —— 那次派发可能直接画卡片页，
+           而卡片页要知道自己手上是摘要还是全文（见下面的 loadDishDetail）。 */
+        state.dataInfo = window.DataSource.sourceInfo();
+        updateDataStatus();
 
         /* Day 13：数据到手，让当前地址再走一遍路由。
            原来这里是自己画列表；现在交给 renderRoute 统一决定 ——
@@ -633,9 +708,10 @@
       .catch(function (err) {
         state.loaded = false;
         state.listState = 'error';
+        state.dataInfo = window.DataSource.sourceInfo();   // Day 20：失败时可能连来源都没有
+        updateDataStatus(err.message);
         state.errorMessage =
-          '可能是文件读取或网络出了问题。如果你是在文件夹里双击 index.html 打开的，' +
-          '请改用本地服务器打开（这不是你写错了，是浏览器的安全规则）。' +
+          '可能是网络或接口出了问题（接口地址写在 js/data-source.js 里）。' +
           '技术信息：' + err.message;
 
         /* 把"失败"记在 state 上，再让路由按**当前视图**去画 ——
@@ -643,6 +719,46 @@
            （比如在索引页点「重试」），记下事实、由 renderRoute 分派，
            才不会出现"错误画在 A 屏、用户人却在 B 屏"。 */
         renderRoute();
+      });
+  }
+
+  /* ---------------------------------------------------------
+     Day 20：取一道菜的完整内容
+
+     ★ 为什么需要这一步：接口的列表返回是**摘要形状**（id / 名称 / 地区 / 卖点 / 图片），
+       三段正文、事实、出处只在详情接口里。而卡片页要把这些都画出来 ——
+       所以在卡片页按 id 再取一次 /api/dishes/{id}。
+
+     取到之后**并回 state.dishes**（同一道菜只留一份）：
+       列表和卡片从此看的是同一份数据，不会出现"卡片有正文、列表没有"的两套说法。
+     --------------------------------------------------------- */
+  function loadDishDetail(id) {
+    state.detailFor = id;          // 记下"这一道正在取"，避免同一 id 被重复请求
+    applyState('loading');
+
+    window.DataSource.getDish(id)
+      .then(function (full) {
+        if (!full || !full.id) { throw new Error('详情接口没返回这道菜'); }
+
+        var i;
+        for (i = 0; i < state.dishes.length; i += 1) {
+          if (state.dishes[i].id === full.id) { state.dishes[i] = full; break; }
+        }
+        if (i === state.dishes.length) { state.dishes.push(full); }
+
+        // 用户可能在取数期间走开了（点了返回 / 改了地址）：那就只把数据留下，不动画面
+        if (!state.route || state.route.id !== id) { return; }
+
+        state.currentDish = full;
+        resetCopy();
+        renderCard(full);
+        applyState('success');
+      })
+      .catch(function (err) {
+        if (!state.route || state.route.id !== id) { return; }
+        state.detailFor = null;    // 失败要允许重试（点卡片上的「重试」会再进来一次）
+        state.errorMessage = '这道菜没能读出来：' + err.message;
+        applyState('error');
       });
   }
 

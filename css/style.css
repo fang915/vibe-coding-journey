@@ -820,6 +820,34 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   text-align: center;
 }
 
+/* ---------- 数据来源状态栏（Day 20 新增） ---------- */
+
+/* 页脚里那一行"数据来源 + 最后更新时间"（余力加练的落点）。
+   为什么长得像一枚小标签：它是**状态**不是正文，用边框和字号把它和页脚文案分开，
+   又不至于抢视线。三种状态用左边框颜色区分，扫一眼就知道数据可不可信：
+     接口数据 = 绿（正常）· 本地示例 = 橙（降级）· 读取失败 = 红。 */
+.data-status{
+  display: inline-block;
+  margin: var(--sp-3) 0 0;
+  padding: 3px 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  background: rgba(0, 0, 0, .03);
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-left-width: 3px;
+  border-radius: 4px;
+}
+.data-status:empty{ display: none; }          /* 还没开始读：整条不占位，不留空白框 */
+.data-status[data-source="api"]{ border-left-color: #3f7d3f; }
+.data-status[data-source="sample"]{ border-left-color: #c98a2b; }
+.data-status[data-source="error"]{ border-left-color: #b23b3b; color: #b23b3b; }
+
+/* 窄屏：状态栏文字长，允许折行，别撑破页脚 */
+@media (max-width: 560px){
+  .data-status{ display: block; text-align: left; overflow-wrap: break-word; }
+}
+
 /* ---------- 回到顶部（Day 10 新增） ---------- */
 
 /* 固定在窗口右下角。默认 hidden，滚到一定距离后由 js/app.js 放开。
