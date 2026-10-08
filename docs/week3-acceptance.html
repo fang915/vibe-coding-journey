@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 3 周 · 周验收表</title>
+<style>
+:root{
+  --ink:#241f1b; --ink-soft:#5b5149; --ink-faint:#8b8078;
+  --line:#e5ddd4; --bg:#f7f4f0; --card:#ffffff;
+  --accent:#9c2b22; --accent-soft:#f6e9e7;
+  --ok:#1a7f4b; --ok-bg:#e8f5ec; --bad:#b3261e; --bad-bg:#fbeae8; --warn:#9a6b00; --warn-bg:#fdf3dd;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; padding:28px 22px 60px; background:var(--bg); color:var(--ink);
+  font:15px/1.75 "Segoe UI","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1120px; margin:0 auto; background:var(--card); border:1px solid var(--line);
+  border-radius:14px; padding:38px 44px 52px; box-shadow:0 1px 3px rgba(60,40,30,.05)}
+h1{font-size:27px; line-height:1.35; margin:0 0 6px; letter-spacing:.2px}
+h1::after{content:""; display:block; width:56px; height:3px; background:var(--accent);
+  border-radius:2px; margin:14px 0 0}
+h2{font-size:19px; margin:34px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line)}
+h2:first-of-type{margin-top:28px}
+h3{font-size:16.5px; margin:26px 0 10px; color:var(--accent)}
+p{margin:9px 0; color:var(--ink)}
+strong{color:var(--ink)}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+ul,ol{margin:9px 0 9px 4px; padding-left:22px}
+li{margin:4px 0}
+blockquote{margin:14px 0; padding:11px 16px; background:var(--accent-soft);
+  border-left:3px solid var(--accent); border-radius:0 8px 8px 0; color:#4a3a35}
+blockquote p{margin:4px 0; font-size:14.5px}
+code{background:#f3efe9; border:1px solid var(--line); border-radius:5px;
+  padding:1px 6px; font:13px/1.5 Consolas,"Courier New",monospace; color:#4a3d33;
+  word-break:break-all}
+pre{background:#faf8f5; border:1px solid var(--line); border-radius:10px; padding:14px 16px; overflow-x:auto}
+pre code{background:none; border:0; padding:0; font-size:12.8px; line-height:1.7}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:13.6px}
+th,td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top}
+th{background:#faf7f3; font-weight:600; color:#4a3f37; white-space:nowrap}
+tbody tr:nth-child(even){background:#fcfbf9}
+td code{font-size:12.4px}
+.badge{display:inline-block; padding:1px 8px; border-radius:20px; font-size:12px;
+  font-weight:700; letter-spacing:.3px; white-space:nowrap}
+.badge.ok{background:var(--ok-bg); color:var(--ok); border:1px solid #bfe3cd}
+.badge.bad{background:var(--bad-bg); color:var(--bad); border:1px solid #efc7c3}
+.badge.warn{background:var(--warn-bg); color:var(--warn); border:1px solid #f0dcae}
+.filebar{display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+  margin:0 0 4px; font-size:12.5px; color:var(--ink-faint)}
+.filebar b{color:var(--accent); font-weight:600}
+hr{border:0; border-top:1px solid var(--line); margin:26px 0}
+</style>
+</head>
+<body>
+<main class="page">
+<div class="filebar"><span><b>寻味 / Xunwei</b> · 第 3 周 · 周验收表</span>
+<span>源文件 week3-acceptance.md · 渲染 2026-10-08 22:46</span></div>
+<h1>第 3 周 · 周验收表 —— 寻味 / Xunwei</h1>
+<blockquote>
+<p>验收范围：<strong>Day 15 – Day 21</strong>（第 3 周：接入云端 + 后端 + 前端换源 + 收尾验收）
+填表人：Amity ｜ 复核：小舟（异机异客户端） ｜ 日期：2026-10-08
+截图用页面：<code>docs/week3-acceptance.html</code>（同一内容的渲染版）</p>
+</blockquote>
+<h2>0. 这份表的口径（先说清楚，免得被误读）</h2>
+<ul>
+<li><strong>验收项来源</strong>：本周每天的「今日任务清单 → 完成标准」。<strong>课程官方的周验收表原文我没拿到</strong>，
+  所以这张表是按每天的完成标准逐条搬过来的，不是另造一套。
+  若课程表格另有条目，以课程为准，把差异补进 §4 即可。</li>
+<li><strong>证据分三类</strong>，表里逐项标注：</li>
+<li><code>实测</code> = 当场跑出来的输出（命令 / 接口返回 / 浏览器实测）</li>
+<li><code>文件</code> = 仓库里可打开的文件或提交</li>
+<li><code>截图</code> = Amity 交的作业截图</li>
+<li><strong>没做到的照样写在这张表上</strong>，标 <code>FAIL</code> 或 <code>未执行</code>，并写清为什么、下一步怎么办（§3）。
+  宁可表难看，不许表骗人。</li>
+</ul>
+<hr />
+<h2>1. 逐项验收表</h2>
+<h3>Day 15 · 首次上公网</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>验收项</th>
+<th>状态</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td>公网健康接口可用</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> <code>https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.ap-shanghai.app.tcloudbase.com/api/health</code> → <code>200 {"ok":true,"service":"xunwei"}</code>（2026-10-08 22:44 复测）</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>前端静态托管可公网访问</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> <code>https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.tcloudbaseapp.com/</code> → 200，<code>index.html</code> / <code>css</code> / <code>js</code> / <code>data</code> 四个资源全部 200</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>接口契约登记</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>文件</code> <code>api-contract.md</code>（32687 字节，含 §1 命名映射、§3 接口清单、§6 写接口边界）</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>合作方（手机端）验证</td>
+<td><span class="badge bad">FAIL · 未执行</span></td>
+<td>跨周欠账。见 §3-①</td>
+</tr>
+</tbody>
+</table>
+<h3>Day 16 · 数据模型定稿 + 建表 + 种子</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>验收项</th>
+<th>状态</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td>6 张表的数据模型定稿</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>文件</code> <code>db/schema.sql</code> + 控制台可直粘版 <code>db/schema.exec.sql</code>（177 行 / 76 条语句）</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>建表脚本能一次跑通</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> <code>db/tools/check-schema.py</code> 结构自检 + PostgreSQL 解析通过；控制台执行记录 <code>CREATE TABLE IF NOT EX...</code>（截图）</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>种子数据入库</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> 控制台 <code>SELECT count(*) FROM public.dishes</code> → <strong>12</strong>；<code>db/seed.exec.sql</code>（1567 行 / 68 条语句）解析通过</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>省级行政区齐备</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> <code>/api/regions</code> → <strong>34</strong> 个省，已收录合计 <strong>13</strong>（含 Day 18 新增那道）</td>
+</tr>
+</tbody>
+</table>
+<h3>Day 17 · 三条读接口</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>验收项</th>
+<th>状态</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.1</td>
+<td>公网 GET 返回 <code>{ok:true,data:...}</code></td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> <code>/api/dishes?limit=2</code> → <code>total=13</code>；<code>/api/dishes/luosifen</code> → <code>facts=11 / sources=4</code>；<code>/api/regions</code> → 34 省</td>
+</tr>
+<tr>
+<td>3.2</td>
+<td>控制台改一行、刷新跟着变</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>截图</code> 改 <code>tagline_zh</code> 后接口返回变成「改动验证：这条来自数据库，不是 mock」（Amity 截图，已复原）</td>
+</tr>
+<tr>
+<td>3.3</td>
+<td>两张截图（接口返回 + 页面）</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>截图</code> 接口返回 / 静态站首页与卡片页</td>
+</tr>
+<tr>
+<td>3.4</td>
+<td>离线形状自测</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> <code>tests/api-shape.test.js</code> → <strong>通过 73 项，失败 0 项</strong>（2026-10-08 复跑）</td>
+</tr>
+</tbody>
+</table>
+<h3>Day 18 · 策展端写接口（POST）</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>验收项</th>
+<th>状态</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4.1</td>
+<td>正常 POST 返回 <code>{ok:true,...}</code>、库里多一行</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>截图</code> <code>ok:true / dishId:fotiaoqiang / sortOrder:13</code>；SQL <code>SELECT ... WHERE id='fotiaoqiang'</code> → 1 行</td>
+</tr>
+<tr>
+<td>4.2</td>
+<td>缺必填字段被拒、提示中文</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>截图</code> 400 <code>bad_request</code>，<strong>一次列全 7 项</strong>（id、菜名中英、卖点中英、地区中英）</td>
+</tr>
+<tr>
+<td>4.3</td>
+<td>重复提交被拒</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>截图</code> 409 <code>conflict</code>「这道菜已经在库里了（id 重复），本次没有重复写入」—— 由数据库主键 <code>pk_dishes</code> 挡下</td>
+</tr>
+<tr>
+<td>4.4</td>
+<td>写接口形状与契约一致</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> <code>/api/dishes/fotiaoqiang</code> → 200，双语名、三段正文、别名「福寿全」</td>
+</tr>
+<tr>
+<td>4.5</td>
+<td>服务端日志（余力加练）</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>文件</code> <code>cloudfunctions/api/index.js</code>：成功记 id/status/地区/条数/耗时；失败按 4xx / 5xx 分开记，不记请求头与口令</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>本周自己抓出来的 bug（已修）</strong>：重复提交原本返回 500 而不是 409 —— 网关把 SQLSTATE 包成
+<code>DATABASE_23505</code>，翻译层只认裸 <code>23505</code>。已改成「提取连续 5 位数字」，并补了一条专门防这坑的自测。</p>
+</blockquote>
+<h3>Day 19 · 拆出数据访问层（重构）</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>验收项</th>
+<th>状态</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.1</td>
+<td>数据库操作拆成独立文件</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>文件</code> <code>cloudfunctions/api/db.js</code>（232 行）；<code>index.js</code> 1094 → <strong>905</strong> 行，不再 <code>require('https')</code></td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>已上线接口全部回归通过</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> 离线 <strong>73/73</strong>；公网逐条 12/12（目录、列表、搜索、索引、详情、404、400、POST 401×2）</td>
+</tr>
+<tr>
+<td>5.3</td>
+<td>改动已提交</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>文件</code> 提交 <code>ac721ee</code></td>
+</tr>
+<tr>
+<td>5.4</td>
+<td>分层示意图（余力加练）</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>文件</code> <code>docs/ARCHITECTURE.md</code> + <code>docs/architecture-layers.svg</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Day 20 · 前端换源（接真接口）</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>验收项</th>
+<th>状态</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6.1</td>
+<td>公网首页展示数据库真实数据</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> 公网首页 <strong>13 张卡</strong>，含 <strong>佛跳墙</strong>（该菜只存在于数据库，<code>data/dishes.json</code> 里没有）</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td>控制台改数据刷新跟着变</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>截图</code> + Amity 确认已执行（改 <code>luosifen</code> 卖点 → 刷新生效 → 已改回原文）</td>
+</tr>
+<tr>
+<td>6.3</td>
+<td>F12 里请求地址是公网地址</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> 页面只发两笔接口请求，域名均为 <code>vibecodingstudy-...ap-shanghai.app.tcloudbase.com</code>：<br><code>/api/dishes?limit=100</code> → 200<br><code>/api/dishes/luosifen</code> → 200</td>
+</tr>
+<tr>
+<td>6.4</td>
+<td>公网首页截图（含地址栏）</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>截图</code> 13 卡 + 页脚状态栏；卡片页截图带完整地址栏</td>
+</tr>
+<tr>
+<td>6.5</td>
+<td>数据来源状态栏（余力加练·最后更新时间）</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>实测</code> 页脚显示「数据来源：公网接口（数据库共 13 道） · 最后更新 2026-10-08 22:41:37」，元素属性 <code>data-source="api"</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Day 20 顺手修的既有 bug</strong>：<code>#region-retry-btn</code> / <code>#card-retry-btn</code> 两个「重试」按钮此前只取了引用、
+<strong>从未绑定事件</strong>（读失败时点了没反应）。已修，并实测验证（挡住详情接口 → 出现失败态 → 点重试 → 产生第 2 次请求）。</p>
+</blockquote>
+<h3>Day 21 · 周验收</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>验收项</th>
+<th>状态</th>
+<th>证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7.1</td>
+<td>周验收表逐项有证据</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>文件</code> 本文件 + <code>docs/week3-acceptance.html</code></td>
+</tr>
+<tr>
+<td>7.2</td>
+<td>同伴给出三行结论的交叉验证</td>
+<td><span class="badge bad">FAIL · 未完成</span></td>
+<td>验证卡与话术已备好：<code>user-test/day21-同伴交叉验证.md</code>；等 Amity 转发给同伴后填入。见 §3-②</td>
+</tr>
+<tr>
+<td>7.3</td>
+<td>缺项如实标 FAIL</td>
+<td><span class="badge ok">PASS</span></td>
+<td>见 §3（8 项，全部写明原因与下一步）</td>
+</tr>
+<tr>
+<td>7.4</td>
+<td>演示提纲已写出并完整走通一遍</td>
+<td><span class="badge ok">PASS</span></td>
+<td><code>文件</code> <code>docs/demo-outline.md</code>（四段结构）；<code>实测</code> 提纲里的每一步都已在本机/公网实跑一遍（见 §2）</td>
+</tr>
+<tr>
+<td>7.5</td>
+<td>三张截图</td>
+<td><span class="badge warn">部分</span></td>
+<td>验收表页 / 演示提纲页可截（备好 HTML）；同伴三行结论那张 <strong>依赖 7.2</strong></td>
+</tr>
+<tr>
+<td>7.6</td>
+<td>3 分钟演示视频（余力加练）</td>
+<td><span class="badge warn">未做</span></td>
+<td>分镜脚本已写进 <code>docs/demo-outline.md</code> §5；录屏需本人操作</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. 演示提纲「走通一遍」的实测记录（2026-10-08 22:41–22:52）</h2>
+<p>用无头 Edge（全新配置目录、零缓存）打开公网地址，逐步实跑：</p>
+<table>
+<thead>
+<tr>
+<th>提纲里的一步</th>
+<th>实测结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打开公网首页</td>
+<td>200；标题「寻味 / Xunwei —— 中华美食文化检索」；<strong>13 张卡</strong></td>
+</tr>
+<tr>
+<td>页脚状态栏</td>
+<td>「数据来源：公网接口（数据库共 13 道） · 最后更新 2026-10-08 22:41:37」</td>
+</tr>
+<tr>
+<td>搜索「螺狮粉」（故意错别字）</td>
+<td>命中 1 道 → 直接进卡片页 <code>#/dish/luosifen</code></td>
+</tr>
+<tr>
+<td>搜索「snail noodles」（英文）</td>
+<td>同样命中 <code>luosifen</code></td>
+</tr>
+<tr>
+<td>搜索「佛跳墙」（只在库里的新菜）</td>
+<td>命中 <code>fotiaoqiang</code> → 进卡片页</td>
+</tr>
+<tr>
+<td>搜索「披萨」（不存在）</td>
+<td>回到 <code>#/</code>，列表 0 道，空态正常显示（不是白屏、不是报错）</td>
+</tr>
+<tr>
+<td>地区筛「广西」</td>
+<td><code>#/region/guangxi</code> → 1 道（螺蛳粉）</td>
+</tr>
+<tr>
+<td>地区筛「福建」</td>
+<td><code>#/region/fujian</code> → <strong>2 道</strong>（沙县小吃、佛跳墙）</td>
+</tr>
+<tr>
+<td>地区筛「天津」</td>
+<td><code>#/region/tianjin</code> → 1 道（狗不理包子）</td>
+</tr>
+<tr>
+<td>深链直开 <code>#/region/guangxi</code></td>
+<td>刷新/别人打开同一个链接 → 同样 1 道（筛选进地址栏这件事是真的）</td>
+</tr>
+<tr>
+<td>卡片页 <code>#/dish/luosifen</code></td>
+<td>三段正文（起因段 1162 字）、<strong>11 条事实</strong>、<strong>4 个出处</strong>；<code>[[ihchina]]</code> 标记已被渲染成可点角标</td>
+</tr>
+<tr>
+<td>F12 Network</td>
+<td>只有两笔接口请求，域名都是接口域名（不是本地文件）</td>
+</tr>
+<tr>
+<td>窄屏 320 / 360 / 390px</td>
+<td>首页与卡片页 <strong>溢出 0px × 6 项</strong>（手机不用横滑）</td>
+</tr>
+<tr>
+<td>运行时异常</td>
+<td><strong>无 JS 异常</strong>；只有一条 <code>favicon.ico</code> 404（见 §3-⑤）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. 缺项如实标记（8 项，全部记入下周待办）</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>缺项</th>
+<th>归类</th>
+<th>为什么没做</th>
+<th>下一步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td><strong>Day 15 合作方手机端验证</strong></td>
+<td>FAIL</td>
+<td>跨周欠账；手机端验证需要对方拿手机打开</td>
+<td>同 ②，一张卡一起发出去，一次收两件</td>
+</tr>
+<tr>
+<td>②</td>
+<td><strong>Day 21 同伴交叉验证（三行结论）</strong></td>
+<td>FAIL</td>
+<td>需要真人第二双眼睛，我只能提供「异机异客户端」复核，不能冒充同伴</td>
+<td>把 <code>user-test/day21-同伴交叉验证.md</code> 里的话术转发给同伴，收到三行后回填</td>
+</tr>
+<tr>
+<td>③</td>
+<td><strong>Day 14 T1 人工测试</strong></td>
+<td>未执行</td>
+<td>记录里只有开发者自查 + 无头实测，<strong>没有真人按清单操作</strong>（<code>user-test/day14-用户测试记录.md</code> §0 已如实标注）</td>
+<td>与 ② 合并：一次找人，同时给 Day 14 任务卡与 Day 21 验证卡</td>
+</tr>
+<tr>
+<td>④</td>
+<td><strong>图片：图源在境外取不到</strong></td>
+<td>FAIL（既有）</td>
+<td>5 张图指向 <code>upload.wikimedia.org</code>，实测全部取不到（<code>net::ERR_TIMED_OUT</code>），页面显示粉色占位</td>
+<td>换国内可达图源或转存到 CloudBase 存储；改数据不改代码结构</td>
+</tr>
+<tr>
+<td>⑤</td>
+<td><strong>favicon 缺失 → 控制台一条 404</strong></td>
+<td>FAIL（轻微）</td>
+<td><code>index.html</code> 没有声明 <code>&lt;link rel="icon"&gt;</code>，浏览器自动请求 <code>/favicon.ico</code> → 404</td>
+<td>加一个图标 + 一行 link，再升版本号重新上传；不影响功能，所以没在验收日动</td>
+</tr>
+<tr>
+<td>⑥</td>
+<td><strong>README 已过期</strong></td>
+<td>FAIL（文档）</td>
+<td><code>README.md</code> 仍写「5 道菜 / 不使用后端、不使用数据库 / 尚未部署上线」，与现状（13 道菜、CloudBase + PostgreSQL、公网在线）不符</td>
+<td>与本次验收内容无关的顺手修复，按「今日不做」记下周；改的时候只需改数字与「技术路线」「已知限制」两节</td>
+</tr>
+<tr>
+<td>⑦</td>
+<td><strong>公网链接有「风险提醒」中间页</strong></td>
+<td>限制（非 bug）</td>
+<td>腾讯云测试域名首次访问必现：正文写「当前域名…是 CloudBase 提供的测试域名」，需点「确定访问」才进站（今日无头实测复现）</td>
+<td>影响「可分享」这件事。要去掉需绑定自定义域名：<code>https://docs.cloudbase.net/service/alias</code> → 记入下周（有域名再说）</td>
+</tr>
+<tr>
+<td>⑧</td>
+<td><strong>3 分钟演示视频</strong></td>
+<td>未做（余力加练）</td>
+<td>录屏是本人操作</td>
+<td>按 <code>docs/demo-outline.md</code> §5 分镜录；脚本已写好，照着念即可</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. 本周的四个「对不上」（今日一问的素材库）</h2>
+<ol>
+<li><strong><code>image</code> 双层对不上</strong>（Day 17）：表里图片是 9 个扁平列，接口返回是 8 字段嵌套对象 —— 这一层是<strong>设计</strong>
+   （接口面向前端重新塑形）；但 5 张图 URL 实测全部取不到 —— 这一层是<strong>真问题</strong>（→ §3-④）。</li>
+<li><strong>网关错误信封 <code>DATABASE_23505</code></strong>（Day 18）：以为是 409，出来却是 500。根因是翻译层做了全等比对，
+   没认出网关加的前缀。教训：<strong>别假设错误体的形状，先把原始报错打出来看</strong>。</li>
+<li><strong>测试的 require 缓存接缝</strong>（Day 19）：拆层后自测炸 3 项 —— <code>API_KEY</code> 搬进 <code>db.js</code>，而测试只清了
+   <code>index.js</code> 的缓存。教训：<strong>动了模块拓扑，测试脚手架要跟着动</strong>。</li>
+<li><strong>列表是摘要、详情才全文</strong>（Day 20）：直接换源会出现「首页有卡、点进去空白」，必须为卡片页补一次二次取数。
+   教训：<strong>换数据源时先比对字段集合，字段少了就不是接线问题、是取数策略问题</strong>。</li>
+</ol>
+<hr />
+<h2>5. 怎么自己再验一遍（复现命令）</h2>
+<pre><code class="language-bash"># ① 接口活着
+curl -s &quot;https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.ap-shanghai.app.tcloudbase.com/api/health&quot;
+
+# ② 读接口真在读数（total 应为 13）
+curl -s &quot;https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.ap-shanghai.app.tcloudbase.com/api/dishes?limit=2&quot;
+
+# ③ 离线形状自测（应输出「通过 73 项，失败 0 项」）
+node tests/api-shape.test.js
+
+# ④ 建表/种子脚本的离线校验
+python db/tools/check-schema.py
+</code></pre>
+<hr />
+<h2>6. 结论</h2>
+<ul>
+<li><strong>本周主线（Day 15–21）七天的完成标准，除三项需要「第二个人」的以外，全部有实测或截图证据。</strong></li>
+<li>三项要人配合的（合作方手机端、T1 人工测试、同伴交叉验证）<strong>如实标 FAIL</strong>，材料已备好，只差发出与回收。</li>
+<li>五项与验收无关的既有问题（图源、favicon、README、中间页、演示视频）<strong>按「今日不做」记入下周</strong>，未在本日顺手改动。</li>
+</ul>
+</main>
+</body>
+</html>
