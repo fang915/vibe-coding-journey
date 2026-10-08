@@ -7,3 +7,6 @@ node_modules/
 # 静态托管部署包（index.html / css / js / data 的副本，用于上传到 CloudBase
 # 静态网站托管；它不是源码，是构建产物性质，进仓库只会造成重复，故忽略）
 deploy/
+
+# 管理口令本地文件（Day 18 调 POST 接口用，内容是 X-Admin-Token，绝不提交）
+tests/admin-token.txt

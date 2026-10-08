@@ -1,0 +1,25 @@
+{
+  "id": "fotiaoqiang",
+  "status": "published",
+  "name": { "zh": "佛跳墙", "en": "Buddha Jumps Over the Wall" },
+  "region": { "zh": "福建福州", "en": "Fuzhou, Fujian" },
+  "tagline": {
+    "zh": "福州宴席的头牌：十几种荤料同坛，文火慢煨出一坛浓汤。",
+    "en": "Fuzhou's banquet showpiece: a dozen or more rich ingredients braised together in one sealed jar."
+  },
+  "blocks": {
+    "origin": {
+      "zh": "佛跳墙是福建福州的传统名菜，一般认为成形于清代的福州，原料与做法历经多次演变，如今常见的版本以多种荤料与高汤同煨。",
+      "en": "A classic dish from Fuzhou, Fujian, generally traced to the Qing dynasty. Its ingredients and method evolved over time; today's common versions braise many rich ingredients in a shared broth."
+    },
+    "story": {
+      "zh": "名称流传最广的说法与文人题句「坛启荤香飘四邻，佛闻弃禅跳墙来」有关：香气浓到连修行的僧人都翻墙而来。这句诗的本事与作者在流传中有不同版本。",
+      "en": "The best-known story behind the name comes from a literati verse: the aroma was so tempting that even a monk would leap over the wall for a taste. Accounts differ on who wrote the verse and when."
+    },
+    "technique": {
+      "zh": "做法的关键在「分而治之」：各料先分别预处理去腥提鲜，再层层装入坛中，注入高汤与酒，以文火长时间慢煨，使各味互相融合。",
+      "en": "The key is handling each ingredient separately: pre-cook and season them one by one, layer them into a jar, add broth and wine, then simmer gently for hours so the flavors meld."
+    }
+  },
+  "aliases": ["福寿全"]
+}
