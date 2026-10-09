@@ -14,7 +14,11 @@
    ③ 【路由与参数】前缀去掉、非法入参挡得掉、分页总数取得对。
    ④ 【写接口的校验】Day 18 加的 POST /api/dishes：必填、双语成对、列宽、
       地区是否真实存在、重复提交撞主键后翻译成哪个状态码。
-      ★ 边界：④ 只验"拒绝"那半边，**不验"接受"**——真写一条进去必须连库，
+   ⑤ 【改与删的校验】Day 22 加的 PATCH / DELETE /api/dishes/{id}：
+      PATCH 只验"传了的字段"、派生列重算、以及**跨字段规则要看合并后的状态**；
+      DELETE 的 confirm 确认、集合路径不许整体操作；
+      外加数据层那道硬保护（缺过滤条件当场抛错 —— 它是"删库"唯一的安全带）。
+      ★ 边界与 ④ 相同：只验"拒绝"那半边。真改 / 真删必须连库，
         所以留给板块③ 对着公网做。离线测试不该偷偷改线上数据。
    ========================================================= */
 
@@ -502,12 +506,148 @@ check('请求体解析：空 / 坏 JSON / 超长 都被挡，合法 JSON 正常�
   assert(b64.id === 'y', 'base64 的请求体没读出来');
 });
 
-check('接口目录里已经登记了 POST，不再是"没有任何写接口"', function () {
+check('接口目录里登记齐了三条写接口（POST / PATCH / DELETE）', function () {
   const idx = X.endpointIndex();
-  const posts = idx.endpoints.filter(function (e) { return e.method === 'POST'; });
-  assert(posts.length === 1, '目录里应该有 1 条 POST，实际 ' + posts.length);
-  assert(posts[0].path === '/api/dishes', 'POST 的路径是 /api/dishes');
-  assert(/X-Admin-Token/.test(posts[0].desc), '目录里应该写明要带口令');
+  const write = idx.endpoints.filter(function (e) {
+    return ['POST', 'PATCH', 'DELETE'].indexOf(e.method) >= 0;
+  });
+  assert(write.length === 3, '目录里应该有 3 条写接口，实际 ' + write.length);
+  const post = idx.endpoints.filter(function (e) { return e.method === 'POST'; })[0];
+  assert(post.path === '/api/dishes', 'POST 的路径是 /api/dishes');
+  assert(/X-Admin-Token/.test(post.desc), '目录里应该写明要带口令');
+  const patch = idx.endpoints.filter(function (e) { return e.method === 'PATCH'; })[0];
+  assert(patch && patch.path === '/api/dishes/{id}', 'PATCH 的路径要带 {id}');
+  const del = idx.endpoints.filter(function (e) { return e.method === 'DELETE'; })[0];
+  assert(del && /confirm/.test(del.path), 'DELETE 的路径上要写明确认参数');
+});
+
+/* ---------------------------------------------------------
+   ⑤ PATCH 的校验：只验"这次传了的字段"，且按"合并后的状态"判（Day 22）
+
+   ★ 与 ④ 同一条边界：这里只验"拒绝"那半边。真改一条要连库，
+     所以留给板块③ 对着公网做 —— 离线测试不该偷偷改线上数据。
+   --------------------------------------------------------- */
+
+// 一条"库里现有的行"，专门用来验跨字段规则（PATCH 的难点就在这）
+const CUR_DRAFT = {
+  id: 'day22-test',
+  status: 'draft',
+  name_zh: '测试菜', name_en: 'Test Dish',
+  region_zh: '广西柳州', region_en: 'Liuzhou, Guangxi',
+  tagline_zh: '旧的卖点', tagline_en: 'old tagline',
+  block_origin_zh: '', block_origin_en: '',
+  block_story_zh: '', block_story_en: '',
+  block_technique_zh: '', block_technique_en: ''
+};
+const CUR_PUBLISHED = {
+  id: 'day22-test',
+  status: 'published',
+  name_zh: '测试菜', name_en: 'Test Dish',
+  region_zh: '广西柳州', region_en: 'Liuzhou, Guangxi',
+  tagline_zh: '卖点', tagline_en: 'tagline',
+  block_origin_zh: 'A', block_origin_en: 'a',
+  block_story_zh: 'B', block_story_en: 'b',
+  block_technique_zh: 'C', block_technique_en: 'c'
+};
+const TEST_REGIONS = [
+  { slug: 'guangxi', name_zh: '广西' },
+  { slug: 'guangdong', name_zh: '广东' }
+];
+
+// 把"应该被拒绝"写成一个断言：必须抛 400，且消息里含某个关键词
+function rejectPatch(body, needWord, current) {
+  let err = null;
+  try { X.validateDishPatch(body, TEST_REGIONS, current || CUR_DRAFT); } catch (e) { err = e; }
+  assert(err, '本该被拒绝，却通过了：' + JSON.stringify(body));
+  assert(err.status === 400, '状态码是 ' + err.status);
+  if (needWord) {
+    assert(err.message.indexOf(needWord) >= 0, '报错里应该提到「' + needWord + '」，实际是：' + err.message);
+  }
+  return err;
+}
+
+check('PATCH：一个字段都不给 → 拒绝（不装作"成功但什么也没做"）', function () {
+  rejectPatch({}, '没有任何字段');
+});
+
+check('PATCH：不许改 id（主键，也是卡片页地址的一部分）', function () {
+  rejectPatch({ id: 'other-id' }, 'id 不能改');
+});
+
+check('PATCH：不认识的字段 → 拒绝（派生列不能直接传）', function () {
+  rejectPatch({ search_text: 'x' }, '不认识的字段');
+  rejectPatch({ sort_order: 99 }, '不认识的字段');
+  rejectPatch({ image_thumb_url: 'http://x' }, '不认识的字段');
+});
+
+check('PATCH：只产出这次传了的列，没传的一个都不动', function () {
+  const r = X.validateDishPatch({ status: 'draft', tagline: { zh: '新卖点', en: 'new tagline' } }, TEST_REGIONS, CUR_DRAFT);
+  assert(r.patch.status === 'draft', 'status 应该写进去');
+  assert(r.patch.tagline_zh === '新卖点', 'tagline 应该写进去');
+  assert(!('name_zh' in r.patch), 'name 没传，就不该出现在 patch 里');
+  assert(!('region_zh' in r.patch), 'region 没传，就不该出现在 patch 里');
+  assert(!('search_text' in r.patch), '名字和地区都没动，不该重算 search_text');
+  assert(r.aliases === null, '没传 aliases 时应该是 null（表示"不动别名"）');
+});
+
+check('PATCH：改了名字 → search_text 跟着重算（否则改了名却搜不到）', function () {
+  const r = X.validateDishPatch({ name: { zh: '改名了', en: 'Renamed' } }, TEST_REGIONS, CUR_DRAFT);
+  assert(r.patch.name_zh === '改名了', '新名字应该写进去');
+  assert(typeof r.patch.search_text === 'string' && r.patch.search_text.length > 0, 'search_text 应该被重算');
+  assert(r.patch.search_text.indexOf('改名了') >= 0, 'search_text 里应该含新名字');
+  assert(r.patch.search_text.indexOf('测试菜') < 0, 'search_text 里不该残留旧名字');
+});
+
+check('PATCH：改了地区 → region_slug 由中文地名重推，不是照抄', function () {
+  const r = X.validateDishPatch({ region: { zh: '广东广州', en: 'Guangzhou, Guangdong' } }, TEST_REGIONS, CUR_DRAFT);
+  assert(r.patch.region_slug === 'guangdong', 'slug 应该是 guangdong，实际 ' + r.patch.region_slug);
+  rejectPatch({ region: { zh: '柳州', en: 'Liuzhou' } }, '不以任何省级行政区名开头');
+});
+
+check('PATCH：只改一段正文 → 只写那一段的列', function () {
+  const r = X.validateDishPatch({ blocks: { story: { zh: '故事', en: 'story' } } }, TEST_REGIONS, CUR_DRAFT);
+  assert(r.patch.block_story_zh === '故事', 'story 应该写进去');
+  assert(!('block_origin_zh' in r.patch), '没传 origin，就不该动它');
+  assert(!('block_technique_zh' in r.patch), '没传 technique，就不该动它');
+});
+
+check('PATCH：双语成对规则与 POST 完全一致（只给中文名 → 拒绝）', function () {
+  rejectPatch({ name: { zh: '只有中文' } }, '缺英文');
+});
+
+check('PATCH 跨字段（今天的关键）：库里 draft 且正文空，想改成 published → 拒绝', function () {
+  rejectPatch({ status: 'published' }, '三段正文必须双语齐全');
+});
+
+check('PATCH 跨字段（今天的关键）：库里 published 且正文齐全，只把 status 改回 draft → 通过', function () {
+  const r = X.validateDishPatch({ status: 'draft' }, TEST_REGIONS, CUR_PUBLISHED);
+  assert(r.patch.status === 'draft', 'status 应该改掉');
+  assert(!('block_origin_zh' in r.patch), '正文没传就不该动');
+});
+
+check('PATCH 跨字段（今天的关键）：库里 published，想把某段正文清空 → 拒绝', function () {
+  rejectPatch({ blocks: { origin: { zh: '', en: '' } } }, '三段正文必须双语齐全', CUR_PUBLISHED);
+});
+
+check('PATCH：aliases 必须是数组；给了就是整组替换（空数组 = 清空）', function () {
+  rejectPatch({ aliases: '不是数组' }, '必须是数组');
+  const r = X.validateDishPatch({ aliases: ['新别名', '新别名', 'another one'] }, TEST_REGIONS, CUR_DRAFT);
+  assert(Array.isArray(r.aliases), 'aliases 应该是数组');
+  assert(r.aliases.length === 2, '重复的别名应该去掉，实际 ' + r.aliases.length);
+  const empty = X.validateDishPatch({ aliases: [] }, TEST_REGIONS, CUR_DRAFT);
+  assert(Array.isArray(empty.aliases) && empty.aliases.length === 0, '空数组代表"清空"，要与 null 区分开');
+});
+
+/* ---------- 数据层那道硬保护（今天最要紧的一行代码） ---------- */
+check('db.js：PATCH / DELETE 缺过滤条件 → 当场抛错，绝不发出请求', function () {
+  const db = require(path.join(ROOT, 'cloudfunctions', 'api', 'db.js'));
+  let e1 = null, e2 = null;
+  try { db.restUpdate('dishes', [], { status: 'draft' }); } catch (e) { e1 = e; }
+  try { db.restDelete('dishes', []); } catch (e) { e2 = e; }
+  assert(e1, 'restUpdate 传空过滤条件时本该抛错');
+  assert(/过滤条件/.test(e1.message), 'restUpdate 的报错里应该点明"过滤条件"');
+  assert(e2, 'restDelete 传空过滤条件时本该抛错');
+  assert(/过滤条件/.test(e2.message), 'restDelete 的报错里应该点明"过滤条件"');
 });
 
 /* ---------- 异步那几条：走 main()，验方法/口令分派 ---------- */
@@ -574,15 +714,72 @@ check('接口目录里已经登记了 POST，不再是"没有任何写接口"', 
     assert(wrongPath.body.error.code === 'method_not_allowed', '错误码是 ' + wrongPath.body.error.code);
   });
 
-  const del = await call({ path: '/api/dishes/guilin-mifen', httpMethod: 'DELETE' });
-  check('DELETE 本期不做 → 405，且不是含糊的 404', function () {
-    assert(del.status === 405, '状态码是 ' + del.status);
+  /* Day 22：DELETE 从"本期不做"变成真接口，旧断言随之退休。
+     下面这几条都停在**碰数据库之前**，所以离线可测；真删一条留给板块③。 */
+  const delNoToken = await call({ path: '/api/dishes/guilin-mifen', httpMethod: 'DELETE', queryStringParameters: { confirm: 'guilin-mifen' } });
+  check('DELETE 不带口令 → 401（写接口先验身份）', function () {
+    assert(delNoToken.status === 401, '状态码是 ' + delNoToken.status);
+  });
+
+  const delNoConfirm = await call({ path: '/api/dishes/guilin-mifen', httpMethod: 'DELETE', headers: { 'x-admin-token': 'test-token' } });
+  check('DELETE 不带 confirm → 400，且说清要带什么（删除不可逆，必须显式确认）', function () {
+    assert(delNoConfirm.status === 400, '状态码是 ' + delNoConfirm.status);
+    assert(delNoConfirm.body.error.code === 'bad_request', '错误码是 ' + delNoConfirm.body.error.code);
+    assert(/confirm/.test(delNoConfirm.body.error.message), '提示里要写明该带什么参数');
+  });
+
+  const delMismatch = await call({
+    path: '/api/dishes/guilin-mifen', httpMethod: 'DELETE',
+    headers: { 'x-admin-token': 'test-token' },
+    queryStringParameters: { confirm: 'luosifen' }
+  });
+  check('DELETE 的 confirm 与路径 id 不一致 → 400，什么都没删（这就是"手滑保护"）', function () {
+    assert(delMismatch.status === 400, '状态码是 ' + delMismatch.status);
+    assert(/不一致/.test(delMismatch.body.error.message), '提示里要说清不一致');
+  });
+
+  const patchOnCollection = await call({
+    path: '/api/dishes', httpMethod: 'PATCH',
+    headers: { 'x-admin-token': 'test-token' }, body: '{"status":"draft"}'
+  });
+  check('PATCH 打到集合路径 /api/dishes → 405（不支持"改全部"）', function () {
+    assert(patchOnCollection.status === 405, '状态码是 ' + patchOnCollection.status);
+    assert(patchOnCollection.body.error.code === 'method_not_allowed', '错误码是 ' + patchOnCollection.body.error.code);
+  });
+
+  const delOnCollection = await call({
+    path: '/api/dishes', httpMethod: 'DELETE',
+    headers: { 'x-admin-token': 'test-token' }, queryStringParameters: { confirm: 'dishes' }
+  });
+  check('DELETE 打到集合路径 /api/dishes → 405（不支持"删全部"）', function () {
+    assert(delOnCollection.status === 405, '状态码是 ' + delOnCollection.status);
+  });
+
+  const patchNoToken = await call({ path: '/api/dishes/luosifen', httpMethod: 'PATCH', body: '{"status":"draft"}' });
+  check('PATCH 不带口令 → 401', function () {
+    assert(patchNoToken.status === 401, '状态码是 ' + patchNoToken.status);
+  });
+
+  const patchBadId = await call({
+    path: '/api/dishes/Bad_ID', httpMethod: 'PATCH',
+    headers: { 'x-admin-token': 'test-token' }, body: '{"status":"draft"}'
+  });
+  check('PATCH 的 id 不合法 → 400（白名单在碰库之前就挡）', function () {
+    assert(patchBadId.status === 400, '状态码是 ' + patchBadId.status);
+  });
+
+  const putElsewhere = await call({ path: '/api/dishes/luosifen', httpMethod: 'PUT', headers: { 'x-admin-token': 'test-token' } });
+  check('PUT 仍未支持 → 405，且报错里指路（修改要用 PATCH）', function () {
+    assert(putElsewhere.status === 405, '状态码是 ' + putElsewhere.status);
+    assert(/PATCH/.test(putElsewhere.body.error.message), '报错里应该指路到 PATCH');
   });
 
   const opt = await fresh.main({ path: '/api/dishes', httpMethod: 'OPTIONS' });
-  check('OPTIONS 预检直接放行（跨域要用）', function () {
+  check('OPTIONS 预检直接放行（跨域要用，且已放行 PATCH / DELETE）', function () {
     assert(opt.statusCode === 204, '状态码是 ' + opt.statusCode);
     assert(/POST/.test(opt.headers['Access-Control-Allow-Methods']), '允许的方法里要有 POST');
+    assert(/PATCH/.test(opt.headers['Access-Control-Allow-Methods']), '允许的方法里要有 PATCH');
+    assert(/DELETE/.test(opt.headers['Access-Control-Allow-Methods']), '允许的方法里要有 DELETE');
     assert(/X-Admin-Token/.test(opt.headers['Access-Control-Allow-Headers']), '允许的请求头里要有 X-Admin-Token');
   });
 

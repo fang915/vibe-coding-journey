@@ -74,6 +74,10 @@ const dbLayer = require('./db.js');
 const httpError = dbLayer.httpError;
 const restGet = dbLayer.restGet;
 const restInsert = dbLayer.restInsert;
+// Day 22：改（PATCH）与删（DELETE）。两个都会在 db.js 内部强制要求过滤条件 ——
+// 少写过滤条件不是"改错一行"，而是"改整张表 / 清整张表"。
+const restUpdate = dbLayer.restUpdate;
+const restDelete = dbLayer.restDelete;
 const parseTotal = dbLayer.parseTotal;
 const gatewayError = dbLayer.gatewayError;
 const API_KEY = dbLayer.API_KEY;
@@ -519,6 +523,28 @@ function matchRegionSlug(regionZh, regionRows) {
   return '';
 }
 
+/* ---------- 校验用的两个小工具（POST 与 PATCH 共用，Day 22 提出来） ---------- */
+
+function text(v) {
+  return (v === null || v === undefined) ? '' : String(v).trim();
+}
+
+/* 双语字段一律成对（契约 §1.2）。少一个键，前端 bilingual() 会渲染出一行空白，
+   所以"只给中文"这种输入必须在门口就被挡掉，不能等页面上去发现。
+   错误推进调用方给的 errors 数组 —— 一次报全，而不是修一个报一个。
+   （Day 22 加 PATCH 时把这段从 validateNewDish 里提了出来：两个接口必须
+     用**同一套**双语文案与列宽规则，抄一份必然漂移。） */
+function pairText(container, label, maxZh, maxEn, errors) {
+  const c = (container && typeof container === 'object' && !Array.isArray(container)) ? container : {};
+  const zh = text(c.zh);
+  const en = text(c.en);
+  if (!zh) { errors.push(label + ' 缺中文（.zh）'); }
+  if (!en) { errors.push(label + ' 缺英文（.en）'); }
+  if (zh && zh.length > maxZh) { errors.push(label + '.zh 太长（' + zh.length + ' 字符，上限 ' + maxZh + '）'); }
+  if (en && en.length > maxEn) { errors.push(label + '.en 太长（' + en.length + ' 字符，上限 ' + maxEn + '）'); }
+  return { zh: zh, en: en };
+}
+
 /* 把一段请求体变成一个"可以进库的行"。纯函数：不碰网络、不读环境变量，
    所以 tests/api-shape.test.js 能离线把每一条校验都跑一遍。
    校验不过就一次把所有问题列出来（而不是修一个报一个）。 */
@@ -526,21 +552,8 @@ function validateNewDish(body, regionRows, nextSortOrder) {
   const errors = [];
   const src = (body && typeof body === 'object' && !Array.isArray(body)) ? body : {};
 
-  function text(v) {
-    return (v === null || v === undefined) ? '' : String(v).trim();
-  }
-
-  /* 双语字段一律成对（契约 §1.2）。少一个键，前端 bilingual() 会渲染出一行空白，
-     所以"只给中文"这种输入必须在门口就被挡掉，不能等页面上去发现。 */
   function pair(container, label, maxZh, maxEn) {
-    const c = (container && typeof container === 'object' && !Array.isArray(container)) ? container : {};
-    const zh = text(c.zh);
-    const en = text(c.en);
-    if (!zh) { errors.push(label + ' 缺中文（.zh）'); }
-    if (!en) { errors.push(label + ' 缺英文（.en）'); }
-    if (zh && zh.length > maxZh) { errors.push(label + '.zh 太长（' + zh.length + ' 字符，上限 ' + maxZh + '）'); }
-    if (en && en.length > maxEn) { errors.push(label + '.en 太长（' + en.length + ' 字符，上限 ' + maxEn + '）'); }
-    return { zh: zh, en: en };
+    return pairText(container, label, maxZh, maxEn, errors);
   }
 
   // ① id：必填 + 白名单（它同时也是主键、也是过滤表达式里的一环）
@@ -676,6 +689,186 @@ function validateNewDish(body, regionRows, nextSortOrder) {
   };
 }
 
+/* ---------- 5.3b PATCH 的校验：只验"这次真传了的字段"（Day 22） ----------
+
+   与 validateNewDish 的关系是「同一套规则，不同的门槛」：
+
+     POST  必须给全（id / 名字 / 地区 / 卖点），因为它要造出整行；
+     PATCH 只校验这次真传了的字段，没传的一律不碰 —— 这正是 PATCH 与 PUT 的区别。
+
+   ★ 一个只有 PATCH 才有的难点：**跨字段规则必须看"合并后的状态"。**
+     「status=published 时三段正文要齐全」这条，光看请求体是不够的 ——
+     请求体可能只有 {"status":"published"}，三段正文正躺在库里。
+     所以调用方要把**库里现有那一行**（current）一起传进来，按合并结果判。
+     POST 没有这个问题：它一次给全，规则只看请求体就成立。
+
+   返回 { patch, aliases, touched }：
+     patch   —— 要写进 dishes 的列（只含改动到的）
+     aliases —— null = 没动别名；数组（含空数组）= 整组替换成这个
+     touched —— 改了哪些字段，给日志和响应回执用 */
+function validateDishPatch(body, regionRows, current) {
+  const errors = [];
+  const src = (body && typeof body === 'object' && !Array.isArray(body)) ? body : {};
+  const cur = current || {};
+  const keys = Object.keys(src).filter(function (k) { return src[k] !== undefined; });
+
+  // ① 主键不可改。它不是"嫌麻烦"，是"旧链接会全部失效"（契约 §4 那条备注）。
+  if (keys.indexOf('id') !== -1) {
+    errors.push('id 不能改：它是主键，也是卡片页地址 #/dish/{id} 的一部分，改了旧链接全部失效');
+  }
+
+  // ② 只认这几样。派生列（search_text / sort_order）和图片列都不接受直接传 ——
+  //    前者由服务端算，后者本期不支持传图（与 POST 同一口径）。
+  const ALLOWED = ['status', 'name', 'region', 'tagline', 'blocks', 'aliases', 'id'];
+  keys.forEach(function (k) {
+    if (ALLOWED.indexOf(k) === -1) {
+      errors.push('不认识的字段「' + String(k).slice(0, 24) +
+        '」（可改的是 status / name / region / tagline / blocks / aliases）');
+    }
+  });
+
+  // ③ 一个字段都不给 = 没法执行。与其回一句"成功但什么也没做"，不如说清楚。
+  if (!keys.length) {
+    errors.push('请求体里没有任何字段（PATCH 只改你传的字段，至少得给一个）');
+  }
+
+  function pair(container, label, maxZh, maxEn) {
+    return pairText(container, label, maxZh, maxEn, errors);
+  }
+
+  // ④ 三组双语字段：传了才验，规则与 POST 完全一致（同一个 pairText）
+  let name = null, tagline = null, region = null;
+  if ('name' in src) { name = pair(src.name, '菜名 name', MAX_LEN.name_zh, MAX_LEN.name_en); }
+  if ('tagline' in src) { tagline = pair(src.tagline, '一句话卖点 tagline', MAX_LEN.tagline_zh, MAX_LEN.tagline_en); }
+  if ('region' in src) { region = pair(src.region, '地区 region', MAX_LEN.region_zh, MAX_LEN.region_en); }
+
+  // ⑤ 地区改了 → slug 跟着重推。不能让"地名"和"slug"各说各话（理由同 POST）。
+  let regionSlug = '';
+  if (region) {
+    regionSlug = matchRegionSlug(region.zh, regionRows || []);
+    if (region.zh && !regionSlug) {
+      errors.push('地区 region.zh「' + region.zh.slice(0, 30) +
+        '」不以任何省级行政区名开头，推不出 region_slug（正确写法如「广西柳州」）');
+    }
+  }
+
+  // ⑥ status：给值就只能是这两个
+  let status = '';
+  if ('status' in src) {
+    status = text(src.status);
+    if (status !== 'published' && status !== 'draft') {
+      errors.push('status 只能是 published 或 draft，收到「' + status.slice(0, 20) + '」');
+    }
+  }
+
+  // ⑦ blocks：给哪几段就验哪几段
+  let blocks = null;
+  if ('blocks' in src) {
+    const bs = (src.blocks && typeof src.blocks === 'object' && !Array.isArray(src.blocks)) ? src.blocks : {};
+    blocks = {};
+    ['origin', 'story', 'technique'].forEach(function (key) {
+      const label = { origin: '起源 origin', story: '故事 story', technique: '做法 technique' }[key];
+      if (!(key in bs) || bs[key] === undefined) { return; } // 这段没传 → 不动它
+      blocks[key] = pair(bs[key], '正文 ' + label, BLOCK_MAX_CHARS, BLOCK_MAX_CHARS);
+    });
+    if (!Object.keys(blocks).length) {
+      errors.push('blocks 里没有 origin / story / technique 任何一段');
+    }
+  }
+
+  const BLOCK_COLS = {
+    origin:    ['block_origin_zh',    'block_origin_en'],
+    story:     ['block_story_zh',     'block_story_en'],
+    technique: ['block_technique_zh', 'block_technique_en']
+  };
+
+  /* ⑧ ★ 跨字段：按"合并后"的状态判（PATCH 独有的难点，见函数头注释）。
+     每段正文有两个来源 —— 这次改的（blocks）或库里原有的（cur）。 */
+  const finalStatus = status || text(cur.status) || 'draft';
+  if (finalStatus === 'published') {
+    ['origin', 'story', 'technique'].forEach(function (key) {
+      const label = { origin: '起源', story: '故事', technique: '做法' }[key];
+      const zh = (blocks && blocks[key]) ? blocks[key].zh : text(cur[BLOCK_COLS[key][0]]);
+      const en = (blocks && blocks[key]) ? blocks[key].en : text(cur[BLOCK_COLS[key][1]]);
+      if (!zh || !en) {
+        errors.push('status=published 时「' + label + '」三段正文必须双语齐全（这次没给，库里也是空的）');
+      }
+    });
+  }
+
+  // ⑨ aliases：传了就是**整组替换**（数组语义上不叫"追加"）
+  let aliases = null;
+  if ('aliases' in src) {
+    if (!Array.isArray(src.aliases)) {
+      errors.push('aliases 必须是数组（整组替换；想清空就给空数组 []）');
+    } else {
+      const seen = {};
+      const list = [];
+      src.aliases.forEach(function (a) {
+        const s = text(a);
+        if (!s || seen[s]) { return; }
+        seen[s] = true;
+        if (s.length > MAX_LEN.alias) {
+          errors.push('别名「' + s.slice(0, 20) + '…」太长（' + s.length + ' 字符，上限 ' + MAX_LEN.alias + '）');
+          return;
+        }
+        if (!normalize(s)) {
+          errors.push('别名「' + s.slice(0, 20) + '」去掉符号后是空的，搜不到任何东西');
+          return;
+        }
+        list.push(s);
+      });
+      aliases = list;
+    }
+  }
+
+  // ⑩ 组装要写的列
+  const patch = {};
+  const touched = [];
+  if (status) { patch.status = status; touched.push('status'); }
+  if (name) {
+    patch.name_zh = name.zh; patch.name_en = name.en; touched.push('name');
+  }
+  if (region) {
+    patch.region_slug = regionSlug; patch.region_zh = region.zh; patch.region_en = region.en;
+    touched.push('region');
+  }
+  if (tagline) {
+    patch.tagline_zh = tagline.zh; patch.tagline_en = tagline.en; touched.push('tagline');
+  }
+  if (blocks) {
+    Object.keys(blocks).forEach(function (key) {
+      patch[BLOCK_COLS[key][0]] = blocks[key].zh;
+      patch[BLOCK_COLS[key][1]] = blocks[key].en;
+    });
+    touched.push('blocks');
+  }
+
+  /* ⑪ search_text 是派生列：只要动了参与拼装的那四样（id|name|region）就要重算。
+     id 不可改，所以触发条件是 name 或 region。规则与 make-seed.py 逐字一致 ——
+     漏算的后果很隐蔽：改了名字，页面却搜不到新名字。 */
+  if (name || region) {
+    patch.search_text = [
+      cur.id,
+      name ? name.zh : cur.name_zh,
+      name ? name.en : cur.name_en,
+      region ? region.zh : cur.region_zh,
+      region ? region.en : cur.region_en
+    ].map(function (s) { return normalize(s); }).join('|');
+    if (patch.search_text.length > MAX_LEN.search_text) {
+      errors.push('派生列 search_text 太长（' + patch.search_text.length + ' 字符，上限 ' + MAX_LEN.search_text + '）');
+    }
+    touched.push('search_text');
+  }
+
+  if (errors.length) {
+    throw httpError(400, 'bad_request',
+      '提交的数据有 ' + errors.length + ' 个问题：' + errors.join('；'));
+  }
+
+  return { patch: patch, aliases: aliases, touched: touched };
+}
+
 /* ---------- 5.4 一次新增：口令 → 校验 → 写库 → 读回 ---------- */
 
 async function handleCreateDish(event) {
@@ -748,6 +941,134 @@ async function handleCreateDish(event) {
   };
 }
 
+/* ---------- 5.5 一次修改：口令 → 读现状 → 校验 → 写库 → 读回（Day 22） ----------
+
+   PATCH 比 POST 多一次"读"：跨字段规则（published 要三段齐全）和派生列重算
+   （search_text）都需要知道**库里现在是什么样**。
+   这次读同时兼任 404 检查，不用多问一次。 */
+async function handleUpdateDish(event, rawId) {
+  const startedAt = Date.now();
+  assertAdmin(event);
+  const body = parseJsonBody(event);
+  const id = readId(rawId); // 与 GET 详情同一条白名单，非法 id 直接 400
+
+  // ① 读现状，顺带当 404 检查：改一道不存在的菜，不该悄悄"成功"。
+  const found = await restGet('dishes', [['select', COLS_DISH], ['id', 'eq.' + id], ['limit', '1']], { count: false });
+  if (!found.rows.length) {
+    throw httpError(404, 'not_found', '没有这道菜，改不了 / Dish not found');
+  }
+  const current = found.rows[0];
+
+  /* ② 地区表只在"这次真要改地区"时才取 —— 不改地区的 PATCH 不该为它多等一次网络。
+     纯粹是省时间：少一次串行请求，响应大致快一倍。 */
+  let regionRows = [];
+  if (body && typeof body === 'object' && body.region !== undefined) {
+    regionRows = (await restGet('regions',
+      [['select', 'slug,name_zh'], ['order', 'group_order.asc,sort_order.asc']], { count: false })).rows;
+  }
+
+  // ③ 校验（不过就 400，一次把问题报全；此时还没碰过数据库）
+  const checked = validateDishPatch(body, regionRows, current);
+
+  /* ④ 写主表。过滤条件是 id=eq.xxx —— 少了它就会改整张表，
+     所以 db.js 的 restUpdate 见到空过滤条件会直接抛错（那层保护不靠这里写对）。 */
+  const updated = await restUpdate('dishes', [['id', 'eq.' + id]], checked.patch);
+
+  /* ⑤ 别名住在另一张表。传了 aliases 就是"整组替换"：先删旧的、再插新的。
+     ⚠️ 与 POST 同样的已知限制：两张表之间没有事务，
+        万一"插新别名"失败，会短暂处于"别名被清空"的状态。记在契约待办里。 */
+  if (checked.aliases !== null) {
+    await restDelete('dish_aliases', [['dish_id', 'eq.' + id]]);
+    if (checked.aliases.length) {
+      await restInsert('dish_aliases', checked.aliases.map(function (a, i) {
+        return { dish_id: id, alias: a, alias_norm: normalize(a), sort_order: i + 1 };
+      }));
+    }
+  }
+
+  // ⑥ 读回：与 POST 一样**故意**复用详情那条路径 —— 返回的是"库里真正存下来的样子"。
+  const dish = await handleDishDetail(id);
+
+  console.log('[xunwei] 修改菜品 id=' + id +
+    ' 改了=' + checked.touched.join(',') +
+    (checked.aliases !== null ? ' 别名=' + checked.aliases.length + ' 条(整组替换)' : '') +
+    ' 写回行数=' + updated.rows.length +
+    ' 耗时=' + (Date.now() - startedAt) + 'ms');
+
+  return {
+    dish: dish,
+    changed: {
+      dishId: id,
+      touched: checked.touched,
+      aliasesReplaced: checked.aliases !== null,
+      returnedRows: updated.rows.length
+    }
+  };
+}
+
+/* ---------- 5.6 一次删除：口令 → 确认 → 删（级联）→ 回执（Day 22） ----------
+
+   ★ 删除是本期唯一**不可逆**的操作，所以它比别的接口多一道确认。
+
+   确认为什么放在 URL 而不是"多问一次"？
+     一次 HTTP 调用就是一次决定，接口没法"再问一遍"。
+     所以把确认做成**必须显式写出来的参数**：?confirm=<同一个 id>。
+     它防的不是坏人（口令在做那件事），而是**手滑**：
+     把 /api/dishes/luosifen 误敲成 /api/dishes/luosilef 时，
+     请求会先失败在"确认参数与路径 id 对不上"，而不是安静地删掉另一道菜。
+     —— 这就是今天要回答的"你在哪加了确认"。 */
+async function handleDeleteDish(event, rawId, query) {
+  const startedAt = Date.now();
+  assertAdmin(event);
+  const id = readId(rawId);
+
+  const confirm = String((query && query.confirm) || '').trim();
+  if (!confirm) {
+    throw httpError(400, 'bad_request',
+      '删除不可逆，必须显式确认：地址里带上 ?confirm=' + id +
+      '（值与路径里的 id 完全一致）/ Deleting is irreversible, add ?confirm=' + id);
+  }
+  if (confirm !== id) {
+    throw httpError(400, 'bad_request',
+      '确认参数与要删的 id 不一致：路径是「' + id + '」，confirm 是「' + confirm.slice(0, 40) +
+      '」。已拒绝，什么都没删 / confirm does not match the id in the path, nothing was deleted');
+  }
+
+  /* 删主表。子表（别名 / 事实 / 出处 / 事实-出处）由外键 ON DELETE CASCADE
+     自动带走 —— 不需要我们手写四条 DELETE，也就不会出现"删到一半"的中间状态
+     （级联与主表删除在同一个事务里完成）。
+
+     ★ 用 return=representation 一次拿到"删掉的那一行"，而不是"先查一遍、再删"：
+       后者两次调用之间那道缝里，数据可能已经变了。 */
+  const deleted = await restDelete('dishes', [['id', 'eq.' + id]]);
+
+  if (!deleted.rows.length) {
+    /* 删不存在的菜 → 404，而不是"200 成功"。
+       ★ 这个区别对 DELETE 尤其要紧：第二次删同一个 id 时，
+         回 200 会让人分不清"删成功了"还是"本来就没有"。404 说得清。 */
+    throw httpError(404, 'not_found', '没有这道菜，没删任何东西 / Dish not found, nothing was deleted');
+  }
+
+  const row = deleted.rows[0];
+
+  console.log('[xunwei] 删除菜品 id=' + id +
+    ' name_zh=' + String(row.name_zh || '') +
+    ' region_slug=' + String(row.region_slug || '') +
+    ' 级联=别名/事实/出处已由外键 CASCADE 带走' +
+    ' 耗时=' + (Date.now() - startedAt) + 'ms');
+
+  return {
+    deleted: {
+      id: row.id,
+      name: { zh: row.name_zh, en: row.name_en },
+      region: { zh: row.region_zh, en: row.region_en },
+      status: row.status,
+      returnedRows: deleted.rows.length
+    },
+    cascade: '这道菜的别名、事实、出处及其关联已由数据库外键 ON DELETE CASCADE 一并删除（不可恢复）'
+  };
+}
+
 /* =========================================================
    五、路由与响应包壳
    ========================================================= */
@@ -781,7 +1102,7 @@ const JSON_HEADERS = {
   // 读接口公开、不带 Cookie；写接口靠 X-Admin-Token 这个请求头自证身份，
   // 不依赖 Cookie，所以 * 依然是安全的（浏览器不会自动带上 X-Admin-Token）。
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Token'
 };
 
@@ -803,13 +1124,15 @@ function fail(status, code, message) {
 function endpointIndex() {
   return {
     service: 'xunwei',
-    note: '寻味接口：四条公开只读（GET）+ 一条策展端写接口（POST，要 X-Admin-Token）。' +
-          '详见 api-contract.md §3 与 §6。',
+    note: '寻味接口：四条公开只读（GET）+ 三条策展端写接口（新增 POST / 修改 PATCH / 删除 DELETE，' +
+          '都要 X-Admin-Token）。详见 api-contract.md §3 与 §6。',
     endpoints: [
       { method: 'GET', path: '/api/dishes', desc: '列表：q 关键词 / region 省级短名 / status / limit / offset' },
       { method: 'GET', path: '/api/dishes/{id}', desc: '卡片：一道菜的完整内容，如 /api/dishes/luosifen' },
       { method: 'GET', path: '/api/regions', desc: '地区索引：34 个省级行政区 + 每省已收录几道' },
-      { method: 'POST', path: '/api/dishes', desc: '新增一道菜（策展端，请求头需 X-Admin-Token）' }
+      { method: 'POST', path: '/api/dishes', desc: '新增一道菜（策展端，请求头需 X-Admin-Token）' },
+      { method: 'PATCH', path: '/api/dishes/{id}', desc: '修改一道菜（策展端，只改你传的字段；id 不可改）' },
+      { method: 'DELETE', path: '/api/dishes/{id}?confirm={id}', desc: '删除一道菜（策展端，必须带 confirm 确认；子表由外键级联删除）' }
     ]
   };
 }
@@ -832,7 +1155,7 @@ exports.main = async function (event) {
     const route = resolveRoute(event);
     const query = (event && event.queryStringParameters) || {};
 
-    // ---- 写接口（Day 18）：POST 目前只开在 /dishes 一处 ----
+    // ---- 写接口：POST /api/dishes（Day 18）、PATCH|DELETE /api/dishes/{id}（Day 22）----
     if (method === 'POST') {
       if (route === '/dishes') {
         // 201 Created：语义上"新资源建好了"。响应体形状仍遵守契约 §1.4 的
@@ -843,10 +1166,29 @@ exports.main = async function (event) {
         'POST 只支持 /api/dishes（新增一道菜）/ POST is only supported on /api/dishes');
     }
 
+    /* 改与删都作用在"某一道菜"上，所以都要求路径里带 id。
+       打在集合路径（/api/dishes）上不给做 —— 那等于"改全部 / 删全部"，
+       正是 db.js 那道空过滤保护要挡的事；
+       这里在路由层先拦住，报错更早，也更容易看懂。 */
+    if (method === 'PATCH' || method === 'DELETE') {
+      const target = /^\/dishes\/(.+)$/.exec(route);
+      if (!target) {
+        return fail(405, 'method_not_allowed',
+          method + ' 必须作用在具体的一道菜上：/api/dishes/{id}（不支持对 /api/dishes 整体操作）/ ' +
+          method + ' requires a dish id in the path');
+      }
+      const targetId = decodeURIComponent(target[1]);
+      if (method === 'PATCH') {
+        return ok(await handleUpdateDish(event, targetId));
+      }
+      return ok(await handleDeleteDish(event, targetId, query));
+    }
+
     if (method !== 'GET') {
-      // 其余方法（PUT / PATCH / DELETE）本期一律不给，说清楚而不是含糊 404
+      // 其余方法（PUT 等）一律不给，说清楚而不是含糊 404
       return fail(405, 'method_not_allowed',
-        '读接口只支持 GET；新增一道菜用 POST /api/dishes。PATCH 与 DELETE 本期不做 / Only GET is supported here');
+        '这个接口只支持 GET；新增用 POST /api/dishes，修改用 PATCH /api/dishes/{id}，' +
+        '删除用 DELETE /api/dishes/{id}?confirm={id} / Only GET is supported here');
     }
 
     if (route === '/') { return ok(endpointIndex()); }
@@ -894,6 +1236,7 @@ exports.__internals = {
   readId: readId,
   endpointIndex: endpointIndex,
   validateNewDish: validateNewDish,
+  validateDishPatch: validateDishPatch,
   matchRegionSlug: matchRegionSlug,
   gatewayError: gatewayError,
   parseJsonBody: parseJsonBody,

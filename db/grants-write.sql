@@ -2,6 +2,12 @@ GRANT INSERT ON public.dishes TO service_role;
 
 GRANT INSERT ON public.dish_aliases TO service_role;
 
+GRANT UPDATE ON public.dishes TO service_role;
+
+GRANT DELETE ON public.dishes TO service_role;
+
+GRANT DELETE ON public.dish_aliases TO service_role;
+
 SELECT c.relname AS tablename,
        r.rolname AS grantee,
        a.privilege_type

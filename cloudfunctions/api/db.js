@@ -232,6 +232,102 @@ function restInsert(table, rows) {
   });
 }
 
+/* =========================================================
+   三、改（PATCH）与删（DELETE）—— Day 22
+   ========================================================= */
+
+/* ★★ 这两个方法和 POST 有一个本质区别，也是 Day 22 的主题：
+
+      POST  天生只影响"你给的那一行"——漏写参数顶多是校验失败；
+      PATCH / DELETE 是**按过滤条件**作用的——过滤条件为空时，
+      PostgREST 会把它们应用到**整张表**（对 DELETE 就是清库）。
+
+   所以这里加一条硬保护：过滤条件为空 → 立刻抛错，连请求都不发。
+   宁可这一步失败，也不能让"少写一个参数"变成"整表被改、被清"。
+
+   它和"防重复提交"是同一类设计思想：安全性要落在**不可能被绕过的那一层**，
+   而不是指望每个调用方每次都记得写对。 */
+function assertHasFilter(pairs, who) {
+  if (!pairs || !pairs.length) {
+    throw new Error(
+      '内部错误：' + who + ' 必须带过滤条件（如 id=eq.xxx），否则会作用于整张表；' +
+      '已拦下，未发出任何请求 / refusing to run ' + who + ' without a filter');
+  }
+}
+
+/* PATCH 与 DELETE 共用的底层请求。
+   （restInsert 保持原样不动 —— 它已经上线并验证过，
+     没必要为了"少写几行"去动一个正在跑的东西。） */
+function writeRequest(method, table, pairs, row) {
+  return new Promise(function (resolve, reject) {
+    const qs = buildQueryString(pairs || []);
+    const reqPath = REST_PREFIX + table + '?' + qs; // 过滤条件必填，这里不再是可选的
+
+    const payload = (row === null || row === undefined) ? null : JSON.stringify(row);
+    const headers = {
+      Authorization: 'Bearer ' + API_KEY,
+      Accept: 'application/json',
+      // 让库把"真正被改动的那一行"回给我们 —— PATCH 用它证明改成了什么，
+      // DELETE 用它充当"删掉了什么"的回执。
+      Prefer: 'return=representation'
+    };
+    if (payload !== null) { headers['Content-Type'] = 'application/json'; }
+
+    const req = https.request({
+      host: GATEWAY_HOST,
+      path: reqPath,
+      method: method,
+      headers: headers,
+      timeout: GATEWAY_TIMEOUT_MS
+    }, function (res) {
+      let body = '';
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) { body += chunk; });
+      res.on('end', function () {
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          return reject(gatewayError(res.statusCode, body));
+        }
+        let json;
+        try {
+          json = JSON.parse(body || '[]');
+        } catch (e) {
+          return reject(new Error('网关返回的不是 JSON：' + body.slice(0, 200)));
+        }
+        /* rows 为空数组 = "过滤条件没匹配到任何行"。
+           PATCH/DELETE 都不把这种情形当报错抛，而是把空结果交给业务层 ——
+           业务层据此回 404（"没有这道菜"），而不是含糊地回个 200 说"成功"。
+           ★ 这一点对 DELETE 尤其要紧：第二次删同一个 id 时，回 200 会让人
+             分不清"删成功了"还是"本来就没有"。 */
+        resolve({
+          rows: Array.isArray(json) ? json : [json],
+          statusCode: res.statusCode
+        });
+      });
+    });
+
+    req.on('timeout', function () {
+      req.destroy(new Error('写库请求超时（' + GATEWAY_TIMEOUT_MS + 'ms）'));
+    });
+    req.on('error', reject);
+    if (payload !== null) { req.write(payload); }
+    req.end();
+  });
+}
+
+/* 改一行（部分更新）。rows 的形状由调用方给，PATCH 收单个对象即可。 */
+function restUpdate(table, pairs, patchRow) {
+  assertHasFilter(pairs, 'PATCH');
+  return writeRequest('PATCH', table, pairs, patchRow);
+}
+
+/* 删一行。★ 用 return=representation 而不是"先查一遍再删"：
+     ① 一次调用就拿到"删掉的是什么"，回执不需要第二次请求；
+     ② 避开"先查后删"之间的竞态 —— 和防重复提交是同一个道理。 */
+function restDelete(table, pairs) {
+  assertHasFilter(pairs, 'DELETE');
+  return writeRequest('DELETE', table, pairs, null);
+}
+
 module.exports = {
   httpError: httpError,
   encodeValue: encodeValue,
@@ -240,5 +336,8 @@ module.exports = {
   parseTotal: parseTotal,
   gatewayError: gatewayError,
   restInsert: restInsert,
+  restUpdate: restUpdate,
+  restDelete: restDelete,
+  assertHasFilter: assertHasFilter,
   API_KEY: API_KEY
 };
