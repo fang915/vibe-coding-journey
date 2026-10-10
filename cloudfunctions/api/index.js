@@ -140,15 +140,19 @@ function normalize(text) {
 // httpError（带 status/code 的错误类型）Day 19 起改由 db.js 定义并导出，
 // 本文件从 dbLayer 里解构使用 —— 定义只保留一份。
 
-function readInt(raw, fallback, min, max, name, hint) {
+/* 中英两条提示分开传：以前只传一条中文 hint，拼出来就成了
+   「must be 1–100 的整数」—— 英文那半还是中文，等于没有双语。
+   Day 23 统一错误提示时一并修掉。 */
+function readInt(raw, fallback, min, max, name, hintZh, hintEn) {
   if (raw === undefined || raw === null || raw === '') { return fallback; }
   // 只认纯数字：'12abc' / '1.5' / 'abc' 一律挡掉（Number() 会放过前两种）
+  const msg = name + ' 必须是 ' + hintZh + ' / ' + name + ' must be ' + hintEn;
   if (!/^\d+$/.test(String(raw))) {
-    throw httpError(400, 'bad_request', name + ' 必须是' + hint + ' / ' + name + ' must be ' + hint);
+    throw httpError(400, 'bad_request', msg);
   }
   const n = Number(raw);
   if (n < min || n > max) {
-    throw httpError(400, 'bad_request', name + ' 必须是' + hint + ' / ' + name + ' must be ' + hint);
+    throw httpError(400, 'bad_request', msg);
   }
   return n;
 }
@@ -317,8 +321,10 @@ async function handleDishes(query) {
     throw httpError(400, 'bad_request', 'status 只能是 published 或 all / status must be published or all');
   }
 
-  const limit = readInt(query.limit, DEFAULT_LIMIT, 1, MAX_LIMIT, 'limit', '1–100 的整数');
-  const offset = readInt(query.offset, 0, 0, 1000000, 'offset', '不小于 0 的整数');
+  const limit = readInt(query.limit, DEFAULT_LIMIT, 1, MAX_LIMIT, 'limit',
+    '1–100 之间的整数', 'an integer between 1 and 100');
+  const offset = readInt(query.offset, 0, 0, 1000000, 'offset',
+    '不小于 0 的整数', 'an integer greater than or equal to 0');
   const region = query.region ? readSlug(query.region) : '';
   const normQuery = normalize(query.q || '');
 
@@ -1137,7 +1143,30 @@ function endpointIndex() {
   };
 }
 
-exports.main = async function (event) {
+/* 把一条请求记成一行日志，好让排查时能"照着时间线看"。
+   三件事齐了才有用：什么时间、谁打了哪个路径、结果如何（状态码 + 耗时）。
+
+   ★ 时区：云函数跑在 UTC，而看日志的我们在 UTC+8。直接输出 UTC 会让我们
+     对不上"刚刚发生的事"，所以统一换算成北京时间再落日志。
+   纯函数，给定时间就给定输出 —— tests/api-shape.test.js 能离线验它。 */
+const LOG_TZ_OFFSET_MS = 8 * 60 * 60 * 1000;
+
+function formatLogLine(entry) {
+  const raw = (entry && entry.at);
+  const base = (raw instanceof Date) ? raw.getTime() : new Date(raw).getTime();
+  const t = new Date((isNaN(base) ? Date.now() : base) + LOG_TZ_OFFSET_MS);
+  function p2(n) { return (n < 10 ? '0' : '') + n; }
+  const stamp = t.getUTCFullYear() + '-' + p2(t.getUTCMonth() + 1) + '-' + p2(t.getUTCDate()) + ' '
+    + p2(t.getUTCHours()) + ':' + p2(t.getUTCMinutes()) + ':' + p2(t.getUTCSeconds());
+  const status = (entry && entry.status !== undefined && entry.status !== null) ? entry.status : '-';
+  const ms = (entry && entry.ms !== undefined && entry.ms !== null) ? entry.ms : '-';
+  return '[xunwei] ' + stamp + ' | ' + String((entry && entry.method) || '?') + ' '
+    + String((entry && entry.path) || '?') + ' | ' + status + ' | ' + ms + 'ms';
+}
+
+/* 真正的业务入口。外面包一层是为了"无论成功还是抛异常都留下一条请求日志" ——
+   如果日志写在里面，抛异常那条路径就漏了，而那恰恰是最需要看的一条。 */
+async function handleRequest(event) {
   try {
     const method = String((event && event.httpMethod) || 'GET').toUpperCase();
 
@@ -1212,12 +1241,41 @@ exports.main = async function (event) {
        4xx 是"调用者给错了"（去看请求体），5xx 是"我们这边坏了"（去看代码和配置）。
        排查时这两类要翻的完全不是同一个地方，混在一条日志里等于没记。 */
     if (err && err.status) {
-      console.log('[xunwei] 拒绝 ' + err.status + ' ' + err.code + '：' + err.message);
+      // 技术细节（英文原文、SQLSTATE）只写进日志 —— 排查时我们需要它，
+      // 但把它塞进响应体只会让用户看到一屏看不懂的东西，还可能漏内部信息。
+      console.log('[xunwei] 拒绝 ' + err.status + ' ' + err.code + '：' + err.message
+        + (err.technical ? '｜技术细节：' + err.technical : ''));
       return fail(err.status, err.code, err.message);
     }
+    /* 走到这里说明是"没预料到的"异常。此时 err.message 长什么样我们并不知道 ——
+       可能是 Node 底层的英文（ECONNREFUSED / ETIMEDOUT），也可能带机器名和端口。
+       所以：原始堆栈只进日志，响应体只给人话和一条"可以怎么办"。 */
     console.error('[xunwei] 服务端异常：' + ((err && err.stack) || String(err)));
-    return fail(500, 'internal_error', '服务端异常 / Internal error：' + ((err && err.message) || String(err)));
+    return fail(500, 'internal_error',
+      '服务端内部错误，请稍后重试；如果一直这样请联系我们 / Internal error, please retry later');
   }
+}
+
+exports.main = async function (event) {
+  const startedAt = Date.now();
+  let res;
+  try {
+    res = await handleRequest(event);
+  } catch (err) {
+    // 兜底：连 handleRequest 自己的 catch 都没接住（比如日志本身出错）。
+    // 这一层只保证"一定有一个像样的响应回去"，同时把原始异常留在日志里。
+    console.error('[xunwei] 未捕获异常：' + ((err && err.stack) || String(err)));
+    res = fail(500, 'internal_error',
+      '服务端内部错误，请稍后重试；如果一直这样请联系我们 / Internal error, please retry later');
+  }
+  console.log(formatLogLine({
+    at: startedAt,
+    method: String((event && event.httpMethod) || 'GET').toUpperCase(),
+    path: String((event && event.path) || ''),
+    status: res && res.statusCode,
+    ms: Date.now() - startedAt
+  }));
+  return res;
 };
 
 /* 给本地自测用：tests/api-shape.test.js 直接 require 这个文件，
@@ -1242,6 +1300,7 @@ exports.__internals = {
   parseJsonBody: parseJsonBody,
   readHeader: readHeader,
   safeEqual: safeEqual,
+  formatLogLine: formatLogLine,
   MAX_LEN: MAX_LEN,
   BLOCK_MAX_CHARS: BLOCK_MAX_CHARS
 };

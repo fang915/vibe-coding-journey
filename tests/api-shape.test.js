@@ -783,6 +783,133 @@ check('db.js：PATCH / DELETE 缺过滤条件 → 当场抛错，绝不发出请
     assert(/X-Admin-Token/.test(opt.headers['Access-Control-Allow-Headers']), '允许的请求头里要有 X-Admin-Token');
   });
 
+  /* =========================================================
+     ⑤ Day 23：错误提示统一 + 请求日志
+     目标：给用户看的 message 里只出现「人话中文 + 一句话英文」；
+     技术原文（SQLSTATE、英文报错、机器名端口）一律只进日志 / technical。
+     下面每一条都在守这件事的一条边，防止以后被人改回去。
+     ========================================================= */
+  console.log('');
+  console.log('⑤ 错误提示统一与请求日志（Day 23）');
+
+  const db = require(DB);
+
+  check('Day 23｜请求日志：一行里齐了时间 / 方法 / 路径 / 状态 / 耗时', function () {
+    const line = X.formatLogLine({
+      at: new Date(Date.UTC(2026, 9, 10, 12, 34, 56)),
+      method: 'GET', path: '/api/dishes', status: 200, ms: 37
+    });
+    assert(line.indexOf('[xunwei] ') === 0, '日志要有统一前缀，实际是「' + line + '」');
+    assert(/2026-10-10 20:34:56/.test(line),
+      'UTC 12:34:56 应换算成北京时间 20:34:56，实际是「' + line + '」');
+    assert(/GET \/api\/dishes/.test(line), '要含方法与路径');
+    assert(/200/.test(line), '要含状态码');
+    assert(/37ms/.test(line), '要含耗时');
+  });
+
+  check('Day 23｜请求日志：失败那条也留痕（5xx 照样记下来）', function () {
+    const line = X.formatLogLine({
+      at: new Date(Date.UTC(2026, 9, 10, 0, 1, 2)),
+      method: 'DELETE', path: '/api/dishes/x', status: 500, ms: 5
+    });
+    assert(/DELETE \/api\/dishes\/x/.test(line), '路径要如实记录');
+    assert(/500/.test(line), '失败也要记状态码');
+  });
+
+  check('Day 23｜请求日志：字段缺失也不崩（宁可少一列，不能抛异常）', function () {
+    const line = X.formatLogLine({ at: new Date(Date.UTC(2026, 9, 10, 0, 0, 0)) });
+    assert(typeof line === 'string' && line.length > 0, '应仍返回一行文本');
+    assert(/\[xunwei\] /.test(line), '前缀还在');
+  });
+
+  /* SQLSTATE 翻译：每一条都同时验三件事 —— 状态码对不对、人话里有没有中文、
+     以及**英文原文有没有偷偷漏进 message**。第三件才是今天真正要守的。 */
+  const SQL_CASES = [
+    { sql: '23505', status: 409, code: 'conflict', human: /已经在库里/, en: /duplicate key/ },
+    { sql: '23502', status: 400, code: 'bad_request', human: /必填/, en: /null value in column/ },
+    { sql: '23514', status: 400, code: 'bad_request', human: /取值检查|不合法/, en: /check constraint/ },
+    { sql: '23503', status: 400, code: 'bad_request', human: /不存在/, en: /foreign key/ },
+    { sql: '42501', status: 500, code: 'internal_error', human: /权限/, en: /permission denied/ }
+  ];
+
+  SQL_CASES.forEach(function (c) {
+    check('Day 23｜SQLSTATE ' + c.sql + ' → ' + c.status + '，且英文原文不许进 message', function () {
+      const err = X.gatewayError(400, JSON.stringify({
+        code: 'DATABASE_' + c.sql,
+        message: c.sql === '23505' ? 'duplicate key value violates unique constraint "pk_dishes"'
+          : c.sql === '23502' ? 'null value in column "name_zh" violates not-null constraint'
+          : c.sql === '23514' ? 'new row for relation "dishes" violates check constraint'
+          : c.sql === '23503' ? 'insert or update on table "dishes" violates foreign key constraint'
+          : 'permission denied for table dishes'
+      }));
+      assert(err.status === c.status, '状态码是 ' + err.status + '，期望 ' + c.status);
+      assert(err.code === c.code, '错误码是 ' + err.code + '，期望 ' + c.code);
+      assert(c.human.test(err.message), 'message 该命中人话，实际是「' + err.message + '」');
+      assert(/[\u4e00-\u9fa5]/.test(err.message), 'message 要有中文');
+      assert(c.en.test(err.message) === false,
+        '英文原文泄漏进 message 了：「' + err.message + '」');
+      assert(c.en.test(String(err.technical || '')), '英文原文应该被保留在 technical 里供排查');
+    });
+  });
+
+  check('Day 23｜认不出来的错误码：兜底也是中文人话，原文只进日志', function () {
+    const err = X.gatewayError(500, JSON.stringify({ code: 'XX000', message: 'internal boom from pg' }));
+    assert(err.status === 500, '状态码是 ' + err.status);
+    assert(err.code === 'internal_error', '错误码是 ' + err.code);
+    assert(/[\u4e00-\u9fa5]/.test(err.message), 'message 要有中文');
+    assert(/boom/.test(err.message) === false, '原文不该进 message：「' + err.message + '」');
+    assert(/boom/.test(String(err.technical || '')), '原文该进 technical');
+  });
+
+  check('Day 23｜空过滤保护：报 500 internal_error，且人话里不含英文堆栈', function () {
+    let err = null;
+    try { db.restUpdate('dishes', [], { status: 'draft' }); } catch (e) { err = e; }
+    assert(err !== null, '应该抛错');
+    assert(err.status === 500, '状态码是 ' + err.status);
+    assert(err.code === 'internal_error', '错误码是 ' + err.code);
+    assert(/过滤条件/.test(err.message), 'message 要说明是过滤条件的问题');
+    assert(/[\u4e00-\u9fa5]/.test(err.message), 'message 要有中文');
+  });
+
+  /* 三类错误合起来看一眼：400 / 404 / 500 是不是都报中文。
+     500 这条用「没配密钥」制造 —— 那是唯一一条不碰网络就能触发的 5xx。 */
+  const e400 = await call({ path: '/api/dishes', httpMethod: 'GET', queryStringParameters: { limit: 'abc' } });
+  const e404 = await call({ path: '/api/no-such-endpoint', httpMethod: 'GET' });
+
+  delete process.env.CLOUDBASE_API_KEY;
+  const freshNoKey = freshIndex();
+  const e500res = await freshNoKey.main({ path: '/api/dishes', httpMethod: 'GET' });
+  const e500 = JSON.parse(e500res.body);
+  process.env.CLOUDBASE_API_KEY = 'dummy-for-offline-test';
+  fresh = freshIndex();
+
+  check('Day 23｜三类错误（400 / 404 / 500）一律报中文人话', function () {
+    assert(e400.status === 400, '400 那条状态码是 ' + e400.status);
+    assert(/[\u4e00-\u9fa5]/.test(e400.body.error.message),
+      '400 要有中文，实际「' + e400.body.error.message + '」');
+    assert(/(must be|between)[^/]*$/.test(e400.body.error.message) &&
+      !/must be [^/]*[\u4e00-\u9fa5]/.test(e400.body.error.message),
+      '英文那半不该还是中文，实际「' + e400.body.error.message + '」');
+    assert(e404.status === 404, '404 那条状态码是 ' + e404.status);
+    assert(/[\u4e00-\u9fa5]/.test(e404.body.error.message),
+      '404 要有中文，实际「' + e404.body.error.message + '」');
+    assert(e500res.statusCode === 500, '500 那条状态码是 ' + e500res.statusCode);
+    assert(/[\u4e00-\u9fa5]/.test(e500.error.message),
+      '500 要有中文，实际「' + e500.error.message + '」');
+    assert(/ECONNREFUSED|ETIMEDOUT|undefined/.test(e500.error.message) === false,
+      '500 里不该出现底层英文或 undefined：「' + e500.error.message + '」');
+  });
+
+  /* 源码级护栏：这次的核心改动是「删掉裸拼 err.message 那句」。
+     光测运行时行为不够 —— 万一将来有人把它加回来，也得当场红。 */
+  check('Day 23｜兜底不再裸拼 err.message（源码级回归护栏）', function () {
+    const src = fs.readFileSync(INDEX, 'utf8');
+    assert(src.indexOf('服务端异常 / Internal error') === -1,
+      '旧的裸拼写法（服务端异常 / Internal error：+ err.message）又回来了');
+    assert(/服务端内部错误，请稍后重试/.test(src), '兜底应给人话中文');
+    assert(/console\.error\('\[xunwei\] 服务端异常：'/.test(src), '原始堆栈应只进日志');
+  });
+
   if (savedKey !== undefined) { process.env.CLOUDBASE_API_KEY = savedKey; }
   else { delete process.env.CLOUDBASE_API_KEY; }
   delete process.env.ADMIN_TOKEN;

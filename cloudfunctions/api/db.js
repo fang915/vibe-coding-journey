@@ -35,11 +35,24 @@ const GATEWAY_TIMEOUT_MS = 8000;
    "这是我们主动判定的错"（4xx），认不出的才按 500 处理。
    它原本住在 index.js，但 gatewayError 也要造这种错，
    于是搬进 db.js 统一定义、两层共用（Day 19 拆层时顺手理顺的依赖方向）。 */
-function httpError(status, code, message) {
+function httpError(status, code, message, technical) {
   const err = new Error(message);
   err.status = status;
   err.code = code;
+  /* technical：给日志看的技术原文（网关响应、Node 底层报错里的英文）。
+     刻意**不放进响应体** —— 调用方只需要读懂"发生了什么、要不要重试"，
+     主机名、端口、SQL 原文这类噪声留在日志里给维护者看。见 index.js 的 catch。 */
+  if (technical) { err.technical = technical; }
   return err;
+}
+
+/* 「我们这边坏了」的统一出口（连不上 / 超时 / 网关报错）。
+   ★ 和 httpError 的分工是"谁的问题"：
+     httpError（400 / 404…）说的是"你给错了"；
+     这个固定 500 + internal_error，说的是"我们的故障"。
+   message 只放人话（中文 + 一句英文），原始报错塞进 technical 留给日志。 */
+function dataServiceError(publicMessage, technicalDetail) {
+  return httpError(500, 'internal_error', publicMessage, technicalDetail);
 }
 
 /* =========================================================
@@ -99,14 +112,26 @@ function restGet(table, pairs, options) {
       res.on('data', function (chunk) { body += chunk; });
       res.on('end', function () {
         if (res.statusCode < 200 || res.statusCode >= 300) {
-          // 网关的报错原文很有信息量（比如权限不足会明说），带上前 300 字
-          return reject(new Error('网关返回 HTTP ' + res.statusCode + '：' + body.slice(0, 300)));
+          /* 读接口吃 401，几乎总是"云函数里那把密钥不对 / 过期了"，
+             而不是"没有权限看这张表" —— 单独给人话，省得对着 401 猜。
+             其余非 2xx 统一说"数据服务出错了"，网关原文只写日志。 */
+          if (res.statusCode === 401) {
+            return reject(dataServiceError(
+              '数据库密钥无效或已过期，请检查云函数环境变量 CLOUDBASE_API_KEY / ' +
+              'The database key is invalid or expired, check CLOUDBASE_API_KEY',
+              'GET ' + reqPath + ' → HTTP 401：' + body.slice(0, 300)));
+          }
+          return reject(dataServiceError(
+            '读取数据时后端返回了错误，请稍后重试 / The data service returned an error, please retry',
+            'GET ' + reqPath + ' → HTTP ' + res.statusCode + '：' + body.slice(0, 300)));
         }
         let json;
         try {
           json = JSON.parse(body || '[]');
         } catch (e) {
-          return reject(new Error('网关返回的不是 JSON：' + body.slice(0, 200)));
+          return reject(dataServiceError(
+            '数据服务返回的内容看不懂，请联系维护者 / The data service returned malformed data',
+            'GET ' + reqPath + ' 返回的不是 JSON：' + body.slice(0, 200)));
         }
         resolve({
           rows: Array.isArray(json) ? json : [json],
@@ -116,9 +141,17 @@ function restGet(table, pairs, options) {
     });
 
     req.on('timeout', function () {
-      req.destroy(new Error('请求网关超时（' + GATEWAY_TIMEOUT_MS + 'ms）'));
+      req.destroy(dataServiceError(
+        '数据服务响应超时，请稍后重试 / The data service timed out, please retry',
+        'GET ' + reqPath + ' 超过 ' + GATEWAY_TIMEOUT_MS + 'ms 未响应'));
     });
-    req.on('error', reject);
+    req.on('error', function (e) {
+      // 已经翻好的人话错误（超时那条）原样抛；其余（ECONNREFUSED / DNS 失败等）在这里翻译
+      if (e && e.status) { return reject(e); }
+      reject(dataServiceError(
+        '连不上数据服务，请稍后重试 / Cannot reach the data service right now',
+        'GET ' + reqPath + ' 请求失败：' + ((e && e.message) || String(e))));
+    });
     req.end();
   });
 }
@@ -157,29 +190,43 @@ function gatewayError(statusCode, bodyText) {
   const m = /(\d{5})/.exec(haystack);
   const sqlstate = m ? m[1] : '';
 
+  /* ★ 从这里往下，「给用户看的话」和「给日志看的话」是分开的：
+       message   —— 只有人话（中文 + 一句英文）；
+       technical —— 数据库 / 网关的原文，只进日志。
+     Day 23 之前这里把数据库原文直接拼进 message，调用方会看到一串英文 SQL 报错；
+     现在噪声留在日志里，响应里只留能读懂的那一句。 */
+  const raw = String((info && info.message) || bodyText).slice(0, 300);
+
   if (sqlstate === '23505') {
     return httpError(409, 'conflict',
-      '这道菜已经在库里了（id 重复），本次没有重复写入 / Dish already exists, nothing was written twice');
+      '这道菜已经在库里了（id 重复），本次没有重复写入 / Dish already exists, nothing was written twice',
+      raw);
   }
   if (sqlstate === '23502') {
     return httpError(400, 'bad_request',
-      '有必填字段没给（数据库说：' + String((info && info.message) || '').slice(0, 160) + '）');
+      '有必填字段没填 / A required field is missing',
+      'SQLSTATE 23502 非空违反：' + raw);
   }
   if (sqlstate === '23514') {
     return httpError(400, 'bad_request',
-      '有字段没通过数据库的取值检查：' + String((info && info.message) || '').slice(0, 160));
+      '有字段的值不合法（没通过数据库的取值检查） / A field failed the database check',
+      'SQLSTATE 23514 CHECK 违反：' + raw);
   }
   if (sqlstate === '23503') {
     return httpError(400, 'bad_request',
-      '引用了不存在的地区（region_slug）或菜品 / unknown region_slug');
+      '引用了不存在的地区（region_slug）或菜品 / unknown region_slug or dish id',
+      'SQLSTATE 23503 外键违反：' + raw);
   }
   if (sqlstate === '42501') {
     return httpError(500, 'internal_error',
-      '数据库权限不够：service_role 还没有写权限，请先在 SQL 编辑器里执行 db/grants-write.sql / ' +
-      'service_role lacks INSERT privilege, run db/grants-write.sql first');
+      '数据库权限不够，请先在 SQL 编辑器里执行 db/grants-write.sql / ' +
+      'service_role lacks write privilege, run db/grants-write.sql first',
+      'SQLSTATE 42501 权限不足：' + raw);
   }
-  // 认不出来的：把网关原文带上前 300 字，别自己编一个原因
-  return new Error('网关返回 HTTP ' + statusCode + '：' + String(bodyText).slice(0, 300));
+  // 认不出来的：响应里给一句人话，网关原文只写日志（别自己编一个原因）
+  return dataServiceError(
+    '写入数据时后端返回了错误，请稍后重试 / The data service returned an error, please retry',
+    '写入 → HTTP ' + statusCode + '：' + raw);
 }
 
 /* 向网关写一行。和 restGet 的区别只有两点：
@@ -214,7 +261,9 @@ function restInsert(table, rows) {
         try {
           json = JSON.parse(body || '[]');
         } catch (e) {
-          return reject(new Error('网关写入后返回的不是 JSON：' + body.slice(0, 200)));
+          return reject(dataServiceError(
+            '数据服务写入后返回的内容看不懂，请联系维护者 / The data service returned malformed data',
+            'POST ' + REST_PREFIX + table + ' 返回的不是 JSON：' + body.slice(0, 200)));
         }
         resolve({
           rows: Array.isArray(json) ? json : [json],
@@ -224,9 +273,16 @@ function restInsert(table, rows) {
     });
 
     req.on('timeout', function () {
-      req.destroy(new Error('写库请求超时（' + GATEWAY_TIMEOUT_MS + 'ms）'));
+      req.destroy(dataServiceError(
+        '数据服务响应超时，请稍后重试 / The data service timed out, please retry',
+        'POST ' + REST_PREFIX + table + ' 超过 ' + GATEWAY_TIMEOUT_MS + 'ms 未响应'));
     });
-    req.on('error', reject);
+    req.on('error', function (e) {
+      if (e && e.status) { return reject(e); }
+      reject(dataServiceError(
+        '连不上数据服务，请稍后重试 / Cannot reach the data service right now',
+        'POST ' + REST_PREFIX + table + ' 请求失败：' + ((e && e.message) || String(e))));
+    });
     req.write(payload);
     req.end();
   });
@@ -249,9 +305,10 @@ function restInsert(table, rows) {
    而不是指望每个调用方每次都记得写对。 */
 function assertHasFilter(pairs, who) {
   if (!pairs || !pairs.length) {
-    throw new Error(
-      '内部错误：' + who + ' 必须带过滤条件（如 id=eq.xxx），否则会作用于整张表；' +
-      '已拦下，未发出任何请求 / refusing to run ' + who + ' without a filter');
+    throw dataServiceError(
+      '服务端内部错误：一次改动缺少必要的过滤条件，已拦下、未执行 / ' +
+      'Internal error: blocked a write without a filter',
+      '拒绝执行不带过滤条件的 ' + who + '（否则会作用于整张表），未发出任何请求');
   }
 }
 
@@ -291,7 +348,9 @@ function writeRequest(method, table, pairs, row) {
         try {
           json = JSON.parse(body || '[]');
         } catch (e) {
-          return reject(new Error('网关返回的不是 JSON：' + body.slice(0, 200)));
+          return reject(dataServiceError(
+            '数据服务返回的内容看不懂，请联系维护者 / The data service returned malformed data',
+            method + ' ' + reqPath + ' 返回的不是 JSON：' + body.slice(0, 200)));
         }
         /* rows 为空数组 = "过滤条件没匹配到任何行"。
            PATCH/DELETE 都不把这种情形当报错抛，而是把空结果交给业务层 ——
@@ -306,9 +365,16 @@ function writeRequest(method, table, pairs, row) {
     });
 
     req.on('timeout', function () {
-      req.destroy(new Error('写库请求超时（' + GATEWAY_TIMEOUT_MS + 'ms）'));
+      req.destroy(dataServiceError(
+        '数据服务响应超时，请稍后重试 / The data service timed out, please retry',
+        method + ' ' + reqPath + ' 超过 ' + GATEWAY_TIMEOUT_MS + 'ms 未响应'));
     });
-    req.on('error', reject);
+    req.on('error', function (e) {
+      if (e && e.status) { return reject(e); }
+      reject(dataServiceError(
+        '连不上数据服务，请稍后重试 / Cannot reach the data service right now',
+        method + ' ' + reqPath + ' 请求失败：' + ((e && e.message) || String(e))));
+    });
     if (payload !== null) { req.write(payload); }
     req.end();
   });
@@ -335,6 +401,7 @@ module.exports = {
   restGet: restGet,
   parseTotal: parseTotal,
   gatewayError: gatewayError,
+  dataServiceError: dataServiceError,
   restInsert: restInsert,
   restUpdate: restUpdate,
   restDelete: restDelete,
