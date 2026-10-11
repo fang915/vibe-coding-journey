@@ -11,6 +11,7 @@
      6. 按地区筛选，并把筛选结果与关键词取交集（Day 12 新增）
      7. 用 hash 路由在三个视图之间切换，并画出面包屑（Day 13 新增）
      8. 生成"地区索引"这个目录页（Day 13 新增，数据零新增、全部现算）
+     9. 决定菜品图从哪来：远端真图还是本地占位图，并给加载失败兜底（Day 24 新增）
 
    ★ Day 13 定下的一条硬规矩：**谁都不许直接改视图的 hidden，一律改 hash**。
      视图显隐只由 renderRoute() 一处决定；跳转一律走 Router.go()。
@@ -47,6 +48,27 @@
 
   // 页面上要反复用到的元素，统一在 init 里取一次
   var el = {};
+
+  /* ---------------------------------------------------------
+     Day 24 · 菜品图的「图源开关」
+
+     背景：数据里 5 道菜的图指向 upload.wikimedia.org（Wikimedia Commons）。
+     实测在这个网络下这个域名系统性不可达 —— DNS 能解析，但 SSL 握手一路超时，
+     图片下载 10/10 全失败。旧代码对此没有任何兜底：<img> 保持"有尺寸、没内容"，
+     于是露出 CSS 的淡色底，列表第一排 5 张卡、详情页正文上方都变成一块粉块，
+     控制台每次刷新留 5 条 net::ERR_TIMED_OUT。
+
+     现在有两档，改下面这一个常量就能切：
+
+       'placeholder'（当前）—— 一律显示本地占位图 assets/placeholder-dish.svg。
+                              零外部请求，控制台干净，演示现场断网也不怕。
+       'remote'             —— 请求数据里的真实 URL（境外图源恢复后改回这个）。
+
+     ★ 关键：**data/ 里的 URL 一个字都没动**。将来图源换成国内可达的地址、
+       或把图片转存到 CloudBase 存储，把这里改回 'remote' 就直接生效。
+     --------------------------------------------------------- */
+  var IMAGE_SOURCE = 'placeholder';
+  var PLACEHOLDER_IMAGE = 'assets/placeholder-dish.svg';
 
   /* ---------------------------------------------------------
      Day 13：地区索引用的两张静态表（34 个省级行政区 + 所属分区）
@@ -889,10 +911,12 @@
 
       // 缩略图（数据里配了才画）。alt 留空是有意的：
       // 菜名和地区就在下面紧挨着，读屏再念一遍图片描述是重复噪音。
+      // Day 24：走 setDishImage —— 图源开关关掉远端时直接上本地占位图，
+      // 开着则先请求真图、失败时自动兜底换占位图。
       if (dish.image && dish.image.thumb) {
         var thumb = document.createElement('img');
         thumb.className = 'entry-thumb';
-        thumb.src = dish.image.thumb;
+        setDishImage(thumb, dish.image.thumb);
         thumb.alt = '';
         thumb.loading = 'lazy';     // 列表有 5 张图，先只加载看得见的
         thumb.decoding = 'async';
@@ -923,6 +947,54 @@
     span.className = className;
     span.textContent = text;
     return span;
+  }
+
+  /* ---------- Day 24：图片的取用与兜底 ----------
+     三件小事，列表页和详情页共用同一套，避免两边各写一份、日后改一处漏一处。 */
+
+  function useRemoteImage() {
+    return IMAGE_SOURCE === 'remote';
+  }
+
+  /* 把一张 <img> 切成本地占位图。
+     两处细节都是有原因的：
+       · class 打上 is-placeholder —— 让 CSS 知道"这不是照片"，用另一套尺寸规则；
+       · 撤掉 width/height 属性 —— 否则会按真图的原始比例撑出一整块空高度
+         （详情页那块"高粉块"就是这么来的）；撤掉后按占位图自己的 3:2 出图。
+     详情页那张还要顺手清掉署名行：占位图不是作品，署真图的名就是一句假话。 */
+  function applyPlaceholder(imgEl) {
+    imgEl.classList.add('is-placeholder');
+    imgEl.removeAttribute('width');
+    imgEl.removeAttribute('height');
+    imgEl.onerror = null;        // 占位图自己再挂就认了，不再往下换（防死循环）
+    imgEl.src = PLACEHOLDER_IMAGE;
+    if (el.cardImage === imgEl) { el.cardCredit.innerHTML = ''; }
+  }
+
+  /* 给 <img> 挂上"加载失败就换占位图"。
+     两个细节：
+       · imgEl 走参数传入（不是靠闭包读循环变量）—— 列表是 forEach 里建图，
+         用闭包会所有回调共享同一个变量，最后一张图的状态会被当成全部的状态。
+       · 用 onerror 属性而不是 addEventListener：属性赋值是幂等的，
+         换一道菜重渲染一次不会把同一个处理函数叠成一串。 */
+  function bindImageFallback(imgEl) {
+    imgEl.onerror = function () {
+      if (imgEl.getAttribute('data-fallback') === '1') { return; }
+      imgEl.setAttribute('data-fallback', '1');
+      applyPlaceholder(imgEl);
+    };
+  }
+
+  /* 渲染一张菜图：谁来供图、失败怎么办，都在这里决定，调用方只管把元素交过来。 */
+  function setDishImage(imgEl, url) {
+    imgEl.removeAttribute('data-fallback');
+    if (useRemoteImage()) {
+      imgEl.classList.remove('is-placeholder');
+      bindImageFallback(imgEl);
+      imgEl.src = url;
+    } else {
+      applyPlaceholder(imgEl);
+    }
   }
 
   /* ---------------------------------------------------------
@@ -1006,22 +1078,43 @@
   /* 详情页的美食图 + 署名行。
      署名不是可选项：这些图来自 Wikimedia Commons，许可是 CC BY-SA 4.0，
      条件之一就是「标出作者与许可」——所以这一行走的是许可要求，不是装饰。
-     数据里没配图（或配得不全）就整块藏起来，不留半张空图。 */
+     数据里没配图（或配得不全）就整块藏起来，不留半张空图。
+
+     ★ Day 24 修的两处：
+       1. index.html 里那个空的 src="" 删了（浏览器会把它解析成"当前页面地址"
+          再发一次请求）；这里也补上 reset，换到没图的菜时把上一次的图清干净。
+       2. 图加载不出来不再露 CSS 淡色底：走本地占位图，并撤掉 width/height，
+          让占位图按自己的 3:2 出图 —— 详情页那块"一整屏高粉块"就此消失。 */
   function renderImage(dish) {
     var img = dish.image;
 
     if (!img || !img.hero) {
       el.cardFigure.hidden = true;
       el.cardImage.removeAttribute('src');
+      el.cardImage.removeAttribute('data-fallback');
+      el.cardImage.classList.remove('is-placeholder');
+      el.cardImage.onerror = null;
       el.cardCredit.innerHTML = '';
       return;
     }
 
-    el.cardImage.src = img.hero;
+    el.cardFigure.hidden = false;
     // 详情页这张给完整描述（列表页那张用的是空 alt，两处不一样是有意的）
     el.cardImage.alt = (img.alt && img.alt.zh) || (dish.name ? dish.name.zh : '');
-    if (img.heroWidth)  { el.cardImage.width  = img.heroWidth; }
-    if (img.heroHeight) { el.cardImage.height = img.heroHeight; }
+
+    if (useRemoteImage()) {
+      // 有真实宽高就写上去：加载前先把位置占住，正文不会因为图片到位而往下跳
+      if (img.heroWidth)  { el.cardImage.width  = img.heroWidth; }
+      if (img.heroHeight) { el.cardImage.height = img.heroHeight; }
+    }
+    setDishImage(el.cardImage, img.hero);
+
+    // 署名只对"真图"有意义；显示占位图时不能署真图的名（那会变成一句假话），
+    // 所以这一行在占位模式下直接留空。
+    if (!useRemoteImage()) {
+      el.cardCredit.innerHTML = '';
+      return;
+    }
 
     var c = img.credit || {};
     var parts = [];

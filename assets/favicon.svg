@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="寻味 / Xunwei">
+  <!-- Day 24（余力加练）：站点图标。
+
+     修的是什么：index.html 的 head 里一直没有 icon 引用，
+     浏览器于是按默认规则去要 /favicon.ico，服务器没这个文件 → 404，
+     控制台里留一条红字。加了这个引用之后，浏览器不再去要那个 .ico。
+
+     为什么用 SVG 而不是 .ico：纯文本、能进版本库看清改了什么、
+     任意尺寸都清晰。色值 #a63a2a 就是全站品牌红（= style.css 的 brand 变量）。
+
+     ★ 注释里不写那个变量名的完整写法：它的开头是连续两个连字符，
+       而 XML 注释中连续两个连字符属于语法错误，会让整个图标解析失败。
+       同样的坑见 assets/placeholder-dish.svg 里的说明。 -->
+  <rect width="64" height="64" rx="14" fill="#a63a2a"/>
+  <!-- 碗身 -->
+  <path d="M13 30h38c0 13-8.6 21-19 21s-19-8-19-21z" fill="#fff"/>
+  <!-- 碗沿 -->
+  <rect x="11" y="26" width="42" height="5.5" rx="2.75" fill="#fff" opacity="0.9"/>
+  <!-- 筷子 -->
+  <g fill="#fff" opacity="0.92">
+    <rect x="41" y="9" width="3.4" height="26" rx="1.7" transform="rotate(20 42.7 22)"/>
+    <rect x="47.5" y="9" width="3.4" height="26" rx="1.7" transform="rotate(20 49.2 22)" opacity="0.75"/>
+  </g>
+</svg>

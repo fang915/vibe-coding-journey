@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 440" width="660" height="440" role="img" aria-label="暂无配图 / Photo coming soon">
+  <!-- Day 24：菜品图的本地占位图。
+
+       为什么需要它：数据里的菜品图指向 upload.wikimedia.org，实测在本网络下
+       系统性不可达（SSL 握手超时、下载 10/10 全失败）。旧行为是「图挂了就露出
+       CSS 的淡色底」，结果列表第一排 5 张卡、详情页正文上方都变成一块粉块。
+       换成这张图之后，无论断网还是图源抽风，页面都还是一张正经的图。
+
+       色值为什么写死、不引用 CSS 变量：本文件是独立的 .svg，由 img 标签引用，
+       读不到页面上的样式表，拿不到那套自定义属性。这里照抄的正是同一套品牌色：
+         #f7ece7 淡底（= style.css 的 brand-bg）   #6b5f59 中文（= ink-soft）
+         #786d67 英文（= ink-faint）               #9c6a60 线条（品牌红降饱和版）
+
+       ★ 变量名为什么只写后半截（brand-bg，而不写连字符开头的全名）：
+         XML 注释里不允许出现连续两个连字符，出现了就是语法错误 —— 浏览器会判定
+         这个 SVG「不是合法 XML」，整张图拒绝渲染。实测症状很隐蔽：图片不报错、
+         只是 naturalWidth 为 0，详情页图片区从正常高度塌成 28px。
+         Day 24 首次交付正是踩了这个坑，以后改这段注释别顺手把连字符补回去。
+
+       尺寸 660x440 = 3:2，与列表缩略图、详情图的画框比例一致，铺满不变形。 -->
+  <rect width="660" height="440" fill="#f7ece7"/>
+  <rect x="0.5" y="0.5" width="659" height="439" fill="none" stroke="#ecdbd3"/>
+
+  <!-- 碗 + 筷子 -->
+  <g stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M252 214h156c0 46-34.5 78-78 78s-78-32-78-78z" fill="#e7d2ca" stroke="#9c6a60" stroke-width="4"/>
+    <path d="M240 214h180" stroke="#9c6a60" stroke-width="8"/>
+    <path d="M404 132l40 84" stroke="#9c6a60" stroke-width="7"/>
+    <path d="M421 127l40 84" stroke="#b98d84" stroke-width="7"/>
+    <path d="M286 194c-7-13 7-21 0-34" stroke="#b98d84" stroke-width="5"/>
+    <path d="M330 188c-7-15 7-25 0-40" stroke="#b98d84" stroke-width="5"/>
+    <path d="M374 194c-7-13 7-21 0-34" stroke="#b98d84" stroke-width="5"/>
+  </g>
+
+  <text x="330" y="368" text-anchor="middle"
+        font-family="'Microsoft YaHei','PingFang SC','Noto Sans SC',system-ui,sans-serif"
+        font-size="24" fill="#6b5f59">暂无配图</text>
+  <text x="330" y="400" text-anchor="middle"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="16" letter-spacing="0.6" fill="#786d67">Photo coming soon</text>
+</svg>

@@ -391,7 +391,8 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 
 /* 列表卡片缩略图。固定 3:2 比例 + object-fit:cover，
    让五张原图比例不一（330x186 ~ 330x247）的缩略图看起来整齐。
-   底色调成品牌淡色：图没加载出来时是一块淡色，而不是刺眼的空白。
+   底色调成品牌淡色：图还没到位时是一块淡色，而不是刺眼的空白。
+   Day 24 起，取不到真图会由 JS 换成 assets/placeholder-dish.svg（见下方 is-placeholder）。
    alt 在 JS 里留空 —— 菜名就在图的正下方，重复朗读对读屏用户是噪音。 */
 .dish-entry .entry-thumb{
   display: block;
@@ -946,7 +947,8 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
 .pending-note p + p{ margin-top: var(--sp-1); }
 
 /* 详情页美食图。图片是外链（Wikimedia Commons），页面不托管图片文件。
-   ——代价：断网或对方抽风时图会空掉，此时露出的就是下面这块淡色底。 */
+   ——Day 24 起：图挂了不再露出下面这块淡色底，统一换成 assets/placeholder-dish.svg
+     （规则就是紧接着的下一节）。 */
 .card-figure{
   margin: var(--sp-5) 0 0;
 }
@@ -956,6 +958,27 @@ main{ padding: var(--sp-6) var(--gutter) var(--sp-7); }
   width: 100%;
   height: auto;                 /* 配合 HTML 上的 width/height 属性，加载前就占住高度，页面不跳 */
   border-radius: var(--radius);
+  background: var(--brand-bg);
+}
+
+/* ---------- Day 24：占位图（图源不可达时的兜底） ----------
+
+   为什么加这一节：菜品图原指向境外图床 upload.wikimedia.org，实测在这个网络下
+   系统性不可达（SSL 握手超时、图片下载 10/10 全失败）。以前对此零兜底，
+   图挂掉就露出上面那块 --brand-bg 淡色底 —— 列表第一排 5 张卡、详情页正文上方
+   各是一大块粉块，看着像"页面坏了"（Day 24 修的正是这个）。
+
+   兜底图换成 assets/placeholder-dish.svg：自带底色、碗筷图形与「暂无配图」字样。
+   这里只补两件事：
+     · object-fit: cover —— 铺满画框不留白边（占位图本身是 3:2，与画框同比例，不变形）；
+     · 底色写同一支品牌淡色 —— 万一占位图也没取到，露出的仍是这块安静的淡色，
+       而不是刺眼的白。
+   ★ 与真图的尺寸规则不同点：真图靠 HTML 上的 width/height 属性撑高度，
+     占位图由 JS 撤掉了这两个属性，改用自身比例 —— 详情页因此从"一整屏高的空块"
+     收成一张正常的 3:2 图。 */
+.dish-entry .entry-thumb.is-placeholder,
+.card-figure img.is-placeholder{
+  object-fit: cover;
   background: var(--brand-bg);
 }
 

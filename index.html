@@ -9,7 +9,11 @@
        浏览器会把 ?v=… 不同的地址当成「新文件」去取，
        避免改完样式却因为缓存看不到变化（我们为此排查过一轮）。
        以后每次改 css/style.css，把这里的日期改掉即可。 -->
-  <link rel="stylesheet" href="css/style.css?v=20261008a">
+  <link rel="stylesheet" href="css/style.css?v=20261009a">
+  <!-- Day 24（余力加练）：站点图标。
+       以前没有这一行，浏览器就去要默认的 /favicon.ico → 404，控制台留一条红字。
+       这里用 SVG：纯文本、进得了版本库、改了什么一眼看得出。 -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
@@ -322,9 +326,13 @@
 
         <!-- 美食图。数据里配了 image 才显示（Day 9 补内容时新增）。
              图片来自 Wikimedia Commons，许可是 CC BY-SA 4.0，
-             作者与许可写在图下那行小字里，可点回原页面核对。 -->
+             作者与许可写在图下那行小字里，可点回原页面核对。
+             ★ Day 24 改动：原来这里是 <img id="card-image" src="" alt="">，
+                那个空 src 会被浏览器解析成"当前页面地址"再发一次请求
+                （探针里那条莫名其妙的 index.html?probe=a 就是它）。
+                空的 src 属性一个都不留，由 js/app.js 决定到底显示哪张图。 -->
         <figure id="card-figure" class="card-figure" hidden>
-          <img id="card-image" src="" alt="">
+          <img id="card-image" alt="">
           <figcaption id="card-credit" class="card-credit"></figcaption>
         </figure>
 
@@ -395,7 +403,7 @@
        之前）就要用 Router.parse() 决定先露哪个视图，好消掉"直接打开
        #/regions 却先闪一下检索列表"。 -->
   <script src="js/router.js?v=20261001a"></script>
-  <script src="js/app.js?v=20261008a"></script>
+  <script src="js/app.js?v=20261009a"></script>
 
 </body>
 </html>
