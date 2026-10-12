@@ -136,6 +136,22 @@ body{
   margin-right: -.12em;
 }
 
+/* Day 26：v1.0 版本标识（页头一处，首屏可见）。
+   为什么做成"小标签"而不是并进正文：版本号是元信息，不是内容。
+   用细边框 + 小字号 + 胶囊圆角把它和封面大字分层，一眼能认出"这是版本"，
+   又不会抢标题的视线。发布验收与回退演练都靠它判断线上跑的是哪一版。 */
+.release-version{
+  display: inline-block;
+  margin: var(--sp-4) 0 0;
+  padding: 2px 12px;
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--brand-ink);
+  background: rgba(0, 0, 0, .03);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
 /* Day 10：标语分两层。
    第一层点文化底蕴（一味一城，一菜一史），
    第二层告诉第一次来的人"这是个干什么的网站" —— 光有腔调不够，新访客得能看懂用途。 */

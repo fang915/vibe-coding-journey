@@ -20,3 +20,9 @@ deploy/
 
 # 管理口令本地文件（Day 18 调 POST 接口用，内容是 X-Admin-Token，绝不提交）
 tests/admin-token.txt
+
+# 历史版本快照（Day 26 新增）。回退演练要"把上一版原样传回去"，
+# 所以每个发布版本都从 deploy/ 存一份到这里，作为可上传的回退产物。
+# 与 deploy/ 同理：它是产物不是源码，而且任何一个版本都能用
+# `git archive <tag>` 重新生成，进仓库只会造成重复，故忽略。
+releases/

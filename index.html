@@ -9,7 +9,7 @@
        浏览器会把 ?v=… 不同的地址当成「新文件」去取，
        避免改完样式却因为缓存看不到变化（我们为此排查过一轮）。
        以后每次改 css/style.css，把这里的日期改掉即可。 -->
-  <link rel="stylesheet" href="css/style.css?v=20261009a">
+  <link rel="stylesheet" href="css/style.css?v=20261012a">
   <!-- Day 24（余力加练）：站点图标。
        以前没有这一行，浏览器就去要默认的 /favicon.ico → 404，控制台留一条红字。
        这里用 SVG：纯文本、进得了版本库、改了什么一眼看得出。 -->
@@ -32,6 +32,13 @@
       读懂一道中国菜的文化来头
       <span class="en">· Understand the story behind a Chinese dish</span>
     </p>
+
+    <!-- Day 26：v1.0 正式发布的版本标识，**只放页头这一处**。
+         为什么必须放首屏、不能只写页脚：发布验收要交一张「地址栏 + 页面」的截图，
+         页脚在首屏之外，截进画面就只剩半页纸；版本标识得在第一屏里看得见，
+         回退演练时它「消失→再出现」的对比才成立（这是演练唯一的肉眼判据）。
+         为什么单独一行、不并进上面的封面大字：版本是元信息，不该抢标题的视线。 -->
+    <p class="release-version">v1.0</p>
   </header>
 
   <main>
@@ -371,7 +378,10 @@
   </main>
 
   <footer class="site-footer">
-    寻味 / Xunwei · MVP v0.1 —— 内容均来自公开可溯源资料
+    <!-- Day 26：版本号改由页头的 .release-version 唯一持有（这行原写作「MVP v0.1」）。
+         理由同上：同一个版本号写两处，早晚改一处忘一处。
+         页脚保留的是"内容出处"这件事，和版本号是两回事，拆开写更清楚。 -->
+    寻味 / Xunwei —— 内容均来自公开可溯源资料
     <span class="en">Content sourced from public, traceable references.</span>
 
     <!-- Day 20：数据来源状态栏（余力加练的「最后更新时间」）。
