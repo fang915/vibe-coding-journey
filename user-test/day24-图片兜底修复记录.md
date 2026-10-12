@@ -79,10 +79,30 @@
   python -c "import xml.etree.ElementTree as ET,sys;ET.parse(sys.argv[1]);print('XML 合法')" assets/placeholder-dish.svg
   ```
 
-## 七、遗留待办
+## 七、部署验收（2026-10-12，公网实测）
 
-1. **本次改动尚未部署**：`deploy/` 镜像已同步（源码与镜像逐文件哈希一致），
-   但静态托管上仍是旧版；下次部署时连同 Day 23 的云函数一起贴。
+静态站与 Day 23 云函数均已重贴上线，公网实测读数（无头浏览器 + CDP 采集，清缓存加载）：
+
+| 检查项 | 读数 | 结论 |
+| --- | --- | --- |
+| `index.html` | 200，含版本号 `v=20261009a` 与 `rel="icon"` 声明 | ✅ 新版已上线 |
+| `assets/placeholder-dish.svg` / `assets/favicon.svg` | 200 / 200 | ✅ 两个新资源都在 |
+| `js/app.js` | 200，`IMAGE_SOURCE = 'placeholder'` | ✅ 开关生效 |
+| 列表首排缩略图 | **5/5** `naturalWidth=660`、占位标记生效 | ✅ 占位图正常渲染 |
+| 详情页（螺蛳粉） | 图源 `assets/placeholder-dish.svg`，解码 660，图片区 689px 正常 | ✅ 不再是空块 |
+| 页面横向溢出 | 0px | ✅ 没改坏 |
+| API `/api/dishes` | 200，返回 13 道菜 | ✅ 接口正常 |
+| API 404 文案 | `{"code":"not_found","message":"没有这道菜 / Dish not found"}` | ✅ **Day 23 双语文案已上线** |
+| `/favicon.ico` | 404 | 正常现象：页面声明的是 `favicon.svg`，声明后浏览器不再默认要 `.ico` |
+
+**证据**：`user-test/screenshots/day24-live-list.png` / `day24-live-card.png`（公网真实渲染截图）。
+
+小坑一枚：CloudBase 测试域名的「风险提醒」中间页，按钮**有 3 秒倒计时禁用**——
+自动化点击太快会被无声忽略，等倒计时结束再点就能过。
+
+## 八、遗留待办
+
+1. ~~本次改动尚未部署~~ → 已于 2026-10-12 部署并通过公网验收（见第七节）。
 2. 缓存提示：若本地浏览器见过早先那版坏 SVG，可能仍显示空块 —— 硬刷新一次（Ctrl+F5）即可。
    真要根治可给占位图地址加版本号（`placeholder-dish.svg?v=...`），目前判断风险窗口只在本机、暂不加。
 3. Day 22 记下的「软删除 `is_deleted`」、Day 14/15 的旧测试仍未做。
