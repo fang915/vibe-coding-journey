@@ -1,0 +1,84 @@
+{
+  "root": "../..",
+  "_comment": "本文件是「发布前检查」Skill 的配置。换项目时只改这里，不改脚本。root 相对本文件所在目录。",
+
+  "site": {
+    "staticBase": "https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.tcloudbaseapp.com",
+    "apiBase": "https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.ap-shanghai.app.tcloudbase.com/api",
+    "indexFile": "index.html",
+    "pageTitleKeyword": "寻味",
+    "expectVersionPrefix": "2026",
+    "notFoundProbeId": "no-such-dish-for-check"
+  },
+
+  "deploy": {
+    "dir": "deploy",
+    "mirror": [
+      "index.html",
+      "css/style.css",
+      "js/app.js",
+      "js/data-source.js",
+      "js/router.js",
+      "data/dishes.json",
+      "assets/placeholder-dish.svg",
+      "assets/favicon.svg"
+    ]
+  },
+
+  "tests": {
+    "offline": "tests/api-shape.test.js",
+    "expectPassedAtLeast": 105
+  },
+
+  "encoding": {
+    "files": [
+      "index.html",
+      "css/style.css",
+      "js/app.js",
+      "js/data-source.js",
+      "js/router.js",
+      "data/dishes.json",
+      "assets/placeholder-dish.svg",
+      "assets/favicon.svg",
+      "cloudfunctions/api/index.js",
+      "cloudfunctions/api/db.js",
+      "tests/api-shape.test.js",
+      "README.md"
+    ]
+  },
+
+  "assets": {
+    "required": [
+      "index.html",
+      "css/style.css",
+      "js/app.js",
+      "data/dishes.json",
+      "assets/placeholder-dish.svg",
+      "assets/favicon.svg"
+    ]
+  },
+
+  "secrets": {
+    "allowFiles": [".env.example"],
+    "minValueLength": 16
+  },
+
+  "docs": {
+    "readme": "README.md",
+    "dishCountFile": "data/dishes.json"
+  },
+
+  "browser": {
+    "enabled": false,
+    "edgePath": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+    "pythonPath": "C:/Users/方/.workbuddy/binaries/python/versions/3.13.12/python.exe",
+    "nodePath": "C:/Users/方/.workbuddy/binaries/node/versions/22.22.2-3/node.exe",
+    "debugPort": 9555,
+    "viewport": { "width": 1180, "height": 1000 },
+    "thumbSelector": ".entry-thumb",
+    "thumbExpectCount": 5,
+    "figureSelector": "#card-figure",
+    "imageSelector": "#card-image",
+    "maxLocalConsoleErrors": 0
+  }
+}

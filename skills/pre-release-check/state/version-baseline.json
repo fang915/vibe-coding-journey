@@ -1,0 +1,21 @@
+{
+  "updatedAt": "2026-10-12T12:17:26.248Z",
+  "files": {
+    "css/style.css": {
+      "hash": "81f0fb07f88dcfcf4ce8c9a619abc7eb565854a1a7157b20b32f123761779674",
+      "version": "20261009a"
+    },
+    "js/data-source.js": {
+      "hash": "793a542b2afa4cf93d3c841011f3a173f2b5f51a6d172077c20f9929b8cb26d9",
+      "version": "20261008a"
+    },
+    "js/router.js": {
+      "hash": "ff9bdb550c6d1fd5c87dba2273ea9fe4cdae944d4f2a9557e0362947378a1360",
+      "version": "20261001a"
+    },
+    "js/app.js": {
+      "hash": "0a367bcdafffc82e5f6c097aeaa30dbad3487a0b735100acee05c05e6112d38f",
+      "version": "20261009a"
+    }
+  }
+}

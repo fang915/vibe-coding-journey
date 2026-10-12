@@ -95,6 +95,20 @@ http://localhost:8000
 
 ---
 
+## 发布前检查（Day 25 起）
+
+把改动发布到公网之前，跑一遍 16 项检查（仓库卫生 / 密钥 / 工程正确性 / 公网真实状态 / 真实渲染）：
+
+```bash
+node skills/pre-release-check/scripts/check-release.mjs --browser --out <输出目录>
+```
+
+- 每项给实测值与四级结论：**FAIL**（阻断发布）/ **WARN**（看一眼）/ **PASS** / **SKIP**（没查，不算通过）。
+- 有 FAIL 时退出码为 1；HTML 报告写在 `--out` 目录（`report.html`）。
+- 判据明细与踩坑记录见 [`skills/pre-release-check/SKILL.md`](skills/pre-release-check/SKILL.md)。
+
+---
+
 ## 内容原则
 
 1. **每条事实性陈述都带出处。** 正文里的 `[n]` 角标可以点击，跳到页面下方的出处列表（来源名称 + 链接 + 访问日期）。
