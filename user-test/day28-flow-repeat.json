@@ -1,0 +1,255 @@
+{
+  "ranAt": "2026-10-12T13:34:42.289Z",
+  "target": "https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.tcloudbaseapp.com",
+  "rounds": 3,
+  "expectations": {
+    "cards": 13,
+    "fujian": 2,
+    "search": "luosifen"
+  },
+  "gate": {
+    "gated": true,
+    "waitMs": 1132,
+    "finalTitle": "寻味 / Xunwei —— 中华美食文化检索"
+  },
+  "roundList": [
+    {
+      "round": 1,
+      "steps": {
+        "home": {
+          "ok": true,
+          "waitMs": 404,
+          "cards": 13,
+          "placeholders": 5,
+          "dataSource": "api",
+          "statusText": "数据来源：公网接口（数据库共 13 道） · 最后更新 2026-10-12 21:34:48",
+          "searchInput": ""
+        },
+        "search": {
+          "ok": true,
+          "ms": 423,
+          "hash": "#/dish/luosifen",
+          "cardName": "螺蛳粉"
+        },
+        "filter": {
+          "ok": true,
+          "ms": 927,
+          "clicked": true,
+          "hash": "#/region/fujian",
+          "cards": 2,
+          "title": "已收录 · Included"
+        },
+        "detail": {
+          "ok": true,
+          "ms": 1126,
+          "clickedId": "shaxian-snacks",
+          "hash": "#/dish/shaxian-snacks",
+          "nameZh": "沙县小吃",
+          "originLen": 1986,
+          "storyLen": 1802,
+          "techLen": 1699,
+          "facts": 11,
+          "sources": 3,
+          "imgNaturalWidth": 660,
+          "imgPlaceholder": true,
+          "scrollRemainAtBottom": 0,
+          "overflowX": 0
+        }
+      },
+      "ok": true,
+      "notes": [],
+      "roundMs": 4812,
+      "consoleErrors": []
+    },
+    {
+      "round": 2,
+      "steps": {
+        "home": {
+          "ok": true,
+          "waitMs": 1,
+          "cards": 13,
+          "placeholders": 5,
+          "dataSource": "api",
+          "statusText": "数据来源：公网接口（数据库共 13 道） · 最后更新 2026-10-12 21:34:52",
+          "searchInput": ""
+        },
+        "search": {
+          "ok": true,
+          "ms": 428,
+          "hash": "#/dish/luosifen",
+          "cardName": "螺蛳粉"
+        },
+        "filter": {
+          "ok": true,
+          "ms": 934,
+          "clicked": true,
+          "hash": "#/region/fujian",
+          "cards": 2,
+          "title": "已收录 · Included"
+        },
+        "detail": {
+          "ok": true,
+          "ms": 1131,
+          "clickedId": "shaxian-snacks",
+          "hash": "#/dish/shaxian-snacks",
+          "nameZh": "沙县小吃",
+          "originLen": 1986,
+          "storyLen": 1802,
+          "techLen": 1699,
+          "facts": 11,
+          "sources": 3,
+          "imgNaturalWidth": 660,
+          "imgPlaceholder": true,
+          "scrollRemainAtBottom": 0,
+          "overflowX": 0
+        }
+      },
+      "ok": true,
+      "notes": [],
+      "roundMs": 4475,
+      "consoleErrors": []
+    },
+    {
+      "round": 3,
+      "steps": {
+        "home": {
+          "ok": true,
+          "waitMs": 1,
+          "cards": 13,
+          "placeholders": 5,
+          "dataSource": "api",
+          "statusText": "数据来源：公网接口（数据库共 13 道） · 最后更新 2026-10-12 21:34:57",
+          "searchInput": ""
+        },
+        "search": {
+          "ok": true,
+          "ms": 431,
+          "hash": "#/dish/luosifen",
+          "cardName": "螺蛳粉"
+        },
+        "filter": {
+          "ok": true,
+          "ms": 931,
+          "clicked": true,
+          "hash": "#/region/fujian",
+          "cards": 2,
+          "title": "已收录 · Included"
+        },
+        "detail": {
+          "ok": true,
+          "ms": 1130,
+          "clickedId": "shaxian-snacks",
+          "hash": "#/dish/shaxian-snacks",
+          "nameZh": "沙县小吃",
+          "originLen": 1986,
+          "storyLen": 1802,
+          "techLen": 1699,
+          "facts": 11,
+          "sources": 3,
+          "imgNaturalWidth": 660,
+          "imgPlaceholder": true,
+          "scrollRemainAtBottom": 0,
+          "overflowX": 0
+        }
+      },
+      "ok": true,
+      "notes": [],
+      "roundMs": 4870,
+      "consoleErrors": []
+    }
+  ],
+  "verdict": {
+    "allRoundsOk": true,
+    "identicalHomeCards": true,
+    "identicalFacts": true,
+    "identicalSources": true,
+    "totalConsoleErrors": 0,
+    "slowestRoundMs": 4870,
+    "fastestRoundMs": 4475
+  },
+  "gateErrors": [
+    {
+      "kind": "控制台错误",
+      "url": "(无url)",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "kind": "控制台错误",
+      "url": "favicon.ico",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "probeB": {
+    "name": "search-then-region",
+    "steps": {
+      "search": {
+        "hash": "#/dish/luosifen",
+        "name": "螺蛳粉"
+      },
+      "inputStillFilled": "螺蛳粉",
+      "afterRegionClick": {
+        "cards": 0,
+        "emptyVisible": true,
+        "emptyTitle": "没找到这道菜· Nothing found",
+        "emptyText": "「福建」里没有匹配「螺蛳粉」的菜。换个说法，或点下面的按钮看全部。 · No match for “螺蛳粉” in 福建",
+        "allBtnVisible": true,
+        "hint": ""
+      },
+      "afterSeeAllBtn": {
+        "hash": "#/",
+        "cards": 13
+      }
+    },
+    "explainsBothConditions": true,
+    "recoverable": true
+  },
+  "summary": {
+    "homeCards": [
+      13,
+      13,
+      13
+    ],
+    "homeWaitMs": [
+      404,
+      1,
+      1
+    ],
+    "searchMs": [
+      423,
+      428,
+      431
+    ],
+    "filterCards": [
+      2,
+      2,
+      2
+    ],
+    "filterMs": [
+      927,
+      934,
+      931
+    ],
+    "facts": [
+      11,
+      11,
+      11
+    ],
+    "sources": [
+      3,
+      3,
+      3
+    ],
+    "storyLen": [
+      1802,
+      1802,
+      1802
+    ],
+    "roundMs": [
+      4812,
+      4475,
+      4870
+    ],
+    "consoleErrors": 0
+  },
+  "ok": true
+}

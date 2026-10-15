@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寻味 / Xunwei · Day 28 结营验收清单（附录 J）</title>
+<style>
+  :root { --ink:#2b2320; --sub:#7a6a60; --line:#e8ddd5; --accent:#9e2b25; --ok:#1a7f4e; --warn:#b06d00; --bg:#fffdf9; --card:#ffffff; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; color: var(--ink); background: var(--bg); line-height: 1.65; padding: 32px 16px 64px; }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 28px; }
+  header h1 { font-size: 26px; color: var(--accent); letter-spacing: 2px; }
+  header p { color: var(--sub); font-size: 14px; margin-top: 6px; }
+  .meta { display: inline-block; margin-top: 10px; padding: 4px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: var(--sub); background: var(--card); }
+  h2 { font-size: 19px; margin: 34px 0 12px; padding-left: 10px; border-left: 4px solid var(--accent); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); font-size: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  th, td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: #f7efe8; font-size: 13.5px; }
+  td.score { text-align: center; white-space: nowrap; font-weight: bold; }
+  td.status { text-align: center; white-space: nowrap; font-weight: bold; }
+  .ok { color: var(--ok); } .warn { color: var(--warn); }
+  a { color: #1a5fa8; text-decoration: none; } a:hover { text-decoration: underline; }
+  .note { font-size: 12.5px; color: var(--sub); display: block; margin-top: 4px; }
+  .checklist { list-style: none; background: var(--card); border: 1px solid var(--line); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .checklist li { padding: 10px 14px; border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: baseline; }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist .mark { font-weight: bold; white-space: nowrap; }
+  .checklist .who { font-size: 12.5px; color: var(--sub); }
+  .summary { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); padding: 14px 18px; font-size: 14.5px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  footer { margin-top: 40px; text-align: center; color: var(--sub); font-size: 12.5px; }
+  @media print { body { padding: 0; } table, .checklist, .summary { box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>寻味 / Xunwei · 结营验收清单</h1>
+    <p>One flavor, one city; one dish, one history —— 面向在华外国人的中英双语中国饮食文化检索站</p>
+    <span class="meta">Day 28 · 附录 J 对照 · 生成于 2026-10-12 · 每一项的证据都可当场打开</span>
+  </header>
+
+  <h2>一、验收评分表（对照附录 J，逐项打勾）</h2>
+  <table>
+    <tr><th style="width:170px">项目</th><th class="score" style="width:50px">分值</th><th>通过证据（点开即验）</th><th class="status" style="width:64px">状态</th></tr>
+    <tr>
+      <td>提示词理解与改写</td><td class="score">20</td>
+      <td><a href="prompt-rewrites.md">docs/prompt-rewrites.md</a>：4 条实际改写提示词（Day 18 写接口、Day 19 重构为原文留档；Day 24 图片修复、Day 25 检查 Skill 按当日记录复原）+ 每条复盘。<a href="demo-outline.md">docs/demo-outline.md §③</a> 含 Day 18 的冲突对照表。</td>
+      <td class="status ok">✅</td>
+    </tr>
+    <tr>
+      <td>前端页面与交互</td><td class="score">15</td>
+      <td>3 个视图：首页列表 / 详情卡（<a href="https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.tcloudbaseapp.com/#/dish/luosifen" target="_blank">#/dish/luosifen</a>）/ 地区筛选（<a href="https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.tcloudbaseapp.com/#/region/fujian" target="_blank">#/region/fujian</a>，进地址栏可分享）。反馈状态：加载态、空态双语文案、404 页。移动端截图：<a href="../user-test/screenshots/day27-T1-手机.jpg">day27-T1-手机.jpg</a>（真人手机实拍）。窄屏横向溢出 0px、控制台 0 错误：Day 28 三轮重复检测（<a href="../user-test/day28-核心流程重复检测.md">报告</a>）。</td>
+      <td class="status ok">✅</td>
+    </tr>
+    <tr>
+      <td>云函数与 API</td><td class="score">15</td>
+      <td>健康：<a href="https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.ap-shanghai.app.tcloudbase.com/api/health" target="_blank">/api/health</a> 200。读取：<a href="https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.ap-shanghai.app.tcloudbase.com/api/dishes?limit=1" target="_blank">/api/dishes</a> / <a href="https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.ap-shanghai.app.tcloudbase.com/api/regions" target="_blank">/api/regions</a> 200（Day 28 当场实测）。写入：POST <code>/api/dishes</code> 已上线，无口令 401（当场实测）、缺字段 400、重复 409；第 13 道菜「佛跳墙」即真实写入的活证据。错误响应：未知接口 404、非法 id 400、写接口无口令 401×2（均为 Day 28 实测原文）。</td>
+      <td class="status ok">✅</td>
+    </tr>
+    <tr>
+      <td>云数据库（PostgreSQL）</td><td class="score">15</td>
+      <td>初始化：<a href="../db/schema.sql">db/schema.sql</a>（7 张表）+ <a href="../db/seed.sql">db/seed.sql</a>（12 道基线，方言解析通过）。真实读写：页面数据全部来自库（佛跳墙只在库里）；控制台改一行 → 刷新跟随变 → 复原（Day 22 真库层证据，demo-outline §④）。修改/删除：PATCH / DELETE 已实现（Day 22，api-contract §3.7/§3.8 + 离线测试）。<span class="note warn">⚠ 如实标注：PATCH / DELETE 的线上实操未单独留存记录（写操作会改线上数据，仅做了无口令 401 门禁实测）；持久化证据 = 佛跳墙跨会话仍在库。</span></td>
+      <td class="status ok">✅（含一条如实标注）</td>
+    </tr>
+    <tr>
+      <td>第三周周成果</td><td class="score">10</td>
+      <td>云端数据服务 v1（13 道菜 CRUD 上线）+ 检查台（<a href="../skills/pre-release-check/SKILL.md">pre-release-check Skill</a> 16 判据 + <a href="../docs/week3-acceptance.md">docs/week3-acceptance.md</a>）+ 演示证据（<a href="demo-outline.md">demo-outline.md</a> 动线与分镜脚本）。</td>
+      <td class="status ok">✅</td>
+    </tr>
+    <tr>
+      <td>Skill 与测试</td><td class="score">10</td>
+      <td>Skill 调用：<a href="../skills/pre-release-check/SKILL.md">pre-release-check</a>（发布前 16 判据）+ <a href="../skills/filter-interaction-check/SKILL.md">filter-interaction-check</a>。故意失败：Day 25 注入三个故障（硬编码口令 / 改内容不升版号 / 镜像漏同步）全被抓出，截图 <a href="../skills/pre-release-check/screenshots/day25-check-failed.png">day25-check-failed.png</a>；还原后全绿 <a href="../skills/pre-release-check/screenshots/day25-check-passed.png">day25-check-passed.png</a>。Bug 修复：Day 24 图床超时 → 本地占位兜底（对照报告 <a href="../user-test/day24-图片兜底修复记录.md">day24 记录</a>）。回归：离线自测 73 项 + Day 28 核心流程 3 轮全绿零漂移。</td>
+      <td class="status ok">✅</td>
+    </tr>
+    <tr>
+      <td>线上发布（CloudBase）</td><td class="score">10</td>
+      <td>公网地址：<a href="https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.tcloudbaseapp.com/" target="_blank">tcloudbaseapp.com（点开即看，v1.0 标识在页头）</a>。线上读写：页面读库 + 策展端写入（佛跳墙）。日志：云函数控制台调用日志（148 次 / 本月）。数据库证据：/api/dishes 13 道、v1.0 发布与回滚演练全程服务器指纹核实（<a href="../user-test/day26-回滚演练记录.md">day26 记录</a>，发布 ≤8min / 回退 ≤3min / 恢复 ≤1min）。</td>
+      <td class="status ok">✅</td>
+    </tr>
+    <tr>
+      <td>额度、到期和备份</td><td class="score">5</td>
+      <td>到期：环境有效期至 2027-04-01（开通记录），套餐每月 1 日重置。计费状态：本月消耗约 653.7 点、无告警，截图 <a href="../user-test/screenshots/day27-额度-套餐用量1.png">day27-额度-1.png</a> / <a href="../user-test/screenshots/day27-额度-套餐用量2.png">day27-额度-2.png</a>。数据导出说明：<a href="final-delivery.md">docs/final-delivery.md §3 备份段</a>（当前路径 = 控制台 SQL 导出，<span class="warn">实操未演练，如实标注</span>；seed.sql 为 12 道基线）。</td>
+      <td class="status ok">✅（导出演练未做）</td>
+    </tr>
+  </table>
+
+  <h2>二、结营交付清单（8 项）</h2>
+  <ul class="checklist">
+    <li><span class="mark ok">✅</span><span><b>公网地址</b>：<a href="https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.tcloudbaseapp.com/" target="_blank">https://vibecodingstudy-d1f1el6a03d5aad8-1499243471.tcloudbaseapp.com/</a>　<span class="who">已截图（含地址栏）</span></span></li>
+    <li><span class="mark ok">✅</span><span><b>代码仓库链接</b>：<a href="https://github.com/fang915/vibe-coding-journey" target="_blank">github.com/fang915/vibe-coding-journey</a>（public，main 分支）</span></li>
+    <li><span class="mark warn">⚠ 已交（41 秒）</span><span><b>3–5 分钟演示录屏</b>：已录 <code>寻味初版.mp4</code>（存 <code>C:\Users\方\Videos\屏幕录制\</code>，59 MB，未入公开仓库）。<span class="warn">实测时长 41 秒，未达 3–5 分钟下限</span>（分镜 7 段覆盖前 2 段：首页 + 搜索）；本人已知该缺口并选择按现状提交，补录列入 v1.1 前置项（见 <a href="../user-test/day28-结营复盘.md">结营复盘 §6</a>）。分镜与旁白：<a href="demo-outline.md">docs/demo-outline.md §⑤</a>。</span></li>
+    <li><span class="mark ok">✅</span><span><b>最终验收表和项目映射表</b>：即本页（§一 评分表 + §二 清单）；每行证据含文件与公网链接</span></li>
+    <li><span class="mark ok">✅</span><span><b>一条最有效的改写提示词</b>：<a href="prompt-rewrites.md">docs/prompt-rewrites.md ①</a>（Day 18：课程示例「收藏接口」→ 改写为策展端 <code>POST /api/dishes</code>，附冲突对照表与复盘）</span></li>
+    <li><span class="mark ok">✅</span><span><b>运行和技术路线说明</b>：<a href="final-delivery.md">docs/final-delivery.md §1–§2</a></span></li>
+    <li><span class="mark ok">✅</span><span><b>数据库、部署、额度、到期和备份说明（不含密钥）</b>：<a href="final-delivery.md">docs/final-delivery.md §3</a>（口令只在环境变量，本文零密钥）</span></li>
+    <li><span class="mark ok">✅</span><span><b>200 字以内结营总结</b>：<a href="final-delivery.md">docs/final-delivery.md §4</a>（作者自撰，90 字，≤200 字；已定稿 2026-10-14）</span></li>
+  </ul>
+
+  <h2>三、今天要交的两张截图</h2>
+  <div class="summary">
+    ① <b>附录 J 验收清单逐项打勾</b> —— 即本页在浏览器里打开后的样子（本页就是打勾状态）。<br>
+    ② <b>作品公网 URL 打开的样子（含地址栏）</b> —— 已有：首页截图（v1.0 标识可见）。<br>
+    <span class="note">两张图都齐后与录屏一并归档；录屏文件较大，建议放网盘 / 课程指定通道，仓库里留链接或精简版。</span>
+  </div>
+
+  <footer>寻味 / Xunwei · vibe coding 28 天结营 · Day 28 · 本页由项目实际文件与 2026-10-12 当场公网实测生成，未做任何虚报</footer>
+</div>
+</body>
+</html>
